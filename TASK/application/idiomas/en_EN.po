@@ -1,0 +1,1256 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Easy A TASK\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-26 11:14+0100\n"
+"PO-Revision-Date: 2013-07-26 11:14+0100\n"
+"Last-Translator: jbadia <juanignacio.badia@t-systems.es>\n"
+"Language-Team: Easy A TASK <juanignacio.badia@t-systems.es>\n"
+"Language: en_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate;_;setLabel;setValue;setLegend;_refresh;"
+"setLegend;setMessage;append;prepend\n"
+"X-Poedit-Basepath: D:\\Proyectos\\EasyTASK\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-SearchPath-0: application\n"
+
+#: application/controllers/ErrorController.php:22
+msgid "Page not found"
+msgstr "Page not found"
+
+#: application/controllers/ErrorController.php:27
+msgid "Application error"
+msgstr "Application error"
+
+#: application/forms/Login.php:14
+msgid "/auth/login"
+msgstr "/auth/login"
+
+#: application/forms/Login.php:31
+msgid "Username"
+msgstr "Username"
+
+#: application/forms/Login.php:45
+msgid "Password"
+msgstr "Password"
+
+#: application/forms/Login.php:60
+msgid "Log in"
+msgstr "Log in"
+
+#: application/models/Graphics/Dashboard.php:52
+#: application/modulos/calendar/plantillas/general.phtml:60
+msgid "Día"
+msgstr "Day"
+
+#: application/models/Graphics/Dashboard.php:53
+msgid "SLA OK"
+msgstr "SLA OK"
+
+#: application/models/Graphics/Dashboard.php:54
+msgid "SLA KO"
+msgstr "SLA KO"
+
+#: application/models/Graphics/Dashboard.php:108
+#: application/models/Graphics/Dashboard.php:169
+#: application/modulos/calendar/plantillas/general.phtml:58
+msgid "Mes"
+msgstr "Month"
+
+#: application/models/Graphics/Dashboard.php:109
+#: application/models/Graphics/Dashboard.php:170
+msgid "Volumetría"
+msgstr "Volumetry"
+
+#: application/models/Graphics/Dashboard.php:171
+msgid "Objetivo"
+msgstr "Target"
+
+#: application/models/Graphics/Dashboard.php:172
+msgid "Cumplimiento"
+msgstr "Fulfillment"
+
+#: application/models/Login/Abstract.php:142
+msgid "No dispone los permisos necesarios para acceder a esta aplicación."
+msgstr ""
+
+#: application/models/Login/Abstract.php:146
+msgid "Aplicación cerrada."
+msgstr "Application closed"
+
+#: application/models/Login/Abstract.php:151
+#, php-format
+msgid "Validación correcta con modelo %s."
+msgstr ""
+
+#: application/models/Login/Abstract.php:156
+#: application/models/Login/Abstract.php:163
+#: application/models/Login/Abstract.php:170
+#: application/models/Login/LoginAd.php:118
+msgid ""
+"Credenciales incorrectas, intentelo de nuevo o contacte con su administrador "
+"de sistema."
+msgstr ""
+"Your credentials are invalid, try again or contact your system administrator"
+
+#: application/models/Login/Abstract.php:158
+#, php-format
+msgid "El usuario que ha introducido (%s) no existe en la Base de datos %s."
+msgstr ""
+
+#: application/models/Login/Abstract.php:165
+msgid "La clave que ha introducido es incorrecta."
+msgstr "The password you entered is incorrect."
+
+#: application/models/Login/Abstract.php:172
+msgid "Se ha producido un error y el código ("
+msgstr "It was an error and the code ("
+
+#: application/models/Login/Authenticate.php:57
+msgid "Motor de autentificación Local"
+msgstr ""
+
+#: application/models/Login/Authenticate.php:79
+msgid "Motor de autentificación Ad"
+msgstr ""
+
+#: application/models/Login/Authenticate.php:93
+#, php-format
+msgid "<b>ERROR:</b> El modelo <b>%s</b> no es un modelo de conexión válido."
+msgstr ""
+
+#: application/models/Login/Authenticate.php:94
+#, php-format
+msgid "ERROR: El modelo %s no es un modelo de conexión válido."
+msgstr ""
+
+#: application/models/Login/Authenticate.php:124
+msgid "<b>ERROR:</b> No se reciben los datos del usuario ($userData)."
+msgstr ""
+
+#: application/models/Login/LoginAd.php:107
+msgid "Fallo al registrar el usuario."
+msgstr ""
+
+#: application/models/Login/LoginAd.php:113
+msgid "Fallo al registrar el usuario. No se reciben datos desde AD."
+msgstr ""
+
+#: application/views/helpers/HaceTiempo.php:93
+#: application/modulos/calendar/plantillas/general.phtml:64
+msgid "Enero"
+msgstr "January"
+
+#: application/views/helpers/HaceTiempo.php:93
+#: application/modulos/calendar/plantillas/general.phtml:65
+msgid "Febrero"
+msgstr "February"
+
+#: application/views/helpers/HaceTiempo.php:93
+#: application/modulos/calendar/plantillas/general.phtml:66
+msgid "Marzo"
+msgstr "March"
+
+#: application/views/helpers/HaceTiempo.php:93
+#: application/modulos/calendar/plantillas/general.phtml:67
+msgid "Abril"
+msgstr "April"
+
+#: application/views/helpers/HaceTiempo.php:93
+#: application/modulos/calendar/plantillas/general.phtml:68
+msgid "Mayo"
+msgstr "May"
+
+#: application/views/helpers/HaceTiempo.php:93
+#: application/modulos/calendar/plantillas/general.phtml:69
+msgid "Junio"
+msgstr "June"
+
+#: application/views/helpers/HaceTiempo.php:93
+#: application/modulos/calendar/plantillas/general.phtml:70
+msgid "Julio"
+msgstr "July"
+
+#: application/views/helpers/HaceTiempo.php:93
+#: application/modulos/calendar/plantillas/general.phtml:71
+msgid "Agosto"
+msgstr "August"
+
+#: application/views/helpers/HaceTiempo.php:93
+#: application/modulos/calendar/plantillas/general.phtml:72
+msgid "Septiembre"
+msgstr "September"
+
+#: application/views/helpers/HaceTiempo.php:93
+#: application/modulos/calendar/plantillas/general.phtml:73
+msgid "Octubre"
+msgstr "October"
+
+#: application/views/helpers/HaceTiempo.php:93
+#: application/modulos/calendar/plantillas/general.phtml:74
+msgid "Noviembre"
+msgstr "November"
+
+#: application/views/helpers/HaceTiempo.php:93
+#: application/modulos/calendar/plantillas/general.phtml:75
+msgid "Diciembre"
+msgstr "December"
+
+#: application/views/helpers/HaceTiempo.php:94
+#, php-format
+msgid "El %s de %s del %s."
+msgstr ""
+
+# Sufijo para las palabras plurales
+#: application/views/helpers/HaceTiempo.php:99
+msgid "es"
+msgstr "s"
+
+#: application/views/helpers/HaceTiempo.php:101
+#, php-format
+msgid "Hace %s mes%s."
+msgstr ""
+
+#: application/views/helpers/HaceTiempo.php:106
+#: application/views/helpers/HaceTiempo.php:125
+#: application/views/helpers/HaceTiempo.php:135
+msgid "s"
+msgstr "s"
+
+#: application/views/helpers/HaceTiempo.php:108
+#, php-format
+msgid "Hace %s semana%s."
+msgstr ""
+
+#: application/views/helpers/HaceTiempo.php:113
+msgid "Ayer."
+msgstr "Yesterday."
+
+#: application/views/helpers/HaceTiempo.php:116
+msgid "Antes de ayer."
+msgstr ""
+
+#: application/views/helpers/HaceTiempo.php:119
+#, php-format
+msgid "Hace %s días."
+msgstr ""
+
+#: application/views/helpers/HaceTiempo.php:127
+#, php-format
+msgid "Hace %s hora%s."
+msgstr ""
+
+#: application/views/helpers/HaceTiempo.php:129
+msgid "Hace más de una hora."
+msgstr ""
+
+#: application/views/helpers/HaceTiempo.php:137
+#, php-format
+msgid "Hace %s minuto%s."
+msgstr ""
+
+#: application/views/helpers/HaceTiempo.php:140
+#, php-format
+msgid "Hace %s segundos."
+msgstr ""
+
+#: application/views/helpers/HaceTiempo.php:143
+msgid "Ahora."
+msgstr "Now."
+
+#: application/modulos/calendar/plantillas/error.phtml:25
+#: application/modulos/checklist/plantillas/error.phtml:25
+#: application/plantillas/error.phtml:25
+msgid "Volver"
+msgstr "Return"
+
+#: application/modulos/calendar/plantillas/general.phtml:44
+#: application/modulos/calendar/views/scripts/error.phtml:2
+#: application/modulos/checklist/plantillas/general.phtml:44
+#: application/modulos/checklist/views/scripts/error.phtml:2
+#: application/plantillas/administracion.phtml:51
+#: application/plantillas/general.phtml:47
+#: application/views/scripts/error/error.phtml:2
+msgid "An error occurred"
+msgstr "An error occurred"
+
+#: application/modulos/calendar/plantillas/general.phtml:44
+#: application/modulos/checklist/plantillas/general.phtml:44
+#: application/plantillas/administracion.phtml:51
+#: application/plantillas/general.phtml:47
+msgid "A ocurrido un error al intentar cargar la seccion que solicita."
+msgstr ""
+
+#: application/modulos/calendar/plantillas/general.phtml:44
+#: application/modulos/checklist/plantillas/general.phtml:44
+#: application/plantillas/administracion.phtml:51
+#: application/plantillas/general.phtml:47
+msgid "Por favor intentelo mas tarde."
+msgstr ""
+
+#: application/modulos/calendar/plantillas/general.phtml:57
+msgid "Hoy"
+msgstr "Today"
+
+#: application/modulos/calendar/plantillas/general.phtml:59
+msgid "Semana"
+msgstr "Week"
+
+#: application/modulos/calendar/plantillas/general.phtml:61
+msgid "Todo el día"
+msgstr "All day"
+
+#: application/modulos/calendar/plantillas/general.phtml:62
+msgid "H:mm"
+msgstr ""
+
+#: application/modulos/calendar/plantillas/general.phtml:78
+msgid "Ene"
+msgstr "Jan"
+
+#: application/modulos/calendar/plantillas/general.phtml:79
+msgid "Feb"
+msgstr "Feb"
+
+#: application/modulos/calendar/plantillas/general.phtml:80
+msgid "Mar"
+msgstr "Mar"
+
+#: application/modulos/calendar/plantillas/general.phtml:81
+msgid "Abr"
+msgstr "Apr"
+
+#: application/modulos/calendar/plantillas/general.phtml:82
+msgid "May"
+msgstr "May"
+
+#: application/modulos/calendar/plantillas/general.phtml:83
+msgid "Jun"
+msgstr "Jun"
+
+#: application/modulos/calendar/plantillas/general.phtml:84
+msgid "Jul"
+msgstr "Jul"
+
+#: application/modulos/calendar/plantillas/general.phtml:85
+msgid "Ago"
+msgstr "Aug"
+
+#: application/modulos/calendar/plantillas/general.phtml:86
+msgid "Sep"
+msgstr "Sep"
+
+#: application/modulos/calendar/plantillas/general.phtml:87
+msgid "Oct"
+msgstr "Oct"
+
+#: application/modulos/calendar/plantillas/general.phtml:88
+msgid "Nov"
+msgstr "Nov"
+
+#: application/modulos/calendar/plantillas/general.phtml:89
+msgid "Dic"
+msgstr "Dec"
+
+#: application/modulos/calendar/plantillas/general.phtml:92
+msgid "Lunes"
+msgstr "Monday"
+
+#: application/modulos/calendar/plantillas/general.phtml:93
+msgid "Martes"
+msgstr "Tuesday"
+
+#: application/modulos/calendar/plantillas/general.phtml:94
+msgid "Miércoles"
+msgstr "Wednesday"
+
+#: application/modulos/calendar/plantillas/general.phtml:95
+msgid "Jueves"
+msgstr "Thursday"
+
+#: application/modulos/calendar/plantillas/general.phtml:96
+msgid "Viernes"
+msgstr "Friday"
+
+#: application/modulos/calendar/plantillas/general.phtml:97
+msgid "Sábado"
+msgstr "Saturday"
+
+#: application/modulos/calendar/plantillas/general.phtml:98
+msgid "Domingo"
+msgstr "Sunday"
+
+#: application/modulos/calendar/plantillas/general.phtml:101
+msgid "Lun"
+msgstr "Mo"
+
+#: application/modulos/calendar/plantillas/general.phtml:102
+msgid "Tue"
+msgstr "Tue"
+
+#: application/modulos/calendar/plantillas/general.phtml:103
+msgid "Mié"
+msgstr "We"
+
+#: application/modulos/calendar/plantillas/general.phtml:104
+msgid "Jue"
+msgstr "Th"
+
+#: application/modulos/calendar/plantillas/general.phtml:105
+msgid "Vie"
+msgstr "Fr"
+
+#: application/modulos/calendar/plantillas/general.phtml:106
+msgid "Sab"
+msgstr "Sat"
+
+#: application/modulos/calendar/plantillas/general.phtml:107
+msgid "Dom"
+msgstr "Su"
+
+#: application/modulos/calendar/plantillas/partials/leftBar.phtml:7
+#: application/modulos/checklist/plantillas/partials/leftBar.phtml:7
+#: application/plantillas/partials/leftBar.phtml:7
+msgid "Dashboards"
+msgstr "Dashboards"
+
+#: application/modulos/calendar/plantillas/partials/leftBar.phtml:9
+#: application/modulos/checklist/plantillas/partials/leftBar.phtml:9
+#: application/plantillas/partials/leftBar.phtml:9
+msgid "Correos"
+msgstr ""
+
+#: application/modulos/calendar/plantillas/partials/leftBar.phtml:10
+#: application/modulos/checklist/plantillas/partials/leftBar.phtml:10
+#: application/plantillas/partials/leftBar.phtml:10
+msgid "Test One"
+msgstr ""
+
+#: application/modulos/calendar/plantillas/partials/leftBar.phtml:23
+#: application/modulos/checklist/plantillas/partials/leftBar.phtml:23
+#: application/plantillas/partials/leftBar.phtml:23
+msgid "Configurar"
+msgstr ""
+
+#: application/modulos/calendar/plantillas/partials/leftBar.phtml:27
+#: application/modulos/checklist/plantillas/partials/leftBar.phtml:27
+#: application/plantillas/partials/leftBar.phtml:27
+msgid "Aplicacion"
+msgstr "Application"
+
+#: application/modulos/calendar/plantillas/partials/leftBar.phtml:31
+#: application/modulos/checklist/plantillas/partials/leftBar.phtml:31
+#: application/plantillas/partials/leftBar.phtml:31
+#: application/views/scripts/admin/delegations.phtml:5
+#: application/views/scripts/admin/ajax/delegaciones.phtml:1
+msgid "Delegaciones"
+msgstr ""
+
+#: application/modulos/calendar/plantillas/partials/leftBar.phtml:38
+#: application/modulos/calendar/plantillas/partials/leftBar.phtml:41
+#: application/modulos/checklist/plantillas/partials/leftBar.phtml:38
+#: application/modulos/checklist/plantillas/partials/leftBar.phtml:41
+#: application/plantillas/partials/leftBar.phtml:38
+#: application/plantillas/partials/leftBar.phtml:41
+#: application/views/scripts/admin/usuarios.phtml:3
+msgid "Usuarios"
+msgstr "Users"
+
+#: application/modulos/calendar/plantillas/partials/leftBar.phtml:45
+#: application/modulos/checklist/plantillas/partials/leftBar.phtml:45
+#: application/plantillas/partials/leftBar.phtml:45
+msgid "Permisos y roles de acceso"
+msgstr ""
+
+#: application/modulos/calendar/plantillas/partials/leftBar.phtml:51
+#: application/modulos/checklist/plantillas/partials/leftBar.phtml:51
+#: application/plantillas/partials/leftBar.phtml:51
+msgid "Logs"
+msgstr ""
+
+#: application/modulos/calendar/plantillas/partials/leftBar.phtml:53
+#: application/modulos/checklist/plantillas/partials/leftBar.phtml:53
+#: application/plantillas/partials/leftBar.phtml:53
+msgid "Aplicación"
+msgstr "Application"
+
+#: application/modulos/calendar/plantillas/partials/leftBar.phtml:54
+#: application/modulos/checklist/plantillas/partials/leftBar.phtml:54
+#: application/plantillas/partials/leftBar.phtml:54
+msgid "Errores"
+msgstr ""
+
+#: application/modulos/calendar/plantillas/partials/leftBar.phtml:55
+#: application/modulos/checklist/plantillas/partials/leftBar.phtml:55
+#: application/plantillas/partials/leftBar.phtml:55
+msgid "Ldap"
+msgstr ""
+
+#: application/modulos/calendar/plantillas/partials/leftBar.phtml:56
+#: application/modulos/checklist/plantillas/partials/leftBar.phtml:56
+#: application/plantillas/partials/leftBar.phtml:56
+msgid "Acceso de usuarios"
+msgstr ""
+
+#: application/modulos/calendar/plantillas/partials/topBar.phtml:12
+#: application/modulos/checklist/plantillas/partials/topBar.phtml:12
+#: application/plantillas/partials/topBar.phtml:12
+msgid "Home"
+msgstr "Home"
+
+#: application/modulos/calendar/plantillas/partials/topBar.phtml:13
+#: application/modulos/checklist/plantillas/partials/topBar.phtml:13
+#: application/plantillas/partials/topBar.phtml:13
+msgid "Calendario"
+msgstr "Calendar"
+
+#: application/modulos/calendar/plantillas/partials/topBar.phtml:14
+#: application/modulos/checklist/plantillas/partials/topBar.phtml:14
+#: application/plantillas/partials/topBar.phtml:14
+msgid "Checklist"
+msgstr ""
+
+#: application/modulos/calendar/plantillas/partials/topBar.phtml:21
+#: application/modulos/checklist/plantillas/partials/topBar.phtml:21
+#: application/plantillas/partials/topBar.phtml:21
+msgid "Administrar aplicacion"
+msgstr "Manage application"
+
+#: application/modulos/calendar/plantillas/partials/topBar.phtml:33
+#: application/modulos/checklist/plantillas/partials/topBar.phtml:33
+#: application/plantillas/partials/topBar.phtml:33
+msgid "Salir"
+msgstr "Logout"
+
+#: application/modulos/calendar/views/scripts/denied.phtml:2
+#: application/modulos/checklist/views/scripts/denied.phtml:2
+#: application/views/scripts/error/denied.phtml:2
+msgid "Acceso no permitido"
+msgstr "Access not allowed"
+
+#: application/modulos/calendar/views/scripts/denied.phtml:4
+#: application/modulos/checklist/views/scripts/denied.phtml:4
+#: application/views/scripts/error/denied.phtml:4
+msgid ""
+"No dispone de los permisos necesarios para acceder a al apartado que "
+"solicita."
+msgstr ""
+
+#: application/modulos/calendar/views/scripts/ajax/comentarios.phtml:2
+#, php-format
+msgid "Comentar%s"
+msgstr "Comment%s"
+
+#: application/modulos/calendar/views/scripts/ajax/comentarios.phtml:14
+msgid "Borrar"
+msgstr "Delete"
+
+#: application/modulos/calendar/views/scripts/index/index.phtml:5
+msgid "Cargando información..."
+msgstr "Loading..."
+
+#: application/modulos/calendar/views/scripts/index/index.phtml:13
+msgid "Fecha"
+msgstr ""
+
+#: application/modulos/calendar/views/scripts/index/index.phtml:14
+msgid "Fecha fin"
+msgstr "Date end"
+
+#: application/modulos/calendar/views/scripts/index/index.phtml:15
+msgid "Origen"
+msgstr ""
+
+#: application/modulos/calendar/views/scripts/index/index.phtml:16
+msgid "Asignado"
+msgstr ""
+
+#: application/views/scripts/admin/country.phtml:3
+msgid "Opciones de País"
+msgstr ""
+
+#: application/views/scripts/admin/country.phtml:5
+msgid "Bla"
+msgstr ""
+
+#: application/views/scripts/admin/delegations.phtml:6
+#: application/views/scripts/admin/ajax/aplicaciones.phtml:1
+msgid "Gestionar Aplicaciones"
+msgstr ""
+
+#: application/views/scripts/admin/deploy.phtml:3
+msgid "Deploy Application"
+msgstr ""
+
+#: application/views/scripts/admin/deploy.phtml:5
+msgid ""
+"ATENCION! si no sabe la utilidad de este apartado no deberia estar aqui. Por "
+"favor abandone esta seccion sin realizar ningun cambio."
+msgstr ""
+
+#: application/views/scripts/admin/general.phtml:6
+#: application/views/scripts/admin/config/home.phtml:1
+msgid "General"
+msgstr "General"
+
+#: application/views/scripts/admin/general.phtml:9
+#: application/views/scripts/admin/config/modules.phtml:1
+msgid "Módulos"
+msgstr ""
+
+#: application/views/scripts/admin/grupos.phtml:3
+msgid "Grupos"
+msgstr "Groups"
+
+#: application/views/scripts/admin/grupos.phtml:5
+msgid ""
+"A continuacion se listan los grupos y se configura el acceso a la aplicacion."
+msgstr ""
+
+#: application/views/scripts/admin/grupos.phtml:11
+msgid "Ceco"
+msgstr ""
+
+#: application/views/scripts/admin/grupos.phtml:12
+#: application/views/scripts/admin/ajax/roles.phtml:9
+#: application/views/scripts/admin/config/modules.phtml:10
+msgid "Nombre"
+msgstr "Name"
+
+#: application/views/scripts/admin/grupos.phtml:13
+msgid "email"
+msgstr "Email"
+
+#: application/views/scripts/admin/grupos.phtml:14
+#: application/views/scripts/admin/usuarios.phtml:13
+msgid "Rol"
+msgstr "Role"
+
+#: application/views/scripts/admin/grupos.phtml:15
+#: application/views/scripts/admin/ajax/roles.phtml:11
+msgid "Estado"
+msgstr "State"
+
+#: application/views/scripts/admin/grupos.phtml:96
+#: application/views/scripts/admin/usuarios.phtml:123
+#: application/views/scripts/admin/ajax/roles.phtml:85
+msgid "Cancelar"
+msgstr "Cancel"
+
+#: application/views/scripts/admin/index.phtml:3
+msgid "Bienvenido al panel de administracion"
+msgstr ""
+
+#: application/views/scripts/admin/permisos-y-roles.phtml:6
+#: application/views/scripts/admin/ajax/permisos.phtml:1
+msgid "Permisos"
+msgstr ""
+
+#: application/views/scripts/admin/permisos-y-roles.phtml:9
+#: application/views/scripts/admin/ajax/permisos.phtml:9
+#: application/views/scripts/admin/ajax/roles.phtml:1
+msgid "Roles"
+msgstr ""
+
+#: application/views/scripts/admin/permisos-y-roles.phtml:12
+#: application/views/scripts/admin/ajax/permisos.phtml:8
+#: application/views/scripts/admin/ajax/recursos.phtml:1
+msgid "Recursos"
+msgstr ""
+
+#: application/views/scripts/admin/usuarios.phtml:5
+msgid ""
+"En este apartado se muestran los usuarios que usan la aplicación. Para "
+"modificar alguna opción basta con hacer clic en ella, dependiendo del campo "
+"se mostrarán las opciones de edición disponibles."
+msgstr ""
+
+#: application/views/scripts/admin/usuarios.phtml:11
+msgid "Usuario"
+msgstr "User"
+
+#: application/views/scripts/admin/usuarios.phtml:12
+msgid "pais"
+msgstr "country"
+
+#: application/views/scripts/admin/usuarios.phtml:14
+msgid "Creado"
+msgstr ""
+
+#: application/views/scripts/admin/usuarios.phtml:15
+msgid "Último acceso"
+msgstr ""
+
+#: application/views/scripts/admin/ajax/aplicaciones.phtml:3
+msgid ""
+"A continuación se pueden definir las aplicaciones utilizadas por las "
+"diferentes delegaciones."
+msgstr ""
+
+#: application/views/scripts/admin/ajax/delegaciones.phtml:3
+msgid ""
+"En este apartado puede adminsitrar las delegaciones y sus parámetros de "
+"configuración."
+msgstr ""
+
+#: application/views/scripts/admin/ajax/delegaciones.phtml:4
+msgid ""
+"A continuación se listan las delegaciones. Puede añadir las aplicaciones que "
+"necesite y configurar los parámetros de su sede. Si desea modificar el "
+"nombre de una delegación puede hacerlo realizando doble click sobre ella."
+msgstr ""
+
+#: application/views/scripts/admin/ajax/permisos.phtml:3
+msgid ""
+"En esta pestaña encontramos una tabla con la lista de recursos de la "
+"aplicación y los roles disponibles. Haciendo clic en los iconos podemos "
+"decidir si un rol tiene acceso o no a una sección o apartado."
+msgstr ""
+
+#: application/views/scripts/admin/ajax/permisos.phtml:12
+msgid "Sección"
+msgstr ""
+
+#: application/views/scripts/admin/ajax/permisos.phtml:13
+msgid "Apartado"
+msgstr "Section"
+
+#: application/views/scripts/admin/ajax/permisos.phtml:50
+msgid "Heredado"
+msgstr ""
+
+#: application/views/scripts/admin/ajax/recursos.phtml:3
+msgid ""
+"A continuación se muestran todos los recursos de la aplicación, si se ha "
+"creado un recurso nuevo y desea actualizar la lista, utilice el botón que "
+"encontrará a continuación."
+msgstr ""
+
+#: application/views/scripts/admin/ajax/recursos.phtml:5
+msgid "Actualizar árbol de recursos"
+msgstr ""
+
+#: application/views/scripts/admin/ajax/recursos.phtml:13
+msgid "Module"
+msgstr "Module"
+
+#: application/views/scripts/admin/ajax/recursos.phtml:14
+msgid "Controller"
+msgstr "Controller"
+
+#: application/views/scripts/admin/ajax/recursos.phtml:15
+msgid "Action"
+msgstr "Action"
+
+#: application/views/scripts/admin/ajax/roles.phtml:3
+msgid ""
+"En esta pestaña encontramos una tabla con la lista de roles de la "
+"aplicación. Se pueden desactivar roles y evitar el acceso de los usuarios "
+"con el control de estado."
+msgstr ""
+
+#: application/views/scripts/admin/ajax/roles.phtml:10
+msgid "Hereda"
+msgstr ""
+
+#: application/views/scripts/admin/config/home.phtml:3
+msgid ""
+"Con el formulario que encontrara a continuacion podra modificar la "
+"configuracion basica de la aplicacion."
+msgstr ""
+
+#: application/views/scripts/admin/config/modules.phtml:2
+msgid ""
+"Un módulo es una aplicación satelite del Portal Easy AUTOMATION. En este "
+"apartado puede gestionarlos para poder tratar con ellos."
+msgstr ""
+
+#: application/views/scripts/admin/config/modules.phtml:4
+msgid "Módulos activos"
+msgstr "Active modules"
+
+#: application/views/scripts/admin/config/modules.phtml:11
+msgid "Dominio"
+msgstr "Domain"
+
+#: application/views/scripts/admin/config/modules.phtml:12
+msgid "URL"
+msgstr "URL"
+
+#: application/views/scripts/admin/config/modules.phtml:13
+msgid "Pais"
+msgstr "Country"
+
+#: application/views/scripts/admin/config/modules.phtml:14
+msgid "Easy.A"
+msgstr "Easy.A"
+
+#: application/views/scripts/admin/config/modules.phtml:23
+msgid "Crear un módulo nuevo"
+msgstr "Create a new module"
+
+#: application/views/scripts/admin/config/modules.phtml:25
+msgid "Utilice el siguiente formulario para crear un nuevo módulo."
+msgstr "Use the form below to create a new module."
+
+#: application/views/scripts/auth/login.phtml:5
+msgid "Please note:"
+msgstr "Please note:"
+
+#: application/views/scripts/auth/login.phtml:5
+msgid ""
+"Para acceder al portal hay que utilizar el login WIW (que es el mismo login "
+"que utilizas para entrar a la red de T-Systems)."
+msgstr ""
+"To access the portal you must use the login WIW's (which is the same login "
+"you use to get to the T-Systems network)."
+
+#: application/views/scripts/auth/signup.phtml:7
+msgid "Formulario de registro"
+msgstr "Registration form"
+
+#: application/views/scripts/index/index.phtml:3
+#, php-format
+msgid "Bienvenido al Portal %s de T-Systems Iberia."
+msgstr "Welcome to %s"
+
+#~ msgid "No comments"
+#~ msgstr "No comments"
+
+#~ msgid "Gauge"
+#~ msgstr "Gauge"
+
+#~ msgid "Histórico mensual del año activo."
+#~ msgstr "Historical monthly active year."
+
+#~ msgid "Histórico diario del mes activo."
+#~ msgstr "Historical daily active month."
+
+#~ msgid "Evolución anual."
+#~ msgstr "Annual evolution."
+
+#~ msgid "Mensual"
+#~ msgstr "Montly"
+
+#~ msgid "Trimestral"
+#~ msgstr "Quarterly"
+
+#~ msgid "Anual"
+#~ msgstr "Annual"
+
+#~ msgid "Variación respecto al mes anterior: %s"
+#~ msgstr "Difference from previous month: %s"
+
+#~ msgid ""
+#~ "Esta pestaña es dinámica y su carga se cancela al cambiar a otra pestaña."
+#~ msgstr ""
+#~ "This tab is dynamic. Its load is canceled when you switch to another tab."
+
+#~ msgid ""
+#~ "Por favor espere a que la carga finalice antes de continuar con la "
+#~ "navegación."
+#~ msgstr "Please before continuing navigation, wait for the tab to load."
+
+#~ msgid "Desplegar todos los Diagramas Gauge."
+#~ msgstr "Expand all Gauge diagrams."
+
+#~ msgid "Desplegar todos los históricos."
+#~ msgstr "Expand all historical charts."
+
+#~ msgid "Desplegar todas las evoluciones."
+#~ msgstr "Expand all evolutions charts."
+
+#~ msgid "Exportar a Excel"
+#~ msgstr "Export to Excel"
+
+#~ msgid "Editar report"
+#~ msgstr "Edit report"
+
+#~ msgid "Finalizar"
+#~ msgstr "Finalize"
+
+#~ msgid "Obteniendo datos..."
+#~ msgstr "Getting data..."
+
+#~ msgid "Ir"
+#~ msgstr "Go"
+
+#~ msgid "January"
+#~ msgstr "January"
+
+#~ msgid "April"
+#~ msgstr "April"
+
+#~ msgid "August"
+#~ msgstr "August"
+
+#~ msgid "November"
+#~ msgstr "November"
+
+#~ msgid "December"
+#~ msgstr "December"
+
+#~ msgid "Última carga de datos realizada el día %s de %s de %s a las %s Hs."
+#~ msgstr "Last load %s %s %s at %s Hs."
+
+#~ msgid "Resumen global"
+#~ msgstr "Overview"
+
+#~ msgid "Dashboard"
+#~ msgstr "Dashboard"
+
+#~ msgid "Documentación adicional"
+#~ msgstr "Additional documentation"
+
+#~ msgid "Configuración y leyenda"
+#~ msgstr "Configuration and legend"
+
+#~ msgid "Observaciones"
+#~ msgstr "Comments"
+
+#~ msgid "ATENCIÓN:"
+#~ msgstr "CAUTION:"
+
+#~ msgid ""
+#~ "Este es un proceso lento y en ocaciones puede tardar hasta 1 minuto en "
+#~ "cargar."
+#~ msgstr ""
+#~ "This is a slow process and occasionally can take up to 1 minute to load."
+
+#~ msgid "Evolución anual por KPI"
+#~ msgstr "Annual evolution by KPI"
+
+#~ msgid "Evolución anual de KPI por grupos"
+#~ msgstr "Annual evolution of KPI groups"
+
+#~ msgid "Actividad prevista en contrato"
+#~ msgstr "Activity under contract"
+
+#~ msgid "Add files..."
+#~ msgstr "Add files..."
+
+#~ msgid "Start upload"
+#~ msgstr "Start upload"
+
+#~ msgid "Cancel upload"
+#~ msgstr "Cancel upload"
+
+#~ msgid "Anadir"
+#~ msgstr "Add"
+
+#~ msgid "Información de configuración"
+#~ msgstr "Configuration information"
+
+#~ msgid "Cliente"
+#~ msgstr "Customer"
+
+#~ msgid "Módulo"
+#~ msgstr "Module"
+
+#~ msgid "Fecha de alta"
+#~ msgstr "Date added"
+
+#~ msgid "Mes inicio de report"
+#~ msgstr "Month beginning of report"
+
+#~ msgid "Tendencia estable"
+#~ msgstr "Stable trend"
+
+#~ msgid ""
+#~ "Siempre que la diferencia entre el cumplimiento actual y el mes anterior "
+#~ "no supere este rango de valores, la tendencia se mostrará estable."
+#~ msgstr ""
+#~ "Whenever the difference between the current fulfillment and the previous "
+#~ "month does not exceed this range, the trends display stable ."
+
+#~ msgid "Tendencia positiva"
+#~ msgstr "Positive trend"
+
+#~ msgid ""
+#~ "Se muestra tendencia positiva cuando la diferencia entre el cumplimiento "
+#~ "actual y el mes anterior sea superior a este valor."
+#~ msgstr ""
+#~ "Positive trend is displayed when the difference between the current "
+#~ "fulfillment and the previous month exceeds this value."
+
+#~ msgid "Tendencia negativa"
+#~ msgstr "Negative trend"
+
+#~ msgid ""
+#~ "Se muestra tendencia negativa cuando la diferencia entre el cumplimiento "
+#~ "actual y el mes anterior sea inferior a este valor."
+#~ msgstr ""
+#~ "Negative trend is displayed when the difference between the current "
+#~ "fulfillment and the previous month is ledd than this value."
+
+#~ msgid "Dashboard por grupos"
+#~ msgstr "Dashboard groups"
+
+#~ msgid "Si"
+#~ msgstr "Yes"
+
+#~ msgid "Módulo de carga"
+#~ msgstr "Load module"
+
+#~ msgid "Leyenda"
+#~ msgstr "Legend"
+
+#~ msgid "Indica comienzo del año."
+#~ msgstr "Indicates the beginning of the year."
+
+#~ msgid "Aumento del cumplimiento mayor a un %s respecto al último mes."
+#~ msgstr "Increased fulfillment greatest to a %s from the last month."
+
+#~ msgid "Aumento del cumplimiento entre un %s y un %s respecto al último mes."
+#~ msgstr "Increased fulfillment between %s and %s from the last month."
+
+#~ msgid "El cumplimiento oscila en un rango de %s y %s respecto al último mes"
+#~ msgstr ""
+#~ "Fulfillment oscillates within a range of %s and %s from the last month"
+
+#~ msgid ""
+#~ "Descenso del cumplimiento entre un %s y un %s respecto al último mes."
+#~ msgstr "Descent the fulfillment between %s and %s from the last month."
+
+#~ msgid "Descenso del cumplimiento mayor a un %s respecto al último mes."
+#~ msgstr "Descent the fulfillment greatest  to a %s from the last month."
+
+#~ msgid "KPI"
+#~ msgstr "KPI"
+
+#~ msgid "Todos"
+#~ msgstr "All"
+
+#~ msgid "Grupo"
+#~ msgstr "Group"
+
+#~ msgid "Período"
+#~ msgstr "Period"
+
+#~ msgid "Desde"
+#~ msgstr "From"
+
+#~ msgid "Hasta"
+#~ msgstr "To"
+
+#~ msgid "Tipo"
+#~ msgstr "Type"
+
+#~ msgid "Resumen"
+#~ msgstr "Summary"
+
+#~ msgid "Detalle"
+#~ msgstr "Detail "
+
+#~ msgid "Este KPI se creará en la categoría"
+#~ msgstr "This KPI is created in the category"
+
+#~ msgid "Título"
+#~ msgstr "Title"
+
+#~ msgid "Objetivo (%)"
+#~ msgstr "Target (%)"
+
+#~ msgid "Fórmula cumplimiento"
+#~ msgstr "Compliance Formula"
+
+#~ msgid "Pliego"
+#~ msgstr "RFP"
+
+#~ msgid "Proceso"
+#~ msgstr "Process"
+
+#~ msgid "Incidencia"
+#~ msgstr "Incident"
+
+#~ msgid "Petición"
+#~ msgstr "Request"
+
+#~ msgid "Otro"
+#~ msgstr "Other"
+
+#~ msgid "Periodicidad"
+#~ msgstr "Periodicity"
+
+#~ msgid "SLA cumple al"
+#~ msgstr "SLA fulfills at"
+
+#~ msgid "100% (por defecto)"
+#~ msgstr "100% (default)"
+
+#~ msgid "0% (kpi inverso)"
+#~ msgstr "0% (kpi reverse)"
+
+#~ msgid "Descripción"
+#~ msgstr "Description"
+
+#~ msgid "Vista por grupos"
+#~ msgstr "View by group"
+
+#~ msgid "Exportar sumario a Excel"
+#~ msgstr "Export to Excel"
+
+#~ msgid "Go"
+#~ msgstr "Go"
+
+#~ msgid "Default"
+#~ msgstr "Default"
+
+#~ msgid "Detaill"
+#~ msgstr "Detaill"
+
+#~ msgid "Summary + Detaill"
+#~ msgstr "Summary + Detaill"
+
+#~ msgid "Gráfica anual no disponible."
+#~ msgstr "Annual Chart not available."
+
+#~ msgid "Casos"
+#~ msgstr "Cases"
+
+#~ msgid "Save"
+#~ msgstr "Save"
+
+#~ msgid ""
+#~ "Cumplimiento calculado de forma automática con los datos importados o "
+#~ "introducidos a mano."
+#~ msgstr ""
+#~ "Compliance calculated automatically with data imported or entered "
+#~ "manually."
+
+#~ msgid "Calculado"
+#~ msgstr "Calculated"
+
+#~ msgid "Cumplimiento final entregado a cliente."
+#~ msgstr "Compliance delivered to customer end."
+
+#~ msgid "Final"
+#~ msgstr "Final"
+
+#~ msgid "Cumplimiento revisado y acordado con el Cliente."
+#~ msgstr "Compliance reviewed and agreed with the Client."
+
+#~ msgid "Revisado"
+#~ msgstr "Revised"
+
+#~ msgid ""
+#~ "En este portal tendrá acceso a los dashboards de los distintos clientes "
+#~ "de la empresa."
+#~ msgstr ""
+#~ "In this website you will have access to the dashboards of various "
+#~ "customers of the company."
+
+#~ msgid ""
+#~ "Puede acceder a ellos seleccionando el cliente deseado del menú de la "
+#~ "barra lateral."
+#~ msgstr ""
+#~ "You can access them by selecting the desired client in the sidebar menu."
+
+#~ msgid "Si necesita ayuda, contacte con %s."
+#~ msgstr "If you need assistance, please contact %s."
+
+#~ msgid "Dashboard del mes activo"
+#~ msgstr "Active month's dashboard"
+
+#~ msgid "Sin comentarios"
+#~ msgstr "No comments"
+
+#~ msgid "Eliminar categoria."
+#~ msgstr "Delete category"
+
+#~ msgid "Crear categoría"
+#~ msgstr "Create category"
+
+#~ msgid "Desplegar todos los comentarios."
+#~ msgstr "Expand all comments."
+
+#~ msgid "Actualmente no se ha añadido ningún KPI a esta categoría."
+#~ msgstr "Currently not added any KPI to this category."
+
+#~ msgid "Desplegar comentarios de categoría."
+#~ msgstr "Display comments category."
+
+#~ msgid "N/A o no hay valores disponibles."
+#~ msgstr "Not applicable or no values ​​are available."
+
+#~ msgid "Cálculo mensual"
+#~ msgstr "Monthly calculation"
+
+#~ msgid "Cálculo trimestral"
+#~ msgstr "Quarterly calculation"
+
+#~ msgid "Cálculo anual"
+#~ msgstr "Annual calculation"
+
+#~ msgid "Marcar como favorito"
+#~ msgstr "Bookmark"
+
+#~ msgid "Periodo:"
+#~ msgstr "Period:"
+
+#~ msgid "Valor Objetivo:"
+#~ msgstr "Target value:"
+
+#~ msgid "Objetivo:"
+#~ msgstr "Target:"
+
+#~ msgid "Cumplimiento:"
+#~ msgstr "Compliance:"
+
+#~ msgid "Cumplimiento revisado:"
+#~ msgstr "Revised Compliance:"
+
+#~ msgid "Última modificación:"
+#~ msgstr "Last modified:"
+
+#~ msgid "N/A"
+#~ msgstr "N/A"
+
+#~ msgid "Histórico"
+#~ msgstr "Historic chart"
+
+#~ msgid "Evolución"
+#~ msgstr "Evolution chart"
+
+#~ msgid "Minimizar"
+#~ msgstr "Minimize"
+
+#~ msgid "Editar valores generales de KPI"
+#~ msgstr "Edit general values of KPI"
+
+#~ msgid "Gestionar cumplimiento mensual"
+#~ msgstr "Manage monthly compliance"
+
+#~ msgid "Eliminar KPI"
+#~ msgstr "Delete KPI"
+
+#~ msgid "Guardar cambios"
+#~ msgstr "Save changes"
+
+#~ msgid "Target"
+#~ msgstr "Target"
+
+#~ msgid "Sin datos"
+#~ msgstr "No data."
+
+#~ msgid "Automático"
+#~ msgstr "Automatic"
+
+#~ msgid "* KPI inverso: Este KPI cumple SLA al 0% y falla con valores >0%"
+#~ msgstr "* KPI reverse: This KPI meets SLA to 0% and fails with values​​> 0%"
+
+#~ msgid "Objetivo necesario para cumplir SLA: %s"
+#~ msgstr "Target necessary to meet SLA: %s"
+
+#, fuzzy
+#~ msgid "Manual"
+#~ msgstr "Annual"
+
+#~ msgid "El usuario que ha introducido no existe en nuestra Base de datos."
+#~ msgstr "The user you entered does not exist in our Database."
+
+#~ msgid "Error de conexión."
+#~ msgstr "Connection failed."

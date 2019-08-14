@@ -1,0 +1,1297 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Easy A Dashboard\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-06-18 08:58+0100\n"
+"PO-Revision-Date: 2013-06-18 09:03+0100\n"
+"Last-Translator: jbadia <juanignacio.badia@t-systems.es>\n"
+"Language-Team: Easy A Dashboard <juanignacio.badia@t-systems.es>\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate;_;setLabel;setValue;setLegend;_refresh;"
+"setLegend;setMessage;append;prepend\n"
+"X-Poedit-Basepath: D:\\Proyectos\\EasyDASHBOARD\\\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SearchPath-0: application\n"
+
+#: application/clients/correos-administracion-de-sistemas/controllers/IndexController.php:347
+#: application/clients/ctti/controllers/IndexController.php:155
+msgid "No comments"
+msgstr "Sin comentarios"
+
+#: application/clients/correos-administracion-de-sistemas/controllers/IndexController.php:365
+#: application/clients/ctti/controllers/IndexController.php:171
+msgid "Gauge"
+msgstr "Gauge"
+
+#: application/clients/correos-administracion-de-sistemas/controllers/IndexController.php:367
+msgid "Histórico mensual del año activo."
+msgstr "Histórico mensual del año activo."
+
+#: application/clients/correos-administracion-de-sistemas/controllers/IndexController.php:368
+#: application/clients/ctti/controllers/IndexController.php:172
+msgid "Histórico diario del mes activo."
+msgstr "Histórico diario del mes activo."
+
+#: application/clients/correos-administracion-de-sistemas/controllers/IndexController.php:370
+#: application/clients/ctti/controllers/IndexController.php:173
+msgid "Evolución anual."
+msgstr "Evolución anual."
+
+#: application/controllers/ErrorController.php:22
+msgid "Page not found"
+msgstr "Página no disponible"
+
+#: application/controllers/ErrorController.php:27
+msgid "Application error"
+msgstr "Error en la aplicación"
+
+#: application/forms/Login.php:14
+msgid "/auth/login"
+msgstr "/auth/login"
+
+#: application/forms/Login.php:31
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: application/forms/Login.php:45
+msgid "Password"
+msgstr "Contraseña"
+
+#: application/forms/Login.php:60
+msgid "Log in"
+msgstr "Entrar"
+
+#: application/models/Dashboard/Kpi.php:306
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:342
+#: application/views/scripts/index/editkpi.phtml:8
+msgid "Mensual"
+msgstr "Mensual"
+
+#: application/models/Dashboard/Kpi.php:307
+#: application/views/helpers/DashboardHelper.php:336
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:342
+#: application/views/scripts/index/editkpi.phtml:8
+#: application/views/scripts/partials/dashboard_portadaGlobal_old.phtml:35
+#: application/views/scripts/partials/dashboard_portadaGlobal_old.phtml:51
+msgid "Trimestral"
+msgstr "Trimestral"
+
+#: application/models/Dashboard/Kpi.php:308
+#: application/views/helpers/DashboardHelper.php:258
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:342
+#: application/views/scripts/index/editkpi.phtml:8
+#: application/views/scripts/partials/dashboard_portadaGlobal_old.phtml:138
+msgid "Anual"
+msgstr "Anual"
+
+#: application/models/Graphics/Dashboard.php:52
+msgid "Día"
+msgstr "Día"
+
+#: application/models/Graphics/Dashboard.php:53
+#: application/views/scripts/index/getlistmonth.phtml:7
+msgid "SLA OK"
+msgstr "SLA OK"
+
+#: application/models/Graphics/Dashboard.php:54
+#: application/views/scripts/index/getlistmonth.phtml:8
+msgid "SLA KO"
+msgstr "SLA KO"
+
+#: application/models/Graphics/Dashboard.php:108
+#: application/models/Graphics/Dashboard.php:169
+#: application/views/scripts/index/getlistmonth.phtml:5
+#: application/views/scripts/index/getlistmonthrevisado.phtml:10
+msgid "Mes"
+msgstr "Mes"
+
+#: application/models/Graphics/Dashboard.php:109
+#: application/models/Graphics/Dashboard.php:170
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:22
+#: application/clients/ctti/views/scripts/index/index.phtml:21
+msgid "Volumetría"
+msgstr "Volumetría"
+
+#: application/models/Graphics/Dashboard.php:171
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:359
+msgid "Objetivo"
+msgstr "Objetivo"
+
+#: application/models/Graphics/Dashboard.php:172
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:360
+#: application/views/scripts/index/getlistmonth.phtml:9
+#: application/views/scripts/index/getlistmonthrevisado.phtml:6
+msgid "Cumplimiento"
+msgstr "Cumplimiento"
+
+#: application/models/Login/Abstract.php:142
+msgid "No dispone los permisos necesarios para acceder a esta aplicación."
+msgstr "No dispone los permisos necesarios para acceder a esta aplicación."
+
+#: application/models/Login/Abstract.php:146
+msgid "Aplicación cerrada."
+msgstr "Aplicación cerrada."
+
+#: application/models/Login/Abstract.php:151
+#, php-format
+msgid "Validación correcta con modelo %s."
+msgstr "Validación correcta con modelo %s."
+
+#: application/models/Login/Abstract.php:156
+msgid "El usuario que ha introducido no existe en nuestra Base de datos."
+msgstr "El usuario que ha introducido no existe en nuestra Base de datos."
+
+#: application/models/Login/Abstract.php:157
+#, php-format
+msgid "El usuario que ha introducido (%s) no existe en la Base de datos %s."
+msgstr "El usuario que ha introducido (%s) no existe en la Base de datos %s."
+
+#: application/models/Login/Abstract.php:162
+#: application/models/Login/Abstract.php:163
+msgid "La clave que ha introducido es incorrecta."
+msgstr "La clave que ha introducido es incorrecta."
+
+#: application/models/Login/Abstract.php:168
+msgid "Error de conexión."
+msgstr "Error de conexión."
+
+#: application/models/Login/Abstract.php:169
+msgid "Se ha producido un error y el código ("
+msgstr "Se ha producido un error y el código ("
+
+#: application/models/Login/Authenticate.php:57
+msgid "Motor de autentificación Local"
+msgstr "Motor de autentificación Local"
+
+#: application/models/Login/Authenticate.php:79
+msgid "Motor de autentificación Ad"
+msgstr "Motor de autentificación Ad"
+
+#: application/models/Login/Authenticate.php:93
+#, php-format
+msgid "<b>ERROR:</b> El modelo <b>%s</b> no es un modelo de conexión válido."
+msgstr "<b>ERROR:</b> El modelo <b>%s</b> no es un modelo de conexión válido."
+
+#: application/models/Login/Authenticate.php:94
+#, php-format
+msgid "ERROR: El modelo %s no es un modelo de conexión válido."
+msgstr "ERROR: El modelo %s no es un modelo de conexión válido."
+
+#: application/models/Login/Authenticate.php:124
+msgid "<b>ERROR:</b> No se reciben los datos del usuario ($userData)."
+msgstr "<b>ERROR:</b> No se reciben los datos del usuario ($userData)."
+
+#: application/models/Login/LoginAd.php:107
+msgid "Fallo al registrar el usuario."
+msgstr "Fallo al registrar el usuario."
+
+#: application/models/Login/LoginAd.php:113
+msgid "Fallo al registrar el usuario. No se reciben datos desde AD."
+msgstr "Fallo al registrar el usuario. No se reciben datos desde AD."
+
+#: application/models/Login/LoginAd.php:118
+msgid "El usuario no existe en WIW"
+msgstr "El usuario no existe en WIW"
+
+#: application/views/helpers/DashboardHelper.php:309
+#: application/views/helpers/DashboardHelper.php:374
+#: application/views/scripts/partials/dashboard_kpi.phtml:102
+#: application/views/scripts/partials/dashboard_kpi.phtml:108
+#: application/views/scripts/partials/dashboard_portadaGlobal_old.phtml:28
+#: application/views/scripts/partials/dashboard_portadaGlobal_old.phtml:32
+#: application/views/scripts/partials/dashboard_portadaGlobal_old.phtml:48
+#: application/views/scripts/partials/dashboard_portadaGlobal_old.phtml:76
+#: application/views/scripts/partials/dashboard_portadaGrupos_old.phtml:44
+#, php-format
+msgid "Variación respecto al mes anterior: %s"
+msgstr "Variación respecto al mes anterior: %s"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/error.phtml:25
+#: application/clients/ctti/plantillas/error.phtml:25
+#: application/plantillas/error.phtml:25
+msgid "Volver"
+msgstr "Volver"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/general.phtml:48
+#: application/clients/correos-administracion-de-sistemas/views/scripts/error.phtml:2
+#: application/clients/ctti/plantillas/general.phtml:48
+#: application/clients/ctti/views/scripts/error.phtml:2
+#: application/plantillas/administracion.phtml:51
+#: application/plantillas/general.phtml:47
+#: application/views/scripts/error/error.phtml:2
+msgid "An error occurred"
+msgstr "Se ha producido un error"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/general.phtml:48
+#: application/clients/ctti/plantillas/general.phtml:48
+#: application/plantillas/administracion.phtml:51
+#: application/plantillas/general.phtml:47
+msgid "A ocurrido un error al intentar cargar la seccion que solicita."
+msgstr "A ocurrido un error al intentar cargar la sección que solicita."
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/general.phtml:48
+#: application/clients/ctti/plantillas/general.phtml:48
+#: application/plantillas/administracion.phtml:51
+#: application/plantillas/general.phtml:47
+msgid "Por favor intentelo mas tarde."
+msgstr "Por favor inténtelo más tarde."
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/leftBar.phtml:9
+#: application/clients/ctti/plantillas/partials/leftBar.phtml:9
+#: application/plantillas/partials/leftBar.phtml:20
+msgid "Configurar"
+msgstr "Configurar"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/leftBar.phtml:13
+#: application/clients/ctti/plantillas/partials/leftBar.phtml:13
+#: application/plantillas/partials/leftBar.phtml:24
+msgid "Aplicacion"
+msgstr "Aplicación"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/leftBar.phtml:17
+#: application/clients/ctti/plantillas/partials/leftBar.phtml:17
+#: application/plantillas/partials/leftBar.phtml:28
+#: application/views/scripts/admin/delegations.phtml:5
+#: application/views/scripts/admin/ajax/delegaciones.phtml:1
+msgid "Delegaciones"
+msgstr "Delegaciones"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/leftBar.phtml:24
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/leftBar.phtml:27
+#: application/clients/ctti/plantillas/partials/leftBar.phtml:24
+#: application/clients/ctti/plantillas/partials/leftBar.phtml:27
+#: application/plantillas/partials/leftBar.phtml:35
+#: application/plantillas/partials/leftBar.phtml:38
+#: application/views/scripts/admin/usuarios.phtml:3
+msgid "Usuarios"
+msgstr "Usuarios"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/leftBar.phtml:31
+#: application/clients/ctti/plantillas/partials/leftBar.phtml:31
+#: application/plantillas/partials/leftBar.phtml:42
+msgid "Permisos y roles de acceso"
+msgstr "Permisos y roles de acceso"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topBar.phtml:15
+#: application/clients/ctti/plantillas/partials/topBar.phtml:15
+#: application/plantillas/partials/topBar.phtml:15
+msgid "Home"
+msgstr "Inicio"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topBar.phtml:23
+#: application/clients/ctti/plantillas/partials/topBar.phtml:23
+#: application/plantillas/partials/topBar.phtml:23
+msgid "Administrar aplicacion"
+msgstr "Administrar aplicación"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topBar.phtml:26
+#: application/clients/ctti/plantillas/partials/topBar.phtml:26
+#: application/plantillas/partials/topBar.phtml:26
+msgid "Salir"
+msgstr "Salir"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:4
+#: application/clients/ctti/plantillas/partials/topClient.phtml:4
+#: application/views/scripts/partials/dashboard_categorias.phtml:23
+#: application/views/scripts/partials/dashboard_categorias.phtml:127
+#: application/views/scripts/partials/dashboard_categorias_grupos.phtml:56
+msgid "Desplegar todos los Diagramas Gauge."
+msgstr "Desplegar todos los Diagramas Gauge."
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:5
+#: application/clients/ctti/plantillas/partials/topClient.phtml:5
+#: application/views/scripts/partials/dashboard_categorias.phtml:24
+#: application/views/scripts/partials/dashboard_categorias.phtml:128
+#: application/views/scripts/partials/dashboard_categorias_grupos.phtml:57
+msgid "Desplegar todos los históricos."
+msgstr "Desplegar todos los históricos."
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:6
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:7
+#: application/clients/ctti/plantillas/partials/topClient.phtml:6
+#: application/views/scripts/partials/dashboard_categorias.phtml:25
+#: application/views/scripts/partials/dashboard_categorias.phtml:129
+#: application/views/scripts/partials/dashboard_categorias_grupos.phtml:58
+msgid "Desplegar todas las evoluciones."
+msgstr "Desplegar todas las evoluciones."
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:8
+#: application/views/scripts/partials/dashboard_kpi_datos.phtml:35
+msgid "Exportar a Excel"
+msgstr "Exportar a Excel"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:15
+#: application/clients/ctti/plantillas/partials/topClient.phtml:14
+msgid "Editar report"
+msgstr "Editar reporte"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:15
+#: application/clients/ctti/plantillas/partials/topClient.phtml:14
+msgid "Finalizar"
+msgstr "Finalizar"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:19
+#: application/clients/ctti/plantillas/partials/topClient.phtml:18
+msgid "Obteniendo datos..."
+msgstr "Obteniendo datos..."
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:21
+msgid "Ir"
+msgstr "Ir"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:29
+#: application/clients/ctti/plantillas/partials/topClient.phtml:28
+msgid "January"
+msgstr "Enero"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:30
+#: application/clients/ctti/plantillas/partials/topClient.phtml:29
+msgid "February"
+msgstr "Febrero"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:31
+#: application/clients/ctti/plantillas/partials/topClient.phtml:30
+msgid "March"
+msgstr "Marzo"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:32
+#: application/clients/ctti/plantillas/partials/topClient.phtml:31
+msgid "April"
+msgstr "Abril"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:33
+#: application/clients/ctti/plantillas/partials/topClient.phtml:32
+msgid "May"
+msgstr "Mayo"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:34
+#: application/clients/ctti/plantillas/partials/topClient.phtml:33
+msgid "June"
+msgstr "Junio"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:35
+#: application/clients/ctti/plantillas/partials/topClient.phtml:34
+msgid "July"
+msgstr "Julio"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:36
+#: application/clients/ctti/plantillas/partials/topClient.phtml:35
+msgid "August"
+msgstr "Agosto"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:37
+#: application/clients/ctti/plantillas/partials/topClient.phtml:36
+msgid "September"
+msgstr "Septiembre"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:38
+#: application/clients/ctti/plantillas/partials/topClient.phtml:37
+msgid "October"
+msgstr "Octubre"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:39
+#: application/clients/ctti/plantillas/partials/topClient.phtml:38
+msgid "November"
+msgstr "Noviembre"
+
+#: application/clients/correos-administracion-de-sistemas/plantillas/partials/topClient.phtml:40
+#: application/clients/ctti/plantillas/partials/topClient.phtml:39
+msgid "December"
+msgstr "Diciembre"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/denied.phtml:2
+#: application/clients/ctti/views/scripts/denied.phtml:2
+#: application/views/scripts/error/denied.phtml:2
+msgid "Acceso no permitido"
+msgstr "Acceso no permitido"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/denied.phtml:4
+#: application/clients/ctti/views/scripts/denied.phtml:4
+#: application/views/scripts/error/denied.phtml:4
+msgid ""
+"No dispone de los permisos necesarios para acceder a al apartado que "
+"solicita."
+msgstr ""
+"No dispone de los permisos necesarios para acceder a al apartado que "
+"solicita."
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:11
+#: application/clients/ctti/views/scripts/index/index.phtml:10
+#, php-format
+msgid "Última carga de datos realizada el día %s de %s de %s a las %s Hs."
+msgstr "Última carga de datos realizada el día %s de %s de %s a las %s Hs."
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:17
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:19
+#: application/clients/ctti/views/scripts/index/index.phtml:16
+#: application/clients/ctti/views/scripts/index/index.phtml:18
+msgid "Resumen global"
+msgstr "Resumen global"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:21
+#: application/clients/ctti/views/scripts/index/index.phtml:20
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:23
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:82
+#: application/clients/ctti/views/scripts/index/index.phtml:22
+#: application/clients/ctti/views/scripts/index/index.phtml:77
+msgid "Documentación adicional"
+msgstr "Documentación adicional"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:24
+#: application/clients/ctti/views/scripts/index/index.phtml:23
+msgid "Configuración y leyenda"
+msgstr "Configuración y leyenda"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:25
+#: application/clients/ctti/views/scripts/index/index.phtml:24
+msgid "Observaciones"
+msgstr "Observaciones"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:33
+msgid "ATENCIÓN:"
+msgstr "ATENCIÓN:"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:33
+msgid ""
+"Este es un proceso lento y en ocaciones puede tardar hasta 1 minuto en "
+"cargar."
+msgstr ""
+"Este es un proceso lento y en ocaciones puede tardar hasta 1 minuto en "
+"cargar."
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:38
+#: application/clients/ctti/views/scripts/index/index.phtml:33
+msgid "Evolución anual por KPI"
+msgstr "Evolución anual por KPI"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:44
+#: application/clients/ctti/views/scripts/index/index.phtml:39
+msgid "Evolución anual de KPI por grupos"
+msgstr "Evolución anual de KPI por grupos"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:50
+#: application/clients/ctti/views/scripts/index/index.phtml:45
+msgid "Actividad prevista en contrato"
+msgstr "Actividad prevista en contrato"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:94
+#: application/clients/ctti/views/scripts/index/index.phtml:89
+msgid "Add files..."
+msgstr "Añadir archivos"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:99
+#: application/clients/ctti/views/scripts/index/index.phtml:94
+msgid "Start upload"
+msgstr "Comenzar"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:103
+#: application/clients/ctti/views/scripts/index/index.phtml:98
+msgid "Cancel upload"
+msgstr "Cancelar"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:107
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:184
+#: application/clients/ctti/views/scripts/index/index.phtml:102
+#: application/clients/ctti/views/scripts/index/index.phtml:179
+msgid "Borrar"
+msgstr "Borrar"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:148
+#: application/clients/ctti/views/scripts/index/index.phtml:143
+msgid "Anadir"
+msgstr "Añadir"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:156
+#: application/clients/ctti/views/scripts/index/index.phtml:151
+#: application/views/scripts/admin/grupos.phtml:96
+#: application/views/scripts/admin/usuarios.phtml:123
+#: application/views/scripts/admin/ajax/roles.phtml:85
+msgid "Cancelar"
+msgstr "Cancelar"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:197
+#: application/clients/ctti/views/scripts/index/index.phtml:191
+msgid "Información de configuración"
+msgstr "Información de configuración"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:204
+#: application/clients/ctti/views/scripts/index/index.phtml:198
+msgid "Cliente"
+msgstr "Cliente"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:209
+#: application/clients/ctti/views/scripts/index/index.phtml:203
+msgid "Módulo"
+msgstr "Módulo"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:214
+#: application/clients/ctti/views/scripts/index/index.phtml:208
+msgid "Fecha de alta"
+msgstr "Fecha de alta"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:219
+#: application/clients/ctti/views/scripts/index/index.phtml:213
+msgid "Mes inicio de report"
+msgstr "Mes inicio de report"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:224
+#: application/clients/ctti/views/scripts/index/index.phtml:218
+msgid "Tendencia estable"
+msgstr "Tendencia estable"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:226
+#: application/clients/ctti/views/scripts/index/index.phtml:220
+msgid ""
+"Siempre que la diferencia entre el cumplimiento actual y el mes anterior no "
+"supere este rango de valores, la tendencia se mostrará estable."
+msgstr ""
+"Siempre que la diferencia entre el cumplimiento actual y el mes anterior no "
+"supere este rango de valores, la tendencia se mostrará estable."
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:229
+#: application/clients/ctti/views/scripts/index/index.phtml:223
+msgid "Tendencia positiva"
+msgstr "Tendencia positiva"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:231
+#: application/clients/ctti/views/scripts/index/index.phtml:225
+msgid ""
+"Se muestra tendencia positiva cuando la diferencia entre el cumplimiento "
+"actual y el mes anterior sea superior a este valor."
+msgstr ""
+"Se muestra tendencia positiva cuando la diferencia entre el cumplimiento "
+"actual y el mes anterior sea superior a este valor."
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:234
+#: application/clients/ctti/views/scripts/index/index.phtml:228
+msgid "Tendencia negativa"
+msgstr "Tendencia negativa"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:236
+#: application/clients/ctti/views/scripts/index/index.phtml:230
+msgid ""
+"Se muestra tendencia negativa cuando la diferencia entre el cumplimiento "
+"actual y el mes anterior sea inferior a este valor."
+msgstr ""
+"Se muestra tendencia negativa cuando la diferencia entre el cumplimiento "
+"actual y el mes anterior sea inferior a este valor."
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:239
+#: application/clients/ctti/views/scripts/index/index.phtml:233
+msgid "Dashboard por grupos"
+msgstr "Dashboard por grupos"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:240
+#: application/clients/ctti/views/scripts/index/index.phtml:234
+msgid "Si"
+msgstr "Si"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:240
+#: application/clients/ctti/views/scripts/index/index.phtml:234
+msgid "No"
+msgstr "No"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:247
+msgid "Información de fuente de datos"
+msgstr "Información de fuente de datos"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:252
+msgid "Fichero"
+msgstr "Fichero"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:253
+msgid "Origen"
+msgstr "Origen"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:254
+msgid "Módulo de carga"
+msgstr "Módulo de carga"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:255
+msgid "Fecha de carga"
+msgstr "Fecha de carga"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:275
+#: application/clients/ctti/views/scripts/index/index.phtml:240
+msgid "Leyenda"
+msgstr "Leyenda"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:281
+#: application/clients/ctti/views/scripts/index/index.phtml:246
+msgid "Indica comienzo del año."
+msgstr "Indica comienzo del año."
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:286
+#: application/clients/ctti/views/scripts/index/index.phtml:251
+#, php-format
+msgid "Aumento del cumplimiento mayor a un %s respecto al último mes."
+msgstr "Aumento del cumplimiento mayor a un %s respecto al último mes."
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:291
+#: application/clients/ctti/views/scripts/index/index.phtml:256
+#, php-format
+msgid "Aumento del cumplimiento entre un %s y un %s respecto al último mes."
+msgstr "Aumento del cumplimiento entre un %s y un %s respecto al último mes."
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:296
+#: application/clients/ctti/views/scripts/index/index.phtml:261
+#, php-format
+msgid "El cumplimiento oscila en un rango de %s y %s respecto al último mes"
+msgstr "El cumplimiento oscila en un rango de %s y %s respecto al último mes"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:301
+#: application/clients/ctti/views/scripts/index/index.phtml:266
+#, php-format
+msgid "Descenso del cumplimiento entre un %s y un %s respecto al último mes."
+msgstr "Descenso del cumplimiento entre un %s y un %s respecto al último mes."
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:306
+#: application/clients/ctti/views/scripts/index/index.phtml:271
+#, php-format
+msgid "Descenso del cumplimiento mayor a un %s respecto al último mes."
+msgstr "Descenso del cumplimiento mayor a un %s respecto al último mes."
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:323
+#: application/clients/ctti/views/scripts/index/index.phtml:284
+msgid "KPI"
+msgstr "KPI"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:323
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:324
+#: application/clients/ctti/views/scripts/index/index.phtml:284
+#: application/clients/ctti/views/scripts/index/index.phtml:285
+msgid "Todos"
+msgstr "Todos"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:324
+#: application/clients/ctti/views/scripts/index/index.phtml:285
+msgid "Grupo"
+msgstr "Grupo"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:325
+#: application/clients/ctti/views/scripts/index/index.phtml:286
+msgid "Período"
+msgstr "Período"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:325
+#: application/clients/ctti/views/scripts/index/index.phtml:286
+msgid "Desde"
+msgstr "Desde"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:325
+#: application/clients/ctti/views/scripts/index/index.phtml:286
+msgid "Hasta"
+msgstr "Hasta"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:326
+#: application/clients/ctti/views/scripts/index/index.phtml:287
+msgid "Tipo"
+msgstr "Tipo"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:326
+msgid "Resumen"
+msgstr "Resumen"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:326
+msgid "Detalle"
+msgstr "Detalle"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:333
+msgid "Este KPI se creará en la categoría"
+msgstr "Este KPI se creará en la categoría"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:336
+#: application/views/scripts/admin/grupos.phtml:12
+#: application/views/scripts/admin/ajax/roles.phtml:9
+#: application/views/scripts/admin/config/modules.phtml:10
+#: application/views/scripts/index/editkpi.phtml:2
+msgid "Nombre"
+msgstr "Nombre"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:337
+#: application/views/scripts/index/editkpi.phtml:3
+msgid "Título"
+msgstr "Título"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:338
+#: application/views/scripts/index/editkpi.phtml:4
+msgid "Objetivo (%)"
+msgstr "Objetivo (%)"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:339
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:358
+#: application/views/scripts/index/editkpi.phtml:5
+msgid "Fórmula cumplimiento"
+msgstr "Fórmula cumplimiento"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:340
+#: application/views/scripts/index/editkpi.phtml:6
+msgid "Pliego"
+msgstr "Pliego"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:341
+#: application/views/scripts/index/editkpi.phtml:7
+msgid "Proceso"
+msgstr "Proceso"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:341
+#: application/views/scripts/index/editkpi.phtml:7
+msgid "Incidencia"
+msgstr "Incidencia"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:341
+#: application/views/scripts/index/editkpi.phtml:7
+msgid "Petición"
+msgstr "Petición"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:341
+#: application/views/scripts/index/editkpi.phtml:7
+msgid "Otro"
+msgstr "Otro"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:342
+#: application/views/scripts/index/editkpi.phtml:8
+msgid "Periodicidad"
+msgstr "Periodicidad"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:343
+#: application/views/scripts/index/editkpi.phtml:9
+msgid "SLA cumple al"
+msgstr "SLA cumple al"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:343
+#: application/views/scripts/index/editkpi.phtml:9
+msgid "100% (por defecto)"
+msgstr "100% (por defecto)"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:343
+#: application/views/scripts/index/editkpi.phtml:9
+msgid "0% (kpi inverso)"
+msgstr "0% (kpi inverso)"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:344
+#: application/views/scripts/index/editkpi.phtml:10
+msgid "Descripción"
+msgstr "Descripción"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:345
+msgid "Fecha de comienzo"
+msgstr "Fecha de comienzo"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:347
+msgid "Vista por grupos"
+msgstr "Vista por grupos"
+
+#: application/clients/correos-administracion-de-sistemas/views/scripts/index/index.phtml:348
+msgid "KPI acumulativo"
+msgstr "KPI acumulativo"
+
+#: application/clients/ctti/plantillas/partials/topClient.phtml:7
+#: application/views/scripts/partials/dashboard_categorias.phtml:27
+#: application/views/scripts/partials/dashboard_categorias.phtml:131
+#: application/views/scripts/partials/dashboard_categorias_grupos.phtml:59
+msgid "Exportar sumario a Excel"
+msgstr "Exportar sumario a Excel"
+
+#: application/clients/ctti/plantillas/partials/topClient.phtml:20
+msgid "Go"
+msgstr "Go"
+
+#: application/clients/ctti/views/scripts/index/index.phtml:287
+msgid "Default"
+msgstr "Por defecto"
+
+#: application/clients/ctti/views/scripts/index/index.phtml:287
+msgid "Detaill"
+msgstr "Detalle"
+
+#: application/clients/ctti/views/scripts/index/index.phtml:287
+msgid "Summary + Detaill"
+msgstr "Resumen + Detalle"
+
+#: application/plantillas/partials/leftBar.phtml:7
+msgid "Dashboards"
+msgstr "Dashboards"
+
+#: application/plantillas/partials/leftBar.phtml:9
+msgid "Correos"
+msgstr "Correos"
+
+#: application/plantillas/partials/leftBar.phtml:10
+msgid "CTTI"
+msgstr "CTTI"
+
+#: application/views/scripts/admin/country.phtml:3
+msgid "Opciones de País"
+msgstr "Opciones de País"
+
+#: application/views/scripts/admin/country.phtml:5
+msgid "Bla"
+msgstr "Bla"
+
+#: application/views/scripts/admin/delegations.phtml:6
+#: application/views/scripts/admin/ajax/aplicaciones.phtml:1
+msgid "Gestionar Aplicaciones"
+msgstr "Gestionar Aplicaciones"
+
+#: application/views/scripts/admin/deploy.phtml:3
+msgid "Deploy Application"
+msgstr "Deploy Application"
+
+#: application/views/scripts/admin/deploy.phtml:5
+msgid ""
+"ATENCION! si no sabe la utilidad de este apartado no deberia estar aqui. Por "
+"favor abandone esta seccion sin realizar ningun cambio."
+msgstr ""
+"ATENCIÓN! si no sabe la utilidad de este apartado es que no debería estar "
+"aquí. Por favor abandone esta sección sin realizar ningún cambio."
+
+#: application/views/scripts/admin/general.phtml:6
+#: application/views/scripts/admin/config/home.phtml:1
+msgid "General"
+msgstr "General"
+
+#: application/views/scripts/admin/general.phtml:9
+#: application/views/scripts/admin/config/modules.phtml:1
+msgid "Módulos"
+msgstr "Módulos"
+
+#: application/views/scripts/admin/grupos.phtml:3
+msgid "Grupos"
+msgstr "Grupos"
+
+#: application/views/scripts/admin/grupos.phtml:5
+msgid ""
+"A continuacion se listan los grupos y se configura el acceso a la aplicacion."
+msgstr ""
+"A continuación se listan los grupos y se configura el acceso a la aplicación."
+
+#: application/views/scripts/admin/grupos.phtml:11
+msgid "Ceco"
+msgstr "Ceco"
+
+#: application/views/scripts/admin/grupos.phtml:13
+msgid "email"
+msgstr "Email"
+
+#: application/views/scripts/admin/grupos.phtml:14
+#: application/views/scripts/admin/usuarios.phtml:13
+msgid "Rol"
+msgstr "Rol"
+
+#: application/views/scripts/admin/grupos.phtml:15
+#: application/views/scripts/admin/ajax/roles.phtml:11
+msgid "Estado"
+msgstr "Estado"
+
+#: application/views/scripts/admin/index.phtml:3
+msgid "Bienvenido al panel de administracion"
+msgstr "Bienvenido al panel de administración"
+
+#: application/views/scripts/admin/permisos-y-roles.phtml:6
+#: application/views/scripts/admin/ajax/permisos.phtml:1
+msgid "Permisos"
+msgstr "Permisos"
+
+#: application/views/scripts/admin/permisos-y-roles.phtml:9
+#: application/views/scripts/admin/ajax/permisos.phtml:9
+#: application/views/scripts/admin/ajax/roles.phtml:1
+msgid "Roles"
+msgstr "Roles"
+
+#: application/views/scripts/admin/permisos-y-roles.phtml:12
+#: application/views/scripts/admin/ajax/permisos.phtml:8
+#: application/views/scripts/admin/ajax/recursos.phtml:1
+msgid "Recursos"
+msgstr "Recursos"
+
+#: application/views/scripts/admin/usuarios.phtml:5
+msgid ""
+"En este apartado se muestran los usuarios que usan la aplicación. Para "
+"modificar alguna opción basta con hacer clic en ella, dependiendo del campo "
+"se mostrarán las opciones de edición disponibles."
+msgstr ""
+"En este apartado se muestran los usuarios que usan la aplicación. Para "
+"modificar alguna opción basta con hacer clic en ella, dependiendo del campo "
+"se mostrarán las opciones de edición disponibles."
+
+#: application/views/scripts/admin/usuarios.phtml:11
+msgid "Usuario"
+msgstr "Usuario"
+
+#: application/views/scripts/admin/usuarios.phtml:12
+msgid "pais"
+msgstr "país"
+
+#: application/views/scripts/admin/usuarios.phtml:14
+msgid "Creado"
+msgstr "Creado"
+
+#: application/views/scripts/admin/usuarios.phtml:15
+msgid "Último acceso"
+msgstr "Último acceso"
+
+#: application/views/scripts/admin/ajax/aplicaciones.phtml:3
+msgid ""
+"A continuación se pueden definir las aplicaciones utilizadas por las "
+"diferentes delegaciones."
+msgstr ""
+"A continuación se pueden definir las aplicaciones utilizadas por las "
+"diferentes delegaciones."
+
+#: application/views/scripts/admin/ajax/delegaciones.phtml:3
+msgid ""
+"En este apartado puede adminsitrar las delegaciones y sus parámetros de "
+"configuración."
+msgstr ""
+"En este apartado puede adminsitrar las delegaciones y sus parámetros de "
+"configuración."
+
+#: application/views/scripts/admin/ajax/delegaciones.phtml:4
+msgid ""
+"A continuación se listan las delegaciones. Puede añadir las aplicaciones que "
+"necesite y configurar los parámetros de su sede. Si desea modificar el "
+"nombre de una delegación puede hacerlo realizando doble click sobre ella."
+msgstr ""
+"A continuación se listan las delegaciones. Puede añadir las aplicaciones que "
+"necesite y configurar los parámetros de su sede. Si desea modificar el "
+"nombre de una delegación puede hacerlo realizando doble click sobre ella."
+
+#: application/views/scripts/admin/ajax/permisos.phtml:3
+msgid ""
+"En esta pestaña encontramos una tabla con la lista de recursos de la "
+"aplicación y los roles disponibles. Haciendo clic en los iconos podemos "
+"decidir si un rol tiene acceso o no a una sección o apartado."
+msgstr ""
+"En esta pestaña encontramos una tabla con la lista de recursos de la "
+"aplicación y los roles disponibles. Haciendo clic en los iconos podemos "
+"decidir si un rol tiene acceso o no a una sección o apartado."
+
+#: application/views/scripts/admin/ajax/permisos.phtml:12
+msgid "Sección"
+msgstr "Sección"
+
+#: application/views/scripts/admin/ajax/permisos.phtml:13
+msgid "Apartado"
+msgstr "Apartado"
+
+#: application/views/scripts/admin/ajax/permisos.phtml:50
+msgid "Heredado"
+msgstr "Heredado"
+
+#: application/views/scripts/admin/ajax/recursos.phtml:3
+msgid ""
+"A continuación se muestran todos los recursos de la aplicación, si se ha "
+"creado un recurso nuevo y desea actualizar la lista, utilice el botón que "
+"encontrará a continuación."
+msgstr ""
+"A continuación se muestran todos los recursos de la aplicación, si se ha "
+"creado un recurso nuevo y desea actualizar la lista, utilice el botón que "
+"encontrará a continuación."
+
+#: application/views/scripts/admin/ajax/recursos.phtml:5
+msgid "Actualizar árbol de recursos"
+msgstr "Actualizar árbol de recursos"
+
+#: application/views/scripts/admin/ajax/recursos.phtml:13
+msgid "Module"
+msgstr "Module"
+
+#: application/views/scripts/admin/ajax/recursos.phtml:14
+msgid "Controller"
+msgstr "Controller"
+
+#: application/views/scripts/admin/ajax/recursos.phtml:15
+msgid "Action"
+msgstr "Action"
+
+#: application/views/scripts/admin/ajax/roles.phtml:3
+msgid ""
+"En esta pestaña encontramos una tabla con la lista de roles de la "
+"aplicación. Se pueden desactivar roles y evitar el acceso de los usuarios "
+"con el control de estado."
+msgstr ""
+"En esta pestaña encontramos una tabla con la lista de roles de la "
+"aplicación. Se pueden desactivar roles y evitar el acceso de los usuarios "
+"con el control de estado."
+
+#: application/views/scripts/admin/ajax/roles.phtml:10
+msgid "Hereda"
+msgstr "Hereda"
+
+#: application/views/scripts/admin/config/home.phtml:3
+msgid ""
+"Con el formulario que encontrara a continuacion podra modificar la "
+"configuracion basica de la aplicacion."
+msgstr ""
+"Con el formulario que encontrará a continuación podra modificar la "
+"configuración básica de la aplicación."
+
+#: application/views/scripts/admin/config/modules.phtml:2
+msgid ""
+"Un módulo es una aplicación satelite del Portal Easy AUTOMATION. En este "
+"apartado puede gestionarlos para poder tratar con ellos."
+msgstr ""
+"Un módulo es una aplicación satelite del Portal Easy AUTOMATION. En este "
+"apartado puede gestionarlos para poder tratar con ellos."
+
+#: application/views/scripts/admin/config/modules.phtml:4
+msgid "Módulos activos"
+msgstr "Módulos activos"
+
+#: application/views/scripts/admin/config/modules.phtml:11
+msgid "Dominio"
+msgstr "Dominio"
+
+#: application/views/scripts/admin/config/modules.phtml:12
+msgid "URL"
+msgstr "URL"
+
+#: application/views/scripts/admin/config/modules.phtml:13
+msgid "Pais"
+msgstr "País"
+
+#: application/views/scripts/admin/config/modules.phtml:14
+msgid "Easy.A"
+msgstr "Easy.A"
+
+#: application/views/scripts/admin/config/modules.phtml:23
+msgid "Crear un módulo nuevo"
+msgstr "Crear un módulo nuevo"
+
+#: application/views/scripts/admin/config/modules.phtml:25
+msgid "Utilice el siguiente formulario para crear un nuevo módulo."
+msgstr "Utilice el siguiente formulario para crear un nuevo módulo."
+
+#: application/views/scripts/auth/login.phtml:5
+msgid "Please note:"
+msgstr "A tener en cuenta:"
+
+#: application/views/scripts/auth/login.phtml:5
+msgid ""
+"Para acceder al portal hay que utilizar el login WIW (que es el mismo login "
+"que utilizas para entrar a la red de T-Systems)."
+msgstr ""
+"Para acceder al portal hay que utilizar el login WIW (que es el mismo login "
+"que utilizas para entrar a la red de T-Systems)."
+
+#: application/views/scripts/auth/signup.phtml:7
+msgid "Formulario de registro"
+msgstr "Formulario de registro"
+
+#: application/views/scripts/index/evolucionanual.phtml:2
+msgid "Gráfica anual no disponible."
+msgstr "Gráfica anual no disponible."
+
+#: application/views/scripts/index/getlistmonth.phtml:6
+msgid "Casos"
+msgstr "Casos"
+
+#: application/views/scripts/index/getlistmonth.phtml:28
+#: application/views/scripts/index/getlistmonthrevisado.phtml:31
+msgid "Save"
+msgstr "Grabar"
+
+#: application/views/scripts/index/getlistmonthrevisado.phtml:11
+msgid ""
+"Cumplimiento calculado de forma automática con los datos importados o "
+"introducidos a mano."
+msgstr ""
+"Cumplimiento calculado de forma automática con los datos importados o "
+"introducidos a mano."
+
+#: application/views/scripts/index/getlistmonthrevisado.phtml:11
+msgid "Calculado"
+msgstr "Calculado"
+
+#: application/views/scripts/index/getlistmonthrevisado.phtml:12
+msgid "Cumplimiento final entregado a cliente."
+msgstr "Cumplimiento final entregado a cliente."
+
+#: application/views/scripts/index/getlistmonthrevisado.phtml:12
+msgid "Final"
+msgstr "Final"
+
+#: application/views/scripts/index/getlistmonthrevisado.phtml:13
+msgid "Cumplimiento revisado y acordado con el Cliente."
+msgstr "Cumplimiento revisado y acordado con el Cliente."
+
+#: application/views/scripts/index/getlistmonthrevisado.phtml:13
+msgid "Revisado"
+msgstr "Revisado"
+
+#: application/views/scripts/index/index.phtml:3
+msgid "Bienvenido al Portal EasyA.Dashboard"
+msgstr "Bienvenido al Portal EasyA.Dashboard"
+
+#: application/views/scripts/index/index.phtml:4
+msgid ""
+"En este portal tendrá acceso a los dashboards de los distintos clientes de "
+"la empresa."
+msgstr ""
+"En este portal tendrá acceso a los dashboards de los distintos clientes de "
+"la empresa."
+
+#: application/views/scripts/index/index.phtml:5
+msgid ""
+"Puede acceder a ellos seleccionando el cliente deseado del menú de la barra "
+"lateral."
+msgstr ""
+"Puede acceder a ellos seleccionando el cliente deseado del menú de la barra "
+"lateral."
+
+#: application/views/scripts/index/index.phtml:6
+#, php-format
+msgid "Si necesita ayuda, contacte con %s."
+msgstr "Si necesita ayuda, contacte con %s."
+
+#: application/views/scripts/index/cmandos/dashboard.phtml:1
+msgid "Dashboard del mes activo"
+msgstr "Dashboard del mes activo"
+
+#: application/views/scripts/index/cmandos/dashboard.phtml:9
+#, fuzzy
+msgid "Sin comentarios"
+msgstr "Sin comentarios"
+
+#: application/views/scripts/index/cmandos/dashboard.phtml:19
+#: application/views/scripts/partials/dashboard_categorias.phtml:15
+#: application/views/scripts/partials/dashboard_categorias.phtml:79
+#: application/views/scripts/partials/dashboard_categorias_grupos.phtml:12
+msgid "Eliminar categoria."
+msgstr "Eliminar categoría."
+
+#: application/views/scripts/index/cmandos/dashboard.phtml:20
+msgid "Crear categoría"
+msgstr "Crear categoría"
+
+#: application/views/scripts/partials/dashboard_categorias.phtml:26
+#: application/views/scripts/partials/dashboard_categorias.phtml:130
+msgid "Desplegar todos los comentarios."
+msgstr "Desplegar todos los comentarios."
+
+#: application/views/scripts/partials/dashboard_categorias.phtml:40
+#: application/views/scripts/partials/dashboard_categorias.phtml:90
+#: application/views/scripts/partials/dashboard_categorias_grupos.phtml:20
+msgid "Actualmente no se ha añadido ningún KPI a esta categoría."
+msgstr "Actualmente no se ha añadido ningún KPI a esta categoría."
+
+#: application/views/scripts/partials/dashboard_categorias.phtml:84
+msgid "Desplegar comentarios de categoría."
+msgstr "Desplegar comentarios de categoría."
+
+#: application/views/scripts/partials/dashboard_kpi.phtml:31
+msgid "N/A o no hay valores disponibles."
+msgstr "N/A o no hay valores disponibles."
+
+#: application/views/scripts/partials/dashboard_kpi.phtml:71
+#: application/views/scripts/partials/dashboard_kpi_grupos.phtml:6
+msgid "Cálculo mensual"
+msgstr "Cálculo mensual"
+
+#: application/views/scripts/partials/dashboard_kpi.phtml:72
+#: application/views/scripts/partials/dashboard_kpi_grupos.phtml:7
+msgid "Cálculo trimestral"
+msgstr "Cálculo trimestral"
+
+#: application/views/scripts/partials/dashboard_kpi.phtml:73
+#: application/views/scripts/partials/dashboard_kpi_grupos.phtml:8
+msgid "Cálculo anual"
+msgstr "Cálculo anual"
+
+#: application/views/scripts/partials/dashboard_kpi_datos.phtml:15
+msgid "Marcar como favorito"
+msgstr "Marcar como favorito"
+
+#: application/views/scripts/partials/dashboard_kpi_datos.phtml:19
+msgid "Periodo:"
+msgstr "Período:"
+
+#: application/views/scripts/partials/dashboard_kpi_datos.phtml:20
+msgid "Valor Objetivo:"
+msgstr "Valor Objetivo:"
+
+#: application/views/scripts/partials/dashboard_kpi_datos.phtml:21
+msgid "Objetivo:"
+msgstr "Objetivo:"
+
+#: application/views/scripts/partials/dashboard_kpi_datos.phtml:22
+msgid "Cumplimiento:"
+msgstr "Cumplimiento:"
+
+#: application/views/scripts/partials/dashboard_kpi_datos.phtml:23
+msgid "Cumplimiento revisado:"
+msgstr "Cumplimiento revisado:"
+
+#: application/views/scripts/partials/dashboard_kpi_datos.phtml:28
+msgid "Última modificación:"
+msgstr "Última modificación:"
+
+#: application/views/scripts/partials/dashboard_kpi_datos.phtml:28
+msgid "N/A"
+msgstr "N/A"
+
+#: application/views/scripts/partials/dashboard_kpi_datos.phtml:32
+msgid "Histórico"
+msgstr "Histórico"
+
+#: application/views/scripts/partials/dashboard_kpi_datos.phtml:33
+msgid "Evolución"
+msgstr "Evolución"
+
+#: application/views/scripts/partials/dashboard_kpi_datos.phtml:34
+msgid "Comentarios"
+msgstr "Comentarios"
+
+#: application/views/scripts/partials/dashboard_kpi_datos.phtml:36
+msgid "Minimizar"
+msgstr "Minimizar"
+
+#: application/views/scripts/partials/dashboard_kpi_datos.phtml:41
+msgid "Editar valores generales de KPI"
+msgstr "Editar valores generales de KPI"
+
+#: application/views/scripts/partials/dashboard_kpi_datos.phtml:43
+msgid "Gestionar cumplimiento mensual"
+msgstr "Gestionar cumplimiento mensual"
+
+#: application/views/scripts/partials/dashboard_kpi_datos.phtml:44
+msgid "Eliminar KPI"
+msgstr "Eliminar KPI"
+
+#: application/views/scripts/partials/dashboard_kpi_datos.phtml:45
+msgid "Guardar cambios"
+msgstr "Guardar cambios"
+
+#: application/views/scripts/partials/dashboard_portadaGlobal_old.phtml:17
+#: application/views/scripts/partials/dashboard_portadaGlobal_old.phtml:117
+#: application/views/scripts/partials/dashboard_portadaGrupos_old.phtml:16
+msgid "Target"
+msgstr "Target"
+
+#: application/views/scripts/partials/dashboard_portadaGlobal_old.phtml:102
+#: application/views/scripts/partials/dashboard_portadaGlobal_old.phtml:136
+#: application/views/scripts/partials/dashboard_portadaGlobal_old.phtml:171
+#: application/views/scripts/partials/dashboard_portadaGrupos_old.phtml:62
+#: application/views/scripts/partials/dashboard_portadaGrupos_old.phtml:94
+msgid "Sin datos"
+msgstr "Sin datos"
+
+#: application/views/scripts/partials/portada/tabla.phtml:89
+msgid "* KPI inverso: Este KPI cumple SLA al 0% y falla con valores >0%"
+msgstr "* KPI inverso: Este KPI cumple SLA al 0% y falla con valores >0%"
+
+#: application/views/scripts/partials/portada/tabla.phtml:101
+#, php-format
+msgid "Objetivo necesario para cumplir SLA: %s"
+msgstr "Objetivo necesario para cumplir SLA: %s"
+
+#~ msgid "no se ha modificado."
+#~ msgstr "no se ha modificado."
