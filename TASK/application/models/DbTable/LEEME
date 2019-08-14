@@ -1,0 +1,25 @@
+LEEME
+
+ES OBLIGATORIO CREAR LAS TABLAS CON UN PREFIJO ÚNICO PARA IDENTIFICARLAS DE FORMA RÁPIDA.
+
+SE DEBERÁN GUARDAR LOS MODELOS DE CONEXION DENTRO DE UNA CARPETA QUE IDENTIFIQUE AL MODELO AL QUE PERTENECEN.
+
+EJEMPLO: 
+
+Prefijo para el Modelo de Checklist: "ch_"
+Nombre de tablas: ch_tabla1, ch_tabla2, etc...
+Modelos de conección dentro de la carpeta  /application/model/DbTable/Checklist/
+
+
+EJEMPLO DE MODELO DE CONEXIÓN:
+
+Nombre y ubicación de archivo: application/model/DbTable/Checklist/Ejemplo.php
+Nombre de clase:
+
+class Application_Model_DbTable_Easya_AppAplicaciones extends Zend_Db_Table {
+	
+	protected $_name = "ch_ejemplo";
+	protected $_primary = 'ID';
+	
+}
+
