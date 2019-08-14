@@ -1,0 +1,62 @@
+<div class="colLeft">
+	<ul>
+		<?php  /*** INDEX ***/
+		
+		if(!is_null($this->menuActivo()->check('default','index'))) { ?>		
+			<!-- 
+			<li class="titulo"><?=$this->translate->_('Dashboards')?></li>
+			
+			<li class="<?=$this->menuActivo()->check('admin','general');?>"><a href="<?=$this->baseUrl('/correos-administracion-de-sistemas')?>" title=""><?=$this->translate->_('Correos')?></a></li>
+			<li class="<?=$this->menuActivo()->check('admin','general');?>"><a href="<?=$this->baseUrl('/test-one')?>" title=""><?=$this->translate->_('Test One')?></a></li>
+			
+			 -->
+			
+		<?php } /*** FIN INDEX ***/ ?>
+		
+		
+		
+		<?php  /*** ADMIN ***/
+		
+		if(!is_null($this->menuActivo()->check('default','admin'))) {?>
+			
+			<?php if ($this->menuActivo()->checkRole($this->user,'admin','general') || $this->menuActivo()->checkRole($this->user,'admin','delegations') || $this->menuActivo()->checkRole($this->user,'admin','sessions')) {?>			
+			<li class="titulo"><?=$this->translate->_('Configurar')?></li>
+			<?php }?>
+		
+			<?php if ($this->menuActivo()->checkRole($this->user,'admin','general')) {?>
+			<li class="<?=$this->menuActivo()->check('admin','general');?>"><a href="<?=$this->baseUrl('/admin/general')?>" title=""><?=$this->translate->_('Aplicacion')?></a></li>
+			<?php }?>
+			
+			<?php if ($this->menuActivo()->checkRole($this->user,'admin','delegations')) {?>
+			<li class="<?=$this->menuActivo()->check('admin','delegations');?>"><a href="<?=$this->baseUrl('/admin/delegations')?>" title=""><?=$this->translate->_('Delegaciones')?></a></li>
+			<?php }?>
+			
+			<?php if ($this->menuActivo()->checkRole($this->user,'admin','general') || $this->menuActivo()->checkRole($this->user,'admin','delegations') || $this->menuActivo()->checkRole($this->user,'admin','sessions')) {?>			
+			<li class="separador"></li>
+			<?php }?>
+			
+			<li class="titulo"><?=$this->translate->_('Usuarios')?></li>
+			
+			<?php if ($this->menuActivo()->checkRole($this->user,'admin','usuarios')) {?>
+			<li class="<?=$this->menuActivo()->check('admin','usuarios');?>"><a href="<?=$this->baseUrl('/admin/usuarios')?>" title=""><?=$this->translate->_('Usuarios')?></a></li>
+			<?php }?>
+			
+			<?php if ($this->menuActivo()->checkRole($this->user,'admin','permisos_y_roles')) {?>
+			<li class="<?=$this->menuActivo()->check('admin','permisos_y_roles');?>"><a href="<?=$this->baseUrl('/admin/permisos_y_roles')?>" title=""><?=$this->translate->_('Permisos y roles de acceso')?></a></li>
+			<?php }?>
+			
+			<!-- 
+			<li class="separador"></li>
+			
+			<li class="titulo"><?=$this->translate->_('Logs')?></li>
+			
+			<li class="<?=$this->menuActivo()->check('admin','logs',array('type'=>'app'));?>"><a href="<?=$this->baseUrl('/admin/logs/type/app')?>" title=""><?=$this->translate->_('Aplicación')?></a></li>
+			<li class="<?=$this->menuActivo()->check('admin','logs',array('type'=>'error'));?>"><a href="<?=$this->baseUrl('/admin/logs/type/error')?>" title=""><?=$this->translate->_('Errores')?></a></li><li>
+			<li class="<?=$this->menuActivo()->check('admin','logs',array('type'=>'ldap'));?>"><a href="<?=$this->baseUrl('/admin/logs/type/ldap')?>" title=""><?=$this->translate->_('Ldap')?></a></li>
+			<li class="<?=$this->menuActivo()->check('admin','logs',array('type'=>'useraccess'));?>"><a href="<?=$this->baseUrl('/admin/logs/type/useraccess')?>" title=""><?=$this->translate->_('Acceso de usuarios')?></a></li>
+			 -->
+			
+		<?php } /*** FIN ADMIN ***/ ?>
+				
+	</ul>
+</div>

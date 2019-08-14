@@ -1,0 +1,74 @@
+<div id="endTask" title="<?=$this->translate('End Task Prompt...')?>" style="display:none">
+    <p class="validateTips" id="_avs"><?=$this->translate('Todos los campos son requeridos.')?></p>
+	<form id="formEndTask">
+		<div id"Error_DIV" class='endtask Error'>
+		    <p class="validateTips"><?=$this->translate('Task Error info.')?></p>
+            <p><input type="text" name="title" data-alts="form_4" style="width: 100%;color: #e1187f;font-size: 1.5em;font-family: Tele-GroteskNor;" value="" class="Error_required aufill ui-tpicker-grid-label" placeholder="<?=$this->translate('Selecione...')?>" readonly /></p>
+    		<fieldset  class="col-a">
+    			<label for="end_0"><?=$this->translate('Ticket ID')?></label>
+    			<input type="text" name="refer" data-status="Error" id="end_0" class="Error_required" placeholder="<?=$this->translate('Add text Ticket ID...')?>" />
+    		</fieldset>
+		</div>
+		<div id='Cancel_DIV' class='endtask Cancel'>
+          <p class="validateTips"><?=$this->translate('Task cancel info.')?></p>
+          <p><input type="text" name="title" data-alts="form_4" data-status="Cancel" style="width: 100%;color: #e1187f;font-size: 1.5em;font-family: Tele-GroteskNor;" id="end_5" value="" class="Cancel_required aufill ui-tpicker-grid-label" placeholder="<?=$this->translate('Selecione...')?>" readonly /></p>
+		</div>
+		<div id='Schedule_DIV' class='endtask Schedule'>
+           <p class="validateTips"><?=$this->translate('Task Schedule info.')?></p>
+                    <p><input type="text" name="title" data-alts="form_4" style="width: 100%;color: #e1187f;font-size: 1.5em;font-family: Tele-GroteskNor;" value="" class="Schedule_required aufill ui-tpicker-grid-label" placeholder="<?=$this->translate('Selecione...')?>" readonly /></p>
+           <fieldset class="col-a">
+                <div id="z" style="background-color:none"></div>
+            </fieldset>
+            
+            <fieldset class="col-a">
+                <label for="end_1" class=""><?=$this->translate('Start Date')?></label>
+                <input type="text" name="start" data-alts="form_6" data-status="Pending" id="end_1" value="" class="Schedule_required aufill" placeholder="<?=$this->translate('Selecione...')?>" />
+                <label for="end_3" class=""><?=$this->translate('End Date')?></label>
+                <input type="text" name="end" data-alts="form_7" id="end_3" value="" class="Schedule_required aufill" placeholder="<?=$this->translate('Selecione...')?>" readonly/>
+                <img src="/img/icon/information.png" alt="" title="<?=$this->translate('Por defecto se añade una semana a la fecha de hoy.')?>"/>
+                <input type="hidden" id="diff" value="" class="" />
+            </fieldset>
+        </div>
+		   <fieldset>
+                <label for="end_2"><?=$this->translate('Comment')?></label>
+                <textarea id="end_2" class="Cancel_required Error_required" name="__log_comment" placeholder="<?=$this->translate('Add Text...')?>"></textarea>
+            </fieldset>
+		
+	</form>
+</div>
+<script>
+//<![CDATA[
+
+$(function(){
+
+
+$('#z').datetimepicker({
+  
+  inline:true,
+  altField:'end_1',
+  onSelect: function(selectedDateTime) {
+     datend = new Date(selectedDateTime.replace(/-/g, "/"));
+     datstart = new Date(selectedDateTime.replace(/-/g, "/"));
+     datend.setMinutes(datend.getMinutes() + parseInt($('#diff').val()));    
+     str = datend.getFullYear() + "-" + ('0' + (datend.getMonth() + 1)).slice(-2) + "-" + ('0' + datend.getDate()).slice(-2) + " " +  ('0' + datend.getHours()).slice(-2) + ":" + ('0' + datend.getMinutes()).slice(-2) + ":" + ('0' + datend.getSeconds()).slice(-2);
+     $('#end_3').val(str);
+     str = datstart.getFullYear() + "-" + ('0' + (datstart.getMonth() + 1)).slice(-2) + "-" + ('0' + datstart.getDate()).slice(-2) + " " +  ('0' + datstart.getHours()).slice(-2) + ":" + ('0' + datstart.getMinutes()).slice(-2) + ":" + ('0' + datstart.getSeconds()).slice(-2);
+     $('#end_1').val(str);},
+  altFieldTimeOnly:false,
+  //timeOnlyShowDate:true,
+  //showButtonPanel: true,
+       stepMinute: 5,
+        firstDay: 1,
+        dateFormat: 'yy-mm-dd', 
+        timeFormat: 'hh:mm:ss',
+  lang:'es'
+    });
+    $("#formEndTask").trigger("reset"); 
+});
+
+        
+
+$("#z").addClass("MY_CLASS_GOES_HERE");
+
+
+</script>

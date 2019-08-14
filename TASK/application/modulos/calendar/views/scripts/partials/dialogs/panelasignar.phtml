@@ -1,0 +1,128 @@
+<div id="asignarPanel">
+	<div class="internior">
+		<h3 class="menuTitle" id="titleTareas"><img src="/img/submenu-s.gif" alt="" title="" /> <?=$this->translate('Planificador')?>: <span></span></h3>
+		
+		<div class="menuTitleDesplegable">
+			<ul>
+				<li data-tipo="#planificador"><img src="/img/submenu-s.gif" alt="" title="" class="hidde" /> <?=$this->translate('Planificador')?>: <span></span></li>
+				<li data-tipo="#carga-trabajo"><img src="/img/submenu-s.gif" alt="" title="" class="hidde" /> <?=$this->translate('Ver carga de trabajo')?></li>
+				<li data-tipo="#gestor-de-grupos"><img src="/img/submenu-s.gif" alt="" title="" class="hidde" /> <?=$this->translate('Gestor de grupos')?></li>
+			</ul>
+		</div>
+		
+		
+		
+		<!--  PLANIFICADOR -->
+		<div class="clear cuerpoPlanificador" id="planificador" style="display:none">
+
+			<p class="validateTips"><?=$this->translate('Vista general de la distribución de tareas por personal.')?></p>
+			
+			<div class="stats">
+				<span title="<?=$this->translate('Número total de tareas.')?>"><?=sprintf($this->translate('Tareas: %s'),'<span id="stats-tareas">0</span>')?></span> | 
+				<span title="<?=$this->translate('Número de tareas pendientes de asignar.')?>"><?=sprintf($this->translate('Pendientes: %s'),'<span id="stats-tareas-pendientes">0</span>')?></span> | 
+				<span title="<?=$this->translate('Número de tareas asignadas.')?>"><?=sprintf($this->translate('Asignadas: %s'),'<span id="stats-tareas-asignadas">0</span>')?></span> | 
+				<span title="<?=$this->translate('Número de tareas programadas por el usuario (debería ser igual que las tareas asignadas)')?>"><?=sprintf($this->translate('Programadas: %s'),'<span id="stats-tareas-programadas">0</span>')?></span>
+			</div>
+			
+			<div class="see_complete"><input id="see_complete" type="checkbox" /> <label for="see_complete"><?=$this->translate('Mostrar tareas finalizadas')?></label></div>
+			
+			<table class="simple">
+				<thead id="planificador-head"></thead>
+				<tbody id="planificador-body"></tbody>
+				<tfoot id="planificador-foot"></tfoot>
+			</table>
+			
+			<p class="validateTips"><?=$this->translate('Vista general de la distribución de tareas por emisor.')?></p>
+			
+			<table class="simple">
+				<thead id="task-head"></thead>
+				<tbody id="task-body"></tbody>
+				<tfoot id="task-foot"></tfoot>
+			</table>
+			
+		<div class="leyenda">
+			<div class="newStyleGreenButtom">Fecha límite en más de 24H</div>
+			<div class="newStyleYellowButtom">Fecha límite en menos de 24H</div>
+			<div class="newStyleRedButtom">Fecha límite sobrepasada en menos de 24H</div>
+			<div class="newStyleBlackButtom">Fecha límite sobrepasada en más de 24H</div>
+		</div>
+		
+			
+		</div>
+		
+		
+		<!--  CARGA DE TRABAJO -->
+		<div class="clear cuerpoPlanificador" id="carga-trabajo" style="display:none">
+
+			<p class="validateTips"><?=$this->translate('Grafica y volumetría de la carga de trabajo del grupo por miembros del equipo.')?></p>
+			
+			
+			
+			<p class="validateTips" style="margin-top:300px"><?=$this->translate('Grafica y volumetría de la carga de trabajo del grupo por emisor de tareas.')?></p>
+			
+			
+		</div>
+		
+		
+		<!--  GESTOR DE GRUPOS -->
+		<div class="clear cuerpoPlanificador" id="gestor-de-grupos" style="display:none">
+
+			<p class="validateTips"><?=$this->translate('Desde este sencillo gestor puede crear, editar y eliminar grupos y los usuarios que pertenecen a ellos.')?></p>
+			
+			<div class="stats">
+				<span><?=sprintf($this->translate('Grupos: %s'),'<span id="stats-grupos">0</span>')?></span> | 
+				<span><?=sprintf($this->translate('Usuarios: %s'),'<span id="stats-usuarios">0</span>')?></span>
+			</div>
+			
+			<table class="simple">
+				<thead id="grupo-head"></thead>
+				<tbody id="grupo-body"></tbody>
+				<tfoot id="grupo-foot"></tfoot>
+			</table>
+			
+			<p class="leyenda"><?=$this->translate('Para añadir un usuario, arrastrelo al grupo deseado.')?><br /><?=$this->translate('Click derecho en los nombres de los grupos para ver más opciones.')?><br /><?=$this->translate('Tenga en cuenta que los cambios efectuados en este apartado no se podrán deshacer.')?></p>
+			
+			<!-- <ul id="simpleUserList" class="tags"></ul> -->
+			
+		</div>
+		
+	</div>
+</div>
+
+<script>
+//<![CDATA[
+$(function(){
+	$('.menuTitle').on('click',function(){$('.menuTitleDesplegable').show();});
+
+	$('.menuTitleDesplegable ul li').on('click',function(){
+		var t = $(this).html();
+		var d = $(this).data('tipo');
+		$('.menuTitle').html(t).children('img').show();
+		$('.menuTitleDesplegable').hide();
+		TASK.Planificador.SetView(d);
+	});
+
+	$('#grupo-head tr th.grupoName').jeegoocontext('menuThGrupo',{
+		ignoreWidthOverflow:0,
+		openBelowContext:0,
+		keyboard:false,
+        onSelect: function(e, context){
+        	if($(this).hasClass('disabled')){return false;}
+            var d = $(context).data();
+            var name = $(context).text();
+			var action = $(this).data('action');
+
+            switch(action)
+            {
+	            case 'add':TASK.Planificador.GestorGrupos.AddSubGroup();break;
+	            case 'edit':TASK.Planificador.GestorGrupos.EditSubGroup(d,name);break;
+	            case 'empty':TASK.Planificador.GestorGrupos.EmptySubGroup(d,name);break;
+	            case 'delete':TASK.Planificador.GestorGrupos.DeleteSubGroup(d,name);break;
+	           default: return false;
+            }
+        }
+	});
+	
+});
+//]]>
+</script>

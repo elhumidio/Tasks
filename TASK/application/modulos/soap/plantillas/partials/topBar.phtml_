@@ -1,0 +1,58 @@
+<?php $lang = $_SESSION['session']['lang'];?>
+
+<div id="topBar">
+	<div class="logo">
+		<img src="/img/logo_AutoToolspq.png" alt="" />
+		<a href="/" style="text-decoration: none;" target="_blank"><span class="azul">easy.A</span></a>
+		<span class="subname corporativo"><?=strtoupper(isset($this->app->appConfig->app_name)?$this->app->appConfig->app_name:'')?></span>
+		<img src="/img/beta.png" alt="" class="beta" />
+	</div>  
+	
+ 	<ul class="topMenu">
+ 		<li><a class="home<?=$this->menuActivo()->check('default','index','index',NULL,'_active');?>" href="<?=$this->baseUrl('/')?>" title="<?php echo $this->translate->_('Home')?>"></a></li>
+ 		<li><a class="<?=$this->menuActivo()->check('calendar','index');?>" href="<?=$this->baseUrl('/calendar')?>" title="<?php echo $this->translate->_('Calendario')?>"><?php echo $this->translate->_('Calendario')?></a></li>
+ 		<li><a class="<?=$this->menuActivo()->check('checklist','index');?>" href="<?=$this->baseUrl('/checklist')?>" title="<?php echo $this->translate->_('Checklist')?>"><?php echo $this->translate->_('Checklist')?></a></li>
+ 		 <?php if (in_array("Portal_Task",$this->user->role)): ?>
+        <li><a class="<?=$this->menuActivo()->check('admincligrup','index');?>" href="<?=$this->baseUrl('/calendar/index/admincligrup')?>" title="<?php echo $this->translate->_('Test')?>"><?php echo $this->translate->_('Administrar clientes y Acceso a los grupos')?></a></li>
+        <?php endif;?>
+ 	</ul>
+ 	
+ 	<ul class="topMenuAdmin">
+ 		<?php if ($this->menuActivo()->checkRole('admin','index')):?>
+ 		<li><a class="<?=$this->menuActivo()->check('default','admin');?>" href="<?=$this->baseUrl('/admin')?>" title="<?php echo $this->translate->_('Administrar aplicacion')?>"><?php echo $this->translate->_('Administrar aplicacion')?></a></li>
+ 		<?php endif;?>
+ 		<li><a href="#" onclick="return EASYA.EditUserDialog(<?=(is_null($this->user->Emp_WIW_Ident)?0:$this->user->Emp_WIW_Ident)?>);"><?=ucwords(mb_strtolower($this->user->display_name, 'UTF-8'))?></a></li>
+ 		
+ 		<li id="buttonLang"><a href="#" onclick="return false;">Language</a>
+ 			<ul id="listLang">
+ 				<li><a <?=$lang=='ca'?'class="active"':''?> href="<?=$this->Url(array('changeLang'=>'ca'))?>">Català</a></li>
+ 				<li><a <?=$lang=='es'?'class="active"':''?> href="<?=$this->Url(array('changeLang'=>'es'))?>">Español</a></li>
+ 				<li><a <?=$lang=='en'?'class="active"':''?> href="<?=$this->Url(array('changeLang'=>'en'))?>">English</a></li>
+ 			</ul>
+ 		</li>
+ 		
+ 		<li><a href="<?=$this->baseUrl('/auth/logout')?>"><?=$this->translate->_('Salir')?></a></li>
+ 	</ul>
+ 	<script>$('#buttonLang').selectorIdioma();</script>
+
+</div>
+
+<div id="rastro">
+	<?php echo $this->navigation()->breadcrumbs()->setLinkLast(true)->setMinDepth(0)->render(); ?> 
+	
+	<div id="notify" aria-live="polite" aria-atomic="true"></div>
+</div>
+
+<div id="edituserDiv" class="hidde"><img class="loader" src="/img/preloader.gif" style="width: 16px; height: 16px; margin: 20px auto;" /></div>
+
+<!--[if lte IE 7]>
+<div id="navegador-obsoleto" class="navegador-obsoleto"><img onclick="abrirAvisoIE()" class="cursor" src="/img/icon/alert.png" alt="" /><p><span class="bold"><?=$this->translate('Su navegador es obsoleto y no podemos garantizar que el portal funcione de manera correcta.')?></span><br /><?=$this->translate('La versión oficial de T-Systems es Internet Explorer 8.0, encontrará una guia de actualización siguiendo este enlace: ')?><br /><a href="http://t-systems.telekom.de/cms/tsi-es/es/Organizacion/templateId=renderStaticPage/id=2060170.doc" title="" target="_blank">http://t-systems.telekom.de/cms/tsi-es/es/Organizacion/templateId=renderStaticPage/id=2060170.doc</a><br /><?=$this->translate('En caso que tuviera alguna consulta o necesitara soporte en el proceso de instalación debe contactar con el BUZON TSE HELPDESK. ')?></p><img onclick="cerrarAvisoIE();" id="botonCerrarAvisoIE" class="close" src="/img/icon/dialog-close.png" alt="" /></div>
+<script>
+function cerrarAvisoIE() {setCookie('avisoIE','1',30);$('#navegador-obsoleto').css('height','13px');$('#botonCerrarAvisoIE').hide();}
+function abrirAvisoIE() {setCookie('avisoIE','1',-1);$('#navegador-obsoleto').css('height','auto');$('#botonCerrarAvisoIE').show();}
+function setCookie(cname,cvalue,exdays){var d = new Date();d.setTime(d.getTime()+(exdays*24*60*60*1000));var expires = "expires="+d.toGMTString();document.cookie = cname + "=" + cvalue + "; " + expires;}
+function getCookie(cname){var name = cname + "=";var ca = document.cookie.split(';');for(var i=0; i<ca.length; i++){var c = ca[i].trim();if (c.indexOf(name)===0){ return c.substring(name.length,c.length);}}return "";}
+if(typeof String.prototype.trim !== 'function') {String.prototype.trim = function() {return this.replace(/^\s+|\s+$/g, '');}}
+$(document).ready(function() {var avisoIE=getCookie("avisoIE");if (avisoIE=="1"){cerrarAvisoIE();}});
+</script>
+<![endif]-->

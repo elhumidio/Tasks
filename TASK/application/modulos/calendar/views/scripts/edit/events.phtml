@@ -1,0 +1,408 @@
+<div class="colRight" style="margin-top: 5px;">
+	<div class="contenido" style="padding-top: 5px;">
+		<div class="titulo" style="font-size:22px;color:#333333;"><?=$this->translate->_('Eventos Checklist')?></div>
+
+				<p><?=$this->translate->_('Puede crear y administrar eventos en esta pestaña. Debajo están los eventos programados; estos eventos son usados para visualizar la checklist y realizar el seguimiento de los mismos.');?></p>
+		
+        <!--<span class="btn btn-success fileinput-button" style="float:right;">
+        <span><?=$this->translate->_('Upload file')?></span>
+            <input id="fileupload" type="file" name="files[]" data-url="/task/raw_temp/" multiple>      
+        </span>-->
+		<!--  <a href="#" id="add_event" style="font-size: 10px !important;" class="boton"><?=$this->translate->_('Agregar evento manual')?></a>  -->
+		<img title="SOLO PARA CHROME!!" style="position:relative;float:right;margin-right:10px;margin-top: -10px;" id="imgInfoChrome" src="/img/info_icon.png">
+		<div id="infoAddChrome" class="infoDivChrome"><span style="font-size: 9px;margin-left: 2px;padding:5px;text-align: left;"><p style="margin-top: -11px">
+													
+													1- <b>Copiar y pegar</b> en la barra de direcciones del navegador <b><i>chrome://settings/content/flash&nbsp;</i></b><br> 
+													2- <b>Activar</b> la opción “Permitir que los sitios web ejecuten Flash”.<br>
+													3- <b>Desactivar</b> la opción "Preguntar antes".</p></span>
+													<div style="margin:-80px -18px 50px 180px" id="clickToClose"><b><img title="Cerrar" width="10;" height="10;" src="/img/icon/dialog-close.png" alt="Cerrar"></b></div>
+		</div>
+		<div id="resultRefresh"></div>
+		
+		<table id="tablaEvents">
+			<thead>
+				<tr>
+					<th></th>
+					<th class="id">ID</th>
+					<th><?=$this->translate->_('Id Template')?></th>
+					<th><?=$this->translate->_('Date Limit')?></th>
+					<th><?=$this->translate->_('Title')?></th>
+					<th><?=$this->translate->_('Description')?></th>
+					<th><?=$this->translate->_('Start')?></th>
+					<th><?=$this->translate->_('End')?></th>
+					<th><?=$this->translate->_('Source')?></th>
+					<th><?=$this->translate->_('Status')?></th>
+					<th><?=$this->translate->_('Incident')?></th>
+					<th><?=$this->translate->_('Shifts')?></th>
+					<th><?=$this->translate->_('Location')?></th>
+					<th><?=$this->translate->_('Client')?></th>
+					<th><?=$this->translate->_('Group')?></th>										
+					<th><?=$this->translate->_('RGroup')?></th>
+					<th><?=$this->translate->_('OU_ID')?></th>
+					<th><?=$this->translate->_('User')?></th>
+					<th><?=$this->translate->_('Entorno')?></th>
+					<th><?=$this->translate->_('Type')?></th>
+				<!--	<th><?=$this->translate->_('Date Log')?></th>   -->    
+				<!--	<th><?=$this->translate->_('Creado por')?></th>  -->
+				<!--	<th><?=$this->translate->_('Message Log')?></th>-->
+					<th><?=$this->translate->_('open-close-ticket')?></th>
+					<th><?=$this->translate->_('minutes-close-ticket')?></th>
+					<th><?=$this->translate->_('Cliente')?></th>
+					<th><?=$this->translate->_('Creado por')?></th>
+					
+					
+					
+				</tr>
+			</thead>
+			
+			<tbody></tbody>
+		</table>		
+	</div>
+</div>
+<div class="modal"><div class="center"><?php echo $this->translate->_("Importando archivo, Por favor espere...")?><br /><?php echo $this->translate->_("Este Proceso puede tardar más de 5 minutos.")?></div></div>
+<?php $this->Dialogs()->ViewEvent();?>
+<?php $this->Dialogs()->CreateEvent();?>
+
+<script type="text/javascript">
+	 	 var destiny = param('destino');
+   	 switch(destiny)
+   	 {
+   		     case 'checkevent':
+   			 //$('#check').click();
+   			 //$('#check_linkevents').click();
+   			 
+   			 break;
+
+    		 case 'checktemplate':
+        		// console.log("pasa por checklist.phtml");
+   			 $('#check').click();
+   			 $('#check_linktemplates').click();
+   			
+   			 break;
+
+   	     	 case 'journaltemplate':
+    	     	    $('#journal').click();
+ 		     break;
+
+			 case 'journalevent':
+  				$('#journal').click();
+  			 break;
+   		 }
+	
+</script>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+
+	$('#imgInfoChrome').hover(function(){
+
+	$('#infoAddChrome').show();
+
+	});
+
+	$('#clickToClose').click(function(){
+	$('#infoAddChrome').hide();
+
+});
+
+
+
+
+	});
+
+	function fnFormatDetails ( ooTable, nTr )
+	{
+	    var aData = ooTable.fnGetData( nTr );
+	    var sOut = '<div class="tablecss"><table class="tblDetalle" cellspacing="0" border="1" style="width: 100%;">';
+	    sOut += '<tr><td class=""><b>Client - Location - Shifts - User Assigned:</b></td><td class="">'+' '+aData[13]+' - '+aData[12]+' - '+aData[11]+' - '+aData[16]+'</td></tr>';
+	    sOut += '<tr><td class=""><b>Start - End:</b></td><td class="">'+' '+aData[6]+' - '+aData[7]+'</td></tr>';
+	    sOut += '<tr><td class=""><b>Description:</b></td><td class="">'+' '+aData[5]+'</td></tr>';
+	    sOut += '<tr><td class=""><b>Date and user log:</b></td><td class="">'+' '+aData[18]+' - '+aData[19]+'</td></tr>';
+	    sOut += '<tr><td class=""><b>Message log:</b></td><td class="">'+' '+aData[20]+'</td></tr>';
+	    sOut += '</table></div>';
+	     
+	    return sOut;
+	}
+	
+	$(function() {	 
+	        $body = $("body");    
+	       var nmarr =[] ;
+            
+            //$("th").addClass("single-line");
+            $('#fileupload').fileupload({
+                dataType: 'json',
+                start: function (e){
+                  $body.addClass("loading");     
+                },
+                done: function (e, data) {
+        
+                     $.each(data.files, function (index, file) {
+                    var obj1 = JSON.parse(data.jqXHR.responseText);
+                     if(obj1[0].error){
+                        alert('El archivo ' + file.name + ' no tiene una extension soportada\nLas extensiones soportadas son, xls, xlsx y csv.');
+                        } else {
+                            $.post( "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'files','type'=>'events'))?>", { name: data.result[0].name  })
+                                                                    .done(function( data1 ) {
+                                                                        $body.removeClass(("loading"));
+                                                                        $('#tablaEvents').DataTable().ajax.reload();
+                                                                         
+                                                                    });
+                            nmarr.push (file.name);
+                        }
+                }); 
+                }
+            }); 
+            $('.boton').button();
+	    
+	    
+	    /*
+	     * Initialse DataTables, with no sorting on the 'details' column
+	     */
+	    var ooTable = $('#tablaEvents').dataTable( {
+			"bStateSave": false,
+			"aaSorting": [[ 1, "desc" ]],
+			"sPaginationType": "full_numbers",
+			//"oLanguage": idiomaDataTables,
+			"lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+			"bProcessing": true,
+	        "bServerSide": true,
+	      //  "dom": 'T<"clear">lfrtip',
+	        		 	"dom": 'Blfrtip',
+		 	"bFilter":true,
+	 		buttons: [
+	        { extend: 'copy', className: 'copyButton' },
+	        { extend: 'print', className: 'excelButton' },
+	        { extend:  'csvHtml5', className: 'excelButton',fieldSeparator: ';' }
+	        
+	    ],
+
+            /*"tableTools": {
+                                "sSwfPath": "/estilos/js/TableTools-2.2.4/swf/copy_csv_xls_pdf.swf",
+                                "aButtons": 
+                                [
+                                    {
+                                        "sExtends":    "collection",
+                                        "sButtonText": "Exportar datos de pantalla",
+                                        "aButtons":    [   {
+                                                                "sExtends":     "xls",
+                                                                "sButtonText": "Export to xls",
+                                                                "mColumns": [ 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22  ]
+                                                            }, 
+                                                           {
+                                                                "sExtends":     "copy",
+                                                                "sButtonText": "Copy to ClipBoard...",
+                                                                "mColumns": [ 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22  ]
+                                                            }]
+                                    }
+                                ]
+                           },*/
+	        "aoColumns": [ 
+							{ "bSortable": false,
+								 "sWidth": "8%", "sClass": "datatables_action"} , //img ->0
+				        	{"sWidth": "3%" }, //'id' ->1
+				        	{ "sWidth": "6%" },  //'idTarea'  ->2
+				        	{ "bVisible":    false},  //'limite' ->3
+				        	{ "sClass": "single-line"},  //'title' ->4
+							{ "bVisible":    false }, //'description' ->5
+							{"sWidth": "6%"  }, //'start' -> 6
+							{ "bVisible":    false }, //'end' -> 7
+							{ "bVisible":    false }, //'source' -> 8
+							{ "bVisible":    false }, //'status' -> 9
+				        	{ "bVisible":    false },  //'schedule' -> 10
+							{ "bVisible":    false }, //'Shifts' -> 11
+							{ "bVisible":    false }, //'Location' -> 12 
+				        	{ "sWidth": "10%" },  //'Client' -> 13
+				        	{ "sWidth": "6%" }, //'Group'  -> 14
+				        	{ "bVisible":    false }, //'rGroup' ->15
+							{ "bVisible":    false }, //'OU_ID' -> 17
+// 							{ "sWidth": "3%","bSortable": false }, //'user' -> 16
+							{ "bVisible":    false }, //'user' -> 16
+							{ "bVisible":    false }, //'environment' -> 18
+// 							{ "sWidth": "3%" }, //'type' -> 19
+							{ "bVisible":    false }, //'type' -> 19
+					//		{ "bVisible":    false }, //'Fecha Log' -> 20
+							//{ "bVisible":    false }, //'User Log' -> 21
+					//		{ "bVisible":    false },
+					//		{ "bVisible":    false }, //'Message Log' -> 22
+							{ "bVisible":    false  }, //'open-close-ticket' -> 23 
+							{ "bVisible":    false  }, //'minutes-close-ticket' ->  24
+							{ "bVisible":    false  }, //'cliente' -> 25
+							{ "sWidth": "6%" },
+					
+							
+							
+		          	     ],
+	        "sAjaxSource": "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'events'))?>",
+			"fnInitComplete": function () {
+	
+				$('.dataTables_filter input').attr("placeholder", "Search");
+				
+			},
+			aoColumnDefs: [{ 
+				"bSortable": false, 
+				"aTargets": ['noSort'] 
+			}]
+		});
+        $('#tablaEvents tbody').on( 'click', 'tr', function () {
+            ii = ooTable.fnGetData(this);
+            $.each(ii, function(index, value) {
+                if(index == 1)dat = value;
+                $('#form_'+index).val(value);
+            }); 
+		});
+		
+		
+		$(document).on( 'mouseenter', 'td.single-line', function () {
+		    MyTip('Title:', $(this).text());
+		});
+		
+		$(document).on( 'mouseleave', 'td.single-line', function () {
+                   UnTip();
+        });
+		
+	    $(document).off('click', '.detail_icon');
+	    $(document).on( 'click', '.detail_icon', function () {
+	        var nTr = $(this).parents('tr')[0];
+	        if ( ooTable.fnIsOpen(nTr) )
+	        {
+	            /* This row is already open - close it */
+	            this.src = "/img/details_open.png";
+	            ooTable.fnClose( nTr );
+	        }
+	        else
+	        {
+	            /* Open this row */
+	            this.src = "/img/details_close.png";
+	            ooTable.fnOpen( nTr, fnFormatDetails(ooTable, nTr), 'tabledetail' );
+	        }
+	    });
+	    $('#add_event').button({
+	            icons: {
+	                primary: "ui-icon-locked"
+	            }}).click(function(){
+	    	// Muestra el dialogo y crea un evento
+	    	{
+            $('#CreateEvent').dialog({
+                autoOpen: true,
+                width: 'auto',
+                dialogClass: 'noTitleStuff',
+                title: 'Create Event ',
+                modal: true,
+                position: 'middle',
+              show: { effect: "fade", duration: 1500 },
+              hide: { effect: "fade", duration: 1500 }
+            });
+	    	};
+	    
+	    });
+	    
+	    $(document).off('click', '.edit_icon');
+	    $(document).on( 'click', '.edit_icon', function (e) {
+
+	    var table = $('#tablaEvents').DataTable();
+	    var row = table.row($(this).parent().parent()).data(); 
+		//console.log(row[13]);		
+				
+							//console.log($(this));
+							//console.log(row[$(this).data('counter')]);
+							
+							$("#form_25 option:contains(" + row[13] +")").attr("selected", true);
+						
+           $('#ViewEvent').dialog({
+                autoOpen: true,
+                width: 'auto',
+                title: 'Detalle del evento '+ dat,
+                dialogClass: 'noTitleStuff',
+                modal: true,
+                position: 'middle',
+                open: function( event, ui ) {
+                    $('#historic').html('');
+                    var ul = $('<ul>').appendTo($('#historic'));
+                    $.post( "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'getevlog'))?>", { id: dat })
+                    .done(function( data1 )
+                    {
+                    var obj = jQuery.parseJSON(data1);
+                    $.each(obj, function(key,value) {
+						
+                            ul.append($(document.createElement('li')).text(value));  
+                        }); 
+                    });  
+
+
+                    
+                    var openCloseTicket = row[24];
+                    $('#form_1').val(dat);
+                    $("#form_23").attr("checked", false);
+                    $("#form_23").val("1");
+                    $("#form_24").attr("disabled", "disabled");
+                    
+ 					if (openCloseTicket){
+ 						$("#form_23").attr("checked", true);
+						$("#form_24").removeAttr("disabled");
+ 					} else {
+ 						$("#form_24").val(null);
+ 					}
+ 					
+
+                    
+
+                    ChangeButton('new_save',1, false);
+                                     
+                    },
+               close: function(ev, ui) { ChangeButton('new_save',0.5, true); },
+              show: { effect: "fade", duration: 1500 },
+              hide: { effect: "fade", duration: 1500 }
+            });
+	    });
+		    
+	    $(document).off('click', '.delete_icon');
+	 
+        $(document).on( 'click', '.delete_icon', function (e) {
+            var r = confirm("¿Borrar el evento?");
+            if (r == true) {
+                    var table = $('#tablaEvents').DataTable();
+                    var row = table.row($(this).parent().parent()).data(); 
+                    $.post( "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'rmevent'))?>", { id: $(this).parent().next().text(), sts:row[9],st: row[6]  })
+                                        .done(function( data1 )
+                                        {
+                                        	if(data1 == "KO")
+                                        	alert("No dispone de permisos para realizar esta acción");
+                                           //$body.removeClass(("loading"));
+                                           $('#tablaEvents').DataTable().ajax.reload();
+                                        });
+            } 
+        });
+
+        
+	});
+	
+	
+	function refreshTree()
+	{
+    	alert('Temporalmente desactivado ...');
+		//$.post('<?=$this->url(array('controller'=>'admin','action'=>'refresrecursos'))?>',function(data){$('#resultRefresh').html(data);});
+	
+		return false;
+	}
+
+ 	function param(name) {
+   	    return (location.search.split(name + '=')[1] || '').split('&')[0];
+   	}
+	</script>
+	
+		<style>
+#tablaEvents{
+	font-size:1.1em !important;
+}
+#ui-datepicker-div{
+	z-index:900003 !important;
+}
+.tbldetalle{
+	font-size: 0.8em !important;
+}
+#tablaEvents_paginate{
+	font-size:12px;
+}
+
+	</style>

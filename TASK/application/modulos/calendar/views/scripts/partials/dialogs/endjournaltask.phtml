@@ -1,0 +1,227 @@
+<div id="endTaskJournal" title="<?=$this->translate('End Journal Task Prompt...')?>" style="display:none;position:relative;z-index:9999999;">
+	<div id="divInfoCode" style="display: none;">
+<table class="blueTable">
+<thead>
+<tr>
+<th>PORTAL BITACORA</th>
+<th>EASY</th>
+
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>COMPLETE</td>
+<td>Finalizada</td>
+
+</tr>
+<tr>
+<td>WITH_PROBLEMS</td>
+<td>Finalizada</td>
+
+</tr>
+<tr>
+<td>PARTIAL</td>
+<td>Finalizada</td>
+
+</tr>
+<tr>
+<td>REVOKED</td>
+<td>Cancelada</td>
+
+</tr>
+  
+  </tr>
+<tr>
+<td>REVOKED_WITH_FALLBACK</td>
+<td>Cancelada</td>
+
+</tr>
+</tbody>
+</table>
+</div>
+    <p class="validateTips" id="_avs"><b><?=$this->translate('All fields are required.')?></b></p>
+	<form id="formEndJorunal">
+		<div id='Schedule_DIV' class='endtask Schedule'>
+           <p class="validateTips"><?=$this->translate('Resolution Code.')?></p>
+                    <p>
+                        <select name="ResolutionCode" id="Code" onchange="removeClass();" style="width: 20%;color: #e1187f;font-size: 1.5em;font-family: Tele-GroteskNor;" value="" class="aufill ui-tpicker-grid-label">
+                            <option value="0">Seleccione *</option>
+                            <option value="COMPLETE">COMPLETE</option>
+                            <option value="WITH_PROBLEMS">WITH_PROBLEMS</option>
+                            <option value="PARTIAL">PARTIAL</option>
+                            <option value="REVOKED">REVOKED</option>
+                            <option value="REVOKED_WITH_FALLBACK">REVOKED_WITH_FALLBACK</option>
+                        </select> <img id="infoCode" onmouseover="mostrarInfo();"  onmouseout="mostrarInfo();" src="/img/icon/information.png" alt="" />
+                    </p>
+                    
+            <fieldset class="col-a">
+                <label for="start_3" class=""><?=$this->translate('Start Date')?></label>
+                <input type="text" name="ActualStart" data-alts="form_6" id="start_3" value="" class="aufill" placeholder="<?=$this->translate('Selecione...')?>" readonly/>
+                <img src="/img/icon/information.png" alt="" title="<?=$this->translate('Hora inicial de la ventana del cambio.')?>"/>
+            </fieldset>
+             <fieldset class="col-a">
+                <label for="end_3" class=""><?=$this->translate('End Date')?></label>
+                <input type="text" name="ActualEnd" data-alts="form_7" id="end_3" value="" class="aufill" placeholder="<?=$this->translate('Selecione...')?>" readonly/>
+                <img src="/img/icon/information.png" alt="" title="<?=$this->translate('Hora fin de la ventana del cambio.')?>"/>
+            </fieldset>
+                
+        </div>
+            <fieldset class="col-a">
+                <label for="lasttext" class=""><?=$this->translate('Task Time')?></label>
+                <input type="text" name="lasttext" data-alts="form_7" id="lasttext" value="" class="aufill" placeholder="<?=$this->translate('Input time...')?>" />
+            </fieldset>  
+		   <fieldset class="col-c">
+                <label for="comments"><?=$this->translate('Closure Comments *')?></label>
+                <textarea style="margin: 0px 8px 10px 0px; height: 218px; width: 450px;" rows="25" id="comments" class="aufill" name="ClosureComments" placeholder="<?=$this->translate('Add Text... (mandatory)')?>"></textarea>
+            </fieldset>
+		
+	</form>
+
+	
+</div>
+<script>
+
+function removeClass()
+{
+ 	$('#Code').removeClass('mandatoryField');
+}
+
+function mostrarInfo()
+{
+	$('#divInfoCode').toggle();
+}
+
+$(document).ready(function(){
+
+
+});
+
+
+        $('#end_3').datetimepicker({
+        onClose: function (dateText, inst) {
+
+          TASK.settings.end = dateText;
+                 function isDonePressed() {
+                  return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
+                  }
+                if (isDonePressed()){
+              
+                  if(dateText > inst.lastVal)
+                  {
+                    alert('La fecha elegida excede la ventana del evento');
+                    $('#end_3').val(inst.lastVal);
+                    return false;
+                  }
+                    
+                  }
+              
+          },
+            showButtonPanel: true,
+            stepMinute: 5,
+            firstDay: 1,
+            dateFormat: 'yy-mm-dd', 
+            timeFormat: 'hh:mm:ss',
+   
+            });
+            
+          $('#start_3').datetimepicker({
+            onClose: function (dateText, inst) {
+
+              TASK.settings.start = dateText;
+                 function isDonePressed() {
+                  return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
+                  }
+                if (isDonePressed()){
+                  
+                  //TODO aqui validacion de fechas
+                  if(dateText < inst.lastVal)
+                  {
+                    alert('La fecha elegida excede la ventana del evento');
+                    $('#start_3').val(inst.lastVal);
+                    return false;
+                  }
+                
+              }
+          },
+  
+            showButtonPanel: true,
+            stepMinute: 5,
+            firstDay: 1,
+            dateFormat: 'yy-mm-dd', 
+            timeFormat: 'hh:mm:ss'
+            });
+        
+        $( ".aufill" ).change(function() {
+            crt = true;
+            
+            $('.aufill').each(function(index ) {
+                if ($(this).val() =='')crt=false;
+  
+            });
+
+            if(crt)$('#button-end').attr("disabled", false).removeClass( 'ui-state-disabled' );    
+         });
+
+</script>
+
+<style>
+#divInfoCode{
+	z-index:1;
+	margin-bottom:200px;
+	margin-left:25%;
+	width:35%;
+	position:absolute;
+	opacity:0.8;
+	
+	
+}
+table.blueTable {
+  border: 1px solid #1C6EA4;
+  background-color: #EEEEEE;
+  width: 80%;
+  text-align: left;
+  border-collapse: collapse;
+}
+table.blueTable td, table.blueTable th {
+  border: 1px solid #AAAAAA;
+  padding: 3px 2px;
+}
+table.blueTable tbody td {
+  font-size: 13px;
+}
+table.blueTable tr:nth-child(even) {
+  background: #D0E4F5;
+}
+table.blueTable thead {
+  background: #1C6EA4;
+  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  border-bottom: 2px solid #444444;
+}
+table.blueTable thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #FFFFFF;
+  border-left: 2px solid #D0E4F5;
+}
+table.blueTable thead th:first-child {
+  border-left: none;
+}
+
+table.blueTable tfoot {
+  font-size: 14px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #D0E4F5;
+  background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+  background: -webkit-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+  background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+  border-top: 2px solid #444444;
+}
+
+.mandatoryField{
+  background-color: #ff9999;
+}
+</style>

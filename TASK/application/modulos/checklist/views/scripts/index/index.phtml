@@ -1,0 +1,167 @@
+<div style="width: 100%; background-color:#fff;">  
+		   
+				 <div style="width: 100%; background-color:#fff; margin-top:1px;" id="add_users">
+				   	<img align="right" style="margin-top:5px;position:relative; top:0px; left:-30px;" src=<?=$this->baseUrl('/img/group_half_add1.png')?> />
+				   	<img align="right" style="margin-top:5px;display:none;position:relative; top:0px; left:-30px;" src=<?=$this->baseUrl('/img/group_half_remove1.png')?> />
+				   </div>
+				<ul id="myTags">
+				    <!-- Existing list items will be pre-added to the tags -->
+				    <li><?php echo($this->user->username)?> </li>
+				</ul>
+	<div id="rotulo" style="display:none; background: #ccc;">			
+				<ul id="myTagsBase">
+				    <!-- Existing list items will be pre-added to the tags -->
+				    <li>group1</li>
+				    <li>group2</li>
+				    <li>group3</li>
+				    <li>anibanez</li>
+				    <li>jbadia</li>
+				    <li>TEXT,COMA</li>
+				</ul>
+
+
+</div>
+<div class="cuerpo" >
+	<div class="resizable" id='checklist'></div>
+	
+	<div class="loading">
+		<div id="loading">
+			<img src="/img/preloader.gif" /> <div><?=$this->translate('Cargando información...')?></div>
+		</div>
+		
+	</div>
+	<div class="doc">
+	 	
+	 	<!-- LISTADO DE TAREAS SIN ASIGNAR -->
+		<div id="tareas-list-huerfanas" class="tareas-list" style="display:none">
+
+			<div class="title"><span id="tareas-list-count-huerfanas">(0)</span> <?=$this->translate('Tareas sin asignar')?></div>
+			
+			<div class="_GAjd _GAjd-1" onclick="TASK.Planificador.Run()" title="<?=$this->translate('Ver planificador')?>"><img src="/img/icon/application_view_columns.png" alt="" /></div>
+			<div class="_GAjd _GAjd-2" onclick="TASK.newTarea()" title="<?=$this->translate('Nueva tarea')?>"><img src="/img/icon/page_white_add.png" alt="" /></div>
+			
+			<ul id="external-events-huerfanas" class="external-events"></ul>
+			<p class="leyenda"><?=$this->translate('Click derecho en una tarea para ver más opciones.')?></p>
+		</div>
+	 	
+	 	<!-- LISTADO DE TAREAS PENDIENTES -->
+		<div id="tareas-list-pendientes" class="tareas-list" style="display:none">
+
+			<div class="title"><span id="tareas-list-count-pendientes">(0)</span> <?=$this->translate('Tareas pendientes de programar')?></div>
+			<!-- 
+			<div class="_GAjd _GAjd-1" onclick="TASK.newTarea()" title="<?=$this->translate('Nueva tarea personal')?>"><img src="/img/icon/page_white_add.png" alt="" /></div>
+			 -->
+			<ul id="external-events-pendientes" class="external-events"></ul>
+			<!-- <input type='checkbox' id='drop-remove' checked /> <label for='drop-remove'><?=$this->translate('Remove after drop')?></label>  -->
+			<p class="leyenda"><?=$this->translate('Click derecho en una tarea para ver más opciones.')?></p>
+		</div>
+	 	
+	 	<!-- LISTADO DE TAREAS PROGRAMADAS -->
+		<div id="tareas-list-programadas" class="tareas-list" style="display:none">
+
+			<div class="title"><span id="tareas-list-count-programadas">(0)</span> <?=$this->translate('Tareas programadas')?></div>
+			<ul id="external-events-programadas" class="external-events"></ul>
+			<p class="leyenda"><?=$this->translate('Click derecho en una tarea para ver más opciones.')?></p>
+		</div>
+
+ <script>
+$(function() {
+
+	var $container = $('.kwicks').kwicks({
+		maxSize : 220,
+		//spacing : 5,
+		behavior: 'menu',
+        deselectOnClick: true,
+		isVertical: true
+	});
+
+    $container.on('expand.kwicks', function(e, data) {
+        var newColor;
+        if (data.expanded) {
+            newColor = $(data.expanded).css('background-color');
+        } else {
+            newColor = '#333';
+        }
+        //console.log(data.expanded);
+        $container.css({
+            'border-color': newColor,
+            'background-color': newColor
+        });
+    });
+    $container.on('select.kwicks', function(e, data) {
+        // panel index (or -1 if we're selecting none)
+        //console.log(data);
+        //alert(data.selected.innerHTML);
+        //data.selected.innerHTML = 'hlllllll1888888';
+        //alert(data.selected.innerHTML);
+
+        // panel reference (or null if we're selecting none)
+        //console.log(data.selected);
+
+        // an array of all unselected panels
+        // (will be all panels if we're selecting none)
+        //console.log(data.unselected);
+
+        // index of previously selected panel (-1 if there wasn't one)
+        //console.log(data.oldIndex);
+
+        // reference to previously selected panel
+        // (or null if there wasn't one)
+        //console.log(data.oldSelected);
+
+        // prevent the panel from being selected
+        //e.preventDefault();
+    });
+	
+	$( "#add_users" ).click(function() {
+		$(this).find('img').toggle();
+		$( "#rotulo" ).toggle( "drop" );
+		});
+	
+    $("#myTags").tagit({
+    	placeholderText: "Apply Filters",
+    	fieldName: "Listado",
+    	singleField: true,
+    	singleFieldDelimiter: "@@@" ,
+    	afterTagRemoved:function(event, ui) {
+	        // do something special
+ 			 $("#myTagsBase").tagit('createTag',ui.tagLabel);
+  			us = $( "input[name='Listado']").val();
+			res = us.split("@@@");
+			fcSources.newo.data = {
+			        		users: JSON.stringify( res ),
+			        		token: CHECK.settings.token
+			};
+  			$("#checklist").fullCalendar( "refetchEvents" );
+    		}
+        });
+
+    $("#myTagsBase").tagit({
+    	readOnly:true,
+    	placeholderText: "Select filters...",
+  	    onTagClicked: function(event, ui) {
+	        // do something special
+   			 $("#myTags").tagit('createTag',ui.tagLabel);
+    			$("#myTagsBase").tagit('removeTagByLabel',ui.tagLabel);
+    			us = $( "input[name='Listado']").val();
+    			res = us.split("@@@");
+    			fcSources.newo.data = {
+    			        		users: JSON.stringify( res ),
+    			        		token: CHECK.settings.token
+    			};
+    			$("#checklist").fullCalendar( "refetchEvents" );
+	      //  console.log(ui.tagLabel);
+	    }
+        });
+    
+	 $(".tagit-new input").attr("readonly", true);
+	 
+	//$('.tlt').on('inAnimationBegin.tlt', function () {
+	//		$( ".tlt" ).children().addClass( "rojo" );
+	//	});
+	
+	$('.tlt').fitText(3.2, { minFontSize: '20px',maxFontSize: '60px' });
+	//$("#test_1").fitText(0.5);
+	
+});
+</script>

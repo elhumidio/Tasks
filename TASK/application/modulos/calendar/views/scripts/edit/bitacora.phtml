@@ -1,0 +1,50 @@
+<div class="colRight" style="margin-top: 5px;">
+        <div class="contenido" style="padding-top: 5px;">
+            <div style="display:none" class="titulo"><?=$this->translate->_('Journal')?>
+
+                    <a id="journal_templates" href="/task/calendar/edit/jtemplates" class="link-custom"><?=$this->translate->_('Templates')?></a>
+                    <a id="journal_events" href="/task/calendar/edit/jevents/type/journal" data-btn="Journal" class="link-custom"><?=$this->translate->_('Events')?></a>                    
+                    
+            </div>
+		   <div id="ui-tabs-3"></div>
+        </div>
+</div>        
+        
+<script type="text/javascript">
+
+function param(name) {
+	    return (location.search.split(name + '=')[1] || '').split('&')[0];
+	}
+
+
+$(document).ready(function(){
+
+	
+  var destiny = param('destino');
+
+	 switch(destiny)
+   	 {
+    	    case 'journaltemplate':
+			    $('.event_title').append('<p>Bitácora templates</p>');
+        	  $('#menuPestanas').tabs('select', '#journal');
+        		setTimeout(function(){
+        			 $("#ui-tabs-3" ).load('/task/calendar/edit/jtemplates');
+        			},2500);
+        		setTimeout(function(){
+        			$('#journal_templates').click();
+        			},500);
+			 break;
+
+			  case 'journalevent':
+			   $('.event_title').append('<p>Bitácora Events</p>');
+    			setTimeout(function() {
+    				 $("#ui-tabs-3" ).load('/task/calendar/edit/jevents/type/journal');
+    				$('#journal_events').click();
+    			    },10);
+			
+			break;
+   	 }
+  });
+
+
+</script>

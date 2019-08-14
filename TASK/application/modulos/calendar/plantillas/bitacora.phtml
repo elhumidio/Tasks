@@ -1,0 +1,39 @@
+<?php echo $this->doctype();?>
+
+<html>
+<head>
+<?php 
+$this->headTitle()->prepend($this->Title()->getTitle());
+echo $this->headTitle();
+?>
+<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+<?php 
+$this->headMeta()->appendName('robots', 'NOINDEX,NOFOLLOW,NOARCHIVE,NOODP,NOSNIPPET');
+echo $this->headMeta(); ?>
+
+<?php echo $this->headLink(); ?>
+
+<?php echo $this->headStyle(); ?>
+<?php echo $this->headScript(); ?>
+
+</head>
+<body id="body-login">
+		<div id="login">
+			<header>
+				<div id="header"> 
+					<a href="<?php echo $this->serverUrl(true); ?>" title="easy.<?=$this->app->appConfig->app_name?>">
+						<img src="/img/logo_easyA_TASK.png" alt="easy.<?=$this->app->appConfig->app_name?>" />
+					</a>
+				</div>
+				
+			</header>
+			
+			<?php echo $this->layout()->content;?>
+			
+		</div>
+		<footer>
+		<?=$this->render('partials/footer.phtml')?>
+		</footer>
+	</body>
+</html>
+

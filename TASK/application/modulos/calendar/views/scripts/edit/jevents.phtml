@@ -1,0 +1,387 @@
+<div class="colRight" style="margin-top: 5px;">
+	<div class="contenido" style="padding-top: 5px;">
+		<div class="titulo" style="font-size:22px; !important; color:#333333;"><?=$this->translate->_('Eventos Bitácora')?></div>
+		<p style="font-size:10px;"><?=$this->translate->_('Puede crear y administrar eventos en este tab. Debajo están los eventos programados, estos eventos son usados para visualizar el journal.');?></p>
+		<!--
+		 <a href="#" id="add_jevent" class="boton .ui-icon-plus" style="font-size: 12px;"><?=$this->translate->_('Agregar evento manual')?></a>&nbsp;&nbsp;&nbsp;<img id="imgInfo" src="/img/info_icon.png">
+		 -->
+	</a>&nbsp;&nbsp;&nbsp;<img title="SOLO PARA CHROME!!" style="position:relative;float:right;margin-right:10px;margin-top: -10px;" id="imgInfoChrome" src="/img/info_icon.png">
+		<div id="resultRefresh"></div>
+		<div id="infoAddEvent" class="infoDivNew">Si es un cambio SM9 ir a menú: "Cargar Datos"</div>
+		<div id="infoAddChrome" class="infoDivChrome"><span style="font-size: 9px;margin-left: 2px;padding:5px;text-align: left;"><p style="margin-top: -11px">
+													
+													1- <b>Copiar y pegar</b> en la barra de direcciones del navegador <b><i>chrome://settings/content/flash&nbsp;</i></b><br> 
+													2- <b>Activar</b> la opción “Permitir que los sitios web ejecuten Flash”.<br>
+													3- <b>Desactivar</b> la opción "Preguntar antes".</p></span>
+													<div style="margin:-80px -18px 50px 180px" id="clickToClose"><b><img title="Cerrar" width="10;" height="10;" src="/img/icon/dialog-close.png" alt="Cerrar"></b></div>
+		</div>
+		<table id="tablajEvents">
+			<thead>
+				<tr>
+					<th>Acciones</th>
+					<th class="id">ID</th>
+					<th><?=$this->translate->_('Id Template')?></th>
+					<th><?=$this->translate->_('Date Limit')?></th>
+					<th><?=$this->translate->_('Title')?></th>
+					<th><?=$this->translate->_('Description')?></th>
+					<th><?=$this->translate->_('Start')?></th>
+					<th><?=$this->translate->_('End')?></th>
+					<th><?=$this->translate->_('Source')?></th>
+					<th><?=$this->translate->_('Status')?></th>
+					<th><?=$this->translate->_('Incident')?></th>
+					<th><?=$this->translate->_('Shifts')?></th>
+					<th><?=$this->translate->_('Location')?></th>
+					<th><?=$this->translate->_('Client')?></th>
+					<th><?=$this->translate->_('Group')?></th>										
+					<th><?=$this->translate->_('RGroup')?></th>
+					<th><?=$this->translate->_('OU_ID')?></th>
+					<th><?=$this->translate->_('User')?></th>
+					<th><?=$this->translate->_('Entorno')?></th>
+					<th><?=$this->translate->_('Type')?></th>
+					<!--<th><?=$this->translate->_('F.Creación')?></th>        -->
+				<!--	<th><?=$this->translate->_('Creado por')?></th>      -->
+				<!--	<th><?=$this->translate->_('Message Log')?></th>  -->
+					<th><?=$this->translate->_('CHM')?></th>
+					<th><?=$this->translate->_('F.Creación')?></th>
+					<th><?=$this->translate->_('Creado por')?></th>
+					</tr>
+			</thead>
+			
+			<tbody></tbody>
+		</table>		
+	</div>
+</div>
+<div class="modal"><div class="center"><?php echo $this->translate->_("Importando archivo, Por favor espere...")?><br /><?php echo $this->translate->_("Este Proceso puede tardar más de 5 minutos.")?></div></div>
+<?php $this->Dialogs()->ViewJEvent();?>
+<?php $this->Dialogs()->NewTemplate();?>
+<?php $this->Dialogs()->CreateJEvent();?>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+$('#imgInfo').hover(function(){
+$('#infoAddEvent').toggle();
+
+});
+
+
+	$('#imgInfoChrome').hover(function(){
+
+	$('#infoAddChrome').show();
+
+	});
+
+	$('#clickToClose').click(function(){
+	$('#infoAddChrome').hide();
+});
+
+
+});
+	var logmessageinfo = "";
+
+	function getLogInfo(id)
+	{
+
+	$.ajax({
+		timeout: 48000,
+		url : TASK.settings.urlBase + '/calendar/ajax/getloginfo',
+		async : false,
+		type: "post",
+		dataType : "json",
+		data:{eventoid:id},
+		success:function(data){
+			logmessageinfo = data;
+		
+  		 },
+  		 error:function(jqxhr, settings, ex) { alert('failed, ' + ex);},
+  		 complete: function(data) {
+             
+        }
+	       	
+	});
+	}
+
+	function fnFormatDetails ( ooTable, nTr )
+	{
+	    var aData = ooTable.fnGetData( nTr );
+	    getLogInfo(aData['1']);
+	    var sOut = '<div class="tablecss"><table class="tblDetalle" cellspacing="0" border="1" style="width: 100%;">';
+	    sOut += '<tr><td style="width:15%;" class=""><b>Client - Location - Shifts - User Assigned:</b></td><td class="">'+' '+aData[13]+' - '+aData[12]+' - '+aData[11]+' - '+aData[16]+'</td></tr>';
+	    sOut += '<tr><td class=""><b>Start - End:</b></td><td class="">'+' '+aData[6]+' - '+aData[7]+'</td></tr>';
+	    sOut += '<tr><td class=""><b>Description:</b></td><td class="">'+' '+aData[5]+'</td></tr>';
+	   // sOut += '<tr><td class=""><b>Date and user log:</b></td><td class="">'+' '+aData[18]+' - '+aData[19]+'</td></tr>';
+	    sOut += '<tr><td class=""><b>Messages and log info:</b></td><td>';
+	for (var i =0; i< JSON.parse(logmessageinfo).length;  i++) {
+				if(i == 0)
+				sOut += JSON.parse(logmessageinfo)[i];
+				else sOut += " - " + JSON.parse(logmessageinfo)[i];
+			}
+//sOut += logmessageinfo;
+	    sOut += '</td></tr>';/*<td class="">'+' '+aData[20]+'</td></tr>';*/
+	    sOut += '</table></div>';
+	     
+	    return sOut;
+	}
+	
+	$('#tablaNewjEvents tbody').on( 'click', 'td', function () {
+            txt =  (($(this).has(".edit").length ==1)?$(this).children().val():$(this).text());
+            $(this).empty();
+            $(this).append('<input type="text" class="edit" value="'+txt+'">');
+                
+    } );
+	
+	$(function() {	 
+	        $body = $("body");    
+	       var nmarr =[] ;
+            
+            //$("th").addClass("single-line");
+            $('#fileupload').fileupload({
+                dataType: 'json',
+                start: function (e){
+                  $body.addClass("loading");     
+                },
+                done: function (e, data) {
+        
+                     $.each(data.files, function (index, file) {
+                    var obj1 = JSON.parse(data.jqXHR.responseText);
+                     if(obj1[0].error){
+                        alert('El archivo ' + file.name + ' no tiene una extension soportada\nLas extensiones soportadas son, xls, xlsx y csv.');
+                        } else {
+                            $.post( "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'files','type'=>'events','all'=>'0'))?>", { name: data.result[0].name  })
+                                                                    .done(function( data1 ) {
+                                                                        $body.removeClass(("loading"));
+                                                                        $('#tablajEvents').DataTable().ajax.reload();
+                                                                         
+                                                                    });
+                            nmarr.push (file.name);
+                        }
+                }); 
+                }
+            }); 
+            $('.boton').button();
+	    
+	    
+	    /*
+	     * Initialse DataTables, with no sorting on the 'details' column
+	     */
+	    var ooTable = $('#tablajEvents').dataTable( {
+			"bStateSave": false,
+			"aaSorting": [[ 1, "desc" ]],
+			"sPaginationType": "full_numbers",
+			//"oLanguage": idiomaDataTables,
+			"lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+			"bProcessing": true,
+	        "bServerSide": true,
+	      //  "dom": 'T<"clear">lfrtip',
+	        		 	"dom": 'Blfrtip',
+		 	"bFilter":true,
+	 		buttons: [
+	        { extend: 'copy', className: 'copyButton' },
+	        { extend: 'print', className: 'excelButton' },
+	        { extend:  'csvHtml5', className: 'excelButton',fieldSeparator: ';' }
+	        
+	    ],
+            /*"tableTools": {
+                                //"sSwfPath": "/estilos/js/TableTools-2.2.4/swf/copy_csv_xls_pdf.swf",
+                                "aButtons": 
+                                [
+                                    {
+                                        "sExtends":    "collection",
+                                        "sButtonText": "Exportar Datos",
+                                        "aButtons":    [   {
+                                                                "sExtends":     "xls",
+                                                                "sButtonText": "Export to xls",
+                                                                "mColumns": [ 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22  ]
+                                                            }, 
+                                                           {
+                                                                "sExtends":     "copy",
+                                                                "sButtonText": "Copy to ClipBoard...",
+                                                                "mColumns": [ 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22  ]
+                                                            }]
+                                    }
+                                ]
+                           },*/
+	        "aoColumns": [ 
+							{ "bSortable": false,
+								 "sWidth": "7%", "sClass": "datatables_action"} , //img ->0
+				        	{ }, //'id' ->1
+				        	{ "sWidth": "1%" },  //'idTarea'  ->2
+				        	{ "bVisible":    false},  //'limite' ->3
+				        	{ "sClass": "single-line"},  //'title' ->4
+							{ "bVisible":    false }, //'description' ->5
+							{ "sWidth": "6%" }, //'start' -> 6
+							{ "bVisible":    false }, //'end' -> 7
+							{ "bVisible":    false }, //'source' -> 8
+							{ "bVisible":    false }, //'status' -> 9
+				        	{ "bVisible":    false },  //'schedule' -> 10
+							{ "bVisible":    false }, //'Shifts' -> 11
+							{ "bVisible":    false }, //'Location' -> 12 
+				        	{ "sWidth": "8%" },  //'Client' -> 13
+				        	{ "sWidth": "1%" }, //'Group'  -> 14
+				        	{ "bVisible":    false }, //'rGroup' ->15
+							{ "bVisible":    false }, //'OU_ID' -> 17
+// 							{ "sWidth": "10%","bSortable": false }, //'user' -> 16
+							{ "bVisible":    false }, //'user' -> 16
+							{ "bVisible":    false }, //'environment' -> 18
+							{ "bVisible":    false }, //'type' -> 19
+						/*	{ "bVisible":    false }, //'Fecha Log' -> 20
+							{ "bVisible":    false }, //'User Log' -> 21
+							{ "bVisible":    false },*/ //'Message Log' -> 22
+
+ 							{ "sWidth": "1%", "mRender": function(oObj){
+									oObj = JSON.parse(oObj);
+ 									return oObj.idChange;
+ 								}
+ 							},
+ 							{ "sWidth": "5%" }, 
+ 							{ "sWidth": "3%" }, 
+
+
+		          	     ],
+	        "sAjaxSource": "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'events'))?>",
+			"fnInitComplete": function () {
+	
+				$('.dataTables_filter input').attr("placeholder", "Search");
+				
+			},
+			aoColumnDefs: [{ 
+				"bSortable": false, 
+				"aTargets": ['noSort'] 
+			}]
+		});
+        $('#tablajEvents tbody').on( 'click', 'tr', function () {
+            ii = ooTable.fnGetData(this);
+            $.each(ii, function(index, value) {
+                if(index == 1)dat = value;
+                $('#form_'+index).val(value);
+            }); 
+} );
+		
+		
+		$(document).on( 'mouseenter', 'td.single-line', function () {
+		    MyTip('Title:', $(this).text());
+		});
+		
+		$(document).on( 'mouseleave', 'td.single-line', function () {
+                   UnTip();
+        });
+		
+	    $(document).off('click', '.detail_icon');
+	    $(document).on( 'click', '.detail_icon', function () {
+	        var nTr = $(this).parents('tr')[0];
+	        if ( ooTable.fnIsOpen(nTr) )
+	        {
+	            /* This row is already open - close it */
+	            this.src = "/img/details_open.png";
+	            ooTable.fnClose( nTr );
+	        }
+	        else
+	        {
+	            /* Open this row */
+	            this.src = "/img/details_close.png";
+	            ooTable.fnOpen( nTr, fnFormatDetails(ooTable, nTr), 'tabledetail' );
+	        }
+	    });
+	    
+	    
+	    $('#add_jevent').button({
+            icons: {
+                primary: "ui-icon-locked"
+            }}).click(function(){
+        // Muestra el dialogo y crea un evento
+        {
+            //$('#new1_repeats').prop('checked', false);
+            $('#new1_template_form')[0].reset();
+            $("#1_detail").hide();
+            $("#new1_repeat-options").hide();
+            
+            $('#CreateJEvent').dialog({
+                 autoOpen: true,
+                width: 700,
+                modal: true,
+                position: 'middle',
+                show: { effect: "fade", duration: 500 },
+                hide: { effect: "fade", duration: 500 }
+             });
+         };
+//     
+ });
+	    
+	    
+
+	    
+	    $(document).off('click', '.edit_icon');
+	    $(document).on( 'click', '.edit_icon', function (e) {
+			var table = $('#tablajEvents').DataTable();
+			var row = table.row($(this).parent().parent()).data(); 
+
+// 			$("#form_25").val($("#form_25" + " option").filter(function() { return this.text == row[13] }).val());
+			var text = JSON.stringify(ii[13]);
+			$("#form_25 option:contains(" + text + ")").attr('selected', 'selected');
+
+			
+           $('#ViewJEvent').dialog({
+                autoOpen: true,
+                width: 'auto',
+                title: 'Detalle del evento '+dat,
+                dialogClass: 'noTitleStuff',
+                modal: true,
+                position: 'middle',
+                open: function( event, ui ) {
+                    $('#historic').html('');
+                    var ul = $('<ul>').appendTo($('#historic'));
+                    $.post( "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'getevlog'))?>", { id: dat })
+                    .done(function( data1 )
+                    {
+                    var obj = jQuery.parseJSON(data1);
+                    $.each(obj, function(key,value) {
+                            ul.append($(document.createElement('li')).text(value));  
+                        }); 
+                    });                   
+                    },
+               close: function(ev, ui) { ChangeButton('new_save',0.5, true); },
+              show: { effect: "fade", duration: 1500 },
+              hide: { effect: "fade", duration: 1500 }
+            });
+	    });
+		    
+	    $(document).off('click', '.delete_icon');
+        $(document).on( 'click', '.delete_icon', function (e) {
+            var r = confirm("¿Borrar el evento?");
+            if (r == true) {
+                    var table = $('#tablajEvents').DataTable();
+                    var row = table.row($(this).parent().parent()).data(); 
+                    $.post( "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'rmevent'))?>", { id: $(this).parent().next().text(), sts:row[9],st: row[6]  })
+                                        .done(function( data1 )
+                                        {
+                                        	if(data1 == "KO")
+                                        	alert("No dispone de permisos para realizar esta acción");
+                                           
+                                           $('#tablajEvents').DataTable().ajax.reload();
+                                        });
+            } 
+        });
+	});
+	
+
+	function refreshTree()
+	{
+    	alert('Temporalmente desactivado ...');
+		//$.post('<?=$this->url(array('controller'=>'admin','action'=>'refresrecursos'))?>',function(data){$('#resultRefresh').html(data);});
+	
+		return false;
+	}
+	</script>
+	<style>
+	#tablajEvents{
+		font-size:1.4em !important;
+	}
+	.tblDetalle{
+		font-size: 0.8em !important;
+	}
+	#ToolTables_tablajEvents_0{font-size: 12px;}
+	#tablaEvents_paginate{
+		font-size:12px;
+	}
+	</style>

@@ -1,0 +1,447 @@
+<div id="CreateJEvent" title="<?=$this->translate('Crear evento')?>" style="display:none;padding: 1px;; z-index: 100000;">
+    <div class="administrarApp" style="width: 98%">
+        <div class="description" style="width: 98%">
+            <?=$this->translate('Puede crear eventos de bitácora en esta ventana.<br />')?>
+
+        </div>      
+        <div class="content" style="margin: 1px;">
+            <form id="new_new_journal_form" enctype='application/json' action="" method="" class="">
+                <dl class="zend_form">
+                 <h3 class="temp-new"><?=$this->translate('General Information')?><img src="/img/details_close.png" alt="" class="img_sty" style="float:right;opacity: 0.4;filter: alpha(opacity=40);"/></h3>
+                 <div id="new_new_jsection_1">
+                    <fieldset style="margin-left:2%;">
+                        <label for="new_title"><?=$this->translate('Template Title*')?></label>
+                        <input type="text" name="title" id="new_new_jform_4" class="needed_event_b" placeholder="<?=$this->translate('Campo obligatorio...')?>"/>
+                        <label for="new_description"><?=$this->translate('Template Description*')?></label>
+                        <textarea id="new_new_jform_5" style="height: 20px;" class="textareas needed_event_b" name="description" placeholder="<?=$this->translate('Campo obligatorio...')?>"></textarea>
+                        <!--<label for="new_remark"><?=$this->translate('Remark')?></label>
+                        <textarea id="new_new_jremark" style="height: 15px;" class="textareas" name="remark" placeholder="<?=$this->translate('Remarks...')?>"></textarea>-->
+                    </fieldset>
+                </div>
+                <h3 class="temp-new"><?=$this->translate('Assignment Options')?><img src="/img/details_open.png" alt=""  class="img_sty" style="float:right;"/></h3>
+                 <div id="new_new_jsection_2" class="oculto">
+                    <fieldset class="col-b" style="display:none;">
+                        <label for="new_shifts" class=""><?=$this->translate('Shifts*')?></label>
+                        <input type="text" name="turno" id="new_new_jform_17" value="Morning" placeholder="<?=$this->translate('Campo obligatorio...')?>" class="">  
+                    </fieldset>
+                    
+                    <fieldset class="col-b last" style="display: none">
+                        <label for="new_location" class=""><?=$this->translate('Location*')?></label>
+                        <!-- <input type="text" name="limite" id="new_form_user" value="" class="" placeholder="<?=$this->translate('Seleccione...')?>" /> -->
+                        <input type="text" name="centro" id="new_new_jform_12" value="BCN - 22@" placeholder="<?=$this->translate('Campo obligatorio...')?>" class="">    
+                    </fieldset>     
+                   
+
+                    <fieldset class="col-a" style="display:none;">
+                        <label class="" for="new_group"><?=$this->translate('Asigned Group*')?></label>
+                        <input type="text" name="group" id="new_new_jform_14" placeholder="<?=$this->translate('Campo obligatorio...')?>" value="" class="">    
+                    </fieldset>
+                    
+                    <fieldset class="col-a">
+                        <label class="" style="width:250px;" for="new_client"><?=$this->translate('Affected Client:*')?></label>  
+                        <!--<input type="text" name="cliente" id="new_new_jform_13" value="" placeholder="<?=$this->translate('Campo obligatorio...')?>" class="needed_event_b">-->
+                        <select style="width:268px;" name="cliente" id="new_new_jform_13" value="" placeholder="<?=$this->translate('Campo obligatorio...')?>" class="needed_event_b">
+                            <option value="">Select -></option>
+                           <?php 
+                               $clisTmp = $this->Clientes()->GetAll();
+                               foreach($clisTmp as $cliTmp){
+                                   echo $cliTmp;
+                               }
+                            ?> 
+                        </select>                      
+                    </fieldset>
+
+                    <fieldset class="col-a last" style="margin-top:0px;"> 
+                        <label class="" for="new_rgroup"><?=$this->translate('Responsible Group*')?></label>     
+                       <input type="text" name="rgroup" readonly="readonly" id="new_new_jform_15" value="" placeholder="<?=$this->translate('Campo obligatorio...')?>" class="">
+                       <div style="float:right;margin-left: 200px;"><img  onmouseover="verInfo()" onmouseleave="verInfo()" id="imgInfo" src="/img/info_icon.png"></div>
+                       <div id="infoRgroup" style="background-color:#ffe6cc;padding:7px;display:none;position:absolute;margin-left:15px;border-radius: 5px;box-shadow: 2px 2px 5px #333;margin-top: -70px;width: 120px;"><div>Para modificar este valor ir a Administración de clientes o consulte a su administrador</div></div>
+                        <!--<select name="group" id="new_new_jform_15" value="" placeholder="<?=$this->translate('Campo obligatorio...')?>" class="needed_event_b">
+                            <option value="">Select -></option>
+                            <?php 
+                               $groupTmp = $this->Groups()->GetAllGroups();
+                               foreach($groupTmp as $gr){
+                                   echo $gr;
+                               }
+                            ?>
+                        </select>-->
+                    </fieldset>
+                </div>              
+                <h3 class="temp-new"><?=$this->translate('Date/Time Options')?><img src="/img/details_open.png" alt=""  class="img_sty" style="float:right;"/></h3>
+                 <div id="new_new_jsection_3" class="oculto">
+                
+                    <fieldset class="col-b">
+                        <?php $now = new DateTime(); $now->setTime($now->format('G')+1,0,0);?>
+                        <label for="form_6" class=""><?=$this->translate('Start Time*')?></label>
+                        <input type="text" class="" name="start" placeholder="<?=$this->translate('Campo obligatorio...')?>" id="new_new_jform_6" value="<?=$now->format('Y-m-d H:i')?>">
+                    </fieldset>
+                    
+                    <fieldset class="col-b last">
+                        <?php $now->modify('+3 hours');?>
+                        <label for="form_7" class=""><?=$this->translate('End Time*')?></label>
+                        <input type="text" name="end" id="new_new_jform_7" placeholder="<?=$this->translate('Campo obligatorio...')?>" class="" value="<?=$now->format('Y-m-d H:i')?>">
+                    </fieldset>
+                </div>   
+               
+               <!-- TAREAS CREADAS DINAMICAMENTE NUEVA SECCION -->
+               <div id="sectiontasks">
+                <h3 class="temp-new"> <?=$this->translate('Tasks')?><img src="/img/details_open.png" alt=""  class="img_sty" style="float:right;"/></h3>  
+             
+                   <div id="new_new_jsection_5" class="oculto"  >
+                         <div id="infoIdTarea" style="padding:10px;display:none;background-color:#e6e6ff;border-radius:7px;width:250px;height:30px;position:absolute;margin-left:25%;margin-top:-1%;z-index:999999;box-shadow: 4px 4px 3px #999999;opacity:1;">
+					Si no ingresa un Id de tarea, se asignará automaticamente.   
+					</div>
+                   <div style="margin-left:90%;margin-top:-4%;padding:10px;"><img title="<?=$this->translate('Add task row')?>" style="cursor: pointer;" onclick="addRow();"  width="20" height="20" src="/img/icon/Add_Round_Button_16_pk.png"></div>
+                  
+                      <table id="rowableDiv">
+                      <tr id="dinamycRow_0" class="firstrow">
+                          <td style="color:#008fb3;font-weight:bold;font-size:14px;padding:10px;width:9%;"><div class="divNumbersNewEvents">1</div></td>
+                          <td>
+                               <fieldset style="padding:10px;margin-top:5px;width:77%;">
+                                    <label for="idtareadynamic_0" id="lblidtarea_0" style="width:77%;background-color:#d9d9d9; color:black;">Id Tarea</label>
+                                    <input title= "Id de la tarea / evento" type="text" name="idtareadynamic" id="idtareadynamic_0" class="" style="width:77%;height:16px;">&nbsp;&nbsp;
+                                    <img style="margin-top:8%;margin-left:5px;cursor:pointer" onmouseout="toggleInfo();" onmouseover="toggleInfo();"  width="17px" height="17px" src="/img/info_icon.png"/>
+                                </fieldset>
+                                
+                                <fieldset style="padding:10px;margin-top:-30px;width:95%;">
+                                    <label for="titledynamic_0" id="lbltitulotarea_0" style="width:85%;background-color:#d9d9d9; color:black;">Título</label>
+                                    <input title= "Título de la tarea / evento" type="text" placeholder="Campo obligatorio..." name="titledynamic" id="titledynamic_0" class="needed_event_b" style="width:85%;height:16px;">
+                                </fieldset>
+                                
+                                <fieldset style="padding:10px;margin-top:-15px !important;margin-bottom:12px;width:95%;">
+                                <label for="descriptiondynamic_0" id="lbldescripciontarea_0" style="width:85%;background-color:#d9d9d9;color:black;">Descripción</label>
+                                <textarea title= "Descripción de la tarea / evento" type="text" placeholder="Campo obligatorio..." name="descriptiondynamic" id="descriptiondynamic_0" class="needed_event_b" style="width:85%;height:30px;"></textarea>
+                                </fieldset>
+                                <div class="delete-event"><img title="<?=$this->translate('Delete task row')?>" class="delete_event"  id="delete_1" width="20" height="20" src="/img/icon/delete.png"></div>
+                          </td>
+                     </tr>
+                     </table>
+                    </div>
+                </div>
+                        
+            
+                <h3 class="temp-new"><?=$this->translate('Environment Options')?><img src="/img/details_open.png" alt=""  class="img_sty" style="float:right;"/></h3>
+                <div id="new_new_jsection_4" class="oculto" >
+                    <fieldset class="col-b" >
+                        <label for="new_new_jform_8" class=""><?=$this->translate('Info')?></label>
+                        <input title= "<?=$this->translate('Determina si el evento es de tipo INFO o no.')?>" type="checkbox" name="info" id="new_new_jform_8" value="checked"  class="">
+                    </fieldset>
+
+                    <fieldset class="col-b" >
+                        <label for="incidentid" class=""><?=$this->translate('Incident ID*')?></label>
+                        <input type="text" name="refer" id="incidentid" value="" placeholder="<?=$this->translate('Campo obligatorio...')?>" class="needed_event_b">
+                    </fieldset>
+
+                    <fieldset class="col-b"  style="display: none;">
+                        <label for="new_source" class=""><?=$this->translate('Source*')?></label>
+                        <input type="text" name="origen" id="new_new_jform_8" value="Journal" placeholder="<?=$this->translate('Campo obligatorio...')?>" class="">
+                    </fieldset>
+
+                    <fieldset class="col-b last" style="display: none;">
+                        <label for="new_type" class=""><?=$this->translate('Type*')?></label>
+                        <input type="text" name="type" class="" id="new_new_j_type" value="Manual">
+                            
+                    </fieldset>
+                </div>
+                
+                    <dt id="new_new_jGuardar-label">&nbsp;</dt>
+                    <dd id="new_new_jGuardar-element">
+                        <!-- <input type="button" style="width: 47%; display: none;" name="update" id="new_new_jupdate" value="Create Event">-->
+                        <div id="new_new_jsavecontain">
+                            <input type="button" style="opacity:1;width: 47%; float:right; clear:both;" name="save" id="new_new_jsave" value="Create event" class="new_save">
+                        </div>
+                    </dd>
+                    </div>
+ 
+                    
+                </dl>
+
+            </form>
+
+</div>
+</div>
+
+<script type="text/javascript">
+
+
+function verInfo()
+{
+    $('#infoRgroup').toggle();
+    
+}
+
+
+function validateFields()
+{
+    var element_count = 0;
+    
+    $('.needed_event_b').each(function(){
+    	if(!$(this).is(":disabled"))
+    	{
+    	    element_count =($(this).val() =='')?1:element_count;
+    	    if($(this).val() =='')
+        	{
+    	        $(this).css('background-color','#ff9f80');
+    	        $(this).attr('placeholder','Campo obligatorio...');
+    	    	//$(this).notify('Mandatory field',{position:"top center",className:"warning"});
+        	}
+    	    else{
+    	        $(this).css('background-color','white');
+        	    }
+    	    	
+        }
+            
+
+            
+        
+});
+
+    /*if (element_count === 0 ) {
+        $('#new_new_jsave').css({'filter':'alpha(opacity=100)', 'zoom':'1', 'opacity':'1'});
+       
+    } else {
+        //ChangeButton('new_new_jsave',0.5, true);
+        $('#new_new_jsave').css({'filter':'alpha(opacity=50)', 'zoom':'1', 'opacity':'0.5'});
+        //$('new_new_jsave').css('opacity',"0.5");
+    }*/
+
+    console.log("COUNT: " + element_count);
+    if(element_count === 0) return true;
+    else return false;
+}
+
+
+$('#new_new_jform_13').change(function(){
+
+    $(this).css('background-color','white');
+	
+});
+
+
+
+function verifySm9Change()
+{
+	
+    var pattern = new RegExp('^[C]{1}[0-9]{9}$')
+    match = pattern.test($('#incidentid').val());
+    console.log(match);
+    if(match)
+    {
+        console.log(match);
+            //$('#incidentid').val('');
+           // $('#new_new_jsave').css({'filter':'alpha(opacity=50)', 'zoom':'1', 'opacity':'0.5'});
+            return false;
+            //alert('Si es un cambio "SM9" ir a menú: "Cargar Datos"');
+            
+    }
+    else return true;
+
+}
+
+
+
+$(document).ready(function(){
+
+	$(document).on('keypress','.needed_event_b',function(){
+
+	    var element_count = 0;
+	    
+	    if($(this).val() != "")
+	        $(this).css('background-color','white');
+	   
+	});
+
+    $('#new_new_jform_8').change(function(){
+
+        
+    	if($(this).is(":checked")) {
+        	console.log("is checked");
+    	    $( "input[id^='titledynamic']" ).prop("disabled",true);
+    	    $( "input[id^='titledynamic']" ).prop("readonly",true);
+    	    $( "input[id^='idTareadynamic']" ).prop("readonly",true);
+    	    $( "input[id^='idTareadynamic']" ).prop("disabled",true);
+    	    $( "textarea[id^='descriptiondynamic']" ).prop("disabled",true);
+    	    $( "textarea[id^='descriptiondynamic']" ).prop("readonly",true);
+    	    $("textarea[id^='descriptiondynamic']").addClass('input-disabled');
+    	    $("input[id^='titledynamic']").addClass('input-disabled');
+    	    $("input[id^='idTareadynamic']").addClass('input-disabled');
+       }
+    	else{
+    		console.log("is NOT checked");
+
+    		$( "input[id^='idTareadynamic']" ).prop("readonly",false);
+    	    $( "input[id^='idTareadynamic']" ).prop("disabled",false);
+        		$( "input[id^='titledynamic']" ).prop("disabled", false);
+        	    $( "input[id^='titledynamic']" ).prop("readonly",false);
+        	    $( "textarea[id^='descriptiondynamic']" ).prop("disabled", false);
+        	    $( "textarea[id^='descriptiondynamic']" ).prop("readonly",false);
+        	    $("textarea[id^='descriptiondynamic']").removeClass('input-disabled');
+        	    $("input[id^='titledynamic']").removeClass('input-disabled');
+        	    $("input[id^='idTareadynamic']").removeClass('input-disabled');
+        	}
+
+
+        });
+
+	
+
+	$("label[id^='lbldescripciontarea']").css('width','405px !important');
+	$("label[id^='lbltitulotarea']").css('width','405px !important');
+	$("label[id^='new_new_jform_9']").css('width','405px !important');
+	$("label[id^='new_new_jform_10']").css('width','405px !important');
+	
+	
+	//Delete row of a query table
+	$( "#rowableDiv" ).on( "click", ".delete_event", function(e) {
+		
+	   e.preventDefault();
+		//console.log($( this ).parents( "tr" )[0].className);
+		if($( this ).parents( "tr" )[0].className == "firstrow")
+			return false;
+	   $( this ).parents( "tr" ).remove();
+	});
+	
+
+   $('#new_new_jform_13').change(function(){
+
+
+        $('#new_new_jform_15').val($("#new_new_jform_13 option:selected").attr("Tipo")); 
+   }); 
+
+   
+});
+
+$(function() {
+    
+
+
+     
+    
+    $('#new_new_jsave').button({
+        icons: {
+            primary: "ui-icon-locked"
+        }}).click(function () {
+
+            var validate = validateFields();
+            var verifySm9 =  verifySm9Change();
+            if(validate && verifySm9)
+            {
+               
+                    var allForm = $('#new_new_journal_form').serializeArray();
+                    var dynamicTasks = [];
+                    var objValues = {};
+                    for(var i = 0; i < allForm.length; i++)
+                    {
+                        dynamicObj = {};    
+                     
+                        if(allForm[i].name == "titledynamic")
+                        {
+                        	dynamicObj.title = allForm[i].value;
+                        	dynamicObj.description = allForm[i +1].value;
+                        	dynamicObj.idTarea = allForm[i-1].value;
+                        	dynamicTasks.push(dynamicObj);                    	 
+                        }
+                         
+                    }
+                   
+                    for(var i = 0; i < allForm.length; i++)
+                    {
+                        objValues[allForm[i].name] = allForm[i].value;
+                        
+                    }
+                    console.log(dynamicTasks);
+                    objValues.dynamicValues = dynamicTasks;
+              
+                  	$.ajax({
+    	        		url : '/task/calendar/edit/createeventsjournalmanually',
+    	        		data: {dynamictasks:objValues},
+    	        		async : true,
+    	        		type: "post",
+    	        		timeout: 48000,
+    	        		dataType : "json",
+    	        	    success:function(data){
+    	        	    	 $('#rowableDiv tr').not(':first').remove();
+                        	 $("#new_new_journal_form").find("input[type=text], textarea").val("");
+    	        	    	$('#new_new_jform_13')[0].selectedIndex = 0;
+    	        	    	$("#new_new_jform_6").datepicker("setDate", new Date());
+    	        	    	$("#new_new_jform_7").datepicker("setDate", new Date());
+                             $('#CreateJEvent').dialog("close");
+                             
+                             for(var i = 0; i< data.length; i++){
+                         	    $.notify('Event '+ data[i] +' Created!.',{position:"top center",className:"success"});
+                             }
+                        },
+    	        	    error:function(){
+    	        	    	 $('#tablajEvents').DataTable().ajax.reload();
+                             $('#CreateJEvent').dialog("close");
+    	        	    }   	
+    	        	});
+              
+            }
+            else{validate && verifySm9
+                if(!validate)
+                    $('#new_new_jsave').notify('Algunos campos obligatorios no han sido informados',{position:"top center",className:"error"});
+                if(!verifySm9)
+                    $('#new_new_jsection_4').notify('Si es un cambio "SM9" ir a menú:\n "Cargar Datos"',{position:"top center",className:"info",autoHideDelay: 3000,});
+           	 return false;
+                }
+   
+            
+        });
+    
+    $("#new_new_jform_6").datetimepicker({
+        showButtonPanel: true,
+        stepMinute: 5,
+        firstDay: 1,
+        dateFormat: 'yy-mm-dd', 
+        timeFormat: 'hh:mm:ss',
+        lang:'es'
+    });
+    
+    $("#new_new_jform_7").datetimepicker({
+        showButtonPanel: true,
+        stepMinute: 5,
+        firstDay: 1,
+        dateFormat: 'yy-mm-dd', 
+        timeFormat: 'hh:mm:ss',
+        lang:'es'
+    });    
+});         
+
+var noteOption = {
+	    // whether to hide the notification on click
+	    clickToHide : true,
+	    // whether to auto-hide the notification
+	    autoHide : true,
+	    autoHideDelay: 2000,
+	    // default style
+	    style : 'bootstrap',    
+	    // default class (string or [string])
+	    arrowShow: true,
+	    // show animation
+	    showAnimation : 'slideDown',
+	    // show animation duration
+	    showDuration : 100,
+	    // hide animation
+	    hideAnimation : 'slideUp',
+	    // hide animation duration
+	    hideDuration : 50,
+	    // padding between element and notification
+	    gap : 20
+	}
+	$.notify.defaults(noteOption);
+function toggleInfo()
+{
+$('#infoIdTarea').toggle();
+}
+</script>
+<style>
+#tablajEvents_paginate{
+	font-size:12px;
+}
+
+.input-disabled{background-color:#EBEBE4 !important;border:1px solid #ABADB3 !important;padding:2px 1px !important;color:rgb(84, 84, 84) !important;}
+
+
+
+</style>

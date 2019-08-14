@@ -1,0 +1,25 @@
+<p class="info" style="margin:10px; font-size:.6em; width: 90%"><img src="/img/logo_AutoTools_footer.png" /> Administration and Production Automation <span class="pink"> | </span> <b> T-Systems Iberia </b>  <span class="pink"> | </span> 
+<!-- SSID <?=Zend_Session::getId()?> --> 
+Environment: <?php echo ucwords(APPLICATION_ENV); ?> <?php if(isset($this->user->role)) {?> <span class="pink"> | </span> Role: <b><?=ucwords(strtolower(implode(', ',$this->user->role)))?></b><?php }?></p>
+
+<?php if(APPLICATION_ENV=='fr_int_pro'):?>
+<!-- Piwik -->
+<script type="text/javascript">
+/*  var _paq = _paq || [];
+  <?php if(isset($this->user->display_name)):?>_paq.push(['setCustomVariable',1,"Nombre","<?=ucwords(mb_strtolower($this->user->display_name, 'UTF-8'))?>","visit"]);<?php endif;?>
+  <?php if(isset($this->user->username)):?>_paq.push(['setCustomVariable',2,"Username","<?=$this->user->username?>","visit"]);<?php endif;?>
+  <?php if(isset($this->user->Emp_WIW_Ident)):?>_paq.push(['setCustomVariable',3,"WiW","<?=$this->user->Emp_WIW_Ident?>","visit"]);<?php endif;?>
+  <?php if(isset($this->user->OU_ID)):?>_paq.push(['setCustomVariable',4,"OU_ID","<?=$this->user->OU_ID?>","visit"]);<?php endif;?>
+  _paq.push(["trackPageView"]);
+  _paq.push(["enableLinkTracking"]);
+
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://easya.t-systems.es/stats/";
+    _paq.push(["setTrackerUrl", u+"piwik.php"]);
+    _paq.push(["setSiteId", "6"]);
+    var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+    g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+  })();*/
+</script>
+<!-- End Piwik Code -->
+<?php endif;?>

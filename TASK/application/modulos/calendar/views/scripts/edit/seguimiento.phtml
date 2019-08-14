@@ -1,0 +1,257 @@
+<!-- <div style="width: 100%; background-color:#fff;">  
+		      <div class="playground grid">
+	              <div class="col-1-1 viewport">
+	                  <div id="tlt_div" class="tlt" >
+						<div id="load" style="height: 58px;z-index:100;"></div>
+	                  </div>
+	              </div>
+	             </div>
+				 <div style="width: 100%; background-color:#fff; margin-top:1px;" id="add_users">
+				   	<img align="right" style="margin-top:5px;position:relative; top:0px; left:-30px;" src=<?=$this->baseUrl('/img/group_half_add1.png')?> />
+				   	<img align="right" style="margin-top:5px;display:none;position:relative; top:0px; left:-30px;" src=<?=$this->baseUrl('/img/group_half_remove1.png')?> />
+				   </div>
+				<ul id="myTags">
+				    <li><?php echo($this->user->username)?> </li>
+				</ul>
+	<div id="rotulo" style="display:none; background: #ccc;">			
+				<ul id="myTagsBase">
+				    <li>group1</li>
+				    <li>group2</li>
+				    <li>group3</li>
+				    <li>anibanez</li>
+				    <li>jbadia</li>
+				    <li>TEXT,COMA</li>
+				</ul>
+	</div>
+
+</div>
+ -->
+<div class="cuerpo" >
+<div id="bitacora">
+
+
+
+</div>
+<!-- 
+	<div style="width: 100%;margin:20px;">
+		<button id="toggle">Toggle</button>
+
+	</div>
+	<div class="cont" style="margin-left: -5000px"></div>
+	 -->
+</div>
+
+ <script>
+$(function() {
+	
+	/*var $container = $('.kwicks').kwicks({
+		maxSize : "20%",
+		spacing : 10,
+		behavior: 'menu',
+        deselectOnClick: true,
+		isVertical: true
+	});*/
+
+	var request = $.ajax({
+		url : CHECK.settings.urlBase + '/checklist/ajax/getbitacoratask',
+        data:{token: "<?=$this->token?>"},
+		async : true,
+		type: "post",
+		dataType: 'json',
+	});
+	
+	request.done(function (data) {
+		
+		
+		var datas = topBitacora();
+		//console.log (data); 
+		for (var property in data.programadas.list){
+			//console.log(data.programadas.list[property]['Message Log']);
+			datas += bodyBitacora(data.programadas.list[property]);
+			}
+			
+		//datas += bodyBitacora('');
+		datas += footBitacora();
+		$('#bitacora').html(datas).height(data.programadas.count*110);
+		var $container = $('.kwicks-vertical').kwicks({
+	        maxSize : '145px',
+	        spacing : '2px',
+	        isVertical: true,
+	        behavior: 'menu',
+	        deselectOnClick: true,
+	        //selectOnClick: false
+	    });
+
+	    $('.kwicks-horizontal').kwicks({
+	        maxSize: '500px',
+	        behavior: 'menu',
+	        spacing : 2,
+	        deselectOnClick: true,
+	        //selectOnClick: false
+	    });
+	});
+
+	request.fail(function (jqXHR, textStatus) {
+	});
+	
+	
+/*	$('#toggle').click(function () {
+	    if (screenfull.enabled) {
+	    	screenfull.toggle();
+	    } else {
+	       alert('Not support'); // Ignore or do something else
+	    }
+		});
+
+	
+  /*  $container.on('expand.kwicks', function(e, data) {
+        var newColor;
+        if (data.expanded) {
+            newColor = $(data.expanded).css('background-color');
+        } else {
+            newColor = '#333';
+        }
+        //console.log(data.expanded);
+        $container.css({
+            'border-color': newColor,
+            'background-color': newColor
+        });
+    });
+    $container.on('select.kwicks', function(e, data) {
+        // panel index (or -1 if we're selecting none)
+        //console.log(data);
+        //alert(data.selected.innerHTML);
+        //data.selected.innerHTML = 'hlllllll1888888';
+        //alert(data.selected.innerHTML);
+
+        // panel reference (or null if we're selecting none)
+        //console.log(data.selected);
+
+        // an array of all unselected panels
+        // (will be all panels if we're selecting none)
+        //console.log(data.unselected);
+
+        // index of previously selected panel (-1 if there wasn't one)
+        //console.log(data.oldIndex);
+
+        // reference to previously selected panel
+        // (or null if there wasn't one)
+        //console.log(data.oldSelected);
+
+        // prevent the panel from being selected
+        //e.preventDefault();
+    });
+	
+	$( "#add_users" ).click(function() {
+		$(this).find('img').toggle();
+		$( "#rotulo" ).toggle( "drop" );
+		});
+	
+    $("#myTags").tagit({
+    	placeholderText: "Los siguientes filtros se aplicaran",
+    	fieldName: "Listado",
+    	singleField: true,
+    	singleFieldDelimiter: "@@@" ,
+    	afterTagRemoved:function(event, ui) {
+	        // do something special
+ 			 $("#myTagsBase").tagit('createTag',ui.tagLabel);
+  			us = $( "input[name='Listado']").val();
+			res = us.split("@@@");
+			fcSources.newo.data = {
+			        		users: JSON.stringify( res )
+			};
+  			//$("#checklist").fullCalendar( "refetchEvents" );
+    		}
+        });
+
+    $("#myTagsBase").tagit({
+    	readOnly:true,
+    	placeholderText: "Seleccione filtros a aplicar al calendario...",
+  	    onTagClicked: function(event, ui) {
+	        // do something special
+   			 $("#myTags").tagit('createTag',ui.tagLabel);
+    			$("#myTagsBase").tagit('removeTagByLabel',ui.tagLabel);
+    			us = $( "input[name='Listado']").val();
+    			res = us.split("@@@");
+    			fcSources.newo.data = {
+    			        		users: JSON.stringify( res )
+    			};
+    			//$("#checklist").fullCalendar( "refetchEvents" );
+    			
+	      //  console.log(ui.tagLabel);
+	    }
+        });
+    
+	 $(".tagit-new input").attr("readonly", true);
+	 
+	//$('.tlt').on('inAnimationBegin.tlt', function () {
+	//		$( ".tlt" ).children().addClass( "rojo" );
+	//	});
+	
+	$('.tlt').fitText(3.2, { minFontSize: '20px',maxFontSize: '60px' });
+	//$("#test_1").fitText(0.5);*/
+
+	
+});
+function topBitacora()
+{
+	var dialogo = "<ul class=\"kwicks kwicks-vertical\">";
+	return dialogo;
+}
+
+function footBitacora()
+{
+	var dialogo = "</ul>";
+    dialogo += "<div class=\"clearboth\">&#160;</div>";
+	return dialogo;
+}
+
+function bodyBitacora(datos)
+{	
+	dat="";
+	dat = (datos['Fecha Log'] ==null)?'</span>': datos['Fecha Log'] + "</span><span class='rojo'> " + datos['User Log'] + "... </span>" + datos['Message Log'];
+	
+	var dialogo =  "<li>";
+	//console.log(datos);
+	if(datos['id'] == '30')//amarillo
+	{
+		dialogo += "<ul class=\"kwicks kwicks-horizontal1 kwicks-horizontal\">";
+		//	dialogo += "<li class=\"clearList\"></li>";
+			dialogo += "<li id=\"csa_1\"><h1>" + datos['start'] + " - " + datos['end'] + 
+						"<span class='blc'>  " + datos['refer'] + "  </span></h1>    <br /><b>" + datos['title'] +
+						"</b><br /><div class=\"line120\"><span class='blue'>" + dat +
+						"</div> <br />" + datos['description'] + "</li>";
+		//	dialogo += "<li class=\"clearList\"></li>";
+		dialogo += "</ul>";
+	dialogo += "</li>";
+	}
+	else if(datos['id'] == '23')//rojo
+	{
+		dialogo += "<ul class=\"kwicks kwicks-horizontal2 kwicks-horizontal\">";
+		//	dialogo += "<li class=\"clearList\"></li>";
+			dialogo += "<li id=\"csa_1\"><h1>" + datos['start'] + " - " + datos['end'] + 
+						"<span class='blc'>  " + datos['refer'] + "  </span></h1>    <br /><b>" + datos['title'] +
+						"</b><br /><div class=\"line120\"><span class='blue'>" + dat +
+						"</div> <br />" + datos['description'] + "</li>";
+		//	dialogo += "<li class=\"clearList\"></li>";
+		dialogo += "</ul>";
+	dialogo += "</li>";
+	}
+	else
+	{
+		dialogo += "<ul class=\"kwicks kwicks-horizontal\">";
+		//	dialogo += "<li class=\"clearList\"></li>";
+			dialogo += "<li id=\"csa_1\"><h1>" + datos['start'] + " - " + datos['end'] + 
+						"<span class='blc'>  " + datos['refer'] + "  </span></h1>    <br /><b>" + datos['title'] +
+						"</b><br /><div class=\"line120\"><span class='blue'>" + dat +
+						"</div> <br />" + datos['description'] + "</li>";
+		//	dialogo += "<li class=\"clearList\"></li>";
+		dialogo += "</ul>";
+	dialogo += "</li>";
+	}
+	return dialogo;
+}
+
+
+
+</script>

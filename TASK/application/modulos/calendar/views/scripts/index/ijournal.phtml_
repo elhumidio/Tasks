@@ -1,0 +1,972 @@
+<?php //$this->Dialogs()->PanelAsignar();?>
+
+<div class="cuerpo second_frame resizable"
+	style="margin-top: 0; display: block;overflow:hidden; height: 120vh;">
+	
+	 <div  class="resizable" id='hourDetail'> 
+		<div id="hour_detail"  style="height: auto;float: left; width: 99%; background-color: #fff; margin: 10px; top:20px !Important;overflow:hidden;position:relative; ">
+			<div style="width: 99%; left: 18px; background-color: whitesmoke; position: relative;">
+
+			<table class="fc-header" style="width:100%;margin-left: 20px; z-index: 190000;"><tbody>
+			<tr id="cellDateTime">
+			<td  class="fc-header-left"><div title="Previous Day" id="fake_prev" class="fc-button fc-button-prev fc-state-default fc-corner-left" style="-moz-user-select: none;">&nbsp;◄&nbsp;</div>
+			<div title="Today" id="fake_today" class="fc-button fc-button-today fc-state-default fc-state-disabled"  style="-moz-user-select: none;cursor: pointer !important;">Today</div>
+			<div title="Next Day" id="fake_next" class="fc-button fc-button-next fc-state-default fc-corner-right"  style="-moz-user-select: none;">&nbsp;►&nbsp;</div></td>
+			<td class="fc-header-center" style="cursor: pointer !important;"><h2><span id="fc-header-title"></h2></span><span id="fc-header-title_day" ></span></td>
+			<td class="fc-header-right"></td></tr></tbody>
+		
+			</table>
+			
+			
+				<div class="adminmenu resizable" style="width: 98%; top: 3px; margin: 10px; color: #404040">
+					
+					<div class="title">
+						<span class="icon-menu-table"
+							style="display: inline-block; width: 16px; height: 16px; color: #404040"></span>
+							<div id = "titleView" class="titleView" >Vista Producción</div>
+					</div>
+					<div class="description">
+						<span class="icon icon-menu-table"></span>
+					</div>
+
+					
+					<div id="h_detail_list"  class="resizable" style="height:90vh;">
+						
+					</div>
+					
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+<div class="morecontent" id="morecontent" title="Click to see more content" ><img width="55" height="35" src="/img/down-arrow.png"></div>
+					
+					</div>
+
+<div class="cuerpo first_frame" style="margin-top: 0">
+
+	<div class="resizable" id='calendar' style="z-index:-10;" ></div>
+</div>
+<input type="hidden" id="pos_punt" value="journal" />
+<?php //$this->Dialogs()->NewTask();?>
+<?php //$this->Dialogs()->AsignarTask();?>
+<?php //$this->Dialogs()->AsignaryProgramarTask();?>
+<?php //$this->Dialogs()->AsignarTags();?>
+
+<!--  Contextmenu filtros-->
+
+<?php
+
+foreach ($this->TagsUser as $key => $value) {
+    
+    echo '<ul id="menu_' . $key . '" class="jeegoocontext cm_default ' .
+             $value['id'] . '" style="z-index: 2147483600">';
+if (isset($value['data_aval'])) {
+foreach ($value['data_aval'] as $vl) {
+    // echo "<li class='icon menu_editar' data-action='tarea_editar'
+    // data-filter='".$value['id']."'><span class='icon
+    // icon-menu-grupo'></span>".$vl['name']."</li>";
+    echo "<li class='icon menu_editar' data-action='tarea_editar' data-filter='" .
+             $value['id'] . "'><span class='icon icon-menu-" . $key . "'></span>" .
+             $vl['name'] . "</li>";
+}
+}
+echo '</ul>';
+}
+?>
+
+<!--  Contextmenu -->
+<?php if(!in_array("Task_Restricted",$this->user->role)):?> //Role Task_Restricted verification
+<ul id="menu" class="jeegoocontext cm_default" style="z-index:21474836">
+	<li class="icon menu_root menu_Pending_root"><span
+		class="icon icon-menu-bullet-go"></span><?=$this->translate('Start')?>
+		<ul>
+			<li class="icon menu_status menu_Pending menu_asignarme"
+				data-action="asignar_me"><span class="icon icon-menu-user-add"></span><?=$this->translate('Start Task')?></li>
+			<!--<li class="icon menu_acciones disabled" data-action="asignar_a"><span class="icon icon-menu-grupo"></span><?=$this->translate('Asignar tarea a...')?></li>
+            <li class="icon menu_status menu_Progress" data-action="reset_assign"><span class="icon icon-menu-arrow-redo"></span><?=$this->translate('Reset Assignment')?></li>-->
+			<!--    <li class="icon menu_status menu_Pending menu_finalizar" data-prc="Schedule" data-action="tarea_finalizar_KO"><span class="icon icon-menu-date-edit"></span><?=$this->translate('Schedule')?> </li>
+             <li class="icon menu_iniciar menu_asignar" data-action="asignar_pausa"><span class="icon icon-menu-control-pause-blue"></span><?=$this->translate('Iniciar y pausar...')?></li> -->
+			<!--     <li class="icon menu_iniciar menu_desasignarme" data-action="asignar_schedule"><span class="icon icon-menu-date-edit"></span><?=$this->translate('Replanificar tarea')?> </li> -->
+		</ul></li>
+	<li class="separator menu_separador"></li>
+	<li class="icon menu_root menu_Progress_root"><span
+		class="icon icon-menu-calendar-edit"></span><?=$this->translate('Status')?>
+        <ul>
+			<!--      <li class="icon menu_finalizar menu_asignar" data-action="asignar_a"><span class="icon icon-menu-bullet-yellow"></span><?=$this->translate('Start & Set Active')?></li>-->
+			<li class="icon menu_status menu_Progress menu_finalizar"
+				data-action="tarea_finalizar"><span class="icon icon-menu-tick"></span><?=$this->translate('Resolve')?></li>
+			<li class="icon menu_status menu_Progress menu_finalizar"
+				data-prc="Cancel" data-action="tarea_finalizar_KO_Journal"><span
+				class="icon icon-menu-bullet-black"></span><?=$this->translate('Cancel')?> </li>
+				
+				
+
+			<!--  <li class="icon menu_status menu_Progress menu_finalizar" data-prc="Error" data-action="tarea_finalizar_KO"><span class="icon icon-menu-bullet-red"></span><?=$this->translate('Error')?> </li>
+		  <li class="icon menu_status menu_Progress menu_finalizar" data-prc="Cancel" data-action="tarea_finalizar_KO"><span class="icon icon-menu-bullet-white"></span><?=$this->translate('Cancel')?> </li>
+            
+            <li class="icon menu_status menu_Progress menu_Cancel menu_Error menu_Finish Progress_No" data-prc="Pending" data-action="reset_status"><span class="icon icon-menu-arrow-redo"></span><?=$this->translate('Reset Status')?></li>
+            <li class="icon menu_status menu_Progress menu_finalizar" data-action="asignar_des"><span class="icon icon-menu-bullet-pink"></span><?=$this->translate('Important')?> </li>-->
+		</ul></li>
+	<li class="separator menu_separador"></li>
+	<li class="icon menu_root menu_Progress_root"><span
+		class="icon icon-menu-alert"></span><?=$this->translate('Alerts')?>
+        <ul>
+				<li id="alert_PC" class="icon menu_status menu_Progress menu_protocolo"
+				data-prc="protocolo_critico" data-action="protocolo_critico"><span
+				class="icon icon-menu-bullet-red"></span><?=$this->translate('Protocolo Crítico CTTI')?> </li>
+				<li id="alert_S" class="icon menu_status menu_Progress menu_protocolo"
+				data-prc="significant" data-action="significant"><span
+				class="icon icon-menu-bullet-yellow"></span><?=$this->translate('Significant/Major')?> </li>
+				<li id="alert_D" class="icon menu_status menu_Progress menu_protocolo"
+				data-prc="direccion" data-action="direccion"><span
+				class="icon icon-menu-bullet-pink"></span><?=$this->translate('Protocolo Dirección')?> </li>
+
+		</ul></li>
+	
+	<li class="separator menu_separador"></li>
+	<li class="icon menu_acciones"><span
+		class="icon icon-menu-bullet-wrench"></span><?=$this->translate('Utilities')?>
+        <ul> 
+		<li  class="icon menu_acciones" data-prc=""
+				data-action="verForm"><span class="icon icon-menu-zoom-in"></span><?=$this->translate('Ver Form')?></li>
+			<li class="icon menu_acciones menu_asignarme" data-prc="Comment"
+				data-action="add_comment"><span class="icon icon-menu-comment-add"></span><?=$this->translate('Add Comment')?></li>
+			<li class="icon menu_acciones menu_desasignarme"
+				data-action="Change_Location"><span class="icon icon-menu-building"></span><?=$this->translate('Cambiar Centro')?> </li>
+			<li class="icon menu_acciones menu_asignar disabled"
+				data-action="asignar_a"><span class="icon icon-menu-bullet-error"></span><?=$this->translate('Incident')?>
+                <ul>
+					<li class="icon menu_acciones menu_desasignarme disabled"
+						data-action="asignar_des"><span class="icon icon-menu-application"></span><?=$this->translate('Create')?> </li>
+					<li class="icon menu_acciones menu_desasignarme disabled"
+						data-action="asignar_des"><span
+						class="icon icon-menu-application-edit"></span><?=$this->translate('Update')?> </li>
+					<li class="icon menu_acciones menu_desasignarme disabled"
+						data-action="asignar_des"><span class="icon icon-menu-tick"></span><?=$this->translate('Resolve')?> </li>
+				</ul></li>
+			<li class="icon menu_acciones menu_desasignarme"
+				data-action="tarea_copy"><span class="icon icon-menu-page-copy"></span><?=$this->translate('Copiar')?> </li>
+			<li class="icon menu_acciones menu_desasignarme disabled"
+				data-action="asignar_des"><span class="icon icon-menu-find"></span><?=$this->translate('Buscar')?> </li>
+		</ul></li>
+		
+		<li class="icon menu_acciones_info">
+		<span
+		class="icon icon-menu-bullet-go"></span><?=$this->translate('Info Actions')?>
+		<ul>
+	        <li id="progress_info" class="icon menu_acciones_info menu_asignarme" data-prc="Progress"
+				data-action="progress_info"><span class="icon icon-menu-user-add"></span><?=$this->translate('Progress')?></li>
+			<li id="finish_info" class="icon menu_acciones_info menu_progress_info" data-prc="Finish"
+				data-action="close_info"><span class="icon icon-menu-building"></span><?=$this->translate('Finish')?> </li>
+		    <li class="icon menu_acciones_info menu_add_comment_info" data-prc="comment"
+				data-action="add_comment"><span class="icon icon-menu-comment-add"></span><?=$this->translate('Add Comment')?></li>
+		</ul>
+		</li>
+
+
+</ul>
+ <?php endif;?>
+
+
+<div id="blockUiDiv">
+<img src="/img/icon32/loader.gif" >
+</div>
+<div id="copy_container">
+	<div id="copy_container_field"></div>
+</div>
+
+<!--<div id="set1">-->
+	<div title="Filtros y visualización de eventos" id="filtering"  class="class1journal" style="bottom:1%;left:4%;z-index:2147483600">
+		<span id="menu_nav" title="Refresca Vista" style="padding: 0 10px 0 10px;"></span> 
+		
+		<!--<span
+			title="Añadir/Quitar Filtros"
+			class="icon icon-menu-filter icon_filter"> <span id="count_filter"
+			class="icon-menu-number1"
+			style="position: absolute; width: 16px; height: 16px;"></span>
+		</span> -->
+		<span id="selectCliente" style="margin-left:25px;">
+		
+		</span>
+
+		<span title="Vista Producción"
+			id="filter_not_ended"
+			class="icon-menu-calendar menu-hour-detail_no_finalizadas _filterJournal_pendings">
+			<span id="count_filter1_No_Finalizadas" class=""
+			style="position: absolute; width: 16px; height: 16px;"></span>
+		</span>
+				<span title="Vista Completa"
+			id="icon_filter"
+			class="icon-menu-calendar menu-hour-detail _filterJournal"> <span
+			id="count_filter1" class="icon-menu-number1"
+			style="position: absolute; width: 16px; height: 16px;"></span>
+		</span> 
+		<!--<span title="Histórico" style="margin-left:5px;" 
+			id="filter_historico"
+			class="icon-menu-calendar menu-hour-detail_historico _filterJournal">
+			<span id="count_filter1_Historico" class=""
+			style="position: absolute; width: 16px; height: 16px;"></span>
+		</span> -->
+		
+		
+	<!--</div>-->
+	<div id="containermenu">
+
+		<div id="inner">
+
+			<div style="float: left; width: 40%; background-color: #fff;">
+				<div
+					style="width: 90%; left: 0px; background-color: rgba(225, 24, 127, 0.50); position: relative; height: 290px;">
+					<div class="adminmenu" style="background-color:whitesmoke;">
+						<div class="title">
+							<span class="icon icon-menu-filter"
+								style="display: inline-block; width: 16px; height: 16px;"></span><b>Filters</b>
+						</div>
+					
+                    </div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
+	
+	
+    <?php echo $this->hash;?>
+<?php $this->Dialogs()->ViewEvent();?>
+<?php $this->Dialogs()->AsignarTask();?>
+<?php $this->Dialogs()->EndJournalTask();?>
+
+</div>
+
+<div id="dialogAddComment" style="display: none; width:250px;">
+	<textarea  id="textAreaCliente" placeholder="Add comment..." cols="40" rows="2"></textarea>
+</div>
+
+<script>
+var pctScrolled = 0;
+function amountscrolled(){
+	var winheight = $(window).height()
+	var docheight = $(document).height()
+	var scrollTop = $(window).scrollTop()
+	var trackLength = docheight - winheight
+	pctScrolled = Math.floor(scrollTop/trackLength * 100) // gets percentage scrolled (ie: 80 or NaN if tracklength == 0)
+	//console.log(pctScrolled);
+	if(pctScrolled == 100){
+		$('#morecontent').hide();
+
+	}
+	else if(TASK.settings.viewCocient < 20 && pctScrolled < 100) $('#morecontent').show();
+	else $('#morecontent').hide();
+}
+
+$(window).on("scroll", function(){
+	amountscrolled();
+})
+
+var VistaActual = "PRODUCCION";
+var Clientes ="";
+
+
+                    
+//<![CDATA[
+$(function(){
+            $(document).on( 'click', '.group',function() {
+                $(".group").removeClass("selected1");
+                $(this).addClass('selected1');
+        
+            });
+
+            $(document).on( 'click', '.detail_hour', function () { 
+                cell_time = ($(this).parent().text()+':00');
+                ev = TASK.calendar.fullCalendar('clientEvents',function(event){
+                        if(event.start.toLocaleTimeString() >= cell_time && event.start.toLocaleTimeString() < cell_time +1 )return true;
+                        else return false; 
+		        });
+		});
+
+        
+ var $fields = $("#formEndJorunal :input");
+    //var $fields = $("#formEndTask :input");
+    var empty = false;
+     $fields.keyup(function() {
+         $fields.each(function() {
+            if($(this).is(':visible'))
+            {
+				//console.log(empty);
+                if ($(this).val() == '') {
+                    empty = true;
+                }
+                else{
+                    empty = false;
+                }
+            }
+        });
+        if(empty == false)
+        {   $( "#button-end" ).button( "option", "disabled", false );}
+        else
+        {   $( "#button-end" ).button( "option", "disabled", true );}
+      });
+
+
+    
+    $(".tag_class").tagit({
+        
+         afterTagRemoved:function(event, ui) {
+            // // do something special
+            $("."+ui.tag.data("filter").replace('.','\\.')).append('<li class="icon menu_editar" data-action="tarea_editar" data-filter="'+ui.tag.data("filter")+'"><span class="icon icon-menu-'+ui.tag.data("filter").substr(2)+'"></span>'+ui.tagLabel+'</li>');
+            res = TASK.tagsSelected();
+        }
+        
+    });
+
+    /**
+     * Muestra vista HISTORICA
+     */
+     $('#filter_historico').click(function(){
+         //ocultar las otras dos mostrar 
+    	 TASK.settings.vista = "HISTORICA";
+    	 TASK.settings.cliente = "Todos";
+         //vistaHistorico();
+         //Load clientes
+         Clientes = loadClientes();
+         TASK.settings.filtered = false;
+ 		$('#titleView').html("<b>Vista Histórico</b>");
+ 		VistaActual = "HISTORICO";
+         });
+
+     /**
+      * Muestra vista COMPLETA
+      */
+     $('#icon_filter').click(function(){
+        TASK.settings.vista = "COMPLETA";
+        TASK.settings.cliente = "Todos";
+    	TASK.updateDetailView();
+		
+    	TASK.settings.filtered = false;
+		//vistaFiltradas();
+		loadClientes();
+		$('#titleView').html('').append("<b>Vista Completa</b>");
+    	$('.fc-header-title_detail').html( $('.fc-header-title').html());
+	    
+        });
+
+    $('.second_frame').css("z-index","10000");
+    $('.first_frame').css("z-index","-10000");
+
+    /**
+     * Muestra vista PRODUCCION
+     */
+    $('#filter_not_ended').click(function(){
+    	
+    	TASK.settings.vista = "PRODUCCION";
+    	TASK.settings.tipoCliente = "Todos";
+    	TASK.updateDetailView();
+    	TASK.settings.filtered = true;
+        
+        //vistaFiltradas();
+		$('#titleView').html('').append("<b>Vista Producción</b>");
+    	$('.fc-header-title_detail').html( $('.fc-header-title').html());
+    	VistaActual = "PRODUCCION";
+    	
+    	$('#selectCliente').html('').append(generateSelectProduccion());
+    	
+    });
+	
+	/**
+	*Refresca variables y vista HISTORICA
+	*/
+	$('#menu_nav').click( function(){
+		
+		$("#calendar").fullCalendar( "refetchEvents" );
+	sleep(500);
+		if(TASK.settings.vista == "COMPLETA" || TASK.settings.vista == "HISTORICA")
+		{
+			//$("#clientesList option:contains('Todos')").val();
+			TASK.settings.cliente = "Todos";
+			$("#clientesList").val("Todos").change();
+		}
+			
+		if(TASK.settings.vista == "PRODUCCION")
+		{
+			TASK.settings.tipoCliente = "Todos";
+			$("#tipoCliente").val("Todos").change();
+		}
+			
+		//Posiciona combo clientes en "Todos"
+		
+		
+	});
+	
+	if (!Array.prototype.includes) {
+  Object.defineProperty(Array.prototype, "includes", {
+    enumerable: false,
+    value: function(obj) {
+        var newArr = this.filter(function(el) {
+          return el == obj;
+        });
+        return newArr.length > 0;
+      }
+  });
+}
+
+    /**
+     * Generates select Produccion
+     */
+    
+    function generateSelectProduccion()
+    {
+        data="";
+        data += "<select id='tipoCliente' style='width:150px;cursor:pointer;'>";
+		data += "<option value=''>Todos</option>";
+		data += "<option value='CTTI'>CTTI</option>";
+		data += "<option value='EASY'>EASY</option>";
+		data += "<option value='Multi'>MULTI</option></select>";
+		return data;
+     }
+
+/**
+ * Visualización filtradas
+ */
+    function vistaFiltradas()
+    {
+
+      	$('.first_frame').css("visibility", "hidden");
+    	$('.first_frame').css("display", "none");
+    	$('#calendar').css("visibility", "hidden");
+    	$('.second_frame').css("display", "block");
+     	$('.second_frame').css("z-index","10000");
+        $('.first_frame').css("z-index","-10000");}
+
+/**
+* Visualizacion Historico
+*/
+    function vistaHistorico()
+    {
+   	 $('#calendar').css("visibility", "visible");
+     $('.first_frame').css("display", "block");
+     $('.second_frame').hide();
+     $('.second_frame').css("z-index","-10000");
+    $('.first_frame').css("z-index","10000");
+        }
+
+    /**
+     * Visualizacion generico
+     */
+    function vistaGenerico()
+    {
+    	$('#calendar').css("visibility", "hidden");
+        $('.first_frame').css("display", "block");
+        $('.first_frame').css("z-index", "-10000");
+        $('.second_frame').css("z-index","10000");
+        }
+    
+   
+
+    /**
+     * Retrocede un dia en vistas nuevas
+     */
+    $('#fake_prev').click(function(){
+
+        $('#calendar').fullCalendar('prev');
+    	vistaGenerico();
+    	TASK.updateDetailView();
+        TASK.settings.filtered = true;
+        getDateFromCalendar();
+      
+       });
+
+    /**
+    * Muestra el dia de hoy 
+    */
+    $('#fake_today').click(function(){
+    	
+     	 $('#calendar').fullCalendar('today');
+		 vistaGenerico();
+         TASK.updateDetailView("filter");
+         getDateFromCalendar();
+      
+      });
+
+    /**
+     * Avanza un dia en vistas nuevas
+     */
+    $('#fake_next').click(function(){
+    	
+
+   	    $('#calendar').fullCalendar('next');
+      	 vistaGenerico();
+      	 getDateFromCalendar();
+    	 TASK.updateDetailView();
+    	
+
+    	
+    });
+
+    // Accepts a Date object or date string that is recognized by the Date.parse() method
+    function getDayOfWeek(date) {
+      var dayOfWeek = new Date(date).getDay();    
+      return isNaN(dayOfWeek) ? null : ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'][dayOfWeek];
+    }
+    
+
+/**
+ * Obtiene la fecha actual seleccionada en el calendario
+ */ 
+    function getDateFromCalendar()
+    {
+        var d = $('#calendar').fullCalendar('getDate');
+    	locale = "es-ES",
+        month = d.toLocaleString(locale, { month: "long" });
+    	day = getDayOfWeek(d);
+    	
+    	var ds =  d.getDate()  + " " + month + " " + d.getFullYear();
+        $('#fc-header-title_day').text(day);
+        $('#fc-header-title').text(ds);
+    }
+
+    
+
+   
+
+    /**Escribe la hora en la cabecera de la vista */
+    $(document).ready(function()
+    {
+       $( "#morecontent" ).click(function(){
+
+			if(pctScrolled <100)
+			{
+				$('#h_detail_list').scrollTop($('#h_detail_list').scrollTop()+110);
+				$(window).scrollTop($(window).scrollTop()+40);
+	
+			}
+     		 	
+			
+    
+ 		}); 
+
+
+	 	$('#h_detail_list').click(function(){
+            $('tr').removeClass('selected1');
+        });
+
+	  TASK.runAdmin({debug: true,token: "<?=$this->token?>"});
+  	  var d = $('#calendar').fullCalendar('getDate');
+	  TASK.settings.mode = "journal";
+	      //  
+    	getDateFromCalendar();
+    	$('#selectCliente').html('').append(generateSelectProduccion());
+		
+		
+		location.getParams = getParams;
+
+//console.log (location.getParams());
+//console.log("id param: " + location.getParams()['idEvento']);
+//Navigate from busqueda bitacora
+
+if(!!location.getParams()['idEvento'] && !!location.getParams()['start'])
+{
+	var splitteddate  = location.getParams()['start'].split(" ")[0].split("-");
+	
+	$('#calendar').fullCalendar('gotoDate',splitteddate[0],splitteddate[1]-1 ,splitteddate[2]);	 
+	     vistaGenerico();
+      	 getDateFromCalendar();
+		 if(location.getParams()['status'] == "Finish" || (location.getParams()['status'] != "Finish" && location.getParams()['parent'] == "Parent"))
+			 TASK.settings.vista = "COMPLETA";
+
+    	 TASK.updateDetailView();
+		
+		 $('#titleView').html('').append("<b>Vista Completa</b>");
+    	$('.fc-header-title_detail').html( $('.fc-header-title').html());
+		 $('tr').removeClass('highlightJournalSearch');
+         setTimeout(function(){
+		 $('#row_' + location.getParams()['idEvento']).addClass("highlightJournalSearch");    
+		 
+		}, 2000);
+         
+        // var elm = document.getElementById('table_' + location.getParams()['idEvento']);
+		var id = 'table_' + location.getParams()['idEvento'];		
+		var idrow = 'row_' + location.getParams()['idEvento'];	
+		//console.log(idrow);	
+		var table = document.getElementById(id);
+	
+
+		if(!!table){
+			setTimeout(function(){
+			document.getElementById(id).scrollIntoView(false);
+			},1000);	
+		}
+		else{
+		setTimeout(function(){
+			var r = document.getElementById(idrow);
+			if(r != null)
+			r.scrollIntoView(false);
+			},1000);		
+			var fila = $("#row_" + location.getParams()['idEvento']);
+			
+			
+				
+
+		}
+		
+		
+	
+}
+
+
+
+
+});
+
+function checkOverflow(el)
+{
+   var curOverflow = el.style.overflow;
+
+   if ( !curOverflow || curOverflow === "visible" )
+      el.style.overflow = "hidden";
+
+   var isOverflowing = el.clientWidth < el.scrollWidth 
+      || el.clientHeight < el.scrollHeight;
+
+   el.style.overflow = curOverflow;
+
+   return isOverflowing;
+}
+
+
+    
+ //Ver vista de no finalizadas  
+ /**
+ * Ejecuta acciones desde boton filtro terminadas 
+ */ 
+$('.menu-hour-detail_no_finalizadas').click(function() {
+
+     if (!$('.first_frame').is(":visible"))
+     {
+         $(this).removeClass( 'icon-menu-calendar' ).addClass('icon-menu-table');
+         $('#icon_filter').prop("disabled",false);
+         
+     }
+     else
+     {
+         $(this).removeClass( 'icon-menu-table' ).addClass('icon-menu-calendar');
+         $('#icon_filter').prop("disabled",true);
+     }
+   });
+    
+    /**
+    * 
+     */
+    $('.add_filter').each(function(index ) {
+        
+        $('#sp_'+$(this).data("filter")).jeegoocontext($(this).data("filter"),{
+            event: 'click', 
+            widthOverflowOffset: 0,
+            heightOverflowOffset: 1,
+            submenuLeftOffset: -3,
+            submenuTopOffset: -1,
+            onHover: function(e, context){
+                if($(this).hasClass('disabled')){return false;}},
+            onSelect: function(e, context)
+                    {
+                        $("#"+$(this).data('filter').replace('.','\\.')+"_myTagsss").tagit('createTag',$(this).text(),null,null,$(this).data('filter'));
+                        $(this).remove();
+                        res = TASK.tagsSelected();
+                     }  
+        })
+        
+    });
+    
+        
+    $('.fc-event').jeegoocontext('menu', {
+        widthOverflowOffset: 0,
+        heightOverflowOffset: 1,
+        submenuLeftOffset: -4,
+        submenuTopOffset: -5,
+        onSelect: function(e, context){
+			$('#alert_PC').removeClass('disabled');
+			$('#alert_S').removeClass('disabled');
+			$('#alert_D').removeClass('disabled');
+
+            //Esta linea deshabilita las opciones que han sido marcadas como 'disabled' en onShow
+            if($(this).hasClass('disabled')){return false;}
+
+          	d = TASK.calendar.fullCalendar( 'clientEvents',$(context).data().eventoid);
+
+    			d = d[0];
+            d.eventoid = d.id;
+            d.type = d.origen;
+			var action = $(this).data('action');
+            var ansEasyClose = "";
+            switch(action)
+            {	
+				case 'direccion' :
+					TASK.setDireccion(d);
+				break;
+				case 'significant' :
+					TASK.setSignificant(d);
+				break;
+				case 'protocolo_critico' : /*console.log("1: " + JSON.parse(d.params))*/;
+                    TASK.setInfoProtocolo(d);
+                break;
+				case 'verForm' : TASK.seeEvent(d);break;
+            	case 'progress_info':
+                	 
+                	result=TASK.updateInfoTask(d.eventoid,$(this).data('prc'));break;  
+
+            	case 'close_info':
+            		result=TASK.updateInfoTask(d.eventoid,$(this).data('prc'));break;   
+            	case 'tarea_finalizar':
+			    	result = TASK.requestFinalizarJournal(d);
+                	ChangeView(result,'menu_status');
+                	TASK.updateDetailView(); break;
+	            case 'tarea_editar':break;
+	            case 'tarea_duplicar':break;
+	            case 'add_comment':TASK.addComentarioEvento(d.eventoid,d["comentarios"]);break;
+	           // case 'reset_status':result = TASK.ModifyEvento(d,'Pending');/*ChangeView(result,'menu_status');*/break;
+	            case 'reset_assign':result = TASK.asignarmeTarea(d,'Pending',d.turno);break;
+	            case 'asignar_me':result = TASK.asignarmeTareaJournal(d,'Progress');ChangeView(result,'menu_status');break;
+	            //case 'asignar_me':result = TASK.asignarmeTareaJournal(d,'Progress');ChangeView(result,'menu_status');TASK.updateDetailView ();break;
+	            case 'tarea_finalizar_KO':result = TASK.finalizarTareaKO(d,$(this).data('prc'));TASK.updateDetailView ();break;
+				 case 'tarea_finalizar_KO_Journal':result = TASK.requestFinalizarKOJournal(d,$(this).data('prc'));/*ChangeView(result,'menu_status');TASK.updateDetailView ();*/break;
+                case 'tarea_copy':CopyDescription(d);break;	            
+	            case 'asignar_a':TASK.asignarTarea(d); break;
+	            case 'asignar_des':TASK.desasignarTarea(d);break;
+	            case 'asignar_re':TASK.asignarTarea(d);break;
+	            case 'calendario_add':TASK.asignaryprogramarTarea(d);break;
+	            case 'tags':TASK.asignarTag(d);break;
+	            case 'Change_Location':TASK.ChangeLocation(d,'Mordor');break;
+	            //TASK.ChangeLocation(d,'Mordor');/*TASK.ModifyEvento(d,'Pending');requestDesAsignar({idtarea:d.id,uid:d.turno,OU_ID:TASK.settings.OU_ID});ChangeView(result,'menu_status');*/break;
+	            case 'calendario_quitar':TASK.deleteEvento(d);break;
+	            default: return false;
+            }
+           
+        },
+        onHover: function(e, context){
+     
+         //   if($(this).hasClass('disabled'))return false;
+        },
+        onShow: function(e, context){
+			$('#alert_PC').removeClass('disabled');
+			$('#alert_S').removeClass('disabled');
+			$('#alert_D').removeClass('disabled');
+       	    $('tr').removeClass('highlightJournal');
+        	$('#row_' + $(context).data().eventoid).addClass("highlightJournal");
+			d = TASK.calendar.fullCalendar( 'clientEvents',$(context).data().eventoid);
+		
+			if(!!d[0].informativo && JSON.stringify(d[0].informativo) == "true")
+			{
+				$('#menu li.menu_tarea, #menu li.menu_finalizar').show();
+                
+			}
+            var d = $(context).data();
+			var dataComparator = TASK.calendar.fullCalendar( 'clientEvents',$(context).data().eventoid);
+			
+            ChangeView (d.status,'menu_status');
+         	/* Deshabilitamos las opciones que no deben estar activos si no es una tarea dada de alta en el portal */
+
+            /*CAMBIOS DE EVENTO INFO*/
+            //Deshabilitamos finish si no está en estado progress
+         	if(d.status != "Progress")
+         	{
+         		$('#finish_info').addClass('disabled');
+            }
+         	else $('#finish_info').removeClass('disabled');
+
+         	//Deshabilitamos progress si está en estado finish
+         	if(d.status == "Finish")
+            {
+            	$('#progress_info').addClass('disabled');
+            }
+            /*////////////////////////////*/
+            
+	 		if(d.origen!='Portal'){$('#menu li.menu_tarea, #menu li li.menu_editar, #menu li li.menu_duplicar').addClass('disabled');
+	 		}else{$('#menu li.menu_tarea, #menu li li.menu_editar, #menu li li.menu_duplicar').removeClass('disabled');}
+
+	 		$('#menu li, #menu li li, #menu li li li').hide();
+	 		
+	 		/* Mostramos las opciones que corresponden a cada lista */
+            
+        	switch($(context).parent().attr('id'))
+            {
+                
+                case 'external-events-huerfanas':
+                	//console.log("id segun tipo de fila: " + $(context).parent().attr('id'));
+                    $('#menu li.menu_tarea, #menu li li.menu_editar, #menu li li.menu_duplicar, #menu li.menu_finalizar').show();
+                    $('#menu li.menu_tags').show();
+                    $('#menu li.menu_separador').show();
+                    $('#menu li.menu_asignacion, #menu li li.menu_asignarme, #menu li li.menu_asignar, #menu li li.menu_asignar_programar').show();
+                break;
+                
+                case 'external-events-pendientes':
+                	//console.log("id segun tipo de fila: " + $(context).parent().attr('id'));
+                	$('#menu li.menu_tarea, #menu li li.menu_editar, #menu li li.menu_duplicar, #menu li.menu_finalizar').show();
+                	$('#menu li.menu_tags').show();
+    	            $('#menu li.menu_separador').show();
+    	            $('#menu li.menu_asignacion, #menu li li.menu_reasignar, #menu li li.menu_desasignarme').show();
+                break;
+                
+                case 'external-events-programadas':
+                	//console.log("id segun tipo de fila: " + $(context).parent().attr('id'));
+                    $('#menu li li.menu_duplicar').addClass('disabled');
+                    $('#menu li.menu_tarea, #menu li li.menu_editar, #menu li li.menu_duplicar, #menu li.menu_finalizar').show();
+                	$('#menu li.menu_tags').show();
+    	            $('#menu li.menu_separador').show();
+    	            $('#menu li.menu_quitar_calendario').show();
+                break;
+                
+                default:
+                	
+            //console.log("dataComparator[0]: " +JSON.stringify(dataComparator[0]));
+                if(typeof dataComparator[0] !== "undefined" && dataComparator[0] !== null)
+                {
+                    //console.log("datots: " + dataComparator[0].informativo);
+                    if(dataComparator[0].informativo != "true")
+                    {
+                       // console.log("MENU TAREA infor distinto true");
+                        
+                        $('#menu li li.menu_duplicar').addClass('disabled');
+                        $('#menu li.menu_tarea, #menu li li.menu_editar, #menu li li.menu_duplicar, #menu li.menu_status, #menu li.menu_No_Iniciado, #menu li.menu_root').show();
+                        $('#menu li.menu_acciones').show();
+                        
+                        $('#menu li.menu_tags').show();
+                        $('#menu li.menu_separador').show();
+                    
+                    }
+                    else if(dataComparator[0].informativo == "true"){
+                    	//console.log("MENU TAREA infor igual a  true");
+                    	//TODO aqui la condicion para habilitar o deshabilitar el close estara en el class info
+                    	$('#menu li.menu_acciones_info, #menu li li.menu_asignarme').show();
+                        }
+                }
+                else{
+                	//console.log("MENU TAREA infor ultimo");
+                	$('#menu li li.menu_duplicar').addClass('disabled');
+                    $('#menu li.menu_acciones_info').show();
+                    $('#menu li.menu_acciones').show();
+                    
+                    $('#menu li.menu_tags').show();
+                    $('#menu li.menu_separador').show();
+                    }
+                    
+                
+                   // 
+            };
+
+            /* Deshabilitamos las opciones que no deben estar activos si no es una tarea dada de alta en el portal 
+	 		if(d.origen!='Portal'){$('#menu li.menu_tarea, #menu li li.menu_editar, #menu li li.menu_duplicar').hide();};*/
+                
+        }
+    });    
+});
+//]]>
+    function ChangeView(data,fil)
+    {
+            $('.'+fil).each(function(index ) {
+               va = $(this).addClass( "disabled" );
+            });
+            $('.menu_'+data).each(function(index ) {
+                if(!($(this).hasClass( data+'_No')))va = $(this).removeClass( "disabled" );
+            });
+
+                
+                // if(result){$(this).addClass('disabled');}
+                // $('#'+element).css({ opacity: opacity });
+                // $('#'+element).prop('disabled', prop);
+    }
+    
+ $('.adminmenu').click(function(){
+	    $('tr').removeClass('highlightJournal');
+	    $('tr').removeClass('highlightJournalSearch');
+ });
+ 
+ 
+ function getParams ()
+{
+    var result = {};
+    var tmp = [];
+
+    location.search
+        .substr (1)
+        .split ("&")
+        .forEach (function (item) 
+        {
+            tmp = item.split ("=");
+            result [tmp[0]] = decodeURIComponent (tmp[1]);
+        });
+
+    return result;
+}
+    
+    function getendJournalParams()
+    {
+        var fields = $("#formEndJorunal :input").not(':input[type=button], :input[type=submit], :input[type=reset]');
+        var empty = false;
+        var item = {};
+        fields.each(function() {
+            if($(this).is(':visible'))
+            {
+
+               if ($(this).data('status'))
+               {
+                    item ["status"] = $(this).data('status');
+                }
+                if ($(this).attr('name') == 'ClosureComments')
+                {
+                    item [$(this).attr('name')] = $(this).val();
+                } else {
+                    item [$(this).attr('name')] = $(this).val();
+                }
+				  if($(this).attr('name') == "ResolutionCode")
+                {
+                    item[$(this).attr('name')] = $(this).val();
+                }
+                if($(this).attr('name') == "ActualStart")
+                {
+                    item[$(this).attr('name')] = $(this).val();
+                }
+                if($(this).attr('name') == "ActualEnd")
+                {
+                    item[$(this).attr('name')] = $(this).val();
+                }												
+            }
+            
+      });
+      
+      
+       // data_array = $("#formEndTask").is(':visible').serialize();
+        return item;
+    }
+
+    function getOriginalDates()
+    {
+    	if($(this).attr('name') == "ActualStart")
+            {
+                TASK.settings.start = $(this).val();
+                //console.log("start: " + $(this).val());
+            }
+        if($(this).attr('name') == "ActualEnd")
+            {
+                TASK.settings.end = $(this).val();
+            }		
+    }
+    
+    
+    
+</script>
+
+<style>
+.first_frame{
+	height:0px;
+}
+
+#h_detail_list {
+	width: 100%;
+	margin: 30px auto;
+	height: 100%;
+	overflow-y: scroll !important;
+}
+
+</style>

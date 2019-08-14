@@ -1,0 +1,213 @@
+<?php $lang = $_SESSION['session']['lang'];?>
+
+<div id="topBar">
+
+	<div class="logo">
+		<img src="/img/logo_AutoToolspq.png" alt="" />
+		<a href="/" style="text-decoration: none;" target="_blank"><span class="azul">easy.A</span></a>
+		<span class="subname corporativo"><?=strtoupper(isset($this->app->appConfig->app_name)?$this->app->appConfig->app_name:'')?></span>
+		<img src="/img/beta.png" alt="" class="beta" />
+	</div>  
+
+ 	<ul class="topMenu">
+ 	<!-- href="<?=$this->baseUrl('/calendar')?>"  -->
+ 	    <?php if(!in_array("Task_Restricted",$this->user->role)):?>
+ 		<li><a href="<?=$this->baseUrl('/cambioturno')?>" title="<?php echo $this->translate->_('Cambio de Turno')?>"><?php echo $this->translate->_('Cambio de Turno')?></a></li>
+        <li><a class="<?=$this->menuActivo()->check('calendar','index','index');?>" onclick="GoToChecklist();" title="<?php echo $this->translate->_('Checklist')?>"><?php echo $this->translate->_('Checklist')?></a></li>
+        <?php endif;?>
+        
+        <!-- href="<?=$this->baseUrl('/calendar/index/ijournal')?>"  -->
+        <li><a class="<?=$this->menuActivo()->check('calendar','index','ijournal');?>" onclick="GoToJournal();" title="<?php echo $this->translate->_('Bitácora')?>"><?php echo $this->translate->_('Bitácora')?></a></li>
+		
+		<?php if(!in_array("Task_Restricted",$this->user->role)):?>
+		<li><a class="<?=$this->menuActivo()->check('jeventsnew','index');?>" href="<?=$this->baseUrl('/calendar/index/jeventsnew')?>" title="<?php echo $this->translate->_('Bitácora Search')?>"><?php echo $this->translate->_('Búsqueda en Bitácora')?></a></li>
+        <?php endif;?>
+
+        <?php if(( in_array("Admin",$this->user->role) && !in_array("Task_Restricted",$this->user->role)) || (in_array("Portal_Task_Admin",$this->user->role) && !in_array("Task_Restricted",$this->user->role))):?>
+        
+        <li><a class="<?=$this->menuActivo()->check('admincligrup','index');?>" href="<?=$this->baseUrl('/calendar/index/admincligrup')?>" title="<?php echo $this->translate->_('Manage groups and clients')?>"><?php echo $this->translate->_('Administrar')?></a></li> 
+        
+        <label style="width:150px !important;"  id="topMenu" onmouseover="verMenu();" onmouseout="ocultarMenu();" title="<?php echo $this->translate->_('Configurar Eventos')?>"><img style="padding:4px;" src="/img/icon32/gear_in.png">
+        
+                    <div id="menuFlotante" class="menuFlotante" onmouseout="ocultarMenu();">
+                        <ul id="itemslistNew">
+                          <li><a onclick="loadConfig('checkevent')" href="#"><?php echo $this->translate->_('Eventos Checklist')?></a></li>
+                            <li style="border-bottom:1px solid black !important "><a onclick="loadConfig('checktemplate')" href="#"><?php echo $this->translate->_('Plantillas Checklist')?></a></li>
+                           
+                            <li style="border-bottom:1px solid black !important "><a onclick="exportFilter()" href="#"><?php echo $this->translate->_('Export')?></a></li>
+                            <li><a onclick="loadConfig('journalevent#ui-tabs-2')" href="#"><?php echo $this->translate->_('Eventos Bitácora')?></a></li>
+                            <li><a onclick="loadConfig('journaltemplate#ui-tabs-2')" href="#"><?php echo $this->translate->_('Cargar Datos')?></a></li>
+                        
+                        
+                        </ul>
+                    </div>
+        </label>
+        
+
+        
+
+
+        <?php elseif (in_array("Administrador_Turnos",$this->user->role) && !in_array("Task_Restricted",$this->user->role)): ?>
+				<label style="width:150px !important;"  id="topMenu" onmouseover="verMenu();" onmouseout="ocultarMenu();" title="<?php echo $this->translate->_('Configurar Eventos')?>"><img style="padding:4px;" src="/img/icon32/gear_in.png">
+ 		
+ 		     		<div id="menuFlotante" class="menuFlotante" style="left:637px !important;" onmouseout="ocultarMenu();">
+                        <ul id="itemslistNew">
+                 	      <li><a onclick="loadConfig('checkevent')" href="#"><?php echo $this->translate->_('Eventos Checklist')?></a></li>
+                            <li style="border-bottom:1px solid black !important "><a onclick="loadConfig('checktemplate')" href="#"><?php echo $this->translate->_('Plantillas Checklist')?></a></li>
+                            <li style="border-bottom:1px solid black !important "><a onclick="exportFilter()" href="#"><?php echo $this->translate->_('Export')?></a></li>
+                            <li><a onclick="loadConfig('journalevent#ui-tabs-2')" href="#"><?php echo $this->translate->_('Eventos Bitácora')?></a></li>
+                            <li><a onclick="loadConfig('journaltemplate#ui-tabs-2')" href="#"><?php echo $this->translate->_('Cargar Datos')?></a></li>
+                 	    
+                 	    
+                 	    </ul>
+                    </div>
+ 		</label>
+		
+        <?php elseif(!in_array("Task_Restricted",$this->user->role)):?>
+        
+         		<label style="width:150px !important;"  style="width:100px !important;" id="topMenu" onmouseover="verMenu();" onmouseout="ocultarMenu();" title="<?php echo $this->translate->_('Configurar Eventos')?>"><img style="padding:4px;" src="/img/icon32/gear_in.png">
+ 		
+ 		     		<div id="menuFlotante" class="noadmin" style="height:48px !important;" onmouseout="ocultarMenu();">
+                        <ul id="itemslistNew">
+                 	      <!--<li><a onclick="loadConfig('checkevent')" href="#">Checklist Events</a></li>-->
+                          <!--  <li style="border-bottom:1px solid black !important "><a onclick="loadConfig('checktemplate')" href="#">Checklist Templates</a></li> -->
+                           <!-- <li><a onclick="loadConfig('journalevent#ui-tabs-2')" href="#">Bitácora Events</a></li>-->
+                           <li><a onclick="loadConfig('journaltemplate#ui-tabs-2')" href="#">Cargar Datos</a></li>
+                 	    
+                 	    
+                 	    </ul>
+                    </div>
+ 		</label>
+        
+ 		<?php endif;?>
+ 		
+ 		
+ 	</ul>
+ 
+ 	<ul class="topMenuAdmin">
+ 		     <?php if (in_array("Admin",$this->user->role) && !in_array("Task_Restricted",$this->user->role)):?>
+ 		<li><a class="<?=$this->menuActivo()->check('default','admin');?>" href="<?=$this->baseUrl('/admin')?>" title="<?php echo $this->translate->_('Administrar aplicacion')?>"><?php echo $this->translate->_('Administrar aplicacion')?></a></li>
+ 		<?php endif;?>
+ 		<li><a href="#" onclick="return EASYA.EditUserDialog(<?=(is_null($this->user->Emp_WIW_Ident)?0:$this->user->Emp_WIW_Ident)?>);"><?=ucwords(mb_strtolower($this->user->display_name, 'UTF-8'))?></a></li>
+ 		
+ 		<li id="buttonLang"><a href="#" onclick="return false;">Language</a>
+ 			<ul id="listLang">
+ 				<li><a <?=$lang=='ca'?'class="active"':''?> href="<?=$this->Url(array('changeLang'=>'ca'))?>">Català</a></li>
+ 				<li><a <?=$lang=='es'?'class="active"':''?> href="<?=$this->Url(array('changeLang'=>'es'))?>">Español</a></li>
+ 				<li><a <?=$lang=='en'?'class="active"':''?> href="<?=$this->Url(array('changeLang'=>'en'))?>">English</a></li>
+ 			</ul>
+ 		</li>
+ 		
+ 		<li><a href="<?=$this->baseUrl('/auth/logout')?>"><?=$this->translate->_('Salir')?></a></li>
+ 	</ul>
+ 	<script>$('#buttonLang').selectorIdioma();</script>
+
+</div>
+
+
+
+
+<div id="rastro">
+	<?php echo $this->navigation()->breadcrumbs()->setLinkLast(true)->setMinDepth(0)->render(); ?> 
+	
+	<div id="notify" aria-live="polite" aria-atomic="true"></div>
+</div>
+
+
+<div id="edituserDiv" class="hidde"><img class="loader" src="/img/preloader.gif" style="width: 16px; height: 16px; margin: 20px auto;" /></div>
+<div id="exportdiv" style="display:none;"></div>
+
+<script>
+$(document).ready(function(){
+
+
+});
+
+function GoToJournal()
+{
+	$.ajax({
+		url : TASK.settings.urlBase + '/calendar/index/ijournal',
+		
+		async : false,
+		type: "post",
+		timeout: 48000,
+		dataType : "html",
+		success:function(data){
+			
+			$('body').html('');
+			$('body').append(data);
+		}
+	       	
+	});
+	}
+
+	function GoToChecklist()
+	{
+
+		$.ajax({
+			url : TASK.settings.urlBase + '/calendar/index',
+			
+			async : false,
+			type: "post",
+			timeout: 48000,
+			dataType : "html",
+			success:function(data){
+				
+				$('body').html('');
+				$('body').append(data);
+			}
+		       	
+		});
+	}
+
+function loadConfig(param)
+{
+	
+	window.location.href = '<?=$this->baseUrl('/calendar/edit?destino=')?>' + param;
+}
+
+function exportFilter()
+{
+	exportDialog();
+}
+
+function verMenu()
+{
+    $('#menuFlotante').show();
+    	}
+    	function ocultarMenu(){
+
+    		$('#menuFlotante').hide();
+        	};
+
+function verMenu2()
+{
+    $('#menuFlotante').show();
+    	}
+
+
+
+
+</script>
+<style>
+
+
+
+
+
+
+
+
+
+</style>
+<!--[if lte IE 7]>
+<div id="navegador-obsoleto" class="navegador-obsoleto"><img onclick="abrirAvisoIE()" class="cursor" src="/img/icon/alert.png" alt="" /><p><span class="bold"><?=$this->translate('Su navegador es obsoleto y no podemos garantizar que el portal funcione de manera correcta.')?></span><br /><?=$this->translate('La versión oficial de T-Systems es Internet Explorer 8.0, encontrará una guia de actualización siguiendo este enlace: ')?><br /><a href="http://t-systems.telekom.de/cms/tsi-es/es/Organizacion/templateId=renderStaticPage/id=2060170.doc" title="" target="_blank">http://t-systems.telekom.de/cms/tsi-es/es/Organizacion/templateId=renderStaticPage/id=2060170.doc</a><br /><?=$this->translate('En caso que tuviera alguna consulta o necesitara soporte en el proceso de instalación debe contactar con el BUZON TSE HELPDESK. ')?></p><img onclick="cerrarAvisoIE();" id="botonCerrarAvisoIE" class="close" src="/img/icon/dialog-close.png" alt="" /></div>
+<script>
+function cerrarAvisoIE() {setCookie('avisoIE','1',30);$('#navegador-obsoleto').css('height','13px');$('#botonCerrarAvisoIE').hide();}
+function abrirAvisoIE() {setCookie('avisoIE','1',-1);$('#navegador-obsoleto').css('height','auto');$('#botonCerrarAvisoIE').show();}
+function setCookie(cname,cvalue,exdays){var d = new Date();d.setTime(d.getTime()+(exdays*24*60*60*1000));var expires = "expires="+d.toGMTString();document.cookie = cname + "=" + cvalue + "; " + expires;}
+function getCookie(cname){var name = cname + "=";var ca = document.cookie.split(';');for(var i=0; i<ca.length; i++){var c = ca[i].trim();if (c.indexOf(name)===0){ return c.substring(name.length,c.length);}}return "";}
+if(typeof String.prototype.trim !== 'function') {String.prototype.trim = function() {return this.replace(/^\s+|\s+$/g, '');}}
+$(document).ready(function() {var avisoIE=getCookie("avisoIE");if (avisoIE=="1"){cerrarAvisoIE();}});
+</script>
+<![endif]-->

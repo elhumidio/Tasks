@@ -1,0 +1,717 @@
+<div class="cuerpo first_frame" style="margin-top: 0">
+
+
+	<div id="tabs" class="contenido" style="width: 80%; margin-left: 10%;">
+		<ul>
+			<li><a href="#tabs-1">Clientes</a></li>
+			<li><a href="#tabs-2">Acceso Grupos</a></li>
+			<li><a href="#tabs-3">Configuración grupos (Checklist)</a></li>
+			<li><a href="#tabs-4">Configuración Títulos (Cambio de Turno)</a></li>
+		</ul>
+		<div id="tabs-1">
+
+			<div class="contenido" style="width: 70%; margin: auto;">
+
+
+				<span style="margin-left: 5%;"><p><?php echo $this->translate->_("Aqui podrá editar, agregar y eliminar clientes");?></p></span>
+				<a class="link-custom" onclick="addClient();">Agregar Cliente</a>
+				<table id="tblClientes" class="display" width="100%" cellspacing="0">
+					<thead>
+						<tr>
+							<th><?php echo $this->translate->_("Eliminar");?></th>
+							<th><?php echo $this->translate->_("Editar");?></th>
+
+							<th><?php echo $this->translate->_("Nombre");?></th>
+							<th><?php echo $this->translate->_("Tipo");?></th>
+							<th><?php echo $this->translate->_("Id");?></th>
+
+						</tr>
+					</thead>
+					<tbody>
+	<?php
+// var_dump($this->datos);die;
+if (isset($this->datos))
+    foreach ($this->datos as $a) {
+        
+        echo '
+		<tr  id="_' . $a["ID"] . '">' . "<td onclick=\"deleteCliente('" .
+                 $a["ID"] . "_" . $a["nombre"] . "')\" class=\"cursor\">" .
+                 "<img class=\"delete_icon\" alt=\"Edit\" src=\"/img/icon/date_delete.png\"></td><td onclick=\"editarCliente('" .
+                 $a["ID"] . "_" . $a["nombre"] ."_".$a["Tipo"].
+                 "')\" ><img class=\"edit_icon\" alt=\"Edit\" src=\"/img/icon/cog_edit.png\"></td><td id=\"cliente_" .
+                 $a["ID"] . "\">" . $a["nombre"] . "</td><td id='tipo_".$a["ID"]."'>".$a["Tipo"]."</td><td>" . $a["ID"] .
+                 "</td>" . 
+
+                '</tr>';
+}
+?>
+	     
+        </tbody>
+				</table>
+			</div>
+		</div>
+		<div id="tabs-2">
+			<div class="contenido" style="width: 70%; margin-left: 10%;">
+
+				<p><?=$this->translate->_('A continuacion se listan los grupos y se configura el acceso a la aplicacion.')?></p>
+
+				<table id="tblGrupos" class="display" width="100%" cellspacing="0">
+					<thead>
+						<tr>
+							<th class="id">#</th>
+							<th><?=$this->translate->_('Nombre')?></th>
+							<th><?=$this->translate->_('Email')?></th>
+							<th><?=$this->translate->_('OU_ID')?></th>
+							<th class="estado"><?=$this->translate->_('Activo')?></th>
+						</tr>
+					</thead>
+
+					<tbody>
+			<?php
+if (count($this->datosGrupos) > 0) {
+    foreach ($this->datosGrupos as $a) {
+        echo '<tr>';
+        echo '<td>' . $a['ID'] . '</td>';
+        echo '<td>' . $a['nombregrupo'] . '</td>';
+        echo '<td>' . $a['correocontacto'] . '</td>';
+        echo '<td>' . $a['ou_id'] . '</td>';
+        
+        if ($a['activo'] == "1") {
+            echo '<td><input id="check_' . $a["ID"] .
+                     '" type="checkbox" onclick="updateActivo(' . $a["ID"] .
+                     ');" value="' . $a['activo'] . '" checked ></td>';
+}
+
+if ($a['activo'] == "0") {
+    echo '<td><input id="check_' . $a["ID"] .
+             '" type="checkbox" onclick="updateActivo(' . $a["ID"] .
+             ');" value="' . $a['activo'] . '"></td>';
+}
+
+echo '</tr>';
+}
+}
+?>
+			</tbody>
+				</table>
+			</div>
+
+		</div>
+
+
+		<div id="tabs-3">
+			<div class="contenido" style="width: 50%; margin-left: 20%;">
+
+				<p><?=$this->translate->_('A continuacion se listan los grupos.')?></p>
+				<a class="link-custom" title="Agregar un nuevo grupo" onclick="addGroup();">Agregar Grupo</a>
+				<table id="tblGroups" class="display" width="100%" cellspacing="0">
+					<thead>
+						<tr>
+							<th width="5%"><?php echo $this->translate->_("Eliminar");?></th>
+							<th width="10%"><?php echo $this->translate->_("Editar");?></th>
+							<th width="10%"><?=$this->translate->_('id')?></th>
+							<th width="75%"><?=$this->translate->_('nombre')?></th>
+							
+						</tr>
+					</thead>
+
+					<tbody>
+			<?php
+if (count($this->groups) > 0) {
+    foreach ($this->groups as $a) {
+        echo '<tr>'.
+         '<td id="delete_group_'.$a['id']."_".$a['group'].'"><img onclick="deleteGroup(this)" style="cursor:pointer" id="edit_group_'.$a['id']."_".$a['group'].'"   alt="Delete" src="/img/icon/date_delete.png"></td>'.
+         '<td id="edit_group_'.$a['id']."_".$a['group'].'"><img onclick="editGroup(this)" style="cursor:pointer" id="edit_group_'.$a['id']."_".$a['group'].'" class="edit_group" alt="Edit" src="/img/icon/cog_edit.png"></td>'.
+         '<td class="two">'.$a['id'].'</td>'.
+         '<td class="three">' . $a['group'] . '</td>'.
+		 '</tr>';
+}
+}
+?>
+			</tbody>
+				</table>
+			</div>
+
+
+
+
+
+
+		</div>
+		
+		
+				<div id="tabs-4">
+			<div class="contenido" style="width: 50%; margin-left: 20%;">
+
+				<p><?=$this->translate->_('A continuacion se listan los títulos de cambio de turno.')?></p>
+				<a class="link-custom" title="Agregar un nuevo Título" onclick="addTitulo();">Agregar Título</a>
+				<table id="tblTitulos" class="display" width="100%" cellspacing="0">
+					<thead>
+						<tr>
+							<th width="5%"><?php echo $this->translate->_("Eliminar");?></th>
+							<th width="10%"><?php echo $this->translate->_("Editar");?></th>
+							<th width="10%"><?=$this->translate->_('id')?></th>
+							<th width="75%"><?=$this->translate->_('titulo')?></th>
+							
+						</tr>
+					</thead>
+
+					<tbody>
+			<?php
+if (count($this->titulos) > 0) {
+    foreach ($this->titulos as $a) {
+        echo '<tr>'.
+         '<td><img onclick="deleteTitulo(this);" style="cursor:pointer" id="delete_titulo_'.$a['id'].'"   alt="Delete" src="/img/icon/date_delete.png"></td>'.
+         '<td><img onclick="editTitulo(this);" style="cursor:pointer" id="edit_titulo_'.$a['id'].'" class="edit_group" alt="Edit" src="/img/icon/cog_edit.png"></td>'.
+         '<td class="two">'.$a['id'].'</td>'.
+         '<td class="three">' . $a['titulo'] . '</td>'.
+		 '</tr>';
+}
+}
+?>
+			</tbody>
+				</table>
+			</div>
+
+
+
+
+
+
+		</div>
+		
+
+	</div>
+
+</div>
+
+<style>
+input[type=textarea], select {
+    width: 80% !important;
+    padding: 6px 10px !important;
+    margin: 8px 0 !important;
+    display: inline-block !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    box-sizing: border-box !important;
+}
+
+input[type=select] {
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+	border: 2px solid blue;
+    border-radius: 4px;
+}
+</style>
+
+<div id="dialogoTexto" style="display: none; width:250px;z-index: 150000;">
+	<table>
+	<tr><td>
+
+	<label for="tipoCliente">Tipo Cliente</label></td><td>
+        <select id="tipoCliente">
+        <option value="-1">Seleccione</option>
+        <option value="Multi">Multi</option>
+        <option value="CTTI">CTTI</option>
+        </select>   
+    
+    </td></tr>
+	<tr><td><label for="textAreaCliente">Nombre Cliente</label></td><td>
+	<textarea  id="textAreaCliente" cols="30" rows="1"></textarea></td></tr>
+	</table>
+	</div>
+
+<div id="dialogoGroups" style="display: none; width:250px;">
+	<table>
+
+	<tr><td></td><td>
+	<textarea  id="textAreaGroup"  cols="30" rows="5"></textarea></td></tr>
+	</table>
+	</div>
+
+<div id="dialogAddClient" style="display: none;">
+	<textarea id="textAreaNewClient" rows="4" cols="50">
+
+</textarea>
+</div>
+
+<div id="dialog-confirm" style="display: none;"
+	title="<?php echo $this->translate->_("Eliminar Cliente");?>">
+	<p>
+		<span class="ui-icon ui-icon-alert"
+			style="float: left; margin: 12px 12px 20px 0;"></span>
+ <?php echo $this->translate->_("Se eliminará un cliente. Esta seguro?");?></p>
+</div>
+
+<div id="dialog-confirm-group" style="display: none;" title="Modificar o Eliminar group">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:8px 8px 10px 0;">Seleccione</span></p>
+</div>
+
+<div id="dialog-modif-group" style="display: none;z-index: 150000;background-color: whitesmoke;">
+	<input type="textarea" id="txtAreaGroupNameModif">
+</div>
+
+<div id="dialog-add-titulo" style="display: none;z-index: 150000;background-color: whitesmoke;">
+	<input type="textarea" cols="5" rows="8" style="width:275px;height:100px;" id="txtAddTitulo">
+</div>
+
+<div id="dialog-delete-titulo" style="display: none;z-index: 150000;background-color: whitesmoke;">
+	<input type="textarea" cols="5" rows="8" style="width:275px;height:100px;" id="txtDeleteTitulo">
+</div>
+
+<div id="dialog-edit-titulo" style="display: none;z-index: 150000;background-color: whitesmoke;">
+	<input type="textarea" cols="5" rows="8" style="width:275px;height:100px;" id="txtEditTitulo">
+</div>
+
+
+<script>
+
+
+/*Añadida funcionalidad CRUD titulos cambio de turno*/
+	function deleteGroup()
+	{
+		console.log($(this));
+		console.log("asdasd " +  $(this).parent().parent().find('td').text());
+	}
+
+    
+    	
+	function addTitulo()
+	{
+	     $( "#dialog-add-titulo" ).dialog({
+		      resizable: false,
+		      height: "250",
+		      width: 350,
+		      zIndex: 1,
+		      modal: true,
+		      
+		      title:"Crear Título",
+		      buttons: {
+		  
+		        Guardar: function() {
+		        	addTituloCambioDeTurno($('#txtAddTitulo').val());
+		          $( this ).dialog( "close" );
+		        }
+		      }
+		    });
+	}
+    
+    
+	function editTitulo(datos)
+	{
+		
+		var idtitulo = $(datos).parent().next().text();
+		var titulo = $(datos).parent().next().next().text();
+		$('#txtEditTitulo').val(titulo);
+		
+		console.log("id: " + idtitulo + " - titulo: " + titulo);
+	     $( "#dialog-edit-titulo" ).dialog({
+		      resizable: false,
+		      height: "250",
+		      width: 350,
+		      zIndex: 1,
+		      modal: true,
+		      
+		      title:"Editar Título",
+		      buttons: {
+		  
+		        Guardar: function() {
+			        console.log("valores antes de mandarlos: " + idtitulo + "  " + $('#txtEditTitulo').val());
+		        	//editTitulo("83","pendorcho");
+			        editTitulosCambioTurno(idtitulo,$('#txtEditTitulo').val());
+		            $( this ).dialog( "close" );
+		        }
+		      }
+		    });
+	}
+
+
+	function deleteTitulo(datos)
+	{
+		console.log(datos);
+		var id = $(datos).map(
+				function(){
+					return $(this).attr('id');
+				}).get()[0].split("_")[2];
+console.log(id);
+
+		var r = confirm("¿Eliminar el título?");
+
+			if(r== true)
+			{
+
+				deleteTituloCambioDeTurno(id);
+			}
+		
+		
+
+	}
+	
+	
+$(document).ready(function(){
+
+
+
+ $('#tblGroups').on('click','td', function () {
+
+ 	var tableData = $(this).map(
+	function(){
+		return $(this).attr('id');
+	}).get();
+		//console.log(tableData);
+    if(tableData.length == 0) return false;
+    else{
+    	arrayId = tableData[0].split("_");
+    	switch(arrayId[0]){
+
+    		case "edit":
+    			modifyGroup(arrayId[2],arrayId[3]);
+    		break;
+
+    		case "delete":
+
+    		  var r = confirm("¿Eliminar el grupo?");
+
+				if(r== true)
+				{
+
+					eliminarGroup(arrayId[2]);
+				}
+		        
+		        $( this ).dialog( "close" );
+    		break;
+    	}
+
+    }
+	//editErase(tableData);
+   })
+});
+
+
+
+
+/**
+ * Elimina un grupo
+ */
+function deleteGroup(datos)
+{
+	if(!!datos)
+	{
+		var id =  datos.split("_")[2];
+		var name = datos.split("_")[3];
+		console.log("edit despues de : " +  id + "  "  + name);
+	 	var r = confirm("¿Eliminar el grupo?");
+
+		if(r== true)
+		{
+
+			eliminarGroup(id);
+		}
+	}
+	
+}
+
+
+function editGroup(datos)
+{
+	if(!!datos){
+		var id =  datos.split("_")[2];
+		var name = datos.split("_")[3];
+		console.log("edit despues de : " +  id + "  "  + name);
+		modifyGroup(id,name);
+	}
+
+}
+
+
+   function modifyGroup(id,name)
+   {
+   	          $('#txtAreaGroupNameModif').val(name);
+		     $( "#dialog-modif-group" ).dialog({
+		      resizable: false,
+		      height: "150",
+		      width: 350,
+		      zIndex: 1,
+		      modal: true,
+		      
+		      title:"Modificar",
+		      buttons: {
+		  
+		        Modificar: function() {
+
+		          console.log($('#txtAreaGroupNameModif').val());
+		          modificarGroup(id,$('#txtAreaGroupNameModif').val());
+		          $( this ).dialog( "close" );
+		        }
+		      }
+		    });  
+   }
+
+
+$(document).ready(function() {
+
+	TASK.runAdmin({debug: true,token: "<?=$this->token?>"});
+	
+	$('#tblClientes').dataTable( {
+		"bStateSave": false,
+		
+		"aaSorting": [[ 0, "asc" ]],
+		"sPaginationType": "full_numbers",
+		"iDisplayLength": 10,
+		"oLanguage": idiomaDataTables,
+	    "aoColumns" : [
+	                   
+		       			{"sWidth": "10%","bSortable":false},
+		       			{"sWidth": "10%","bSortable":false},
+		       			{"sWidth": "70%",},
+		       			{"sWidth":"10%",},
+		       			{"bVisible": false}
+		       			
+		       			
+		       		],
+		"fnInitComplete": function () {
+			$('.dataTables_filter input').attr("placeholder", "Buscar");
+			
+		},
+		aoColumnDefs: [{ 
+			"bSortable": true, 
+			"aTargets": ['noSort'] 
+		}]
+	});
+
+	$('a.toggle-vis').on( 'click', function (e) {
+        e.preventDefault();
+ 
+        // Get the column API object
+        var column = table.column( $(this).attr('data-column') );
+ 
+        // Toggle the visibility
+        column.visible( ! column.visible() );
+    } );
+	//InitOverviewDataTable();
+
+	$('#tblGrupos').dataTable( {
+		
+		"bStateSave": true,
+		"aaSorting": [[ 0, "asc" ]],
+		"sPaginationType": "full_numbers",
+		"oLanguage": idiomaDataTables,
+		 "aoColumns" : [
+                        {"bVisible": false,},
+		       			{"sWidth": "150px",},
+		       			{"sWidth": "150px",},
+		       			{"sWidth":"25px",},
+		       			{"sWidth":"25px",}
+		       			
+		       		],
+		"fnInitComplete": function () {
+			$('.dataTables_filter input').attr("placeholder", "Buscar");
+			
+		},
+		aoColumnDefs: [{ 
+			"bSortable": true, 
+			"aTargets": ['noSort'] 
+		}]
+	});
+		
+
+		$('#tblGroups').dataTable( {
+		  columns: [	
+		  			     { data:"delete"},
+		  				 { data:"edit"},
+                         { data:"id" }, //00
+                         { data: "group"}], 
+		"bStateSave": true,
+		"aaSorting": [[ 0, "asc" ]],
+		"sPaginationType": "full_numbers",
+		"oLanguage": idiomaDataTables,
+
+		"fnInitComplete": function () {
+			$('.dataTables_filter input').attr("placeholder", "Buscar");
+			
+		},
+		aoColumnDefs: [{ 
+			"bSortable": true, 
+			"aTargets": ['noSort'] 
+		}]
+	});
+
+
+		$('#tblTitulos').dataTable( {
+			  columns: [	
+			  			     { data:"delete"},
+			  				 { data:"edit"},
+	                         { data:"id" }, //00
+	                         { data: "titulo"}], 
+			"bStateSave": true,
+			"aaSorting": [[ 0, "asc" ]],
+			"sPaginationType": "full_numbers",
+			"oLanguage": idiomaDataTables,
+
+			"fnInitComplete": function () {
+				$('.dataTables_filter input').attr("placeholder", "Buscar");
+				
+			},
+			aoColumnDefs: [{ 
+				"bSortable": true, 
+				"aTargets": ['noSort'] 
+			}]
+		});
+});
+
+
+	
+
+$( function() {
+    $( "#tabs" ).tabs();
+  } );
+
+</script>
+<style>
+#tblClientes_info{font-size: 11px;}
+#tblClientes_paginate{font-size: 11px;}
+#tblGrupos_info{font-size: 11px;}
+#tblGrupos_paginate{font-size: 11px;}
+#tblGroups_info{
+	font-size: 11px;
+}
+#tblGroups_paginate{
+	font-size: 11px;
+}
+input[type=textarea], select {
+   
+   
+    margin: 8px 0 !important;
+    display: inline-block !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    box-sizing: border-box !important;
+}
+.odd{
+	background-color:#d9d9d9!important;
+	
+}
+.even{
+	height:20px !important;
+}
+th{background-color: #336699 !important;}
+.header{
+	background-color:#336699!important;
+	height:25px !important;
+	border-radius:3px !important;
+}
+input[type=select] {
+
+}
+.titulo{
+font-family:arial;
+ opacity: 0.7;
+    filter: alpha(opacity=70); /* For IE8 and earlier */
+font-weight:bold;
+font-size: 1.2em;
+color:white;	
+padding:5px;
+border-radius:5px;
+background-color:#3973ac !important;
+box-shadow: 6px 6px 5px #888888 !important;
+width:98%;
+margin:auto;
+	
+}
+.titulo_footer{
+	width:85vh !important;
+}
+
+td input[type="checkbox"] {
+	float: left;
+	margin: 0 auto;
+	width: 100%;
+}
+
+.dataTables_length{
+clear:both;	float:left;
+margin-top:1% !important;
+
+margin-bottom:5px;
+background-color: #d9e6f2;
+padding:5px;
+border-radius:5px;	
+width:200px;	
+}
+
+.temp-new{
+	border-color:#3973ac !important;
+	color:#2d5986 !important;
+}
+.paginate_button current{
+	background-color:#4080bf !important;
+}
+.tablajEvents_wrapper{
+	height:80%;
+}
+
+.ui-dialog {
+	top: 0;
+	left: 0;
+	padding: .2em;
+    border:1px;
+    
+}
+
+.ui-dialog .ui-dialog-content {
+	border: 0;
+	padding: 20px;
+    font-size:18px;
+    color:black;
+    background-color: #e6e6e6;
+	overflow: auto;
+}
+.ui-dialog .ui-dialog-buttonpane {
+	text-align: left;
+	border-width: 1px 0 0 0;
+	background-image: none;
+	margin-top: .5em;
+	padding: .3em 1em .5em .4em;
+    background-color: #bfbfbf;
+}
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+	float: right;
+    
+}
+.ui-dialog .ui-dialog-buttonpane button {
+	margin: .5em .4em .5em 0;
+	cursor: pointer;
+    
+}
+.ui-dialog .ui-resizable-se {
+	width: 12px;
+	height: 12px;
+	right: -5px;
+	bottom: -5px;
+	background-position: 16px 16px;
+    
+}
+.ui-draggable-handle {
+	-ms-touch-action: none;
+	touch-action: none;
+}
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset .yescls
+{
+    font-size:15px;
+    color: #FFFFFF;
+    width: 150px;
+    background: #90C93E;
+    
+}
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset .cancelcls
+{
+    font-size:15px;
+    color: #FFFFFF;
+    width: 150px;
+    background: #F86379;
+    
+}
+
+</style>

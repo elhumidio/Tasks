@@ -1,0 +1,397 @@
+<div class="colRight">
+	<div class="contenido">
+		<div class="titulo" style="font-size:22px;color:#333333;"><?=$this->translate->_('Plantillas Checklist')?></div>
+				<p>			<?=$this->translate('Puede crear y administrar plantillas en esta pestaña. Estas plantillas son usadas para crear los eventos de la checklist.')?></p>		
+
+			
+            <span class="btn btn-success fileinput-button" style="float:right;">
+            <span><?=$this->translate->_('Subir plantilla Excel')?></span>
+            <input id="fileupload_" type="file" name="files[]" data-url="/task/raw_temp/" multiple>      
+            </span>
+           <a href="#" id="add_template" style="font-size: 10px;" class="boton .ui-icon-plus"><?=$this->translate->_('Agregar evento periódico')?></a>
+			<img title="SOLO PARA CHROME!!" style="position:relative;float:right;margin-right:-100px;margin-top: -22px;" id="imgInfoChrome" src="/img/info_icon.png">
+			<!--<label id="custom_upload_label" class="custom_upload_label" for="fileupload">Uploads</label> -->
+		<div id="infoAddChrome" class="infoDivChrome"><span style="font-size: 9px;margin-left: 2px;padding:5px;text-align: left;"><p style="margin-top: -11px">
+													
+													1- <b>Copiar y pegar</b> en la barra de direcciones del navegador <b><i>chrome://settings/content/flash&nbsp;</i></b><br> 
+													2- <b>Activar</b> la opción “Permitir que los sitios web ejecuten Flash”.<br>
+													3- <b>Desactivar</b> la opción "Preguntar antes".</p></span>
+													<div style="margin:-80px -18px 50px 180px" id="clickToClose"><b><img title="Cerrar" width="10;" height="10;" src="/img/icon/dialog-close.png" alt="Cerrar"></b></div>
+		</div>
+
+		<div id="resultRefresh"></div>
+		
+		<table id="tablaTemplates">
+			<thead>
+				<tr>
+					<th></th>
+					<th class="id">ID</th>
+					<th><?=$this->translate->_('Group')?></th>
+					<th><?=$this->translate->_('Shifts')?></th>
+					<th><?=$this->translate->_('Location')?></th>
+					<th><?=$this->translate->_('Description')?></th>
+					<th><?=$this->translate->_('OU_ID')?></th>
+					<th><?=$this->translate->_('User')?></th>
+					<th><?=$this->translate->_('start')?></th>
+					<th><?=$this->translate->_('end')?></th>
+					<th><?=$this->translate->_('Title')?></th>
+					<th><?=$this->translate->_('Entorno')?></th>
+					<th><?=$this->translate->_('Title')?></th>
+					<th><?=$this->translate->_('Status')?></th>
+					<th><?=$this->translate->_('Client_nombre')?></th>					
+					<th><?=$this->translate->_('Environment')?></th>
+					<th><?=$this->translate->_('Source')?></th>
+					<th><?=$this->translate->_('Date Log')?></th>
+					<th><?=$this->translate->_('UserLog')?></th>
+					<th><?=$this->translate->_('Log Message')?></th>
+					<th><?=$this->translate->_('Group')?></th>
+					<th><?=$this->translate->_('Creada')?></th>
+					<th><?=$this->translate->_('Creado por')?></th>
+					<th><?=$this->translate->_('Rgroup')?></th>
+					<th><?=$this->translate->_('Type')?></th>
+					<th><?=$this->translate->_('Programacion')?></th>
+					<th><?=$this->translate->_('open-close-ticket')?></th>
+					<th><?=$this->translate->_('minutes-close-ticket')?></th>
+					<th><?=$this->translate->_('Client')?></th>
+				</tr>
+			</thead>
+			
+			<tbody></tbody>
+		</table>		
+	</div>
+</div>
+<div class="modal"><div class="center"><span style="text-align: center"><?php echo $this->translate->_("Importando archivo, Por favor espere...")?></span><br /><?php echo $this->translate->_("Este Proceso puede tardar más de 5 minutos.")?></div></div>
+<?php $this->Dialogs()->NewTemplate();?>
+<?php $this->Dialogs()->ViewTemplate();?>
+
+<script type="text/javascript">
+
+	/*DOCUMENT READY*/
+	$(document).ready(function(){
+
+
+	/*HOVER OVER IMG info chrome*/
+	$('#imgInfoChrome').hover(function(){
+
+			$('#infoAddChrome').show();
+
+	});
+
+	$('#clickToClose').click(function(){
+			$('#infoAddChrome').hide();
+	});
+
+
+	});
+
+
+
+		//alert("<?php echo $this->token;?>");
+		tk = "<?php echo $this->token;?>";
+		var nmarr =[] ;
+		$( "#form_grupo" ).change(function(){
+			//alert(this.value);
+		//	TASK.getGroupMembers(this.value,tk);
+		});
+		
+	function fnFormatDetails ( oTable, nTr )
+	{
+	    var aData = oTable.fnGetData( nTr );
+	    var sOut = '<div class="tablecss"><table class="tblDetalle" cellspacing="0" border="1" style="width: 100%;">';
+	    sOut += '<tr><td class=""><b>Client - Location - Shifts - Responsible:</b></td><td class="">'+' '+aData[14]+' - '+aData[4]+' - '+aData[3]+' - '+aData[7]+'</td></tr>';
+	    sOut += '<tr><td class=""><b>Start - End:</b></td><td class="">'+' '+aData[8]+' - '+aData[9]+'</td></tr>';
+	    sOut += '<tr><td class=""><b>Description</b></td><td class="">'+' '+aData[5]+'</td></tr>';
+	    sOut += '<tr><td class=""><b>Date and user log:</b></td><td class="">'+' '+aData[17]+' - '+aData[18]+'</td></tr>';
+	    sOut += '<tr><td class=""><b>Message log:</b></td><td class="">'+' '+aData[19]+'</td></tr>';
+	    sOut += '</table></div>';
+	     
+	    return sOut;
+	}
+	
+	$(function() {
+	           $body = $("body");    
+           var nmarr =[] ;
+            
+            //$("th").addClass("single-line");
+            $('#fileupload_').fileupload({
+                dataType: 'json',
+                start: function (e){
+                  $body.addClass("loading");     
+                },
+                done: function (e, data) {
+        
+                     $.each(data.files, function (index, file) {
+                    var obj1 = JSON.parse(data.jqXHR.responseText);
+                     if(obj1[0].error){
+                        alert('El archivo ' + file.name + ' no tiene una extension soportada\nLas extensiones soportadas son, xls, xlsx y csv.');
+                        } else {
+                            $.ajax({
+                                    type: 'POST',
+                                    timeout:88800,
+                                    url:"<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'files','type'=>'templates'))?>", 
+                                    data: { name: data.result[0].name  }})
+                                                                    .done(function( data1 ) {
+                                                                        $body.removeClass(("loading"));
+                                                                        $('#tablaTemplates').DataTable().ajax.reload();
+                                                                        if (data1){
+                                                                        	dat1 = JSON.parse(data1);
+                                                                        	alert(dat1.errMsg);    
+                                                                        }
+                                                                         
+                                                                    });
+                            nmarr.push (file.name);
+                        }
+                }); 
+                }
+            }); 
+            $('.boton').button();
+
+	    var oTable = $('#tablaTemplates').dataTable( {
+			"bStateSave": false,
+			"aaSorting": [[ 1, "desc" ]],
+			"sPaginationType": "full_numbers",
+			"lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+			//"oLanguage": idiomaDataTables,
+			"bProcessing": true,
+			"dom": 'T<"clear">lfrtip',
+            "tableTools": {
+                                //"sSwfPath": "/estilos/js/TableTools-2.2.4/swf/copy_csv_xls_pdf.swf",
+                                "aButtons": 
+                                [
+                                    {
+                                        "sExtends":    "collection",
+                                        "sButtonText": "Exportar datos de pantalla",
+                                        "aButtons":    [   {
+                                                                "sExtends":     "xls",
+                                                                "sButtonText": "Export to xls",
+                                                                "mColumns": [ 1, 2, 3, 4, 5,  8, 9, 11, 12, 13, 15, 17, 18, 19, 20,24,25 ]
+                                                            }, 
+                                                           {
+                                                                "sExtends":     "copy",
+                                                                "sButtonText": "Copy to ClipBoard...",
+                                                                "mColumns": [ 1, 2, 3, 4, 5,  8, 9, 11, 12, 13, 15, 17, 18, 19, 20,24,25 ]
+                                                            }]
+                                    }
+                                ]
+                           },
+	        "bServerSide": true,
+	        "aoColumns": [ 
+							{ "bSortable": false,
+								 "sWidth": "7%" } , //img
+				        	{ "sWidth": "1%" }, //'id'
+				        	{ "sWidth": "4%"  },  //'group' 
+				        	{ "sWidth": "1%" },  //'shifts'
+				        	{ "sWidth": "5%" },  //'Location'
+							{ "bVisible":    false }, //'description'
+							{ "bVisible":    false }, //'OU_ID'
+							{ "bVisible":    false }, //'User'
+							{ "bVisible":    false }, //'start' 
+							{ "bVisible":    false }, //'end'
+							{ "bVisible":    false }, //'title'
+							{ "bVisible":    false }, //'environment'
+				        	{ "sClass": "single-line"},  //'title' ->4
+// 				        	{ "sWidth": "8%" }, //'status'
+				        	{ "bVisible":    false }, //'status'
+				        	{ "sWidth": "9%" }, //'cliente_nombre'
+				        	{ "bVisible":    false}, //'environment'
+// 				        	{ "sWidth": "4%" }, //'origen'
+				        	{ "bVisible":    false }, //'origen'
+							{ "bVisible":    false }, //'Fecha Log'
+							{ "bVisible":    false }, //'User Log'
+							{ "bVisible":    false }, //'Message Log'
+							{ "bVisible":    false }, //'group'
+							{ "sWidth": "2%" }, //'Creada'
+// 							{ "bVisible":    false  }, //'Owner'
+							{ "sWidth": "2%" }, //'Owner'
+							{ "bVisible":    false  }, //'rgroup'
+							{ "bVisible":    false  }, //'type'
+							{ "bVisible":    false  }, //'programacion' -> 25
+							{ "bVisible":    false  }, //'open-close-ticket' -> 26
+							{ "bVisible":    false  }, //'minutes-close-ticket' -> 27
+				        	{ "bVisible":    false  } //'client' -> 28
+							
+							
+		          	     ],
+	        "sAjaxSource": "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'templates'))?>",
+			"fnInitComplete": function () {
+	
+				$('.dataTables_filter input').attr("placeholder", "Search");
+				
+			},
+			aoColumnDefs: [{ 
+				"bSortable": false, 
+				"aTargets": ['noSort'] 
+			}]
+		});
+		
+		$(document).off('click', '.detail_icon');
+	    $(document).on( 'click', '.detail_icon', function () {
+	        var nTr = $(this).parents('tr')[0];
+	        if ( oTable.fnIsOpen(nTr) )
+	        {
+	            /* This row is already open - close it */
+	            this.src = "/img/details_open.png";
+	            oTable.fnClose( nTr );
+	        }
+	        else
+	        {
+	            /* Open this row */
+	            this.src = "/img/details_close.png";
+	            oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'tabledetail' );
+	        }
+	    });
+	    $('#add_template').button({
+            icons: {
+                primary: "ui-icon-locked"
+            }}).click(function(){
+    	// Muestra el dialogo y crea un evento
+    	{
+    	    //$('#new1_repeats').prop('checked', false);
+    	    $('#new1_template_form')[0].reset();
+    	    $("#1_detail").hide();
+    	    $("#new1_repeat-options").hide();
+    	    
+    		$('#createNewTemplate').dialog({
+    			autoOpen: true,
+    			width: 700,
+    			modal: true,
+    			position: 'middle',
+    			open:function(event, ui){
+    				$(".day_chk input:checkbox").prop("checked", false);
+          			},
+          		close:function(event, ui){
+          			$(".day_chk input:checkbox").prop("checked", false);},
+       			show: { effect: "fade", duration: 500 },
+	           	hide: { effect: "fade", duration: 500 }
+    		 });
+    	 };
+//     
+ });
+        $(document).off('click', '.edit_icon');
+        $(document).on( 'click', '.edit_icon', function (e) {
+            
+			var table = $('#tablaTemplates').DataTable();
+            var row = table.row($(this).parent().parent()).data(); 
+
+           	$('#ViewTemplate').dialog({
+                autoOpen: true,
+                width: 'auto',
+                title: 'Detalle de la plantilla ' +row[1],
+                dialogClass: 'noTitleStuff',
+                modal: true,
+                position: 'middle',
+                open: function( event, ui ) {
+                   
+                    $('#view_template_form')[0].reset();
+                    $("#1_detail_edit1").hide();
+                    $('.vtempl').each(function(){
+                        $(this).val(row[$(this).data('counter')]);
+						var idElement = $(this).map(function(){return $(this).attr('id');}).get();
+						if(idElement=="edit1_client"){
+							//TODO seleccionar option by name 
+							console.log($(this));
+							console.log(row[$(this).data('counter')]);
+							
+							$("#edit1_client option:contains(" + row[$(this).data('counter')] +")").attr("selected", true);
+						}
+						
+                    });
+	
+                    var openCloseTicket = row[26];
+                    $("#edit1_open-close-ticket").attr("checked", false);
+                    $("#edit1_open-close-ticket").val("1");
+                    $("#edit1_minutes-close-ticket").attr("disabled", "disabled");
+                    
+ 					if (openCloseTicket){
+ 						$("#edit1_open-close-ticket").attr("checked", true);
+						$("#edit1_minutes-close-ticket").removeAttr("disabled");
+ 					} else {
+ 						$("#edit1_minutes-close-ticket").val(null);
+ 					}
+ 					
+                    $('#repeats_edit1').prop('checked', true);
+                    
+                    object = JSON.parse(row[25]);
+                    if("fr_tmp" in object) {
+                        $('#repeats_edit1').prop('checked', true);
+                        $("#1_detail_edit1").show();
+                        //$('#1_detail_edit1').css('display','block');
+                        $('#end-repeat_edit1').prop('disabled', false);
+                        
+                        for (var key in object.fr_tmp.P1D) {
+                            $('#'+object.fr_tmp.P1D[key]+'_edit1').prop('checked', true);
+                                //alert(key + " -> " + object.fr_tmp.P1D[key]);
+                            }
+                        
+                        //console.log(object.fr_tmp.P1D);
+                    }
+                    
+                    // $('#historic').html('');
+                    // var ul = $('<ul>').appendTo($('#historic'));
+                    // $.post( "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'getevlog'))?>", { id: dat })
+                    // .done(function( 1 )
+                    // {
+                    // var obj = jQuery.parseJSON(1);
+                    // $.each(obj, function(key,value) {
+                            // ul.append($(document.createElement('li')).text(value));  
+                        // }); 
+                    // });  
+
+                    ChangeButton('edit1_save',1, false);
+                                     
+				},
+                     
+               close: function(ev, ui) { ChangeButton('new_save',0.5, true); },
+              show: { effect: "fade", duration: 1500 },
+              hide: { effect: "fade", duration: 1500 }
+            });
+        });
+        
+        $(document).off('click', '.delete_icon');
+        $(document).on( 'click', '.delete_icon', function (e) {
+            var r = confirm("¿Borrar la platilla?");
+            if (r == true) 
+            {
+                var table = $('#tablaTemplates').DataTable();
+                var row = table.row($(this).parent().parent()).data(); 
+                //console.log(row);
+                $.post( "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'rmtemp'))?>", { id: $(this).parent().next().text(), st: row[21]  })
+                         .done(function(data1) {
+                               //$body.removeClass(("loading"));
+                               $('#tablaTemplates').DataTable().ajax.reload();
+                            });
+            }
+        });
+  
+	});
+	
+	
+	
+/*	function add_template()
+	{
+		alert('Temporalmente Desactivado...');
+		//$.post('<?=$this->url(array('controller'=>'admin','action'=>'refresrecursos'))?>',function(data){$('#resultRefresh').html(data);});
+	
+		return false;
+	}*/
+
+
+	function refreshTree()
+	{
+    	alert('Temporalmente desactivado ...');
+		//$.post('<?=$this->url(array('controller'=>'admin','action'=>'refresrecursos'))?>',function(data){$('#resultRefresh').html(data);});
+	
+		return false;
+	}
+
+	
+	
+	</script>
+	<style>
+		  .tblDetalle{
+    	font-size: 1em !important;
+    }
+	#tablaTemplates_paginate{
+		font-size:12px;
+	}
+	</style>

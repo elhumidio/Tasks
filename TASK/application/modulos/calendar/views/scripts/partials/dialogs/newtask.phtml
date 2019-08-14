@@ -1,0 +1,55 @@
+<div id="createNewTask" title="<?=$this->translate('Crear nueva tarea')?>" style="display:none">
+	<p class="validateTips" id="_avs"><?=$this->translate('Todos los campos son requeridos.')?></p>
+	<form id="formNewTask">
+		<fieldset>
+			<label for="form_title"><?=$this->translate('Título de la tarea')?></label>
+			<input type="text" name="title" id=""form_title"" class="" placeholder="<?=$this->translate('Escriba un título...')?>" />
+			<label for="form_description"><?=$this->translate('Descripción de la tarea')?></label>
+			<textarea id="form_description" name="description" placeholder="<?=$this->translate('Escriba la tarea a realizar...')?>"></textarea>
+		</fieldset>
+		
+		<fieldset class="col-b">
+			<label for="form_grupo" class=""><?=$this->translate('A realizar por el grupo')?></label>
+			<!-- <input type="text" name="max" id="form_grupo" value="" class="" placeholder="<?=$this->translate('Seleccione...')?>" />  -->
+			<select id="form_grupo" name="subgrupo">
+				<option value="-1"><?=$this->translate('Cualquiera')?></option>
+				<?php 
+				for($i=0;$i<count($this->subgrupos);$i++)
+				{
+					echo '<option value="'.$this->subgrupos[$i]['id'].'">'.$this->subgrupos[$i]['name'].'</option>';
+				}
+				?>
+			</select>
+			<img src="/img/icon/information.png" alt="" title="<?=$this->translate('Utilice el planificador para gestionar los grupos.')?>"/>
+		</fieldset>
+		<fieldset class="col-b last">
+			<label for="form_user" class=""><?=$this->translate('A realizar por el usuario')?></label>
+			<!-- <input type="text" name="limite" id="form_user" value="" class="" placeholder="<?=$this->translate('Seleccione...')?>" /> -->
+			<select id="form_user" name="uid">
+				<option value="-1"><?=$this->translate('Cualquiera')?></option>
+				<?php 
+				for($i=0;$i<count($this->colegas);$i++)
+				{
+					echo '<option value="'.$this->colegas[$i]['id'].'">'.$this->colegas[$i]['name'].'</option>';
+				}
+				?>
+			</select>
+			<img src="/img/icon/information.png" alt="" title="<?=$this->translate('Usuarios pertenecientes al grupo seleccionado, utilice el planificador si desea gestionarlos.')?>"/>
+		</fieldset>
+		
+		<fieldset class="col-a">
+			<label for="form_min" class=""><?=$this->translate('Duración mínima')?></label>
+			<input type="text" name="min" id="form_min" value="00:30" class="" />
+		</fieldset>
+		<fieldset class="col-a">
+			<label for="form_max" class=""><?=$this->translate('Duración máxima')?></label>
+			<input type="text" name="max" id="form_max" value="01:00" class="" />
+		</fieldset>
+		<fieldset class="col-a last">
+			<?php $now = new DateTime(); $now->modify('+1 week'); ?>
+			<label for="form_limite" class=""><?=$this->translate('Fecha límite')?></label>
+			<input type="text" name="limite" id="form_limite" value="<?=$now->format('d/m/Y H:m')?>" class="" placeholder="<?=$this->translate('Escriba...')?>" />
+			<img src="/img/icon/information.png" alt="" title="<?=$this->translate('Por defecto se añade una semana a la fecha de hoy.')?>"/>
+		</fieldset>
+	</form>
+</div>

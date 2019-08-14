@@ -1,0 +1,133 @@
+<?php echo $this->doctype();?>
+
+<html>
+<head>
+<?php 
+$active = $this->navigation()->findActive($this->navigation()->getContainer());
+$activePage =  (!empty($active))?$active['page']:'Error';
+$this->headTitle()->prepend($this->Title()->getTitle());
+$this->headTitle()->append((($activePage!='Error')?$activePage->getLabel():'Error'));
+echo $this->headTitle();
+?>
+<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+<?php 
+$this->headMeta()->appendName('robots', 'NOINDEX,NOFOLLOW,NOARCHIVE,NOODP,NOSNIPPET');
+echo $this->headMeta(); ?>
+
+<?php echo $this->headLink(); ?>
+
+<?php echo $this->headStyle(); ?>
+<?php echo $this->headScript(); ?>
+
+</head>
+<body>
+<script type="text/javascript" src="/estilos/js/idiomaDataTables.js"></script>
+
+
+<header>
+<?=$this->render('partials/topBar.phtml')?>
+</header>
+
+<div id="cuerpo">
+	<?php echo $this->layout()->content;?>
+</div>
+
+<footer>
+<?=$this->render('partials/footer.phtml')?>
+</footer>
+
+<?php if ($this->User()->hasRole('Admin')) {$debug = 1;}else{$debug = 0;}?>
+
+<script type="text/javascript">
+var preloader = '<div class="preloader"><img class="" src="/img/preloader.gif" alt="" /></div>';
+var preloader_black = '<div class="preloader"><img class="" src="/img/preloader_black.gif" alt="" /></div>';
+var errorajax = '<div id="errorPage"><h1><?=str_replace("'","\'",$this->translate->_("An error occurred"))?></h1><h2><?=str_replace("'","\'",$this->translate->_('A ocurrido un error al intentar cargar la seccion que solicita.'))?></h2><h2><?=str_replace("'","\'",$this->translate->_('Por favor intentelo mas tarde.'))?></h2></div>';
+
+//<![CDATA[
+$(document).ready(function() {
+
+	$('#buttonLang').selectorIdioma();
+	
+	$('#notify').makeNotify({app:'<?=$this->app->fileBaseName?>',username:'<?=$this->user->username?>',debug:false,interval:120000});
+
+	CHECK.run({
+				debug: true,
+				token: "<?=$this->token?>",
+				urlBase:"<?=$this->baseUrl()?>",
+				username:"<?=$this->user->username?>",
+				OU_ID:"<?=$this->user->OU_ID?>"
+			},
+			{
+				tagsempty: '<?=$this->translate->_('No hay tags definidos.')?> ',
+				uniontime: '<?=$this->translate->_('a las')?> ',
+				imposibleCargar : {
+					comentarios : '<?=$this->translate->_('Imposible cargar comentario/s.')?> ',
+					eventos : '<?=$this->translate->_('Imposible cargar evento/s.')?> ',
+					tareas : '<?=$this->translate->_('Imposible cargar tarea/s.')?> ',
+				},
+				imposibleMover : {
+					comentario : '<?=$this->translate->_('Imposible mover el comentario: ')?> ',
+					evento : '<?=$this->translate->_('Imposible mover el evento: ')?> ',
+				},
+				imposibleBorrar : {
+					comentario : '<?=$this->translate->_('Imposible borrar el comentario: ')?> ',
+					evento : '<?=$this->translate->_('Imposible borrar el evento: ')?> ',
+				},
+				today: '<?=$this->translate->_('Hoy')?>',
+				month: '<?=$this->translate->_('Mes')?>',
+				week: '<?=$this->translate->_('Semana')?>',
+				day: '<?=$this->translate->_('Día')?>',
+				allDayText :'<?=$this->translate->_('Todo el día')?>',
+				axisFormat : '<?=$this->translate->_('H:mm')?>',
+				monthNames: {
+					enero: '<?=$this->translate->_('Enero')?>',
+					febrero: '<?=$this->translate->_('Febrero')?>',
+					marzo: '<?=$this->translate->_('Marzo')?>',
+					abril: '<?=$this->translate->_('Abril')?>',
+					mayo: '<?=$this->translate->_('Mayo')?>',
+					junio: '<?=$this->translate->_('Junio')?>',
+					julio: '<?=$this->translate->_('Julio')?>',
+					agosto: '<?=$this->translate->_('Agosto')?>',
+					septiembre: '<?=$this->translate->_('Septiembre')?>',
+					octubre: '<?=$this->translate->_('Octubre')?>',
+					noviembre: '<?=$this->translate->_('Noviembre')?>',
+					diciembre: '<?=$this->translate->_('Diciembre')?>'
+				},
+				monthNamesShort: {
+					enero: '<?=$this->translate->_('Ene')?>',
+					febrero: '<?=$this->translate->_('Feb')?>',
+					marzo: '<?=$this->translate->_('Mar')?>',
+					abril: '<?=$this->translate->_('Abr')?>',
+					mayo: '<?=$this->translate->_('May')?>',
+					junio: '<?=$this->translate->_('Jun')?>',
+					julio: '<?=$this->translate->_('Jul')?>',
+					agosto: '<?=$this->translate->_('Ago')?>',
+					septiembre: '<?=$this->translate->_('Sep')?>',
+					octubre: '<?=$this->translate->_('Oct')?>',
+					noviembre: '<?=$this->translate->_('Nov')?>',
+					diciembre: '<?=$this->translate->_('Dic')?>'
+				},
+				dayNames: {
+					lunes: '<?=$this->translate->_('Lunes')?>',
+					martes: '<?=$this->translate->_('Martes')?>',
+					miercoles: '<?=$this->translate->_('Miércoles')?>',
+					jueves: '<?=$this->translate->_('Jueves')?>',
+					viernes: '<?=$this->translate->_('Viernes')?>',
+					sabado: '<?=$this->translate->_('Sábado')?>',
+					domingo: '<?=$this->translate->_('Domingo')?>'
+				},
+				dayNamesShort: {
+					lunes: '<?=$this->translate->_('Lun')?>',
+					martes: '<?=$this->translate->_('Tue')?>',
+					miercoles: '<?=$this->translate->_('Mié')?>',
+					jueves: '<?=$this->translate->_('Jue')?>',
+					viernes: '<?=$this->translate->_('Vie')?>',
+					sabado: '<?=$this->translate->_('Sab')?>',
+					domingo: '<?=$this->translate->_('Dom')?>'
+				},
+			});
+});
+//]]>
+</script>
+</body>
+</html>

@@ -1,0 +1,776 @@
+<div class="colRight">
+	<div class="contenido">
+	
+		<div style="float:left;background-color: #ffb380;" id="ticker">	</div>
+
+    	<div class="titulo" style="font-size:22px; !important;color:#333333;"><?=$this->translate->_('Cargar Bitácora')?></div>
+    	<p style="font-size:10px;"><?=$this->translate->_('Puede crear y administrar eventos en esta pestaña, estos eventos componen la bitácora.');?></p>
+    
+    	<div style="width:800px; margin: auto; text-align: center; margin-top: 30px; margin-bottom: 150px; font-size: 1.5em;">
+
+			<a href="#" id="add_jevent"  style="text-decoration: none;">    
+        		<span class="btn fileinput-button bigger" style="line-height: 1.5; background-color: #EDEDED !important; margin-right: 30px; margin-top:25px; height: 50px; width:140px; ">					
+       				<?=$this->translate->_('Agregar evento manual')?>
+        		</span>
+    		</a>
+    		
+    		<a href="#" id="add_template" style="text-decoration: none;">
+    			<span class="btn fileinput-button bigger" style="line-height: 1.5; background-color: #EDEDED !important; margin-right: 30px; margin-top:25px; height: 50px; width:140px; ">
+    				Cargar cambio SM9
+	    		</span>
+    		</a>
+    		
+    		<a href="/task/raw_temp/Datos_para_plantilla_CTTI v2 0.xlsx" id="download_template" style="text-decoration: none">
+    			<span class="btn fileinput-button bigger" style="line-height: 1.5; background-color: #EDEDED !important; margin-right: 30px; margin-top:25px; height: 50px; width:140px; ">
+    				Descargar plantilla Excel (CTTI)
+    			</span>
+			</a>    			
+    
+    		<span class="btn fileinput-button bigger" style="line-height: 1.5; background-color: #EDEDED !important; margin-right:30px; margin-top:25px; height: 50px;width: 140px;"> 
+    			<?=$this->translate->_('Subir plantilla Excel (CTTI)')?>
+    			<input id="fileupload_" type="file" name="files[]" data-url="/task/raw_temp/" multiple>	
+    		</span>
+    
+    	</div>
+                
+		<div id="dialogoTextoExcelDialog" style="width:100%;">
+			<div id="dialogoTextoExcel" style="overflow:inherit;font-size:0.9em;"></div>
+		</div>
+		
+		<div class="titulo" style="font-size:22px; !important;color:#333333;"><?=$this->translate->_('Cargar Checklist')?></div>
+
+		<div style="width:800px; margin: auto; text-align: center; margin-top: 30px; margin-bottom: 150px; font-size: 1.5em;">
+    		<a href="#" id="add_event"  style="text-decoration: none;">    
+        		<span class="btn fileinput-button bigger" style="line-height: 1.5; background-color: #EDEDED !important; margin-right: 30px; margin-top:25px; height: 50px; width:140px; ">					
+       				<?=$this->translate->_('Agregar evento manual')?>
+        		</span>
+    		</a>
+		
+		</div>
+		
+		
+		
+		
+		<!--<table id="tablajTemplates">
+			<thead>
+				<tr>
+					<th></th>
+					<th class="id">ID</th>
+					<th><?=$this->translate->_('Group')?></th>
+					<th><?=$this->translate->_('Shifts')?></th>
+					<th><?=$this->translate->_('Location')?></th>
+					<th><?=$this->translate->_('Description')?></th>
+					<th><?=$this->translate->_('OU_ID')?></th>
+					<th><?=$this->translate->_('User')?></th>
+					<th><?=$this->translate->_('start')?></th>
+					<th><?=$this->translate->_('end')?></th>
+					<th><?=$this->translate->_('Title')?></th>
+					<th><?=$this->translate->_('Entorno')?></th>
+					<th><?=$this->translate->_('Title')?></th>
+					<th><?=$this->translate->_('Status')?></th>
+					<th><?=$this->translate->_('Client_nombre')?></th>
+					<th><?=$this->translate->_('Environment')?></th>
+					<th><?=$this->translate->_('Source')?></th>
+					<th><?=$this->translate->_('Date Log')?></th>
+					<th><?=$this->translate->_('UserLog')?></th>
+					<th><?=$this->translate->_('Log Message')?></th>
+					<th><?=$this->translate->_('Group')?></th>
+					<th><?=$this->translate->_('Creada')?></th>
+					<th><?=$this->translate->_('Owner')?></th>
+					<th><?=$this->translate->_('Rgroup')?></th>
+					<th><?=$this->translate->_('Type')?></th>
+					<th><?=$this->translate->_('Programacion')?></th>
+					<th><?=$this->translate->_('open-close-ticket')?></th>
+					<th><?=$this->translate->_('minutes-close-ticket')?></th>
+					<th><?=$this->translate->_('Client')?></th>
+					<th><?=$this->translate->_('Change')?></th>
+					<th><?=$this->translate->_('tasks')?></th>
+					
+				</tr>
+			</thead>
+			
+			<tbody></tbody>
+		</table>-->		
+	</div>
+</div>
+<div class="modal"><div class="center"><span style="text-align: center"><?php echo $this->translate->_("Importando archivo, Por favor espere...")?></span><br /><?php echo $this->translate->_("Este Proceso puede tardar más de 5 minutos.")?></div></div>
+
+<?php $this->Dialogs()->ViewTemplate();?>
+<?php $this->Dialogs()->PreJournal();?>
+<?php $this->Dialogs()->CreateJEvent();?>
+<?php $this->Dialogs()->CreateEvent();?>
+
+
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+
+
+		 $("#add_template").mouseover(function() {
+    $(this).removeClass("ui-state-hover");
+  });
+		 $("#add_template").mouseout(function() {
+    $(this).removeClass("ui-state-hover");
+  });
+	 $("#add_template").hover(function() {
+    $(this).removeClass("ui-state-hover");
+  });
+	
+
+
+
+	});
+
+var tWidth = '400px'; // width (in pixels)
+var tHeight = '15px'; // height (in pixels)
+var tcolour = 'whitesmoke'; // background colour:
+var moStop = true; // pause on mouseover (true or false)
+var fontfamily = 'arial,sans-serif'; // font for content
+var tSpeed = 2; // scroll speed (1 = slow, 5 = fast)
+// enter your ticker content here (use \/ and \' in place of / and ' respectively)
+var content = 'Descargar el nuevo template de Excel CTTI, se ha agregado el campo Significant, el antiguo template ya no funciona.';
+
+var cps = -tSpeed;
+var aw, mq;
+var fsz = parseInt(tHeight) - 6;
+
+function scrollticker() {
+    mq.style.left = (parseInt(mq.style.left) > (-10 - aw)) ? mq.style.left = parseInt(mq.style.left) + cps + "px" : parseInt(tWidth) + 10 + "px";
+}
+
+function startticker() {
+    if (document.getElementById) {
+        var tick = '<div style="display:none; color:#802000;margin-left:70%;float:left;opacity:0.7;position:absolute;width:' + tWidth + ';height:' + tHeight + ';overflow:hidden;background-color:' + tcolour + '"';
+        if (moStop) tick += ' onmouseover="cps=0" onmouseout="cps=-tSpeed"';
+        tick += '><div id="mq" style="position:absolute;right:0px;top:0px;font-family:' + fontfamily + ';font-size:' + fsz + 'px;white-space:nowrap;"><\/div><\/div>';
+        document.getElementById('ticker').innerHTML = tick;
+        mq = document.getElementById("mq");
+        mq.style.left = (10 + parseInt(tWidth)) + "px";
+        mq.innerHTML = '<span id="tx">' + content + '<\/span>';
+        aw = document.getElementById("tx").offsetWidth;
+        lefttime = setInterval(scrollticker, 50);
+    }
+}
+startticker();
+window.onload = startticker;
+
+
+var dataEventsByTask = "";
+var dataForExcel = "";
+
+		tk = "<?php echo $this->token;?>";
+		var nmarr =[] ;
+		$( "#form_grupo" ).change(function(){
+			//alert(this.value);
+		//	TASK.getGroupMembers(this.value,tk);
+		});
+
+		function makeTablewithJson(data)
+		{
+			//console.log("data con error: " + JSON.stringify(data))
+			var table = "<table id='resizabletbl' class='tbljournal'>";
+			var header = "<thead class='tblheader'>";
+			header += "<tr><th width='10%' id='column-header-1' class='tblheader'>Id Change<div width='5%' id='column-header-1-sizer'></div></th><th width='20%' id='column-header-2' class='tblheader'>Description<div id='column-header-2-sizer'></div>"; 
+			header += "</th><th id='column-header-3' class='tblheader'>Service<div id='column-header-3-sizer'></div></th><th width='3%' id='column-header-4' class='tblheader'>"; 
+			header += "Env.<div id='column-header-4-sizer'></div></th><th width='5%' id='column-header-5' class='tblheader'>";
+			header += "Status<div id='column-header-5-sizer'></div></th><th id='column-header-6' class='tblheader'>"; 
+			header += "Start<div id='column-header-6-sizer'></div></th><th id='column-header-7' class='tblheader'>End<div id='column-header-7-sizer'></div></th><th id='column-header-8' class='tblheader'>";
+		    header += "Petitioner<div id='column-header-8-sizer'></div></th><th width='3%' id='column-header-9' class='tblheader'>";
+			header += "SDM<div id='column-header-9-sizer'></div></th><th width='5%' id='column-header-10' class='tblheader'>";
+		
+			header += "Crit. Serv.<div id='column-header-10-sizer'></div></th><th width='5%' id='column-header-10' class='tblheader'>CBI.<div id='column-header-10-sizer'></div></th><th id='column-header-11' class='tblheader'>Id Evento<div id='column-header-11-sizer'></div></div></th><th width='7%' id='column-header-12' class='tblheader'>";
+			
+			
+				header += "Observs.<div id='column-header-12-sizer'></div></th></tr></thead>";
+			
+				var row ="";
+		
+			data.forEach( function( item ) {
+				if(typeof item.data !== "undefined")
+				{
+					console.log("fila existing: " +JSON.stringify(item.existing));
+					
+					if(item.error)
+					{row += "<tr style='background-color:#fff0e6 !important'><td>"  + item.idChange + "</td><td style='width:35%;'>" + item.data.description;
+					$('#dialogoTextoExcelDialog').attr('disabled','disabled')
+				
+					}
+					else if(!!item.existing && item.existing == "true")
+					{
+						row += "<tr style='background-color:#808080 !important'><td>"  + item.idChange + "</td><td style='width:25%;word-wrap: break-word;'>" + item.data.description;
+					}
+					else
+						row += "<tr><td>"  + item.idChange + "</td><td style='width:25%;word-wrap: break-word;'>" + item.data.description;
+				    row += "</td><td style='word-wrap: break-word;'>" + JSON.parse(item.data.params).Service + "</td><td style='word-wrap: break-word;'>"; 
+				    row += JSON.parse(item.data.params).Environment + "</td><td style='word-wrap: break-word;'>";
+				    row += JSON.parse(item.data.params).Status + "</td><td style='word-wrap: break-word;'>"; 
+				    
+				    row += item.date + " - " +  item.data.t_start + "</td><td style='word-wrap: break-word;'>" + item.dateend + " - " +  item.data.t_end + "</td><td style='word-wrap: break-word;'>"; 
+				    row += JSON.parse(item.data.params).Petitioner + "</td><td style='word-wrap: break-word;'>";
+				    row += JSON.parse(item.data.params).SDM + "</td><td style='word-wrap: break-word;'>";
+					if(!!JSON.parse(item.data.params).critical_services)
+					    row += JSON.parse(item.data.params).critical_services + "</td><td style='word-wrap: break-word;'>";
+					else{
+					    row +=  "</td><td style='word-wrap: break-word;'>";
+					    }
+
+					if(!!JSON.parse(item.data.params).CBI)
+					    row += JSON.parse(item.data.params).CBI + "</td><td style='word-wrap: break-word;'>";
+					else{
+					    row +=  "</td><td style='word-wrap: break-word;'>";
+				    }
+				    row += JSON.parse(item.data.params).idTarea + "</td>";
+
+				    //Control de errores
+					if(item.error)
+				    {
+				    	row += "<td style='background-color:#ffa366;'>" + item.error + "</td></tr>";
+					}
+					else if(!!item.existing && item.existing == "true")
+					{row += "<td style='word-wrap: break-word;'> Change exists in database </td></tr>";}
+				    else
+				    {
+				    	row += "<td style='word-wrap: break-word;'> ----- </td></tr>";
+				    }
+					
+				    if(item.errormerged)
+				    {
+				    	row += "<td style='background-color:#ffa366;'>" + item.errormerged + "</td></tr>";
+					}
+				    
+				 }
+				
+			    });
+			
+		    	table =  table + header + row + "</table>";
+		        return table;
+		    
+			}
+		
+		function normal(data)
+		{
+			if(!!data) return data;
+			else return "";
+		}
+	function fnFormatDetails ( oTable, nTr )
+	{
+		var aData = oTable.fnGetData( nTr );
+	    var sOut = '<div><table class="tblDetalle" cellspacing="0" border="1" style="width: 100%;">';
+	    sOut += '<tr><td style="width:15%;"><b>Client - Location - Shifts - Responsible:</b></td><td class="">'+' '+aData[14]+' - '+aData[4]+' - '+aData[3]+' - '+aData[7]+'</td></tr>';
+	    sOut += '<tr><td ><b>Start - End:</b></td><td class="">'+' '+ normal(aData[8])+ ' - ' + normal(aData[9]) +'</td></tr>';
+	    sOut += '<tr><td ><b>Description</b></td><td class="">'+' '+aData[5]+'</td></tr>';
+	    sOut += '<tr><td ><b>Date and user log:</b></td><td class="">'+' '+ normal(aData[17]) + ' - ' + normal(aData[18])+'</td></tr>';
+	    sOut += '<tr><td ><b>Message log:</b></td><td class="">'+' '+ normal(aData[19])+'</td></tr>';
+	    sOut += '<tr><td><b>Events:</b></td><td>';
+	  
+	    for (var i = 0; i < dataEventsByTask.length; i++) {
+	    	if(i!=0)
+	    	{
+	    		sOut += " - " + dataEventsByTask[i].id;
+	    	}
+	    else  
+	    	{
+	    		sOut += dataEventsByTask[i].id;
+	    	}
+	    }
+	    sOut += '</td></tr>';
+	    if(!!aData[30])
+	    sOut += '<tr><td><b>Tasks: </b></td><td>' + aData[30].replace(/(\r\n|\n|\r)/gm,"") + '</td></tr>';
+	    sOut += '</table></div>';
+	    dataEventsByTask = ""; 
+	    return sOut;
+	}
+
+function seeError(data)
+{
+	data.forEach( function( item ) {
+		//console.log("item: " + item);
+if(!!item )
+	if(item.error)
+	return true;
+		});
+	return false;
+	
+	}
+	var hasExistingChanges = false;
+
+	function muestraDialogHtml(data){
+		console.log("dataForExcel: " + JSON.stringify(dataForExcel));
+		if(JSON.stringify(data).indexOf("Template out of date") != -1)
+		{
+			alert("Is not a valid template, please use another excel file");
+			return false;
+		}
+	
+			$('#dialogoTextoExcelDialog').html(makeTablewithJson(data));
+
+
+			$(function() {
+				  var thHeight = $("table#resizabletbl th:first").height();
+				  $("table#resizabletbl th").resizable({
+				      handles: "e",
+				      minHeight: thHeight,
+				      maxHeight: thHeight,
+				      minWidth: 40,
+				      resize: function (event, ui) {
+				        var sizerID = "#" + $(event.target).attr("id") + "-sizer";
+				        $(sizerID).width(ui.size.width);
+				      }
+				  });
+				});
+			
+		$('#dialogoTextoExcelDialog').dialog({
+
+			open: function( event, ui ) {
+				data.forEach( function( item ) {
+					//console.log("item: " + item);
+			if(item)
+				if(item.error || item.errormerged)
+				{
+					$('#send_button').attr('disabled','true');
+					alert("There are errors in Excel, save funcionality is disabled");
+					$('#send_button').attr('display','none');
+					
+					return;
+				}
+				if(!!item.existing && item.existing == "true")
+					hasExistingChanges = true;
+		   });    
+
+			
+				},
+			autoOpen: true,
+		
+			title:"Excel results",
+		    modal: true, 
+			dialogClass:"noTitleStuff",
+			maxWidth:1300,
+		    maxHeight:800,
+		    width: 1050,
+		    height: 600,	
+			buttons: {
+				"savebutton": {
+					text:"Create Events",
+					id:"send_button",
+					class:"send_button",
+				click: function() {
+
+					if(hasExistingChanges)
+					{
+						if (!confirm("There are duplicates, Do you want overwrite events?") == true) 
+						{
+							hasExistingChanges = false;
+							$( this ).dialog( "close" );
+     					    return false;
+    					}
+					}	
+			    	$.ajax({
+		url : "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'savedatafromexcel'))?>",
+		async : true,
+		type: "post",
+		dataType: "json",
+		data:{dataExcel:dataForExcel},
+	
+		success:function(data){
+			//console.log("CLIENTES!!!!: " + data);
+			$('#tablajTemplates').DataTable().ajax.reload();
+			 
+  		 },
+  		 error:function(jqxhr, settings, ex) { },
+  		 complete: function(data) {
+            // end of ajax call
+         
+        }
+	       	
+	});
+					$( this ).dialog( "close" );
+					
+				}
+			}
+		}
+		});
+	}
+
+	
+
+	
+	$(function() {
+	           $body = $("body");    
+           var nmarr =[] ;
+            
+            //$("th").addClass("single-line");
+            $('#fileupload_').fileupload({
+                dataType: 'json',
+                start: function (e){
+                   
+                  $body.addClass("loading");     
+                },
+                done: function (e, data) {
+        
+                     $.each(data.files, function (index, file) {
+                    var obj1 = JSON.parse(data.jqXHR.responseText);
+                    console.log(obj1[0]);
+                     if(obj1[0].error){
+                        alert('El archivo ' + file.name + ' no tiene una extension soportada\nLas extensiones soportadas son, xls, xlsx y csv.');
+                        $body.removeClass(("loading"));
+                        return;
+                        } else {
+                          
+                            //creo que aca el dialogo
+                            
+                            
+                            $.ajax({
+                                    type: 'POST',
+                                    dataType:'json',
+                                    timeout:88800,
+                                    url:"<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'files','type'=>'Jtemplate'))?>", 
+                                    data: { name: data.result[0].name  }})
+                                                                    .done(function( data1 ) {
+                                                                        $body.removeClass(("loading"));
+                                                                        //console.log("data1: " + data1);
+
+                                                                        dataForExcel = data1;
+                                                                        if(!muestraDialogHtml(data1))
+                                                                            return false;
+                                                                        if (data1){
+                                                                        	dat1 = JSON.parse(data1);
+                                                                        	//alert(dat1.errMsg);    
+                                                                        }
+                                                                        
+                                                                        
+                                                                    });
+                            nmarr.push (file.name);
+                        }
+                    
+                }); 
+                }
+            }); 
+            $('.boton').button();
+
+	    var oTable = $('#tablajTemplates').dataTable( {
+			"bStateSave": false,
+			"aaSorting": [[ 1, "desc" ]],
+			"sPaginationType": "full_numbers",
+			"lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+			//"oLanguage": idiomaDataTables,
+			"bProcessing": true,
+			"dom": 'T<"clear">lfrtip',
+            "tableTools": {
+                                //"sSwfPath": "/estilos/js/TableTools-2.2.4/swf/copy_csv_xls_pdf.swf",
+                                "aButtons": 
+                                [
+                                    /*{
+                                        "sExtends":    "collection",
+                                        //"sButtonText": "Exportar datos de pantalla",
+                                        "aButtons":    [   {
+                                                                "sExtends":     "xls",
+                                                                "sButtonText": "Export to xls",
+                                                                "mColumns": [ 1, 2, 3, 4, 5,  8, 9, 11, 12, 13, 14, 16, 17, 18, 19,23,24 ]
+                                                            }, 
+                                                           {
+                                                                "sExtends":     "copy",
+                                                                "sButtonText": "Copy to ClipBoard...",
+                                                                "mColumns": [ 1, 2, 3, 4, 5,  8, 9, 11, 12, 13, 14, 16, 17, 18, 19,23,24 ]
+                                                            }]
+                                    }*/
+                                ]
+                           },
+	        "bServerSide": true,
+	        "aoColumns": [ 
+							{ "bSortable": false,
+								 "sWidth": "8%" } , //img
+				        	{ "sWidth": "4%" }, //'id'
+				        	{  },  //'group' 
+				        	{ "sWidth": "4%" },  //'shifts'
+				        	{  },  //'Location'
+							{ "bVisible":    false }, //'description'
+							{ "bVisible":    false }, //'OU_ID'
+							{ "bVisible":    false }, //'User'
+							{ "bVisible":    false }, //'start' 
+							{ "bVisible":    false }, //'end'
+							{ "bVisible":    false }, //'title'
+							{ "bVisible":    false }, //'environment'
+				        	{ "sClass": "single-line"},  //'title' ->4
+				        	 
+				        	{ "sWidth": "10%" }, //'status' 
+				        	{ "sWidth": "3%" }, //'cliente'
+				        	{ "bVisible":    false}, //'environment'
+				        	{ "sWidth": "4%" }, //'origen'
+							{ "bVisible":    false }, //'Fecha Log'
+							{ "bVisible":    false }, //'User Log'
+							{ "bVisible":    false }, //'Message Log'
+							{ "bVisible":    false }, //'group'
+							{ "sWidth": "4%" }, //'Creada'
+							{ "bVisible":    false  }, //'Owner'
+							{ "bVisible":    false  }, //'rgroup'
+							{ "bVisible":    false  }, //'type'
+							{ "bVisible":    false  }, //'programacion' -> 25
+							{ "bVisible":    false  }, //'open-close-ticket' -> 26
+							{ "bVisible":    false  }, //'minutes-close-ticket' -> 27
+				        	{ "bVisible":    false  }, //'client' -> 28
+							{ "sWidth":    "3%"  }, //refer
+							{ "bVisible":    false  }
+		          	     ],
+	       // "sAjaxSource": "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'jtemplates'))?>",
+			"fnInitComplete": function () {
+	
+				$('.dataTables_filter input').attr("placeholder", "Search");
+				
+			},
+			aoColumnDefs: [{ 
+				"bSortable": false, 
+				"aTargets": ['noSort'] 
+			}]
+		});
+		
+
+	    $('#add_jevent').click(function(){
+           // $('#new1_template_form').reset();
+            $("#1_detail").hide();
+            $("#new1_repeat-options").hide();
+
+            $('#CreateJEvent').dialog({
+                 autoOpen: true,
+                width: 700,
+                dialogClass: 'noTitleStuff',
+                modal: true,
+                position: 'middle',
+                show: { effect: "fade", duration: 500 },
+                hide: { effect: "fade", duration: 500 }
+             });
+    
+		 });
+
+	    
+	    $('#add_event').click(function(){
+	    	 $("#1_detail").hide();
+	    	 $("#new1_repeat-options").hide();
+            $('#CreateEvent').dialog({
+                autoOpen: true,
+                width: 'auto',
+                dialogClass: 'noTitleStuff',
+                title: 'Crear evento checklist',
+                modal: true,
+                position: 'middle',
+              show: { effect: "fade", duration: 1500 },
+              hide: { effect: "fade", duration: 1500 }
+            });
+    	});
+
+	    
+		
+// 		      $('#add_template').button({
+//                 icons: {
+//                     primary: "ui-icon-locked"
+//                 }
+//               }).click(function(){
+//             // Muestra el dialogo y crea un evento
+//             {
+//             $('#preJournal').dialog({
+//                 autoOpen: true,
+//                 width: '85%',
+//                 dialogClass: 'noTitleStuff',
+//                 title: 'Add Tasks to Journal...',
+//                 modal: false,
+//                 position: 'middle',
+//               show: { effect: "fade", duration: 1500 },
+//               hide: { effect: "fade", duration: 1500 }
+//             });
+//             };
+        
+//         });
+
+		$('#add_template').click(function(){
+            // Muestra el dialogo y crea un evento
+            {
+            $('#preJournal').dialog({
+                autoOpen: true,
+                width: '85%',
+                dialogClass: 'noTitleStuff',
+                title: 'Add Tasks to Journal...',
+                modal: true,
+                position: 'middle',
+              show: { effect: "fade", duration: 1500 },
+              hide: { effect: "fade", duration: 1500 }
+            });
+            };
+        
+        });
+		
+		$(document).off('click', '.detail_icon');
+	    $(document).on( 'click', '.detail_icon', function () {
+	        var nTr = $(this).parents('tr')[0];
+	        if ( oTable.fnIsOpen(nTr) )
+	        {
+	            /* This row is already open - close it */
+	            this.src = "/img/details_open.png";
+	            oTable.fnClose( nTr );
+	        }
+	        else
+	        {
+	            /* Open this row */
+	            
+	            var datosFila = oTable.fnGetData( nTr );
+	            var eventos = getDataEvents(datosFila[1]);
+	            this.src = "/img/details_close.png";
+	            oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'tabledetail' );
+	        }
+	    });
+
+		
+		
+	    
+        $(document).off('click', '.edit_icon');
+        $(document).on( 'click', '.edit_icon', function (e) {
+                var table = $('#tablajTemplates').DataTable();
+                var row = table.row($(this).parent().parent()).data(); 
+                //console.log("Fila: " + JSON.stringify(row));
+           $('#ViewTemplate').dialog({
+                autoOpen: true,
+                width: 'auto',
+                title: 'Detalle de la plantilla ' +row[1],
+                dialogClass: 'noTitleStuff',
+                modal: false,
+                position: 'middle',
+                 open: function( event, ui ) {
+                     $('#view_template_form')[0].reset();
+                     $("#1_detail_edit1").hide();
+                    $('.vtempl').each(function(){
+                        $(this).val(row[$(this).data('counter')]);
+                        //console.log("data: " + row[$(this).data('counter')] );
+                        
+                    });
+                    object = JSON.parse(row[25]);
+                   // console.log("objeto: " + JSON.stringify(object));
+                    if("fr_tmp" in object) {
+                        $('#repeats_edit1').prop('checked', true);
+                        $("#1_detail_edit1").show();
+
+                        $('#end-repeat_edit1').prop('disabled', false);
+                        
+                        for (var key in object.fr_tmp.P1D) {
+                            $('#'+object.fr_tmp.P1D[key]+'_edit1').prop('checked', true);
+
+                                alert(key + " -> " + JSON.stringify(object.fr_tmp.P1D[key]));
+                            }
+                        
+
+                    }
+                  
+                     },
+               close: function(ev, ui) { ChangeButton('new_save',0.5, true); },
+              show: { effect: "fade", duration: 1500 },
+              hide: { effect: "fade", duration: 1500 }
+            });
+        });
+
+        $(document).off('click', '.delete_icon');
+        $(document).on( 'click', '.delete_icon', function (e) {
+            var r = confirm("¿Borrar la platilla?");
+            if (r == true) 
+            {
+                var table = $('#tablajTemplates').DataTable();
+                var row = table.row($(this).parent().parent()).data(); 
+
+                $.post( "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'rmtemp'))?>", { id: $(this).parent().next().text(), st: row[21]  })
+                         .done(function(data1) {
+
+                               $('#tablajTemplates').DataTable().ajax.reload();
+                            });
+            }
+        });
+        
+	});
+	
+	
+	
+/*	function add_template()
+	{
+		alert('Temporalmente Desactivado...');
+		//$.post('<?=$this->url(array('controller'=>'admin','action'=>'refresrecursos'))?>',function(data){$('#resultRefresh').html(data);});
+	
+		return false;
+	}*/
+
+
+	function refreshTree()
+	{
+    	alert('Temporalmente desactivado ...');
+		//$.post('<?=$this->url(array('controller'=>'admin','action'=>'refresrecursos'))?>',function(data){$('#resultRefresh').html(data);});
+	
+		return false;
+	}
+
+	function getDataEvents(idTarea)
+	{
+		//console.log('idtarea en metodo js' + idTarea);
+		$.ajax({
+				timeout: 48000,
+				url : "/task/calendar/edit/geteventsbytask",
+				data: {idtarea:idTarea},
+				async : false,
+				type: "post",
+				dataType : "json",
+				success:function(d){
+					dataEventsByTask = JSON.parse(d);
+					//console.log(d);
+				}
+			});
+	}
+	
+	</script>
+	
+	<style>
+
+	#tablajTemplates{
+		font-size:1.5em !important;
+	}
+	#tablajTemplates_length{
+		font-size:1.5em !important;
+	}
+	#add_template{
+		/*font-size:1.2em !important;*/
+	}
+	.bigger{
+		font-size:1.5em !important;
+	}
+    .tbljournal{
+	    table-layout: auto !important;
+    	box-shadow: 10px 10px 5px #888888 !important;
+    	border-collapse: separate !important;
+    	border-spacing: 2px !important;
+    	border-color:transparent !important;
+    	width:99% !important;
+    	font-size:10px !important;
+    	margin-top:2% !important;
+    	
+    }
+    .tbljournal td{
+	border-color:transparent !important;
+    }
+    .ui-state-hover 
+    {
+    	background-color: #EDEDED !important;
+    	border-color: #D3D3D3 !important;
+    }
+    .tblheader{
+	background-color:#0088cc !important;
+    color:whitesmoke !important;
+    border-radius:0px !important;
+    font-size:11px !important;
+    text-align:center !important;
+    }
+        .tbljournal  tr:nth-child(even) {background: #b3cce6 !important;}
+        .tbljournal  tr:nth-child(odd) {background: #f2f2f2 !important;}
+
+    .modalStyle .ui-dialog-titlebar{
+	background:red !important;
+    }
+    .tblDetalle{
+    	font-size: 1.2em !important;
+    }
+  
+    
+
+	</style>

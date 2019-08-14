@@ -1,0 +1,272 @@
+<div id="CreateEvent" title="Detalle del evento" style="display:none;padding: 1px; z-index: 100000;">
+    <div class="administrarApp" style="width: 98%">
+        <div class="description" style="width: 98%">
+            <?=$this->translate('Puede crear Eventos en esta pestaña')?>
+
+        </div>      
+        <div class="content" style="margin: 1px;">
+            <form id="new_new_template_form" enctype='application/json' action="" method="" class="">
+                <dl class="zend_form">
+                 <h3 class="temp-new"><?=$this->translate('General Information')?><img src="/img/details_close.png" alt="" class="img_sty" style="float:right;opacity: 0.4;filter: alpha(opacity=40);"/></h3>
+                 <div id="new_new_section_1">
+                    <fieldset>
+                        <label for="new_title"><?=$this->translate('Template Title*')?></label>
+                        <input type="text" name="title" id="new_new_form_4" class="needed_event_c" placeholder="<?=$this->translate('Required Fields...')?>"/>
+                        <label for="new_description"><?=$this->translate('Template Description*')?></label>
+                        <textarea id="new_new_form_5" style="height: 20px;" class="textareas needed_event_c" name="description" placeholder="<?=$this->translate('Required Fields...')?>"></textarea>
+                        <!--<label for="new_remark"><?=$this->translate('Remark')?></label>
+                        <textarea id="new_new_new_remark" style="height: 15px;" class="textareas" name="remark" placeholder="<?=$this->translate('Remarks...')?>"></textarea>-->
+                    </fieldset>
+                </div>
+                <h3 class="temp-new"><?=$this->translate('Asignament Options')?><img src="/img/details_open.png" alt=""  class="img_sty" style="float:right;"/></h3>
+                 <div id="new_new_section_2" class="oculto">
+                    <fieldset class="col-b">
+                        <label for="new_shifts" class=""><?=$this->translate('Shifts*')?></label>
+                        <!--<input type="text" name="turno" id="new_new_form_17" value="" placeholder="<?=$this->translate('Required Fields...')?>" class="needed_event_c">  -->
+
+                        <select name="turno" id="new_new_form_17" placeholder="<?=$this->translate('Required Fields...')?>" class="">
+                            <option value="Morning">Morning</option>
+                            <option value="Evening">Evening</option>
+                            <option value="Night">Night</option>
+
+
+                        </select>
+                    </fieldset>
+                    
+                    <fieldset class="col-b last">
+                       <!-- <label for="new_location" class=""><?=$this->translate('Location *')?></label>-->
+                       
+                        <!--<input type="text" name="centro" id="new_new_form_12" value="" placeholder="<?=$this->translate('Required Fields...')?>" class="needed_event_c">    -->
+
+                        <select name="centro" id="new_new_form_12" value="" style="display: none;" class="">
+                            <option selected="selected" value="BCN - 22@">BCN - 22@</option>
+                            <!--<option value="MAD - 28@">MAD - 28@</option>-->
+                        </select>
+
+                    </fieldset>     
+                    <fieldset class="col-a">
+                        <label class="" for="new_group"><?=$this->translate('Asigned Group *')?></label>
+                        <!--<input type="text" name="group" id="new_new_form_14" placeholder="<?=$this->translate('Required Fields...')?>" value="" class="needed_event_c">    -->
+                        <select name="group" id="new_new_form_14" placeholder="<?=$this->translate('Required Fields...')?>" value="" class="">
+                        <?php 
+                        $tmp = $this->Groups()->GetAllGroups();
+                        foreach ($tmp as $cli)
+                        {
+                            echo $cli;
+                        }
+                        
+                        
+                        ?>
+                        </select>
+                    </fieldset>
+                    
+                    <fieldset class="col-a">
+                        <label style="width: 290px;" class="" for="new_client"><?=$this->translate('Client *')?></label>  
+                        <!-- <input type="text" name="cliente" id="new_new_form_13" value="" placeholder="<?=$this->translate('Required Fields...')?>" class="needed_event_c">  -->                      
+    				    <select style="width: 308px;" name="cliente" class="" id="new_new_form_13">
+    				    	<!--<option value=""><?=$this->translate('Select Location')?></option>-->
+    				    	<?php 
+    				    	   $clisTmp = $this->Clientes()->GetAll();
+    				    	   foreach($clisTmp as $cliTmp){
+    				    	       echo $cliTmp;
+    				    	   }
+    				    	?>
+    				    </select>                        
+                    </fieldset>
+
+                   <!-- <fieldset class="col-a last">
+                        <label class="" for="new_rgroup"><?=$this->translate('Responsible Group*')?></label>     
+                        <input type="text" name="rgroup" id="new_new_form_15" value="" placeholder="<?=$this->translate('Required Fields...')?>" class="needed_event_c">          
+                    </fieldset>-->
+                </div>              
+                <h3 class="temp-new"><?=$this->translate('Date/Time Options')?><img src="/img/details_open.png" alt=""  class="img_sty" style="float:right;"/></h3>
+                 <div id="new_new_section_3" class="oculto">
+                
+                    <fieldset class="col-b">
+                        <?php $now = new DateTime(); $now->setTime($now->format('G')+1,0,0);?>
+                        <label for="form_6" class=""><?=$this->translate('Start Time*')?></label>
+                        <input type="text" class="" name="start" placeholder="<?=$this->translate('Required Fields...')?>" id="new_new_form_6" value="<?=$now->format('Y-m-d H:i')?>">
+                    </fieldset>
+                    
+                    <fieldset class="col-b last">
+                        <?php $now->modify('+3 hours');?>
+                        <label for="form_7" class=""><?=$this->translate('End Time*')?></label>
+                        <input type="text" name="end" id="new_new_form_7" placeholder="<?=$this->translate('Required Fields...')?>" class="" value="<?=$now->format('Y-m-d H:i')?>">
+                    </fieldset>
+                </div>              
+            
+                <h3 class="temp-new" style="display: none;"><?=$this->translate('Environment Options')?><img src="/img/details_open.png" alt=""  class="img_sty" style="float:right;"/></h3>
+                <div id="new_new_section_4" style="display: none;">
+                    <fieldset class="col-b" >
+                        <label for="new_source" class=""><?=$this->translate('Source*')?></label>
+                        <input type="text" name="origen" id="new_new_form_8" value="Checklist" placeholder="<?=$this->translate('Required Fields...')?>" class="">
+                    </fieldset>
+
+                    <fieldset class="col-b last" >
+                        <label for="new_type" class=""><?=$this->translate('Type*')?></label>
+                        <input type="text" name="type" id="new_new_new_type" value="Manual" placeholder="<?=$this->translate('Required Fields...')?>" class="">
+                        
+                    </fieldset>
+                    </div>
+                
+                
+<h3 class="temp-new"><?=$this->translate('Service Manager')?><img src="/img/details_open.png" alt=""  class="img_sty" style="float:right;"/></h3>
+<div id="new_new_section_5" class="oculto">
+	<fieldset class="col-b">
+		<label for="open-close-ticket" class=""><?=$this->translate('Open/Close Ticket')?></label>
+		<div style="border: 1px solid #ccc;border-top-color: #EEEEEE;height:50px;background-color: #fafafa;">
+			<input type="checkbox" style="width: 100px;float:left;display:inline;" name="open-close-ticket" id="new_new_open-close-ticket" value="1" class="">
+		</div>
+	</fieldset>
+	<fieldset class="col-b last">
+		<label for="minutes-close-ticket"><?=$this->translate('Minutes for closing ticket:')?></label>
+		<div id="minutes-close-ticket_container">			
+			<input id="new_new_minutes-close-ticket" class="minutesCloseTicket" style="height:45px" placeholder="<?=$this->translate('Max. 60 minutes')?>" name="minutes-close-ticket" type="text" disabled="disabled">
+		</div>
+	</fieldset>
+</div>                
+                
+                
+                    <dt id="new_new_Guardar-label">&nbsp;</dt>
+                    <dd id="new_new_Guardar-element">
+                        <!-- <input type="button" style="width: 47%; display: none;" name="update" id="new_new_update" value="Create Event">-->
+                        <div id="new_new_savecontain">
+                            <input type="button" style="opacity:0.5;width: 47%; float:right; clear:both;" name="save" id="new_new_save" value="Save Event" class="new_save">
+                        </div>
+                    </dd>
+                    </div>
+ 
+                    
+                </dl>
+
+            </form>
+
+</div>
+</div>
+
+
+<script type="text/javascript">
+$(function() {
+
+	$(".minutesCloseTicket").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl/cmd+A
+            (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+C
+            (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+X
+            (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+            
+        } else {
+
+
+        	// Validar valores minimo y maximo
+        	
+        	// Para controlar el teclado numérico
+            valueCode = (e.keyCode < 96) ? e.keyCode : e.keyCode - 48;  
+            valueInput = String.fromCharCode(valueCode)
+            
+            valueText = $(this).val();
+            
+     		valueFinal = "" + valueText + valueInput;
+     		if (valueFinal > 60) e.preventDefault();
+     		
+        }
+
+        
+    });
+
+	
+	$("#new_new_open-close-ticket").change(function(){
+
+		if ($("#new_new_open-close-ticket").prop('checked')) {
+			$("#new_new_minutes-close-ticket").removeProp("disabled");
+			$("#new_new_minutes-close-ticket").focus();
+				
+		} else {
+			$("#new_new_minutes-close-ticket").val(null);
+			$("#new_new_minutes-close-ticket").prop("disabled", true);
+		}
+    	
+    });
+
+    
+
+    $('.needed_event_c').change(function(){
+
+            var element_count = 0;
+            $('.needed_event_c').each(function(){
+            	                
+                if ($(this).prop('type')==="checkbox") {
+                    element_count =($(this).prop( "checked"))?element_count:1;
+                } else {
+                    element_count =($(this).val() =='')?1:element_count;
+                }
+                
+        });
+            if (element_count === 0) {
+                ChangeButton('new_new_save',1, false);
+            } else {
+                ChangeButton('new_new_save',0.5, true);
+            }
+    });
+     
+    
+    $('#new_new_save').button({
+        icons: {
+            primary: "ui-icon-locked"
+        }}).click(function () {
+            //console.log("me hicieron click");
+            if($(this).css("opacity") == 1)
+            {
+                ChangeButton('new_new_save',0.5, true);
+                console.log( $( "#new_new_template_form" ).serialize());
+                $.post( "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'crevent'))?>",
+                     $( "#new_new_template_form" ).serialize())
+                       .done(function(data) {
+                               // $('#tablaEvents').DataTable().ajax.reload();
+                                $('#CreateEvent').dialog("close");
+                                //console.log(data);
+                                $.fn.makeNotify.sendMsj('Event '+data +' Created!.');
+                                TASK.debug( 'Event '+ data +' Created!.');
+                                //$( this ).dialog( "close" );
+                                })
+                       .fail(function() {
+                                $('#tablaEvents').DataTable().ajax.reload();
+                                $('#ViewEvent').dialog("close");
+                                //$.fn.makeNotify.sendMsj('Fail to update the Event '+$('#form_1').val() +', pls contact with automation@t-systems.com.');
+                                //TASK.debug( 'Fail to update the Event '+$('#form_1').val() +', pls contact with automation@t-systems.com.');                                
+                       });          
+            }
+            
+        });
+    
+    $("#new_new_form_6").datetimepicker({
+        showButtonPanel: true,
+        stepMinute: 5,
+        firstDay: 1,
+        dateFormat: 'yy-mm-dd', 
+        timeFormat: 'hh:mm:ss',
+        lang:'es'
+    });
+    
+    $("#new_new_form_7").datetimepicker({
+        showButtonPanel: true,
+        stepMinute: 5,
+        firstDay: 1,
+        dateFormat: 'yy-mm-dd', 
+        timeFormat: 'hh:mm:ss',
+        lang:'es'
+    });    
+});         
+
+</script>

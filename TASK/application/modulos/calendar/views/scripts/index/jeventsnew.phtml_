@@ -1,0 +1,433 @@
+<div class="cuerpo first_frame" style="margin-top: 5px;height:100vh;">
+	<div class="contenido" style="padding-top: 10px;width:98%;height: 85vh;margin-left:2%;overflow:auto;">
+		<div class="titulo"><?=$this->translate->_('Eventos Journal')?></div>
+
+				<p><b><i>&nbsp;&nbsp;&nbsp;&nbsp;<?=$this->translate->_('Puede administrar eventos de Bitácora (Journal) en esta pestaña. Debajo se visualizan los eventos programados. Estos eventos alimentan la Bitácora (Journal).');?></i></b></p>
+		
+		<div id="resultRefresh"></div>
+		
+		<table id="tablajEvents" width="99%">
+			<thead class="header">
+				<tr class="header">
+					<th class="header"><?=$this->translate->_('Acciones')?></th>
+					<th class="header">ID</th>
+					<th class="header"><?=$this->translate->_('Id Template')?></th>
+					<th class="header"><?=$this->translate->_('Date Limit')?></th>
+					<th class="header"><?=$this->translate->_('Title')?></th>
+					<th class="header"><?=$this->translate->_('Description')?></th>
+					<th class="header"><?=$this->translate->_('Start')?></th>
+					<th class="header"><?=$this->translate->_('End')?></th>
+					<th class="header"><?=$this->translate->_('Source')?></th>
+					<th class="header"><?=$this->translate->_('Status')?></th>
+					<th class="header"><?=$this->translate->_('Change Id')?></th>
+					<th class="header"><?=$this->translate->_('Shifts')?></th>
+					<th class="header"><?=$this->translate->_('Location')?></th>
+					<th class="header"><?=$this->translate->_('Client')?></th>
+					<th class="header"><?=$this->translate->_('Group')?></th>										
+					<th class="header"><?=$this->translate->_('RGroup')?></th>
+					<th class="header"><?=$this->translate->_('OU_ID')?></th>
+					<th class="header"><?=$this->translate->_('User')?></th>
+					<th class="header"><?=$this->translate->_('Entorno')?></th>
+					<th class="header"><?=$this->translate->_('Type')?></th>
+					<th class="header"><?=$this->translate->_('Tk/Par')?></th>
+					<!--<th class="header"><?=$this->translate->_('Date Log')?></th>
+					<th class="header"><?=$this->translate->_('User Log')?></th>-->
+					<!--<th class="header"><?=$this->translate->_('Message Log')?></th>-->
+					</tr>
+			</thead>
+			
+			<tbody></tbody>
+		</table>		
+	</div>
+	<div class="titulo_footer"><?=$this->translate->_('')?></div>
+</div>
+
+
+
+<?php $this->Dialogs()->NewTemplate();?>
+<?php $this->Dialogs()->ViewJEvent();?>
+
+<script type="text/javascript">
+String.prototype.unquoted = function (){return this.replace (/(^")|("$)/g, '')}
+	var logmessageinfo = "";
+
+	function getLogInfo(id)
+	{
+
+	$.ajax({
+		timeout: 48000,
+		url : TASK.settings.urlBase + '/calendar/ajax/getloginfo',
+		async : false,
+		type: "post",
+		dataType : "json",
+		data:{eventoid:id},
+		success:function(data){
+			logmessageinfo = data;
+		
+  		 },
+  		 error:function(jqxhr, settings, ex) { alert('failed, ' + ex);},
+  		 complete: function(data) {
+        
+             
+        }
+	       	
+	});
+	}
+
+	function fnFormatDetails ( ooTable, nTr )
+	{
+		//Get log data
+
+		var aData = ooTable.fnGetData( nTr .false);
+		
+		date = "";
+		userlog = "";
+	   
+    	getLogInfo(aData[nTr._DT_RowIndex]['1']);
+	   	userlog = !!aData[nTr._DT_RowIndex]['18'] ? aData[nTr._DT_RowIndex]['18'] : "NA";
+		userassigned = !!aData[nTr._DT_RowIndex]['21'] ? aData[nTr._DT_RowIndex]['21'] : "User not assigned yet";
+		uk = !!aData[nTr._DT_RowIndex]['22'] ? aData[nTr._DT_RowIndex]['22'] : "User not assigned yet";
+	    var sOut = '<div class="tablecss"><table class="tblDetalle" cellspacing="0" border="1" style="width: 100%;">';
+	    sOut += '<tr><td style="width:15%;" class="tabletitle"><b>Client - Location - Shifts - User Assigned:</b></td><td class="tableres">'+' '+  JSON.stringify(aData[nTr._DT_RowIndex]['13']).unquoted() +' - '+ JSON.stringify(aData[nTr._DT_RowIndex]['12']).unquoted() 
+		+' - '+ JSON.stringify(aData[nTr._DT_RowIndex]['11']).unquoted() +' - '+ userassigned.unquoted() +'</td></tr>';
+	    sOut += '<tr><td class="tabletitle"><b>Start - End:</b></td><td class="tableres">'+' '+  JSON.stringify(aData[nTr._DT_RowIndex]['6']).unquoted() +' - '+ JSON.stringify(aData[nTr._DT_RowIndex]['7']).unquoted() + '</td></tr>';
+	    sOut += '<tr><td class="tabletitle"><b>Description:</b></td><td class="tableres">'+' '+ JSON.stringify(aData[nTr._DT_RowIndex]['5']).unquoted() +'</td></tr>';
+	    //sOut += '<tr><td class="tabletitle"><b>Date and user log:</b></td><td class="tableres">' + date.unquoted() + " - " +   ' '+ userlog.unquoted() +' - '+ JSON.stringify(aData[nTr._DT_RowIndex]['19']).unquoted() +'</td></tr>';
+	   // if(!!aData[nTr._DT_RowIndex]['22'])
+		sOut += '<tr><td class="tabletitle"><b>Messages and log info:</b></td><td class="tableres">';
+			for (var i =0; i< JSON.parse(logmessageinfo).length;  i++) {
+				if(i == 0)
+				sOut += JSON.parse(logmessageinfo)[i];
+				else sOut += " - " + JSON.parse(logmessageinfo)[i];
+			}
+	
+	    sOut += '</td></tr></table></div>';
+	     
+	    return sOut;
+	}
+	
+	$('#tablaNewjEvents tbody').on( 'click', 'td', function () {
+            txt =  (($(this).has(".edit").length ==1)?$(this).children().val():$(this).text());
+            $(this).empty();
+            $(this).append('<input type="text" class="edit" value="'+txt+'">');
+                
+    } );
+	
+	$(function() {	 
+	        $body = $("body");    
+	       var nmarr =[] ;
+	       $body.addClass("loading");
+     
+            $('.boton').button();
+	    
+	    
+	    /*
+	     * Initialse DataTables, with no sorting on the 'details' column
+	     */
+	    var ooTable = $('#tablajEvents').dataTable( {
+			"bStateSave": true,
+			"aaSorting": [[ 1, "desc" ]],
+			"bRetrieve":true,
+			"sPaginationType": "full_numbers",
+			"bdeferRender": true,
+			 "deferRender": true, 
+			//"oLanguage": idiomaDataTables,
+			"lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+			"bProcessing": true,
+	        "bServerSide": true,
+	        "dom": 'T<"clear">lfrtip',
+			
+            "tableTools": {
+                              
+                                "aButtons": 
+                                [
+                  
+                                ]
+                           },
+	        "aoColumns": [ 
+							{ "bSortable": false,
+								 "sWidth": "6%", "sClass": "datatables_action"} , //img ->0
+				        	{"sWidth": "2%" }, //'id' ->1
+				        	{ "sWidth": "3%" },  //'idTarea'  ->2
+				        	{ "bVisible":    false},  //'limite' ->3
+				        	{ "sClass": "single-line"},  //'title' ->4
+							{ "bVisible":    false }, //'description' ->5
+							
+							{ "sWidth":"6%" }, //'start' -> 6
+							{ "sWidth":"6%"  }, //'end' -> 7
+							{ "bVisible":    false }, //'source' -> 8
+							{ "sWidth": "3%" }, //'status' -> 9
+				        	{ "sWidth": "5%" },  //'schedule' -> 10
+							//{ "bVisible":    false }, //'Shifts' -> 11
+							{ "sWidth": "5%" }, //'Shifts' -> 11
+							{ "bVisible":    false }, //'Location' -> 12 
+				        	{ "sWidth": "15%" },  //'Client' -> 13
+				        	{ "sWidth": "3%","bSortable": false }, //'Group'  -> 14
+				        	{ "bVisible":    false,"bSortable": false }, //'rGroup' ->15
+							{ "bVisible":    false }, //'OU_ID' -> 17
+							{ "bVisible":    false,}, //'user' -> 16
+							{ "bVisible":    false }, //'environment' -> 18
+							{ "bVisible":    true,"sWidth":"2%","bSortable": false }, 	//'type' -> 19
+							{ "bVisible":    true,"sWidth":"5%" },
+
+							/*{ "bVisible":    false }, //'Fecha Log' -> 20
+							/*{ "bVisible":    false }, //'User Log' -> 21
+							{ "bVisible":    false  } //'Message Log' -> 22*/
+		          	     ],
+						   columnDefs: [ 
+
+                                { 
+									
+								    targets: [2,3,4,5,6,7],
+                                    render:$.fn.dataTable.render.ellipsis( 10 )}
+                                ],
+	        "sAjaxSource": "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'searchjournal'))?>",
+			"fnInitComplete": function () {
+	
+				$('.dataTables_filter input').attr("placeholder", "Search");
+				
+			},
+			aoColumnDefs: [{ 
+				"bSortable": false, 
+				"aTargets": ['noSort'] 
+			}]
+		});
+		//ooTable = ooTable.DefaultView.ToTable(true);
+		var fila="";
+        $('#tablajEvents tbody').on( 'click', 'tr', function () {
+            ii = ooTable.fnGetData(this);
+			fila = ooTable.fnGetData(this);
+			//console.log("FILA: " + fila);
+            $.each(ii, function(index, value) {
+                if(index == 1)dat = value;
+                $('#form_'+index).val(value);
+            }); 
+} );
+		
+		
+		$(document).on( 'mouseenter', 'td.single-line', function () {
+		    MyTip('Title:', $(this).text());
+		});
+		
+		$(document).on( 'mouseleave', 'td.single-line', function () {
+                   UnTip();
+        });
+		
+	    $(document).off('click', '.detail_icon');
+	    $(document).on( 'click', '.detail_icon', function () {
+	        var nTr = $(this).parents('tr')[0];
+			
+	        if ( ooTable.fnIsOpen(nTr) )
+	        {
+	            /* This row is already open - close it */
+	            this.src = "/img/details_open.png";
+	            ooTable.fnClose( nTr );
+	        }
+	        else
+	        {
+	            /* Open this row */
+	            this.src = "/img/details_close.png";
+	            ooTable.fnOpen( nTr, fnFormatDetails(ooTable, nTr), 'tabledetail' );
+				
+	        }
+	    });
+	    
+	    
+	    $('#add_jevent').button({
+            icons: {
+                primary: "ui-icon-locked"
+            }}).click(function(){
+        // Muestra el dialogo y crea un evento
+        {
+            //$('#new1_repeats').prop('checked', false);
+            $('#new1_template_form')[0].reset();
+            $("#1_detail").hide();
+            $("#new1_repeat-options").hide();
+            
+            $('#createNewTemplate').dialog({
+                 autoOpen: true,
+                width: 700,
+                modal: true,
+                position: 'middle',
+                show: { effect: "fade", duration: 500 },
+                hide: { effect: "fade", duration: 500 }
+             });
+         };
+//     
+ });
+	    
+  $(document).on( 'click', '.goto', function () {
+	        var nTr = $(this).parents('tr')[0];
+			var x = $(this).parents('td');
+			var aData = ooTable.fnGetData( nTr .false);
+			var idEvento = nTr.cells[1].innerText;
+			var startDate = nTr.cells[4].innerText;
+			var status = nTr.cells[6].innerText;
+			var parent = nTr.cells[12].innerText;
+			//console.log("idEvento: " + nTr.cells[1].innerText + " Fecha inicio: " + nTr.cells[4].innerText + " Parent: " + nTr.cells[12].innerText);
+            window.location.href = 'ijournal?idEvento=' + idEvento + '&start=' + startDate + '&status=' + status + '&parent=' + parent;
+			
+	   
+	    }); 
+
+	    
+	    //$(document).off('click', '.edit_icon');
+	    $(document).on( 'click', '.edit_icon', function (e) {
+			
+	    	ChangeButton('new_save',1, false);
+           $('#ViewJEvent').dialog({
+                autoOpen: true,
+                width: 'auto',
+                title: 'Detalle del evento '+dat,
+                dialogClass: 'jeventsnew',
+                modal: false,
+                position: 'middle',
+                open: function( event, ui ) {
+                    $('#historic').html('');
+					 //set select
+					
+				
+				var text = JSON.stringify(fila[13]);
+				
+			    $("#form_25 option:contains(" + text + ")").attr('selected', 'selected');
+				
+                    var ul = $('<ul>').appendTo($('#historic'));
+                    $.post( "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'getevlog'))?>", { id: dat })
+                    .done(function( data1 )
+                    {
+                    var obj = jQuery.parseJSON(data1);
+                    $.each(obj, function(key,value) {
+                            ul.append($(document.createElement('li')).text(value));  
+                        }); 
+                    });                   
+                    },
+               close: function(ev, ui) { ChangeButton('new_save',1, false); },
+              show: { effect: "fade", duration: 1500 },
+              hide: { effect: "fade", duration: 1500 }
+            });
+	    });
+		    
+	    /*$(document).off('click', '.delete_icon');
+        $(document).on( 'click', '.delete_icon', function (e) {
+            var r = confirm("¿Borrar el evento?");
+            if (r == true) {
+                    var table = $('#tablajEvents').DataTable();
+                    var row = table.row($(this).parent().parent()).data(); 
+                    $.post( "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'rmevent'))?>", { id: $(this).parent().next().text(), sts:row[9],st: row[6]  })
+                                        .done(function( data1 )
+                                        {
+                                           $body.removeClass(("loading"));
+                                           $('#tablajEvents').DataTable().ajax.reload();
+                                        });
+            } 
+        });*/
+	});
+
+
+
+	$(document).ready(function(){
+		 $('#tablajEvents td').removeClass("sorting_1");
+		 $('.delete_icon').css('display','none');
+		});
+	function refreshTree()
+	{
+    	alert('Temporalmente desactivado ...');
+		//$.post('<?=$this->url(array('controller'=>'admin','action'=>'refresrecursos'))?>',function(data){$('#resultRefresh').html(data);});
+	
+		return false;
+	}
+	
+	
+
+	</script>
+	
+	<style>
+input[type=textarea], select {
+   
+   
+    margin: 8px 0 !important;
+    display: inline-block !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    box-sizing: border-box !important;
+}
+.odd{
+	background-color:#d9d9d9!important;
+	
+}
+.even{
+	height:20px !important;
+}
+
+.header{
+	background-color:#336699!important;
+	height:25px !important;
+	border-radius:3px !important;
+	font-size:12px;
+}
+   th{background-color: #336699 !important;}
+   
+input[type=select] {
+
+}
+
+.td-limit {
+    max-width: 70px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.titulo{
+font-family:arial;
+ opacity: 0.7;
+    filter: alpha(opacity=70); /* For IE8 and earlier */
+font-weight:bold;
+font-size: 1.2em;
+color:white;	
+padding:5px;
+border-radius:5px;
+background-color:#3973ac !important;
+box-shadow: 6px 6px 5px #888888 !important;
+width:98%;
+margin:auto;
+	
+}
+td {word-wrap: break-word;}
+.titulo_footer{
+	width:85vh !important;
+}
+#tablajEvents{
+	box-shadow: 6px 6px 5px #888888 !important;
+	font-size:11px;
+
+	
+}
+.dataTables_filter{
+margin-right:1% !important;
+margin-top:3% !important;	
+
+	
+}
+
+.dataTables_length{
+clear:both;	float:left;
+margin-top:1% !important;
+margin-left:2%;
+margin-bottom:5px;
+background-color: #d9e6f2;
+padding:5px;
+border-radius:5px;	
+	
+}
+.temp-new{
+	border-color:#3973ac !important;
+	color:#2d5986 !important;
+}
+.paginate_button current{
+	background-color:#4080bf !important;
+}
+.tablajEvents_wrapper{
+	height:80%;
+}
+
+	</style>

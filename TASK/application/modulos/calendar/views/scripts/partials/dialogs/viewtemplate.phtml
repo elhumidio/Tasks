@@ -1,0 +1,581 @@
+<div id="ViewTemplate" title="<?=$this->translate('Edit Template')?>" style="display:none">
+	<div class="administrarApp">
+		<!--<div class="title"><?=$this->translate('Edit Template')?></div>-->
+		<div class="description">
+			<?=$this->translate('Puede editar Plantillas en esta pestaña.<br />
+			Las plantillas se utilizan para crear los eventos checklist.')?>
+
+		</div>		
+		<div class="content">
+			<form id="view_template_form" enctype='application/json' action="" method="" class="">
+				<dl class="zend_form">
+				 <h3 class="temp-new"><?=$this->translate('General Information')?><img src="/img/details_close.png" alt="" class="img_styedit" style="float:right;opacity: 0.4;filter: alpha(opacity=40);"/></h3>
+				 <div id="section_1">
+					<fieldset>
+						<label for="edit1_title"><?=$this->translate('Template Title')?></label>
+						<input type="text" name="__@@__title" id="edit1_title" data-counter="10" class="needed_tem_edit vtempl" placeholder="<?=$this->translate('Set Title...')?>" />
+						<label for="edit1_description"><?=$this->translate('Template Description')?></label>
+						<textarea id="edit1_description" style="height: 20px;" class="textareas needed_tem_edit vtempl" name="__@@__description" data-counter="5" placeholder="<?=$this->translate('Set the description for this template...')?>"></textarea>
+						<!--<label for="edit1_remark"><?=$this->translate('Remark')?></label>
+						<textarea id="edit1_remark" style="height: 15px;" class="textareas" name="remark" placeholder="<?=$this->translate('Remarks...')?>"></textarea>-->
+					</fieldset>
+				</div>
+				<h3 class="temp-new"><?=$this->translate('Asignament Options')?><img src="/img/details_open.png" alt=""  class="img_styedit" style="float:right;"/></h3>
+				 <div id="section_2" class="oculto">
+					<fieldset class="col-b">
+						<label for="edit1_shifts" class=""><?=$this->translate('Shifts:')?></label>
+						<!--<input type="text" name="__@@__turno" id="edit1_shifts" data-counter="3" class="needed_tem_edit vtempl" placeholder="<?=$this->translate('Select shifts')?>" />-->
+                            <select name="__@@__turno" id="edit1_shifts" data-counter="3" class="needed_tem_edit vtempl" placeholder="<?=$this->translate('Select shifts')?>">
+                                <option value="Morning">Morning</option>
+                                <option value="Evening">Evening</option>
+                                <option value="Night">Night</option>
+                            </select>
+
+					</fieldset>
+					
+					<fieldset class="col-b last">
+						<!--  <label for="edit1_location" class=""><?=$this->translate('Location:')?></label>-->
+                      <!--<input type="text" name="__@@__centro" id="edit1_location" data-counter="4" class="needed_tem_edit vtempl" placeholder="<?=$this->translate('Select Location')?>" />-->
+<select style="display:none;" name="__@@__centro" id="edit1_location" data-counter="4" class="needed_tem_edit vtempl" placeholder="<?=$this->translate('Select Location')?>">
+    
+    <option selected="selected"  value="BCN - 22@">BCN - 22@</option>
+    <!--  <option value="MAD - 28@">MAD - 28@</option>-->
+</select>
+
+					</fieldset>		
+					<fieldset class="col-a">
+    					<label class="" for="edit1_group"><?=$this->translate('Asigned Group')?></label>
+    					<!--<input type="text" name="__@@__group" id="edit1_group" data-counter="2" class="needed_tem_edit vtempl Upper" placeholder="<?=$this->translate('GENE, MULTI, INTER...')?>" />-->
+
+                        <select name="__@@__group" id="edit1_group" data-counter="2" placeholder="<?=$this->translate('Required Fields...')?>" value="" class="needed_tem_edit vtempl Upper">
+                        <?php 
+                        $tmp = $this->Groups()->GetAllGroups();
+                        foreach ($tmp as $cli)
+                        {
+                            echo $cli;
+                        }
+                        
+                        
+                        ?>
+                        </select>
+					</fieldset>
+					
+					<fieldset class="col-b last" style="width:150px !important;margin-top:0px;">
+    					<label style="width:290px;"  class="" for="edit1_client"><?=$this->translate('Client:')?></label>			
+                        <!--  <input type="text" name="__@@__client" id="edit1_client" data-counter="14" class="needed_tem_edit vtempl Upper" placeholder="<?=$this->translate('All, MULTI, INTER...')?>" />-->
+    				    <select name="__@@__client" class="needed_tem_edit vtempl"  id="edit1_client" data-counter="14" style="width:308px;">
+    				    	<option value=""><?=$this->translate('Select->')?></option>
+    				    	<?php 
+    				    	   $clisTmp = $this->Clientes()->GetAll();
+    				    	   foreach($clisTmp as $cliTmp){
+    				    	       echo $cliTmp;
+    				    	   }
+    				    	?>
+    				    </select>
+					</fieldset>
+
+					<!--<fieldset class="col-a last">
+    					<label class="" for="edit1_rgroup"><?=$this->translate('Responsible Group')?></label>	
+                        <input type="text" name="__@@__rgroup" id="edit1_rgroup" data-counter="23" class="vtempl Upper" placeholder="<?=$this->translate('COP, WINTEL, TOOLS, BACKUP ...')?>" />
+					</fieldset>-->
+				</div>				
+				<h3 class="temp-new"><?=$this->translate('Date/Time Options')?><img src="/img/details_open.png" alt=""  class="img_styedit" style="float:right;"/></h3>
+				 <div id="section_3" class="oculto">			
+					<fieldset class="col-b">
+						<label for="edit1_time_start" class=""><?=$this->translate('Start Time')?></label>
+                        <input type="text" name="__@@__t_start" id="edit1_time_start" data-counter="8" class="needed_tem_edit vtempl" value="" />
+					</fieldset>
+					
+					<fieldset class="col-b last">
+						<label for="edit1_time_end" class=""><?=$this->translate('End Time')?></label>
+                        <input type="text" name="__@@__t_end" id="edit1_time_end" data-counter="9" class="needed_tem_edit vtempl" value="" />
+					</fieldset>
+				</div>		
+				
+				
+				<h3 class="temp-new"><?=$this->translate('Recurring Options')?><img src="/img/details_open.png" alt=""  class="img_sty" style="float:right;"/></h3>
+                <div id="section_3" class="oculto">
+                    <fieldset class="col-b">
+                        <label for="repeats" class=""><?=$this->translate('Repeat')?></label>
+                        <div style="border: 1px solid #ccc;border-top-color: #EEEEEE;height:50px;background-color: #fafafa;">
+                            <input type="checkbox" style="float:left;display:inline;margin:4% 0px 5px 25px;" name="repeats" id="repeats_edit1" value="0">
+                        <select name="repeat-options" id="repeat-options_edit1" style="display:none;width:60%;float:right; margin:6px;">
+                                
+                               <!--<option value=""><?=$this->translate('Select Repeat')?></option>-->
+                                <option value="1"><?=$this->translate('Weekly')?></option>
+                              <!--   <option value="2"><?=$this->translate('Monthly')?></option>
+                                <option value="3"><?=$this->translate('Yearly')?></option>-->
+                        </select>
+                        </div>
+                        
+                    </fieldset>
+                    <fieldset class="col-b last">
+                        <label for="end-repeat"><?=$this->translate('Repeat until:')?></label>
+                        <div id="repeat_until_container_edit1">                               
+                            <input type="text" style="height:45px" name="end-repeat" id="end-repeat_edit1" disabled />
+                        </div>
+                    </fieldset>
+                <div class="repeat-fieldset-frame">
+                    <!--<fieldset id="0_detail_edit1" class="repeat-fieldset" style='margin:0 5px 5px 5px;float:right;'>
+                    <legend>Day</legend>
+                                    <?php 
+                                       $n = new DateTime(); 
+                                       $n->modify('+1 day');
+                                       $bg = $n->format('m/d/Y');
+                                    ?>
+                        <div>
+                        <label for="0_detail_type_edit1"style="border:0;background-color: #ffe8ef;box-shadow: 0 0 0 rgba(0, 0, 0, 0) inset;"><?=$this->translate('Repeat Every ')?></label>
+                            <div class="input-append spinner" data-trigger="spinner" id="spinner_0_detail_edit">
+                                <span class="ui-spinner ui-widget ui-widget-content ui-corner-all" style="height: 25px; width: 45px;margin:5px;">
+                                    <input class="ui-spinner-input cl_0_locatebg" autocomplete="off" style="width: 30px; height: 20px;" data-type="day" data-max="30" data-begin="-... day +1 day" data-min="1" data-step="1" type="text" id="0_locate_edit1" name="0_locate" value="1">
+                                        <a href="javascript:;" class="ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-state-default ui-button-text-only" data-spin="up"><span class="ui-button-text"><span class="ui-icon ui-icon-triangle-1-n">&#9650;</span></span></a>
+                                        <a href="javascript:;" class="ui-spinner-button ui-spinner-down ui-corner-br ui-button ui-widget ui-state-default ui-button-text-only" data-spin="down"><span class="ui-button-text"><span class="ui-icon ui-icon-triangle-1-s">&#9660;</span></span></a>
+                                </span>
+                            </div>
+                            <input type="hidden" class="cl_0_locate" value="1" />
+                            <?php echo $this->translate(' day(s).');?>
+                    
+                        </div>
+                    </fieldset>-->
+                    
+                    <fieldset id="1_detail_edit1" class="repeat-fieldset" style='margin: 0 5px 5px 5px;float:right;'>
+                            <legend><?=$this->translate('Weekly')?></legend>
+                            <div>
+                            <label for="1_detail_type"style="border:0;background-color: #ffe8ef;box-shadow: 0 0 0 rgba(0, 0, 0, 0) inset;"><?=$this->translate('Repeat Every ')?></label>
+                                <!--<div class="input-append spinner" data-trigger="spinner" id="spinner_1_detail_edit1">
+                                    <span class="ui-spinner ui-widget ui-widget-content ui-corner-all" style="height: 25px; width: 45px;margin:5px;">
+                                        <input class="ui-spinner-input cl_1_locate cl_1_locatebg" autocomplete="off" style="width: 30px; height: 20px;" data-type="this ... week" data-begin="- ... week" data-max="54" data-min="1" data-step="1" type="text" id="1_locate_edit1" name="1_detail_type" value="1">
+                                            <a href="javascript:;" class="ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-state-default ui-button-text-only" data-spin="up"><span class="ui-button-text"><span class="ui-icon ui-icon-triangle-1-n">&#9650;</span></span></a>
+                                            <a href="javascript:;" class="ui-spinner-button ui-spinner-down ui-corner-br ui-button ui-widget ui-state-default ui-button-text-only" data-spin="down"><span class="ui-button-text"><span class="ui-icon ui-icon-triangle-1-s">&#9660;</span></span></a>
+                                    </span>
+                                </div>
+                                <?php echo $this->translate(' week(s).');?>
+                                <br />-->
+                                <p style="text-align:left">
+
+                                <span>
+                                <?php 
+                                $timestamp = strtotime('next Monday');
+                                $days = array();
+                                for ($i = 1; $i < 8; $i++) {
+                                    $days = strftime('%A', $timestamp);
+                                    $timestamp = strtotime('+1 day', $timestamp);
+                                    
+                                    echo "<label for='$days' style='border:0;background-color: #ffe8ef;box-shadow: 0 0 0 rgba(0, 0, 0, 0) inset;margin: 0 5px 5px 5px;width: 50px;float:right;'>".$this->translate($days)."</label>";
+                                    echo "<input type='checkbox' style='margin: 10px 10px 10px 10px;width: 14px; height: 14px;float:right;' class='day_chk' name='day_checkbox' id='".$i."_edit1' value='$i'/>";
+                                    if($i =='3') echo'<br />';
+                                }
+                                
+                                
+                                ?></span></p>
+                            </div>
+                        </fieldset> 
+                    
+                       <!-- <fieldset id="2_detail_edit1" class="repeat-fieldset" style='margin: 0 5px 5px 5px;float:right;'>
+                            <legend>Monthly</legend>
+                            <div>
+                                  <?php 
+                                    $now = new DateTime(); 
+                                    $begin = $now->format('m').'/.../'.$now->format('Y');
+                                    ?>
+                                
+                                
+                                <label for="month_count" style="border:0;background-color: #ffe8ef;box-shadow: 0 0 0 rgba(0, 0, 0, 0) inset;"><?=$this->translate('Repeat Every ')?></label>
+                                <div class="input-append spinner" data-trigger="spinner" id="spinner_2_detail_edit1">
+                                    <span class="ui-spinner ui-widget ui-widget-content ui-corner-all" style="height: 25px; width: 45px;margin:5px;">
+                                        <input class="ui-spinner-input cl_2_locate" autocomplete="off" style="width: 30px; height: 20px;" data-type="this ... month" data-max="12" data-min="1" data-step="1" data-begin="<?=$begin;?>" data-userkey="month" type="text" id="new1_2_locate_edit1" name="2_detail_type" value="1">                                     
+                                            <a href="javascript:;" class="ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-state-default ui-button-text-only" data-spin="up"><span class="ui-button-text"><span class="ui-icon ui-icon-triangle-1-n">&#9650;</span></span></a>
+                                            <a href="javascript:;" class="ui-spinner-button ui-spinner-down ui-corner-br ui-button ui-widget ui-state-default ui-button-text-only" data-spin="down"><span class="ui-button-text"><span class="ui-icon ui-icon-triangle-1-s">&#9660;</span></span></a>
+                                    </span>
+                                </div>
+                                <?=$this->translate(' month(s).')?>
+                                <br />
+                                <span>
+                                <label for='mount_days' style="width: 80px;border:0;background-color: #ffe8ef;box-shadow: 0 0 0 rgba(0, 0, 0, 0) inset;float:left;"><?=$this->translate('Every Day ')?></label>
+                                <select name="mount_days" class='cl_2_locatebg' style="width: 45px; float: left; height: 25px; padding-bottom: 2px; padding-top: 2px; border-top-width: 2px; border-bottom-width: 1px;">
+                                <?php 
+                                $days = array();
+                                for ($i = 1; $i < 32; $i++) {
+                                    echo "<option value='$i'>$i</option>";
+                                }
+                                
+                                
+                                ?></select>
+                                <br />
+                                
+                                
+                                </span>
+                            </div>
+                        </fieldset>        
+
+                        <fieldset id="3_detail_edit1" class="repeat-fieldset" style='margin: 0 5px 5px 5px;float:right;'>
+                            <legend>Yearly</legend>
+                            <div>
+                
+                            <label for="3_detail_type" style="border:0;background-color: #ffe8ef;box-shadow: 0 0 0 rgba(0, 0, 0, 0) inset;"><?=$this->translate('Repeat Every ')?></label>
+                                <div class="input-append spinner" data-trigger="spinner" id="spinner_3_detail_edit1">
+                                    <span class="ui-spinner ui-widget ui-widget-content ui-corner-all" style="height: 25px; width: 45px;margin:5px;">
+                                        <input class="ui-spinner-input cl_3_locate" autocomplete="off"style="width: 30px; height: 20px;" data-max="5" data-min="1" data-step="1" type="text" id="spinner_day_edit1" name="3_detail_type" value="1">
+                                            <a href="javascript:;" class="ui-spinner-button ui-spinner-up ui-corner-tr ui-button ui-widget ui-state-default ui-button-text-only" data-spin="up"><span class="ui-button-text"><span class="ui-icon ui-icon-triangle-1-n">&#9650;</span></span></a>
+                                            <a href="javascript:;" class="ui-spinner-button ui-spinner-down ui-corner-br ui-button ui-widget ui-state-default ui-button-text-only" data-spin="down"><span class="ui-button-text"><span class="ui-icon ui-icon-triangle-1-s">&#9660;</span></span></a>
+                                    </span>
+                                </div>
+                                <?=$this->translate(' year(s).')?>
+                                <br />
+                                <span>
+                                    <select name="month" class='add_recur' data-type="year" data-userkey='month' id="new1_3_locate_edit1" style="width: 90px; float: left; height: 25px; padding-bottom: 2px; padding-top: 2px; border-top-width: 2px; border-bottom-width: 1px;">
+                                    <?php 
+                                    $timestamp = strtotime('next January');
+                                    $month = array();
+                                    for ($i = 0; $i < 12; $i++) {
+                                        $month = strftime('%B', $timestamp);
+                                        $timestamp = strtotime('+1 month', $timestamp);
+                                        echo "<option value='$month'>".$this->translate($month)."</option>";
+                                    }?>
+                                    </select>
+                                </span>
+                            </div>
+                        </fieldset>           -->           
+                    
+                </div>
+                </div>
+
+				
+				
+				
+										
+				<h3 class="temp-new"><?=$this->translate('Environment Options')?><img src="/img/details_open.png" alt=""  class="img_styedit" style="float:right;"/></h3>
+				<div id="section_4" class="oculto">
+					<fieldset class="col-a">
+						<label for="edit1_environment" class=""><?=$this->translate('Environment')?></label>
+						<input type="text" name="__@@__environment" id="edit1_environment" data-counter="15" class="vtempl Upper" placeholder="<?=$this->translate('Select Environment')?>" />
+					</fieldset>
+					
+					<fieldset style="display: none;" class="col-a">
+						<label for="edit1_source" class=""><?=$this->translate('Source')?></label>
+                       <input type="text" name="__@@__origen" id="edit1_source" data-counter="16" class="" value="Checklist" placeholder="<?=$this->translate('Checklist')?>" />
+					</fieldset>
+
+					<fieldset style="display: none;" class="col-a">
+						<label for="edit1_type" class=""><?=$this->translate('Type')?></label>
+						<input type="text" name="__@@__type" id="edit1_type" data-counter="24" value="MANUAL" class="needed_tem_edit vtempl Upper" placeholder="<?=$this->translate('Select Type')?>" />
+					</fieldset>
+					</div>
+					
+					
+					
+<h3 class="temp-new"><?=$this->translate('Service Manager')?><img src="/img/details_open.png" alt=""  class="img_sty" style="float:right;"/></h3>
+<div id="section_5" class="oculto">
+	<fieldset class="col-b">
+		<label for="open-close-ticket" class=""><?=$this->translate('Open/Close Ticket')?></label>
+		<div style="border: 1px solid #ccc;border-top-color: #EEEEEE;height:50px;background-color: #fafafa;">
+			<input type="checkbox" style="width: 100px;float:left;display:inline;" name="__@@__open-close-ticket" data-counter="26" id="edit1_open-close-ticket" value="1" class="vtempl">
+		</div>
+	</fieldset>
+	<fieldset class="col-b last">
+		<label for="minutes-close-ticket"><?=$this->translate('Minutes for closing ticket:')?></label>
+		<div id="minutes-close-ticket_container">			
+			<input id="edit1_minutes-close-ticket" class="vtempl minutesCloseTicket" style="height:45px" data-counter="27" placeholder="<?=$this->translate('Max. 60 minutes')?>" name="__@@__minutes-close-ticket" type="text" disabled="disabled">
+		</div>
+	</fieldset>
+</div>
+
+					
+					
+					<dt id="Guardar-label">&nbsp;</dt>
+					<dd id="Guardar-element">
+						<div id="edit1_savecontain">
+						<!--<input type="button" style="opacity:1;width: 47%; float:right; clear:both;" name="save" id="edit1_save" value="Save Template" class="new_save">-->
+<input type="button" style="opacity:1;width: 47%; float:right; clear:both;" name="save" id="test_save" value="Save Template" class="">
+                    </div>
+						<input type="hidden" name="__@@__template"  id="edit1_temp" value="Y">
+						<input type="hidden" name="__@@__id"  id="edit1_id" class="vtempl" data-counter="1" value="">
+						<input type="hidden" name="__@@__re_value1_recur" value="" id="edit1_value_recur">
+						<input type="hidden" name="tareaid" value="" id="edit1_tareaid">
+					</dd>
+					</div>
+ 
+					
+				</dl>
+
+			</form>
+
+</div>
+</div>	
+
+
+<script type="text/javascript">
+$(function() {
+
+
+	$(".minutesCloseTicket").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl/cmd+A
+            (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+C
+            (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+X
+            (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+            
+        } else {
+
+
+        	// Validar valores minimo y maximo
+        	
+        	// Para controlar el teclado numérico
+            valueCode = (e.keyCode < 96) ? e.keyCode : e.keyCode - 48;  
+            valueInput = String.fromCharCode(valueCode)
+            
+            valueText = $(this).val();
+            
+     		valueFinal = "" + valueText + valueInput;
+     		if (valueFinal > 60) e.preventDefault();
+     		
+        }
+
+        
+    });
+
+		
+	$("#edit1_open-close-ticket").change(function(){
+
+		if ($("#edit1_open-close-ticket").prop('checked')) {
+			$("#edit1_minutes-close-ticket").removeProp("disabled");
+			$("#edit1_minutes-close-ticket").focus();
+				
+		} else {
+			$("#edit1_minutes-close-ticket").val(null);
+			$("#edit1_minutes-close-ticket").prop("disabled", true);
+		}
+    	
+    });
+    
+
+	
+	$('.needed_tem_edit').change(function(){
+
+		var element_count = 0;
+		$('.needed_tem_edit').each(function(){
+			if ($(this).prop('type')==="checkbox") {
+				element_count =($(this).prop( "checked"))?element_count:1;
+			} else {
+				element_count =($(this).val() =='')?1:element_count;
+			}
+		});
+		
+		if (element_count === 0) {
+		    ChangeButton('edit1_save',1, false);
+		} else {
+		    ChangeButton('edit1_save',0.5, true);
+		}
+									
+		//console.log($(this));
+	});
+	
+	   $("#repeat-options_edit1").change(function () {
+        $(".repeat-fieldset").css('display','none');    
+        $('#end-repeat_edit1').prop('disabled', true);
+        name = $('#repeat-options_edit1 option:selected').val();
+        //alert(name);
+        if(name=='')
+        {
+            //alert(name+"_detail");
+        }
+        else        {
+            $('#'+name+'_detail_edit1').css('display','block');
+            $('#end-repeat_edit1').prop('disabled', false);
+        }
+    });
+	
+	$("#edit1_start-time").timepicker({
+		showButtonPanel: true,
+		stepMinute: 5,
+		timeFormat: 'hh:mm',
+		amNames: ['a.m.', 'AM', 'A'],
+		pmNames: ['p.m.', 'PM', 'P'],
+		ampm: false,
+		firstDay: 1,
+		dateFormat: 'dd-mm-yy'
+	});
+	
+	$("#edit1_end-time").timepicker({
+		showButtonPanel: true,
+		stepMinute: 5,
+		timeFormat: 'hh:mm',
+		amNames: ['a.m.', 'AM', 'A'],
+		pmNames: ['p.m.', 'PM', 'P'],
+		ampm: false,
+		firstDay: 1,
+		dateFormat: 'dd-mm-yy'
+	});
+	$("h3").unbind("click").css({"cursor":"pointer"}).click(function () {
+	$('.img_styedit').fadeTo( "slow" , 1);
+	//opacity: 0.4;filter: alpha(opacity=40);
+		$(this).next("div").slideToggle("slow");
+		$(this).children().fadeTo( "slow" , 0.4);
+		stext = $(this).children("")[0].src;
+		if(stext.search('details_close') == -1)
+		{
+			$(this).children("")[0].src = '/img/details_close.png';
+		}
+		else
+		{
+			$(this).children("")[0].src = '/img/details_open.png';
+		}
+ });
+
+
+     $('#test_save').button({
+        icons: {
+            primary: "ui-icon-locked"
+        }}).click(function () {
+            console.log($(this).css("opacity"));
+            if($(this).css("opacity") === '1')
+            {
+
+
+                if ($("#edit1_open-close-ticket").prop('checked')) {
+                    
+                    if($.isNumeric($("#edit1_minutes-close-ticket").val())){
+
+                        if ($("#edit1_minutes-close-ticket").val() === 0 ||
+                                $("edit1_minutes-close-ticket").val() > 120){
+
+                            alert("Minutes for closing ticket have to be between 1 and 120.");
+                            return;
+                        }
+                        
+                    } else {
+                        alert("Minutes for closing ticket have to be numeric between 1 and 120.");
+                        return;
+                    }                               
+                
+                } 
+                
+console.log($( "#view_template_form" ).serialize());
+                
+                            /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
+                            var chkArray = [];
+                            $(".day_chk:checked").each(function() {
+                                chkArray.push(parseInt($(this).val()));
+                            });
+                            var obj = {fr_tmp:{P1D:chkArray}};
+                            $('#edit1_value_recur').val(JSON.stringify(obj));
+                            //console.log(obj);
+                        $.post( "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'uptemp'))?>", $( "#view_template_form" ).serialize()).done(function( data1 ) {
+                                                                                                                    $('#ViewTemplate').dialog("close");
+                                                                                                                    $('#tablaTemplates').DataTable().ajax.reload();$('#tablajTemplates').DataTable().ajax.reload()
+                                                                                                                 });
+                    
+            }
+        });
+        
+
+
+
+     $('#edit1_save').button({
+        icons: {
+            primary: "ui-icon-locked"
+        }}).click(function () {
+            console.log($(this).css("opacity"));
+			if($(this).css("opacity") === '1')
+			{
+
+
+				if ($("#edit1_open-close-ticket").prop('checked')) {
+					
+					if($.isNumeric($("#edit1_minutes-close-ticket").val())){
+
+						if ($("#edit1_minutes-close-ticket").val() === 0 ||
+								$("edit1_minutes-close-ticket").val() > 120){
+
+							alert("Minutes for closing ticket have to be between 1 and 120.");
+							return;
+						}
+						
+					} else {
+						alert("Minutes for closing ticket have to be numeric between 1 and 120.");
+						return;
+					}								
+				
+				} 
+				
+console.log($( "#view_template_form" ).serialize());
+				
+                            /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
+                            var chkArray = [];
+                            $(".day_chk:checked").each(function() {
+                                chkArray.push(parseInt($(this).val()));
+                            });
+                            var obj = {fr_tmp:{P1D:chkArray}};
+                            $('#edit1_value_recur').val(JSON.stringify(obj));
+                            //console.log(obj);
+				        $.post( "<?=$this->url(array('controller'=>'edit','action'=>'serverside','tabla'=>'uptemp'))?>", $( "#view_template_form" ).serialize()).done(function( data1 ) {
+                                                                                                                    $('#ViewTemplate').dialog("close");
+                                                                                                                    $('#tablaTemplates').DataTable().ajax.reload();
+                                                                                                                 });
+					
+			}
+		});
+		
+		
+	 $("#repeats_edit1").change(function () {
+            $("#1_detail_edit1").toggle();
+            //$('#1_detail_edit1').css('display','block');
+            $('#end-repeat_edit1').prop('disabled', false);
+            
+            
+    });
+	
+	
+	$("#edit1_time_start").timepicker({
+		showButtonPanel: true,
+		stepMinute: 5,
+		timeFormat: 'hh:mm',
+		amNames: ['a.m.', 'AM', 'A'],
+		pmNames: ['p.m.', 'PM', 'P'],
+		ampm: false,
+		firstDay: 1,
+		dateFormat: 'dd-mm-yy'
+	});
+	
+	$("#edit1_time_end").timepicker({
+		showButtonPanel: true,
+		stepMinute: 5,
+		timeFormat: 'hh:mm',
+		amNames: ['a.m.', 'AM', 'A'],
+		pmNames: ['p.m.', 'PM', 'P'],
+		ampm: false,
+		firstDay: 1,
+		dateFormat: 'dd-mm-yy'
+	});
+
+
+    $(".textareas").focusin(function () {
+    	           $(this).animate({           
+    	            height: '150px'
+    	            },
+    	           "slow"
+	   	        )
+    	    });
+
+    $(".textareas").focusout(function () {
+        $(this).animate({           
+         height: '20px'
+         },
+        "slow"
+        )
+ });
+	
+});			
+
+</script>

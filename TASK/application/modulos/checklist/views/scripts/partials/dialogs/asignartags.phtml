@@ -1,0 +1,80 @@
+<div id="asignarTags" title="<?=$this->translate('Asignar tags')?>" style="display:none">
+	<p class="validateTips"><?=$this->translate('Click en el tags Para asignar / desasignar.')?></p>
+	
+<!--  	<div class="loading">
+		<div id="loadinger">
+			<img src="/img/preloader.gif" /> <div><?=$this->translate('Cargando información...')?></div>
+		</div>
+	</div> -->
+	
+
+
+<input type="hidden" name="tags" id="mySingleField" value="" disabled="disabled">
+	<fieldset>
+		<legend>Tags asignados</legend>
+			<ul id="myTagsBase">
+				<!-- Existing list items will be pre-added to the tags -->
+			</ul>
+	</fieldset>
+	<!--  <ul id="memberList" class="listSelect"></ul>-->
+</div>
+
+
+	
+<script type="text/javascript">
+$(function(){
+	$(window).load(function(){
+			
+    list_tags = [];
+	var r = TASK.request('/calendar/ajax/tags');
+	r.done(function (data) {
+		if(TASK.checkErrorData(data)){
+	        for (var i=0, len=data.length; i < len; i++) {
+	              list_tags.push (data[i].tag);
+	        }
+		}
+	//});
+    
+ //   console.log(TASK.settings.token);
+  /*    $.getJSON("/task/calendar/ajax/tags/",{token: TASK.settings.token},function(json){ 
+        for (var i=0, len=json.length; i < len; i++) {
+              list_tags.push (json[i].tag);
+        }*/
+    $("#myTagsBase").tagit({
+    	placeholderText: "Seleccione o cree tags a añadir...",
+        singleField: true,
+        singleFieldNode: $('#mySingleField'),
+        singleFieldDelimiter: '@@@',
+        allowSpaces: true,
+        minLength: 0,
+        tagSource: list_tags,
+        removeConfirmation: true,
+        autocomplete: {
+            delay: 6,
+            minLength: 2},
+  	    onTagClicked: function(event, ui) {
+	        // do something special
+	       /* alert(ui.tagLabel);
+   			 $("#myTags").tagit('createTag',ui.tagLabel);
+    			$("#myTagsBase").tagit('removeTagByLabel',ui.tagLabel);
+
+    			fcSources.newo.data = {
+    			        		users: JSON.stringify( res )
+    			};
+   			
+	      //  console.log(ui.tagLabel);*/
+	    },
+        beforeTagAdded: function(event, ui) {
+                // do something special
+
+        	var r = TASK.request('/calendar/ajax/addtags',{term:ui.tagLabel});
+        	r.done(function (data) {
+        		if(TASK.checkErrorData(data)){
+        				$.fn.makeNotify.sendMsj('Añadido Tag: '+ui.tagLabel);
+            		}});
+            }
+        });
+    });
+});
+});
+</SCRIPT>

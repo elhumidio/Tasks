@@ -1,0 +1,18 @@
+<?php $lang = isset($_SESSION['session']['lang'])?$_SESSION['session']['lang']:'en';?>
+
+<div id="rastro">
+	<?php echo $this->navigation()->breadcrumbs()->setLinkLast(true)->setMinDepth(0)->render(); ?> 
+	
+	<div id="notify" aria-live="polite" aria-atomic="true"></div>
+</div>
+
+<div id="edituserDiv" class="hidde"><img class="loader" src="/img/preloader.gif" style="width: 16px; height: 16px; margin: 20px auto;" /></div>
+
+<!--[if lte IE 7]>
+<div id="navegador-obsoleto" class="navegador-obsoleto"><img onclick="abrirAvisoIE()" class="cursor" src="/img/icon/alert.png" alt="" /><p><span class="bold"><?=$this->translate('Su navegador es obsoleto y no podemos garantizar que el portal funcione de manera correcta.')?></span><br /><?=$this->translate('La versión oficial de T-Systems es Internet Explorer 8.0, encontrará una guia de actualización siguiendo este enlace: ')?><br /><a href="http://t-systems.telekom.de/cms/tsi-es/es/Organizacion/templateId=renderStaticPage/id=2060170.doc" title="" target="_blank">http://t-systems.telekom.de/cms/tsi-es/es/Organizacion/templateId=renderStaticPage/id=2060170.doc</a><br /><?=$this->translate('En caso que tuviera alguna consulta o necesitara soporte en el proceso de instalación debe contactar con el BUZON TSE HELPDESK. ')?></p><img onclick="cerrarAvisoIE();" id="botonCerrarAvisoIE" class="close" src="/img/icon/dialog-close.png" alt="" /></div>
+<script>
+function cerrarAvisoIE() {setCookie('avisoIE','1',30);$('#navegador-obsoleto').css('height','13px');$('#botonCerrarAvisoIE').hide();}
+function abrirAvisoIE() {setCookie('avisoIE','1',-1);$('#navegador-obsoleto').css('height','auto');$('#botonCerrarAvisoIE').show();}
+$(document).ready(function() {var avisoIE=getCookie("avisoIE");if (avisoIE=="1"){cerrarAvisoIE();}});
+</script>
+<![endif]-->

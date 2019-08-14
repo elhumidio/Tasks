@@ -1,0 +1,353 @@
+<div id="preJournal" title="<?=$this->translate('Add Tasks to Journal')?>" style="display:none">
+    <!--<p class="validateTips"><?=$this->translate('Desde esta ventana puede añadir los Id de cambios para importar.<br />Tambien podra validar los datos importados antes de crear eventos con los mismos.')?></p>-->
+    <input type="text"value=""class="add"  name="changeid" id="new_changeid" placeholder="Add change ID, comma separated"/>
+    <a href="/task/calendar/edit/jevents/type/journal" data-btn="NewJournal" class="link-custom" id="link_import"><?=$this->translate('Import Tasks')?></a>
+    <!-- <div class="resizable" id='preJournaldivTable' style="width:600px; height: 400px; margin:auto;"></div> -->
+    <TEXTAREA COLS=155 ROWS=5 NAME="edit_field" id="new_edit_field" data-tpid="" tprow="" tpcol="" data-tp=false placeholder="Describe yourself here..." style="display: none;">
+    </TEXTAREA> 
+    <a href="#" data-btn="UpdateJournal" style="background-color: #005580;float:right;margin: 5px 58px 20px 0;display: none;"class="link-custom" id="link_update"><?=$this->translate('Update Field/Close')?></a>
+    <? //phpinfo();?>
+
+
+           <table id="tablapreJournal" class="tbljournal">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="id tblheader">ChangeID</th>
+                    <th class="tblheader"><?=$this->translate('TaskID')?></th>
+                    <th class="tblheader"><?=$this->translate('Start')?></th>
+                    <th class="tblheader"><?=$this->translate('End')?></th>
+                    <th class="tblheader"><?=$this->translate('Customer Tenant')?></th>
+                    <th class="tblheader"><?=$this->translate('Customer Affected')?></th>
+                    <th class="tblheader"><?=$this->translate('Status')?></th>
+                    <th class="tblheader"><?=$this->translate('Service')?></th>
+                    <th class="tblheader"><?=$this->translate('Environment')?></th>
+                    <th class="tblheader"><?=$this->translate('CHM Coordinator')?></th> 
+                    <th class="tblheader"><?=$this->translate('Approval Status')?></th>
+                    <th class="tblheader"><?=$this->translate('Change CBI')?></th> 
+                    <th class="tblheader"><?=$this->translate('Title')?></th>
+                    <th class="tblheader"><?=$this->translate('Description')?></th>
+                    <th class="tblheader"><?=$this->translate('Affected CI')?></th>
+                </tr>
+            </thead>
+            
+            <tbody></tbody>
+        </table>    
+            <a href="#" data-btn="ProccessJournal" style="background-color: #005580;float:left;margin: 5px 10px 0 17px;" class="link-custom" id="link_proccess"><?=$this->translate('Create Events')?></a>
+</div>
+
+<script>
+    $('#new_changeid').blur(function(){
+        $('#new_changeid').css('background-color','#ffcccc');
+
+    });
+    $('#new_changeid').focus(function(){
+        $('#new_changeid').css('background-color','white');
+
+    });
+//<![CDATA[
+$(function(){
+        var body = $("body"); 
+        var ooTable = $('#tablapreJournal').DataTable( {
+                            "autoWidth": false,
+							 /*   "iDisplayLength": 50,*/
+                            data:[],
+                            columns: [
+                                 { data:"Delimg" }, //00
+                                { data: "ParentChange" }, //01
+                                { data: "TaskID" }, //02
+                                { data: "PlannedStart" }, //03
+                                { data: "PlannedEnd" }, //04
+                                { data: "CodCli" }, //05
+                                { data: "Customer" }, //06
+                                { data: "TaskStatus" }, //07
+                                { data: "Service" }, //08
+                                { data: "Environment",className: "hide_column" }, //09
+                                { data: "Coordinator",className: "hide_column" }, //10
+                                { data: "ApprovalStatus" }, //11
+                                { data: "ChangeTypeCBI",className: "hide_column"}, //12
+                                { data: "Title" }, //13
+                                { data: "TaskDescription","width": "60%" }, //14
+                                { data: "NameOfCI" } //15
+                                
+                            ],
+                
+                                columnDefs: [ 
+
+                                { 
+									
+								
+                                    targets: [05,06,10,13,14,15],
+                                    render:$.fn.dataTable.render.ellipsis( 30 )}
+                                ],
+                                rowCallback: function (row, data) {},
+                                filter: false,
+                                info: false,
+                                ordering: false,
+                                processing: true,
+                                retrieve: true     
+            // "bStateSave": false,
+            // "aaSorting": [[ 1, "desc" ]],
+            // "sPaginationType": "full_numbers",
+            // //"oLanguage": idiomaDataTables,
+            // "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            // "bProcessing": true,
+            // "bServerSide": true,
+            // "dom": 'T<"clear">lfrtip'
+        });
+
+        
+    $( "#new_edit_field" ).change(function() {
+      //alert( "Handler for .change() called." );
+      
+    });
+
+
+        
+        
+        $( "#link_update" ).click(function(event) {
+             event.preventDefault();
+            
+              if($("#new_edit_field" ).data('tprow') >=0)
+
+              {
+
+               
+                  dat = ooTable.cells($("#new_edit_field" ).data('tprow'),$("#new_edit_field" ).data('tpcol')).nodes().to$();
+                  ($("#new_edit_field" ).data('tp')) ? $(dat).children('span').text($("#new_edit_field" ).val().substring(0,30)).attr('title',$("#new_edit_field" ).val()).prop('title',$("#new_edit_field" ).val()):$(dat).text($("#new_edit_field" ).val());
+                  
+                  console.log(dat);  
+                  //ooTable.cells($("#new_edit_field" ).data('tprow'),$("#new_edit_field" ).data('tpcol')).data($("#new_edit_field" ).val());
+                  //ooTable.cells($("#new_edit_field" ).data('tprow'),$("#new_edit_field" ).data('tpcol')).data('voy');
+                      var header = Array();
+
+                      
+                      $("#tablapreJournal tr th").each(function(i, v){
+                          header[i] = $(this).text();
+
+                      })                     
+                      var data = Array();
+                      
+                      $("#tablapreJournal tr").each(function(i, v){
+                          data[i] = Array();
+                          $(this).children('td').each(function(ii, vv){                  
+                            if($(this).children().hasClass('ellipsis'))
+                            {
+                                data[i][ii] = $(this).children('span').attr("title") 
+                                } else {
+                                    data[i][ii] = $(this).text();
+                                }
+                          }); 
+                      })
+              }
+       $('#new_edit_field').hide();     
+       $('#link_update').hide();
+       console.log(data);
+         });
+        
+        var checkcliente = "";
+        function verificarCliente(nomcliente)
+        {
+        $.ajax({
+        timeout: 48000,
+        url:"<?=$this->url(array('controller'=>'edit','action'=>'verificacliente'))?>", 
+        async : false,
+        type: "post",
+        dataType : "json",
+        data:{name:nomcliente},
+        success:function(data){
+            //console.log("vuelta del metodo: " + data);
+            if(data == "OK")
+           {  checkcliente =  "OK";}  
+
+           else{checkcliente =  "KO";} 
+            //console.log("checkcliente antes: " + checkcliente);
+        
+         },
+         error:function(jqxhr, settings, ex) { alert('failed, ' + ex);},
+         }); 
+        }
+    
+    $( "#link_import" ).click(function(event) {
+        event.preventDefault();
+        $('#preJournal').parent().hide();
+        body.addClass("loading");  
+        $.ajax({
+            type: 'POST',
+            timeout:600000,
+            url:"<?=$this->url(array('controller'=>'edit','action'=>'gettaskfromchange'))?>", 
+        data: { ids: $('#new_changeid').val()  }})
+        .done(function( data1 ) {
+            body.removeClass("loading"); 
+            $('#preJournal').parent().show();
+            ooTable.clear().draw();
+            ooTable.rows.add(data1).draw();
+        })
+        .error(function() {
+            body.removeClass("loading"); 
+            $('#preJournal').parent().show();
+            alert('Fallo al importar los registros, verifique los numeros de cambio');
+        });
+    });
+
+    
+    $( "#link_proccess" ).click(function(event) {
+        event.preventDefault();
+
+        //verificar la existencia del cliente
+        var table = $('#tablapreJournal').DataTable();
+        console.log(JSON.stringify(table.rows(0).data()[0]));
+        var customer= JSON.stringify(table.rows(0).data()[0]['CodCli']);
+         console.log("checkcliente antes: " + customer);
+        verificarCliente(customer);
+
+ // console.log("checkcliente despues: " + checkcliente);
+      
+    
+        if(checkcliente == "KO")
+        {
+            if (window.confirm("El cliente " + customer + " no existe, \ndebe crearlo en bbdd para poder insertar los eventos. Desea crear el cliente? "))
+            {
+                window.location.href='index/admincligrup';
+                return false;
+            }
+            else{
+            $( "#preJournal" ).dialog( "close" );
+            return false;    
+            }
+            
+            
+        }
+       checkcliente = "";
+        //return false;
+        if(ooTable.rows().indexes().length > 0) // #>DBLANC ver de quitar esta validacion para debugar
+        {   
+            r = true;
+            del = null;
+             /*comprobar que se ejecute tanto al confirmar el mensaje de que se sobreescribe una entrada en la bbdd, como si no hay entradas duplicadas y se envia directamente.
+             *  */
+            if($('.alert_row').length > 0)      
+            {
+                var r = confirm("Existe un evento ya creado en la aplicacion y se sobreescribira\n.¿desea continuar?");
+                del = true;
+            }
+                if (r == true) 
+                {   
+                    var header = Array();
+                    $("#tablapreJournal tr th").each(function(i, v){
+                        header[i] = $(this).text();
+                    })                   
+                    
+                    var data = Array();
+					
+					//#>DBLANC Este cambio soluciono el problema de que solo se guardaban los primeros 10 registros
+					// El problema era que solo se estaban guardando los datos de la primera "página" de la tabla paginada
+					//Dejo los cambios a la vista con fines documentales y educativos. 
+					var table = $('#tablapreJournal').dataTable();
+ 					$(table.fnGetNodes()).each(function(i, v){
+                    //$("#tablapreJournal tr").each(function(i, v){
+                        data[i] = Array();
+                        $(this).children('td').each(function(ii, vv){
+                            if($(this).children().hasClass('ellipsis'))
+                            {
+                                data[i][ii] = $(this).children('span').attr("title") 
+                            } else {
+                                data[i][ii] = $(this).text();
+                            }
+                        }); // #>DBLANC solo recoge los de la primera pagina 
+                    })
+								
+                    $.ajax({
+                        type: 'POST',
+                        timeout:88800,
+                        url:"<?=$this->url(array('controller'=>'edit','action'=>'createeventsfromchange'))?>", 
+                        data: { info: data, del: del  }})
+                        .done(function( data1 ) {
+                         $('#new_changeid').val('');    
+                         $('#new_edit_field').val('').data('tpcol','').data('tprow','').data('tpid','').data('tp','false');
+						 
+                         ooTable.clear().draw();
+                         $( "#preJournal" ).dialog( "close" );
+                    });
+                }
+        }
+    });
+    
+    $(document).off('click', '.delete_row');
+    $(document).on( 'click', '.delete_row', function (e) {
+        var r = confirm("¿Borrar el evento?");
+        if (r == true) {
+            i = ($(this).parent().next().next().text() == 'Parent')?$(this).parent().next().text():null;
+            if(i)
+            {
+                arr_temp = Array();
+                ooTable
+                .rows().every( function ( id) {
+                    var d = this.data();
+                    if(i == d.ParentChange)
+                    {
+                        arr_temp.push(this.index());
+                    } 
+                } );
+                ooTable
+                .rows( arr_temp )
+                .remove()
+                .draw();                            
+            } else {
+                ooTable
+                    .row( $(this).parents('tr') )
+                    .remove()
+                    .draw();
+            }
+        } 
+    });
+
+	$(document).ready(function(){
+		
+        //$('#tablapreJournal_length').hide();
+
+
+
+
+        var table = $('tablapreJournal').DataTable(function(){
+			
+			//var column = table.column( $(this).attr('data-column') );
+			console.log(table);
+	
+      
+      
+		});
+		
+	});
+            $('#tablapreJournal tbody').on( 'click', 'td', function () {
+                if($(this).children().hasClass('ellipsis'))
+                {
+                    txt =  $(this).children().attr("title");
+                    ct = true;
+                } else {
+                    txt =  $(this).text();
+                    ct = false;
+                }
+                    var rowIdx = ooTable
+                        .cell( this )
+                        .index().row;
+                    var colIdx = ooTable
+                        .cell( this )
+                        .index().column;
+                $("#new_edit_field" ).val(txt).data('tp',ct).data('tprow',rowIdx).data('tpcol',colIdx);
+                $("#new_edit_field" ).show();
+                $("#link_update").show();
+                $("#new_edit_field" ).focus();
+            });
+});
+//]]>
+</script>
+
+<style type="text/css">
+    .hide_column {
+    display : none;
+}
+thead th{
+    font-weight: normal !important;
+}
+</style>

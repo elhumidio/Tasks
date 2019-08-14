@@ -1,0 +1,43 @@
+<div id="pestañas" class="colRightPestañas">
+	<div class="menuPestanas">
+		<ul>
+    		<li><a id="check" href="/task/calendar/edit/checklist"></a></li>
+    		<li><a id="journal" href="/task/calendar/edit/bitacora"></a></li>
+		</ul>
+	</div>
+	
+	<div class="contenido">
+		<div id="ui-tabs-1"></div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(function() {
+	
+	$( "#pestañas" ).tabs({
+		cache: false,
+		ajaxOptions: {
+			type: "post",
+			error: function( xhr, status, index, anchor ) {
+				$( anchor.hash ).html(errorajax);
+			}
+		}
+	}).children().children().removeClass('ui-widget-header');
+	
+});
+
+
+
+</script>
+
+<style>
+.ui-state-default ui-corner-top ui-state-focus{
+	border-color:transparent!important;
+}
+.ui-state-default ui-corner-top ui-tabs-selected ui-state-active{
+	border-color:#EEEEEE !important;
+}
+.ui-state-default ui-corner-top{
+	border-color:#EEEEEE !important;
+}
+</style>

@@ -1,0 +1,56 @@
+<div class="colRight" style="margin-top: 5px;">
+        <div class="contenido" style="padding-top: 5px;">
+            <div style="display:none;" class="titulo"><?=$this->translate->_('Checklist')?>
+                <a id="check_linktemplates" href="/task/calendar/edit/templates" class="link-custom"><?=$this->translate->_('Templates')?></a>
+                <a  id="check_linkevents" href="/task/calendar/edit/events/type/checklist" class="link-custom"><?=$this->translate->_('Events')?></a>
+            </div>
+                    
+            </div>
+                    <div id="ui-tabs-2"></div>
+        </div>        
+        
+<script type="text/javascript">
+    $(function() {
+		console.log("okok");
+         $("#ui-tabs-2" ).load('/task/calendar/edit/events/type/checklist');
+         $( ".link-custom" ).click(function(event) {
+             event.preventDefault();
+             $("#ui-tabs-2" ).load($(this).attr('href'));
+     });
+});
+
+
+
+    $(document).ready(function(){
+
+   	 var destiny = param('destino');
+   	 switch(destiny)
+   	 {
+   		     case 'checkevent':
+   			 $('#check').click();
+   			 $('#check_linkevents').click();
+   			 
+   			 break;
+
+    		 case 'checktemplate':
+   			 $('#check').click();
+   			 $('#check_linktemplates').click();
+   			
+   			 break;
+
+   	     	 case 'journaltemplate':
+    	     	    $('#journal').click();
+ 		     break;
+
+			 case 'journalevent':
+  				$('#journal').click();
+  			 break;
+   		 }
+   	     
+   		
+   	});
+
+   	function param(name) {
+   	    return (location.search.split(name + '=')[1] || '').split('&')[0];
+   	}
+</script>

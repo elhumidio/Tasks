@@ -1,0 +1,32 @@
+<ul id="list-comentarios">
+	<?php 
+	if($this->count>5 && count($this->comentarios)==5)
+	{
+		echo '<li class="antiguo"><span id="seeAllComments_'.$this->apartado.'">'.$this->translate('Mostrar comentarios anteriores.').'</span></li>';
+	}
+	
+	foreach($this->comentarios as $comentario)
+	{
+		$tiempo = $this->HaceTiempo()->clacular($comentario['fecha'].' [Y-n-j H:i:s]');
+		echo '<li><p><span class="username" title="'.$this->escape($comentario['username']).'">'.$this->escape($comentario['display_name']).':</span> '.$this->escape($comentario['comentario']).'<br />';
+		echo '<span class="time">'.$tiempo;
+		
+		if($this->user->username == $comentario['username']){
+			echo ' | <span class="deleteComment" onclick="TASK.delComment('.$comentario['id'].');">'.$this->translate('Borrar').'</span>';
+		}
+		
+		echo '</span></p></li>';
+	}
+	?>
+	<li class="addComment"><input id="sendComment_<?=$this->apartado?>" type="text" placeholder="<?=$this->translate('Añadir comentario...')?>" /></li>
+</ul>
+
+
+<script type="text/javascript">
+/*
+	$('#addComentarios_<?=$this->apartado?>').click(TASK.addComentario);
+*/	
+	$('#sendComment_<?=$this->apartado?>').keypress(TASK.sendComment);
+	$('#seeAllComments_<?=$this->apartado?>').click(TASK.sendAllComment);
+
+</script>
