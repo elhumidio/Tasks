@@ -1,0 +1,198 @@
+<div class="colRight">
+	<div class="contenido">
+
+		<div class="titulo"><?=$this->translate->_('Cuaderno de bitácora')?> <img src="/img/beta.png" style="height: 12px" /></div>
+
+		<a class="newStyleButtom" id="busquedaAvanzada" href="#" onclick="return BITACORA.busqueda();"><?=$this->translate->_('Búsqueda avanzada')?></a>
+		
+		<div class="selectUsername" class="ui-state-default ui-corner-all">
+			<dl>
+				<dt><label for="usernameBitacora">Ver los mensajes de</label></dt>
+				<dd><select id="usernameBitacora" onChange="BITACORA.ChangeUser();">
+					<option value="">Todo mi grupo</option>
+					<?php foreach($this->usersBitacora as $val) {?>
+						<option value="<?=$val['username']?>"><?=$val['name']?></option>
+					<?php }?>
+					</select>
+				</dd>
+				<dt><label for="fechaBitacoraSQ"><?=$this->translate->_('Fecha')?></label></dt>
+				<dd><input type="text" placeholder="<?=$this->translate->_('dd/mm/yyyy')?>" id="fechaBitacoraSQ" disabled="disabled" /></dd>
+				<dt><label for="hostnameBitacoraSQ"><?=$this->translate->_('Hostname')?></label></dt>
+				<dd><input type="text" id="hostnameBitacoraSQ" class="iconInfo" /> <img class="iconInfo" src="/img/icon/info_icon.png" title="<?=$this->translate->_('Utiliza %% para mostrar todos los resultados.')?>" /> </dd>
+				<dt><label for="ticketBitacoraSQ"><?=$this->translate->_('Ticket')?></label></dt>
+				<dd><input type="text" id="ticketBitacoraSQ" class="iconInfo" /> <img class="iconInfo" src="/img/icon/info_icon.png" title="<?=$this->translate->_('Utiliza %% para mostrar todos los resultados.')?>" /> </dd>
+				<dt><label for="appBitacoraSQ"><?=$this->translate->_('Aplicación')?></label></dt>
+				<dd><input type="text" id="appBitacoraSQ" class="iconInfo" /> <img class="iconInfo" src="/img/icon/info_icon.png" title="<?=$this->translate->_('Utiliza %% para mostrar todos los resultados.')?>" /> </dd>
+			</dl>
+			<div class="buttonsBar">
+				<a class="newStyleButtom" href="#" onclick="return BITACORA.closeForm();"><?=$this->translate->_('Cerrar')?></a>
+				<a class="newStyleButtom" href="#" onclick="return BITACORA.clearForm();"><?=$this->translate->_('Limpiar')?></a>
+				<a class="newStyleButtom" href="#" onclick="return BITACORA.ChangeUser();"><?=$this->translate->_('Buscar')?></a>
+			</div>
+		</div>
+		
+		<div id="bitacora">
+			
+			<div class="sendMsj">
+				<textarea maxlength="800" name="" id="msjBitacora" onKeyUp="BITACORA.contar(this,'New')"></textarea>
+				<div class="statusBar">
+					<input type="text" placeholder="<?=$this->translate->_('Hostname')?>" id="hostnameBitacora" />
+					<input type="text" placeholder="<?=$this->translate->_('Ticket')?>" id="ticketBitacora" />
+					<input type="text" placeholder="<?=$this->translate->_('Aplicación')?>" id="appBitacora" />
+					
+					<span id="conutCharactrer_New">800</span> <?=$this->translate->_('caracteres disponibles')?>.
+					<a class="newStyleButtom" style="float:right;" href="#" onClick="return BITACORA.sendMsj();"><?=$this->translate->_('Enviar')?></a>
+					<a class="newStyleButtom" style="float:right;" href="#" onClick="return BITACORA.clearMsj();"><?=$this->translate->_('Limpiar')?></a>
+				</div>
+			</div>
+		
+			
+			<div class="mensaje"></div>	
+			
+			<div id="loader">
+				<img id="LoaderGeneral" src="/img/preloader.gif" />
+				<a id="LoaderLink" class="more" href="#" onclick="return BITACORA.CargarDatos();"><?=$this->translate->_('Cargar anteriores...')?></a>
+			</div>
+			
+			<div class="titulo"><?=$this->translate->_('RSS')?> <img src="/img/beta.png" style="height: 12px" /></div>
+			
+			<?=$this->User()->getRss($this->user->username);?>
+			
+		</div>
+		
+		
+		
+	</div>
+</div>
+
+<script type="text/javascript">
+
+
+$(window).scroll(function(){
+	/*
+	if ($(window).scrollTop() == $(document).height() - $(window).height()){
+		BITACORA.CargarDatos();
+	}
+	*/					
+});
+
+(function( $ ) {
+
+	$('.editable').editable();
+
+	$.widget( "ui.combobox", {
+		_create: function() {
+			var input,
+				self = this,
+				select = this.element.hide(),
+				selected = select.children( ":selected" ),
+				value = selected.val() ? selected.text() : "",
+				wrapper = $( "<span>" )
+					.addClass( "ui-combobox" )
+					.insertAfter( select );
+
+			input = $( "<input>" )
+				.appendTo( wrapper )
+				.val( value )
+				.addClass( "ui-state-default" )
+				.autocomplete({
+					delay: 0,
+					minLength: 0,
+					source: function( request, response ) {
+						var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+						response( select.children( "option" ).map(function() {
+							var text = $( this ).text();
+							if ( this.value && ( !request.term || matcher.test(text) ) )
+								return {
+									label: text.replace(
+										new RegExp(
+											"(?![^&;]+;)(?!<[^<>]*)(" +
+											$.ui.autocomplete.escapeRegex(request.term) +
+											")(?![^<>]*>)(?![^&;]+;)", "gi"
+										), "<strong>$1</strong>" ),
+									value: text,
+									option: this
+								};
+						}) );
+					},
+					select: function( event, ui ) {
+						ui.item.option.selected = true;
+						//alert(ui.item.option.value);
+
+						saveEspecificos(ui.item.option.value);
+						
+						self._trigger( "selected", event, {
+							item: ui.item.option
+						});
+					},
+					change: function( event, ui ) {
+						if ( !ui.item ) {
+							var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( $(this).val() ) + "$", "i" ),
+								valid = false;
+							select.children( "option" ).each(function() {
+								if ( $( this ).text().match( matcher ) ) {
+									this.selected = valid = true;
+									return false;
+								}
+							});
+							if ( !valid ) {
+								// remove invalid value, as it didn't match anything
+								$( this ).val( "" );
+								select.val( "" );
+								input.data( "autocomplete" ).term = "";
+								return false;
+							}
+						}
+					}
+				})
+				.addClass( "ui-widget ui-widget-content ui-corner-left" );
+
+			input.data( "autocomplete" )._renderItem = function( ul, item ) {
+				return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>" + item.label + "</a>" )
+					.appendTo( ul );
+			};
+
+			$( "<a>" )
+				.attr( "tabIndex", -1 )
+				.attr( "title", "Show All Items" )
+				.appendTo( wrapper )
+				.button({
+					icons: {
+						primary: "ui-icon-triangle-1-s"
+					},
+					text: false
+				})
+				.removeClass( "ui-corner-all" )
+				.addClass( "ui-corner-right ui-button-icon ui-button-cc" )
+				.click(function() {
+					// close if already visible
+					if ( input.autocomplete( "widget" ).is( ":visible" ) ) {
+						input.autocomplete( "close" );
+						return;
+					}
+
+					// work around a bug (likely same cause as #5265)
+					$( this ).blur();
+
+					// pass empty string as value to search for, displaying all results
+					input.autocomplete( "search", "" );
+					input.focus();
+				});
+		},
+
+		destroy: function() {
+			this.wrapper.remove();
+			this.element.show();
+			$.Widget.prototype.destroy.call( this );
+		}
+	});
+})( jQuery );
+
+$(document).ready(function(){
+	
+	// Carga inicial	
+	BITACORA.Run({debug:true, OU_ID:'<?=$this->user->OU_ID?>'});
+});
+</script>

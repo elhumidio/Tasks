@@ -1,0 +1,88 @@
+<div class="colRight">
+	<div class="contenido">
+		<input id=imp_fecha type="hidden" value="<?php echo $this->fecha; ?>" />
+		<table width="99%">
+			<tr>
+				<td width="33%">
+        			<a onclick="cambioTurno_cambiaDia('resta');" class="bt_fecha boton ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false"><span style="height: 20px" class="ui-button-text">&nbsp;◄&nbsp;</span></a>
+        			<a onclick="cambioTurno_cambiaDia();" class="bt_hoy bt_fecha boton ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false"><span style="height: 20px" class="ui-button-text">Hoy</span></a>
+        			<a onclick="cambioTurno_calendario();" class="bt_hoy bt_fecha boton ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false"><span style="height: 20px" class="ui-button-text"><img src="/img/icon32/calendar_view_month.png" height="15" alt="Calendario" title="Calendario"></span></a>
+        			<div style="position: absolute;" id="datepicker"></div>
+        			<a onclick="cambioTurno_cambiaDia('suma');" class="bt_fecha boton ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false"><span style="height: 20px" class="ui-button-text">&nbsp;►&nbsp;</span></a>
+        			<a onclick="cambioTurno_entrada('nueva');" class="bt_add bt_entrada bt_fecha boton ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false"><span style="height: 20px" class="ui-button-text"><img class="bt_img" src="/img/icon32/page_add.png" height="15" alt="Add Comentario" title="Add Comentario"></span></a>
+        			<a onclick="cambioTurno_papelera();" class="bt_papelera boton ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false"><span style="height: 20px" class="ui-button-text"><img class="bt_img" src="/img/icon32/recycle.png" height="15" alt="Papelera" title="Papelera"></span></a>
+				</td>
+				<td class="centro" width="33%"><h2><span id="fecha_dia"><?php echo $this->fechaFormateada.'<br>';?></span></h2><spam id="dia_semana"><?php echo $this->diaSemana ?></spam></td>
+				<td width="33%" style="text-align: right;">
+					<div style="width: 49%; display: inline-block;text-align: left;">
+					
+                    <select id="select_grupo">
+                    	<?php 
+                    	       echo '<option value="ES003691">Operaciones</option>';
+                    	?>
+                    </select>
+					
+					</div>
+					<div style="width: 49%; display: inline-block; text-align: center;">
+						<input id="busqueda" type="text" placeholder="Búsqueda" onkeypress="cambioTurno_buscar(event);">
+					</div>
+				</td>
+			<tr>
+		</table>
+		<div id="divTabla">
+			<?php  echo $this->contenido; ?>
+		</div>	
+			
+		<div id="divEntrada" style="display: none"></div>
+		<div id="dialogo"></div>
+		<div id="dialogo-historial-papelera"></div>
+		<div id="mascontenido" title="Más contenido abajo..." ><img width="55" height="35" src="/img/icon32/arrow_down.png"></div>
+		
+	</div>
+</div>
+
+<ul id="menu" class="jeegoocontext cm_default" style="z-index: 30001;">
+    <li class="icon" data-action="edit"><span class="icon icon-edit"></span>Editar</li>
+    <li class="icon" data-action="del"><span class="icon icon-del"></span>Eliminar</li>
+    <li class="separator menu_separador"></li>
+    <li class="icon" data-action="critico"><span class="icon icon-crit"></span>Crítico</li>
+    <li class="icon" data-action="pendiente"><span class="icon icon-pend"></span>Pendiente</li>
+    <li class="separator menu_separador"></li>
+    <li class="icon" data-action="historial"><span class="icon icon-hist"></span>Historial</li>
+</ul>
+
+<ul id="menu-pendiente" class="jeegoocontext cm_default icon" style="z-index: 30001;">
+    <li class="icon" data-action="edit"><span class="icon icon-edit"></span>Editar</li>
+    <li class="icon" data-action="del"><span class="icon icon-del"></span>Eliminar</li>
+    <li class="separator menu_separador"></li>
+    <li class="icon" data-action="critico"><span class="icon icon-crit"></span>Crítico</li>
+    <li class="icon" data-action="finish"><span class="icon icon-finish"></span>Terminar</li>
+    <li class="separator menu_separador"></li>
+    <li class="icon" data-action="historial"><span class="icon icon-hist"></span>Historial</li>
+</ul>
+
+<script type="text/javascript" charset="utf-8">
+
+
+$(document).ready(function(){
+
+	inicializaCalendario();
+	
+	cambioTurno_menus();
+	cambioTurno_fondo();
+
+	$(".det").css('cursor', 'pointer');
+
+	scroll();
+	
+	$(window).scroll(function(){
+		scroll();
+	});
+   	
+   	setInterval(cambioTurno_llenaTabla, 3000);
+	
+});
+
+</script>
+
+

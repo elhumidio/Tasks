@@ -1,0 +1,237 @@
+
+<div id="tableContainer" style="margin-left:0%;">
+<table id="tablaEventsFilter" style="font-size:11px !important;">
+<thead>
+<tr>
+<th><?php echo $this->translate->_("Info");?></th>
+<th><?=$this->translate->_('id')?></th>
+					<th><?=$this->translate->_('Title')?></th>
+					<th><?=$this->translate->_('Description')?></th>
+					<th><?=$this->translate->_('Origin')?></th> <!-- origen -->
+					<th><?=$this->translate->_('Start')?></th>
+					<th><?=$this->translate->_('End')?></th>
+					
+					<th><?=$this->translate->_('Status')?></th>
+					<th><?=$this->translate->_('Incident')?></th>  	<!-- refer -->
+					<th><?=$this->translate->_('Turnos')?></th>		<!-- turno -->
+					<th style="width:8%;"><?=$this->translate->_('Centro')?></th>	<!-- centro -->
+					<th><?=$this->translate->_('Cliente')?></th>
+					<th><?=$this->translate->_('Customer Affected')?></th>
+					<th><?=$this->translate->_('Group')?></th>										
+					<th><?=$this->translate->_('Type')?></th>
+					<th><?=$this->translate->_('Id Change')?></th>
+				    <th><?=$this->translate->_('Id Tarea')?></th>
+				    <th><?=$this->translate->_('Coordinator')?></th>
+				    <th><?=$this->translate->_('open-close-ticket')?></th>
+					<th><?=$this->translate->_('minutes-close-ticket')?></th>
+					<th><?=$this->translate->_('ticket-id')?></th>
+					<th><?=$this->translate->_('ticket-start')?></th>
+					<th><?=$this->translate->_('ticket-end')?></th>
+					<th><?=$this->translate->_('comentarios')?></th>
+					<th><?=$this->translate->_('Creado por')?></th> <!-- usuario -->
+					<th><?=$this->translate->_('Time User')?></th> 
+					<th><?=$this->translate->_('Time App')?></th> 
+					<th><?=$this->translate->_('Resolution Code')?></th> 
+					
+					
+				</tr>
+			</thead>
+			
+	
+			
+			<tbody>
+			<?php 
+			if(isset($this->data))
+			{
+				foreach ($this->data as $a)
+				{
+					//Descomposicion del campo params
+					$coordinator = "";
+					$arrayParams =json_decode($a['params'],true);
+					$idChange = $arrayParams['idChange']; 
+					$idTarea = $arrayParams['idTarea'];
+					if(isset($arrayParams['Coordinator']))
+						$coordinator =explode("->",$arrayParams['Coordinator'])[0]; ;
+					
+					echo "<tr>".
+							
+					"<td><img class='edit-icon' width='15' height='15' src='/img/details_open.png'></td>".
+					"<td>".$a['id']."</td>".
+					"<td>".$a['title']."</td>".
+					"<td>".$a['description']."</td>".
+					"<td>".$a['origen']."</td>".
+					"<td>".$a['start']."</td>".
+					"<td>".$a['end']."</td>".
+					"<td>".$a['status']."</td>".
+					"<td>".$a['refer']."</td>".
+					"<td>".$a['turno']."</td>".
+					"<td>".$a['centro']."</td>".
+					"<td>".$a['cliente']."</td>".
+					"<td>".$a['customer_affected']."</td>".
+					"<td>".$a['group']."</td>".
+					"<td>".$a['type']."</td>".
+					"<td>".$idChange."</td>".
+					"<td>".$idTarea."</td>".
+					"<td>".$coordinator."</td>".
+					"<td>".$a['open-close-ticket']."</td>".
+					"<td>".$a['minutes-close-ticket']."</td>".
+					"<td>".$a['ticket-id']."</td>".
+					"<td>".$a['ticket-start']."</td>".
+					"<td>".$a['ticket-end']."</td>".
+					"<td>".$a['comentarios']."</td>".
+					"<td>".$a['usuario']."</td>".
+					"<td style='cursor:pointer' class='timeuserclass'>".$a['time_user']."</td>".
+					"<td style='cursor:pointer' class='timeappclass'>".$a['time_app']."</td><td>".$a['resolution_code']."</td>".
+					"</tr>";
+					
+					
+				}
+				
+				
+				
+			}
+			
+			
+			?>
+			
+			</tbody>
+		</table>
+		
+		</div>
+		
+		
+		<script>
+
+$(document).ready(function(){
+/*$('td').live('click',function(){
+	console.log(this.className);
+	classname = this.className;
+	if(classname == "timeuserclass")
+	{
+		console.log("FILA");
+	console.log($(this).closest('tr'));
+	
+		modifyTimeUser(this);
+	}
+	else if(classname == "timeappclass")
+	{
+		modifyTimeApp(this);
+	}
+});*/
+
+$('#tablaEventsFilter').on('click', 'tbody td', function(){
+	if(this.className == "timeappclass" || this.className == "timeuserclass"){
+		var arr=$('#tablaEventsFilter').dataTable().fnGetData($(this).closest('tr')); 
+	    var Id=arr[0]; //returns first td value 
+	    var Name=arr[1];//returns second td value
+	    modifyTime(arr);
+	 
+	}
+       
+});
+
+	$('.edit-icon').click(function(d){
+
+		var td = this.parentNode;
+	            var nTr = td.parentNode;    
+	            //var nTr = $(this).parents('tr')[0];
+	            
+	            if ( table.fnIsOpen(nTr) )
+	            {
+	                
+	                /* This row is already open - close it */
+	                d.src = "/img/details_open.png";
+	                table.fnClose( nTr );
+	            }
+	            else
+	            {
+	                /* Open this row */
+	                d.src = "/img/details_close.png";
+	                table.fnOpen( nTr, fnFormatDetails(table, nTr), 'tabledetail' );
+	            }
+	});
+	
+
+	 var table = $('#tablaEventsFilter').dataTable( {
+			"bStateSave": false,
+			"aaSorting": [[ 1, "desc" ]],
+			"sPaginationType": "full_numbers",
+			"aLengthMenu": [[10,25, 50, 100, -1], [10,25, 50, 100, "All"]],
+		    "iDisplayLength": 100,//Mostrar 100 filas por defecto
+			"bProcessing": true,
+	        "bServerSide": false,
+	        "bAutoWidth": false,
+	        "dom": 'Blfrtip',
+
+	    	buttons: [
+	        { extend: 'copy', className: 'copyButton' },
+	        	
+	        { extend:  'csvHtml5', className: 'excelButton',fieldSeparator: ';' }
+	    ],
+	        "aoColumns": [ 
+		                  	{"sWidth": "2%","bSortable":false,"title":"info"},//0
+							{"data":"id","bVisible": false}, //'id' ->1
+				        	{ "sWidth": "6%" },  //'title'  ->2
+				        	{ "sWidth": "3%","bVisible":    false},  //'description' ->3
+				        	{ "sClass": "single-line","sWidth": "4%"},  //'origen' ->4
+							{ "bVisible":    true,"sWidth": "5%"  }, //start ->5
+							{"sWidth": "5%"   }, //end -> 6
+							{ "bVisible":    true,"sWidth": "4%"}, //status -> 7
+							{ "bVisible":    true,"sWidth": "4%" }, //incident -> 9
+				        	{ "bVisible":    true,"sWidth": "4%" },  //turno  -> 10
+							{ "bVisible":    true,"sWidth": "6%"  }, //Centro -> 11
+							{ "bVisible":    true,"sWidth": "8%" }, //Cliente -> 12 
+				        	{ "sWidth": "7%" },  //Customer affected -> 13
+				        	{ "sWidth": "6%" }, //Group  -> 14
+				        	
+				        	{ "bVisible":    false },//
+				        	{ "bVisible":    true,"sWidth": "5%" },//16 IdChange
+				        	{ "bVisible":    true,"sWidth": "5%" },// 17 IdTarea
+				        	 //'rGroup' ->15
+							{ "bVisible":    true}, //Coordinator -> 19
+							{ "bVisible":    true}, //Open-close-ticket minutes-close-ticket -> 20
+							{ "bVisible":    true}, //ticket-id -> 21
+							{ "bVisible":    true}, //comentarios -> 22
+							{ "bVisible":    true}, //'open-close-ticket' -> 23 
+							{ "bVisible":    true}, //creado por ->  24
+							{ "bVisible":    true}, //'cliente' -> 25
+							{ "sWidth": "6%" },//26
+							{"data":"time_user", "sWidth": "6%" },// time_user 27
+							{"data":"time_app", "sWidth": "6%" }, //time_app 28
+							{"sWidth": "6%" }
+		          	     ],
+		          	     	   columnDefs: [ 
+
+                                { 
+									
+								    targets: [2,3,4,5,6,7,8,9,10,11,12,13,14,18,19,20,21,22,23,24],
+                                    render:$.fn.dataTable.render.ellipsis( 5 )}
+                                ],
+
+
+		      
+	      
+			"fnInitComplete": function () {
+
+				$('.dataTables_filter input').attr("placeholder", "Search");
+				
+			},
+			aoColumnDefs: [{ 
+				"bSortable": false, 
+				"aTargets": ['noSort'] ,
+				 targets: [2,3,4,5,6,7,8,9,10,11,12,13,14,18,19,20,21,22,23,24],
+                 render:$.fn.dataTable.render.ellipsis( 15 )                   
+
+
+			}]
+		});
+
+
+	
+});
+
+
+		</script>
+		<script language="JavaScript" type="text/javascript" src="/estilos/js/wz_tooltip.js"></script>
+<script language="JavaScript" type="text/javascript" src="/estilos/js/datos_tooltip.js"></script>
+<script language="JavaScript" type="text/javascript" src="/estilos/js/idiomaDataTables.js"></script>

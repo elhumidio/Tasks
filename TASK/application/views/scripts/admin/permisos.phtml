@@ -1,0 +1,70 @@
+<div class="colRight">
+	<div class="contenido">
+		<div class="titulo"><?=$this->translate->_('Permisos')?></div>
+		
+		<p><?=sprintf($this->translate('Es necesario mantener actualizado el %s para poder dar permisos a toda la aplicación.'),'<a href="'.$this->url(array('controller'=>'admin','action'=>'recursos')).'" title="'.$this->translate('ir a recursos').'">'.$this->translate('arbol de recursos').'</a>')?></p>
+		
+		<div id="permisosSection">
+			<!-- Lista estática para los roles -->
+			<div class="rolesList">
+				<ul>
+				<?php foreach($this->rolesList as $rol) {?>
+					<li id="rolid_<?=$rol['ID']?>"><?=$rol['name']?></li>
+				<?php }?>
+				</ul>
+			</div>
+			
+			<!-- Lista dinamica de los recursos. Necesario un js para activar en función -->
+			<div id="" class="recursosList"><div style="margin:0 20px;"><?=$this->translate('No es posible modificar los permisos del rol Admin')?></div></div>			
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+var EASY = {};
+var rol_id_base = <?=$this->rol_id?>;
+
+/** Obtiene de la BBDD los datos de privilegios del Rol_id proporcionado **/
+function loadPrivilegios(element_id) {
+	var element = $('#'+element_id);
+	element.parent().children('li').css('border-right','1px solid #BBB').css('background-color','#FFF');
+	element.css('border-right','0').css('background-color','#F1F1F1');
+
+	var id = element.prop('id').replace('rolid_','');
+	var request = $.ajax({
+		url : '<?=$this->url(array('controller'=>'admin','action'=>'getpermisos'))?>',
+		data: {id:id},
+		async : true,
+		type: "post"
+	});
+	
+	request.done(function (result) {
+		$('#permisosSection .recursosList').html(result).css('background-color','#F1F1F1');
+	});
+}
+
+/** Activa o desactiva los checkboxes **/
+function check(id,checkboxes) {
+	if($(id).is(':checked')) {checkboxes.prop('checked', true);
+    } else {checkboxes.prop('checked', false);}	
+}
+
+/** Borra y genera el indice de privilegios del rol_id proporcionado **/
+function generarIndice(elemento,rol_id) {
+	var request = $.ajax({
+		url : '<?=$this->url(array('controller'=>'admin','action'=>'generaindicesparaelrol'))?>', 
+		data: {rol_id:rol_id},
+		async : true,
+		type: "post"
+	});
+	
+	request.done(function (result) {
+		loadPrivilegios('rolid_'+rol_id);
+		$.fn.makeNotify.sendMsj('El indice para el rol ID '+rol_id+' se ha generado correctamente.');
+	});
+}
+
+$(function(){
+	if(rol_id_base!=0){loadPrivilegios('rolid_'+rol_id_base);}
+	$('#permisosSection .rolesList ul li').click(function(){loadPrivilegios(this.id);});
+});
+</script>

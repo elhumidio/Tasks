@@ -1,0 +1,72 @@
+<div class="div-form">
+    <form id="form-entrada" method="post" action="/taskv2/cambioturno/procesa">
+    	<input id="hidden_group" type="hidden" name='grupo' value="">
+    	<div class="div-row">
+    		<div id="entrada_error" class="div-col-unico">
+    			<div id="entrada_error_bloque">
+    				<div style="margin-bottom: 10px;"><span> Se han producido los siguientes errores:</span></div>
+    				<div id="entrada_error_items"></div>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="div-row">
+    		<div class="div-col div-col-izq">
+    			<label id="lblTitulo" for="titulo">Titulo</label>
+    		</div>
+    		<div class="div-col div-col-dcha">
+    			<!--  <input class="div-col-text w100" type="text" id="titulo" name="titulo">-->  
+    			       	<select class="div-col-text w100"  id="titulo" name="titulo">
+    			       	</select>
+    		</div>
+    	</div>
+    	<div class="div-row">
+    		<div class="div-col-unico">
+    			<textarea class="w100" id="descripcion" rows="4" cols="100"></textarea>        
+    		</div>
+    	</div>
+    	<div class="div-row">
+    		<div class="div-col-unico">
+        		<a onclick="cambioTurno_add()" class=" boton-menu boton ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+        			<span class="ui-button-text"><img class="bt_img" src="/img/icon32/page_add.png" height="15" alt="Add Entrada" title="Add Entrada"></span>
+        		</a>
+        		<hr class="hr-entrada">
+    		</div>
+    	</div>
+    	<div class="div-row">
+    		<span id="titulo-divBloques">Entradas a procesar</span>
+    		<div id="divBloques" class="div-col-unico" />
+    	</div>
+		
+   </form>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+
+$(document).ready(function(){
+	$('#hidden_group').val($('#select_grupo').val());
+
+  	$.ajax({
+	    url :'/task/cambioturno/refreshtitulos', 
+	    async : false,
+	    type: "post",
+	    timeout: 48000,
+	    dataType : "json",
+	    success:function(data){
+	    	loadSelectTitulos(data);
+	    	
+	    },
+	    error:function(){
+	    	alert("Error modificando los datos. Intente nuevamente");
+	    }
+	});
+
+
+
+
+	
+});
+
+</script>
+
+
+

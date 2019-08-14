@@ -1,0 +1,104 @@
+<div class="colRight">
+	<div class="contenido">
+		<div class="titulo"><?=$this->translate->_('Grupos')?></div>
+		
+		<p><?=$this->translate->_('A continuacion se listan los grupos y se configura el acceso a la aplicacion.')?></p>
+		
+		<table id="tablaGrupos">
+			<thead>
+				<tr>
+					<th  class="id">#</th>
+					<th><?=$this->translate->_('Ceco')?></th>
+					<th><?=$this->translate->_('Nombre')?></th>
+					<th><?=$this->translate->_('email')?></th>
+					<th><?=$this->translate->_('Rol')?></th>
+					<th class="estado"><?=$this->translate->_('Estado')?> <span onmouseover="MyTip('InfoEstado', InfoEstadoDescGrupo)" onmouseout="UnTip()">?</span></th>
+				</tr>
+			</thead>
+			
+			<tbody>
+			<?php 
+			if(count($this->list)>0){
+				foreach($this->list as $row)
+				{
+					echo '<tr>';
+					echo '<td>'.$row['ID'].'</td>';
+					echo '<td>'.$row['departament'].'</td>';
+					echo '<td>'.$row['name'].'</td>';
+					echo '<td>'.$row['email'].'</td>';
+					echo '<td>'.$this->rol()->getRolName($row['rol_id']).'</td>';
+					echo '<td class="switchButtom"><input name="grupos#'.$row['ID'].'" type="checkbox" '.(($row['estado']=="on")?"checked":"").' /><span class="hidde">'.$row['estado'].'</span></td>';
+					echo '</tr>';
+				}
+			}
+			?>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(function() {
+
+	/* Definir siempre antes que el datatables */
+	$('.switchButtom :checkbox').iphoneStyle({
+		duration: 100,
+		onChange : changeHandler 
+	});
+	
+	var tablaGrupos = $('#tablaGrupos').dataTable( {
+		"bStateSave": true,
+		"aaSorting": [[ 0, "asc" ]],
+		"sPaginationType": "full_numbers",
+		"oLanguage": idiomaDataTables,
+		"fnInitComplete": function () {
+			$('.dataTables_filter input').attr("placeholder", "Buscar");
+			
+		},
+		aoColumnDefs: [{ 
+			"bSortable": false, 
+			"aTargets": ['noSort'] 
+		}]
+	});
+
+	
+
+	var oTableGrupos = new TableTools( tablaGrupos, {
+		"sRowSelect": "single",
+		"aButtons": [
+            {
+            	"sExtends": "text",
+            	"sButtonText": "Nuevo",
+            	"fnClick": function ( nButton, oConfig, oFlash ) {
+					alert(nButton);
+            		//dialogo('Nuevo Grupo');
+                }
+            }
+        ]
+    } );
+	
+	$('#tablaGrupos_wrapper').before( oTableGrupos.dom.container );
+	
+	
+	
+});
+
+
+function dialogo(titulo)
+{
+	var dialogo = $( "<div></div>" ).html(preloader).dialog({
+		autoOpen: true,
+		position: 'middle',
+		modal: true,
+		title: titulo,
+		width: 1000,
+		buttons: {
+			"<?php echo $this->translate->_("Cancelar")?>": function() {
+				$( this ).dialog( "close" );
+			}
+			
+		}
+	}).load('/admin/ajax_new_grupos',function(){dialogo.dialog({position: 'middle'});});
+}
+
+</script>

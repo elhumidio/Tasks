@@ -1,0 +1,69 @@
+
+<table class="display" id="lista-busqueda">
+	<thead>
+		<tr>
+			<th>Fecha</th>
+			<th>Titulo</th>
+			<th>Descripcion</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php 
+
+if(isset($this->entradasBusqueda))
+    
+	foreach($this->entradasBusqueda as $item){
+		
+	    $id = $item['ID'];
+	    $fecha = $item['fecha'];
+	    $titulo = $item['titulo'];
+	    $descripcion = $item['descripcion'];
+	    
+		echo "<tr style='cursor: pointer;' onclick=\"cambioTurno_seleccionaFecha('$fecha')\">"
+		        ."<td>$fecha</td>"    
+    			."<td>$titulo</td>"
+    			."<td>$descripcion</td>"
+		    ."</tr>";	
+	}?>
+	
+	</tbody>
+</table>
+
+
+<script type="text/javascript" charset="utf-8">
+
+$(document).ready(function(){
+
+	$('#lista-busqueda').dataTable( {
+		"bStateSave": false,
+		"fnStateSave": function (oSettings, oData) {
+	        localStorage.setItem( 'DataTables_'+window.location.pathname, JSON.stringify(oData) );
+	    },
+	    "fnStateLoad": function (oSettings) {
+	        return JSON.parse( localStorage.getItem('DataTables_'+window.location.pathname) );
+	    },
+		"bPaginate": true,
+		"bInfo":true,
+		"bSort":true,
+		"iDisplayLength": 10,
+		"sPaginationType": "full_numbers",
+		"oLanguage": idiomaDataTables,
+		"bFilter": true,	
+		"fnInitComplete": function () {
+			$('.dataTables_filter input').attr("placeholder", "Buscar");
+			
+		},
+		"aoColumns": [
+		              false,
+		              false,
+		              false
+		]
+
+	});
+	
+});
+
+</script>
+
+
+

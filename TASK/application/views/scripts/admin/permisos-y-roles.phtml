@@ -1,0 +1,43 @@
+<div id="pestañas" class="colRightPestañas">
+	<div class="menuPestanas">
+		
+		<ul>
+			<?php if ($this->menuActivo()->checkRole($this->user,'admin','ajaxpermisos')) {?>
+			<li><a href="<?=$this->baseUrl('/admin/ajax_permisos')?>" title=""><?=$this->translate->_('Permisos')?></a></li>
+			<?php }?>
+			<?php if ($this->menuActivo()->checkRole($this->user,'admin','ajaxroles')) {?>
+			<li><a href="<?=$this->baseUrl('/admin/ajax_roles')?>" title=""><?=$this->translate->_('Roles')?></a></li>
+			<?php }?>
+			<?php if ($this->menuActivo()->checkRole($this->user,'admin','ajaxrecursos')) {?>
+			<li><a href="<?=$this->baseUrl('/admin/ajax_recursos')?>" title=""><?=$this->translate->_('Recursos')?></a></li>
+			<?php }?>
+		</ul>
+		
+	</div>
+	
+	<div class="contenido" style="overflow: auto;">
+		<div id="ui-tabs-1"></div>
+		
+	</div>
+</div>
+
+
+
+<script type="text/javascript">
+$(function() {
+	$( ".boton" ).button();
+	
+	$( "#pestañas" ).tabs({
+		cache: false,
+		ajaxOptions: {
+			type: "post",
+			error: function( xhr, status, index, anchor ) {
+				$( anchor.hash ).html(errorajax);
+			}
+		}
+	}).children().children().removeClass('ui-widget-header');
+	
+});
+
+
+</script>

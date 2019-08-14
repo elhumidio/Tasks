@@ -1,0 +1,73 @@
+
+
+<h3 class="dialog-titulo"><?php echo $this->data['entrada'][0]['titulo'];?></h3>
+<p><?php echo $this->data['entrada'][0]['descripcion'];?></p>
+
+
+<table class="display" id="lista-historial">
+	<thead>
+		<tr>
+			<th>Fecha / Hora</th>
+			<th>Usuario</th>
+			<th>Acción</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php 
+
+if(isset($this->data))
+    
+	foreach($this->data['historial'] as $item){
+		
+	    $fecha = $item['fecha'];
+	    $usuario = $item['usuario'];
+	    $mensaje = $item['mensaje'];
+	    
+		echo "<tr>"
+		        ."<td>$fecha</td>"    
+    			."<td>$usuario</td>"
+    			."<td>$mensaje</td>"
+		    ."</tr>";	
+	}?>
+	
+	</tbody>
+</table>
+
+
+<script type="text/javascript" charset="utf-8">
+
+$(document).ready(function(){
+
+	$('#lista-historial').dataTable( {
+		"bStateSave": false,
+		"fnStateSave": function (oSettings, oData) {
+	        localStorage.setItem( 'DataTables_'+window.location.pathname, JSON.stringify(oData) );
+	    },
+	    "fnStateLoad": function (oSettings) {
+	        return JSON.parse( localStorage.getItem('DataTables_'+window.location.pathname) );
+	    },
+		"bPaginate": true,
+		"bInfo":false,
+		"bSort":true,
+		"iDisplayLength": 10,
+		"sPaginationType": "full_numbers",
+		"oLanguage": idiomaDataTables,
+		"bFilter": false,	
+		"fnInitComplete": function () {
+			$('.dataTables_filter input').attr("placeholder", "Buscar");
+			
+		},
+		"aoColumns": [
+		              {"sWidth": "150px","bSortable":true},
+		              {"sWidth": "150px"},
+		              false
+		]
+
+	});
+	
+});
+
+</script>
+
+
+

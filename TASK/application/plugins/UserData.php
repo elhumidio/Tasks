@@ -1,0 +1,28 @@
+<?php
+/**
+ * Este plugin pasa los datos del usuario a todos los controladores y vistas
+ * 
+ * @author      Juan Ignacio Badia <juanignacio.badia@t-systems.es>
+ *
+ */
+class Application_Plugin_UserData extends Zend_Controller_Plugin_Abstract
+{
+	public function preDispatch(Zend_Controller_Request_Abstract $request)
+	{
+		$storage = new Zend_Auth_Storage_Session (NAMESPACE_APP,NAMESPACE_MEMBER);
+		$namespace = Zend_Auth_Storage_Session::NAMESPACE_DEFAULT.NAMESPACE_APP;
+		$userData = $storage->read($namespace);
+		
+		$request->setParam('user', $userData);
+		
+		$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+		$viewRenderer->init();
+	
+		$viewRenderer->view->user = $userData;
+		$viewRenderer->view->ssid = Zend_Session::getId();
+		
+		Zend_Registry::set('usuario', $userData);
+		
+		
+    }
+}

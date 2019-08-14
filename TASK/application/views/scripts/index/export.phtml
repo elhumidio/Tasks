@@ -1,0 +1,284 @@
+
+<div class="containerx"> 
+	
+ <table style="width:100%;table-layout: fixed;z-index:16777271">
+ <thead ><tr>
+ <th class="header">Origen</th>
+ <th class="header">Desde</th>
+ <th class="header">Hasta</th>
+ <th class="header">Cliente</th>
+ <th class="header" id="headUsuario">Usuario</th>
+ <th class="header">Status</th>
+ <th id="headertiporegistro" class="header">Tipo Registro</th>
+ </tr></thead>
+ <tr><td style"width:18%;" class="color">
+		 <div class="row" id="divOrigen">
+				<?php echo "<input id='roles' type='hidden' value='". $this->userrole."'>";?>
+		    
+		       <select class="inputs" name = "origen" id="slctOrigen" onchange="controlDisplay();">
+						<option value="journal" >Bitácora</option>
+						<option value="checklist">Checklist</option>
+				</select>	
+		      
+		 </div>
+ 
+ </td>
+  <!--js-example-basic-single-->
+ 	<td style"width:8%;" class="color">
+ 	  <input class="inputsdate" type="text" id="dateDesde" name="start">
+	</td>
+	<td style"width:8%;" class="color">
+      <input class="inputsdate" type="text" id="dateHasta" name="end">
+    </td>
+<td style"width:33%;" class="color">
+<br>
+   <div class="row" id="divClientes">
+      
+        <select multiple class="inputs" id="slctClientes" name="cliente">
+        <option value="" selected>Select value...</option>          
+        </select>
+      
+    </div>
+
+
+</td>
+
+<td id="cellUsuario" style"width:11%;" class="color"><br>
+    <div class="row" id="divUsuario">
+        <select class="inputs" id="slctUsuario"  name="username">
+        <option value="" class="userrow" selected>Select value...</option>
+        </select>
+    </div><br>
+    <div class="row" id="divActionUsuario">
+        <select class="inputs" id="slctActionUsuario" disabled name="action_usuario">
+          <option value="" selected>Select value...</option>
+         <!-- <option value="creation">Creación</option>-->
+          <option value="start">Start</option>
+          <option value="finish">Finish</option>
+          
+        
+        </select>
+    </div>
+    
+
+
+</td>
+
+<td style"width:12%;" class="color">
+	<br>
+	<div class="row" id="divStatus">
+			<select multiple class="inputs" id="slctStatus" name="status">
+				<option value="" selected>Select value...</option>
+				<option value="Pending">Pending</option>
+				<option value="Progress">Progress</option>
+				<option value="Cancel">Cancel</option>
+				<option value="Finish">Finish</option>
+				<option value="Alert">Alert</option>
+				<option value="Error">Error</option>
+				<option id="optionreplanif" value="Replanificado">Replanificado</option>
+			</select>
+		
+	</div>
+</td>
+<td style="width:10%" class="color" id="celltiporegistro">
+<div class="row" id="divTipoRegistro">
+			<select class="inputs" id="slctTipoRegistro" name="tiporegistro">
+			<option value="" selected>Select value...</option>
+				<option value="parent">Parent</option>
+				<option value="task">Task</option>
+				<option value="info">Info</option>
+			</select>
+		
+	</div>
+
+</td>
+ </tr>
+ <tr id="rowtype"><td>
+ 	<br><br>
+		 <select class="inputs" id="slctType" name="type" onchange="controlsDisplayType();">
+					<option value="" selected>Select Type...</option>
+					<option value="SM9">SM9</option>
+					<option value="CTTI">CTTI</option>
+					<option value="Easy">Easy</option>
+					<option value="Manual">Manual</option>
+		</select>	
+		
+		
+ 
+ </td><td style="width:50%;" colspan="4">
+ 
+ <table style="width:100%;table-layout: fixed;">
+	<thead class="notvisible"  ><th id="SM9Fields" class="header"></th><th class="header" id="SM9Fields"></th><th class="header" id="cellCI"></th></thead>
+	<tr>
+
+	<td  class="notvisible cellstype color">
+		
+	
+			<div  class="row" id="divCustomerAffected" >
+					<label for="slctCustomer" class="headerlabel" style="padding: 5px;">Customer affected<br><br><select multiple class="inputs" id="slctCustomer" disabled name="customer_affected">
+					<option value="" selected>Select value...</option>
+					</select></label>
+			</div>
+		
+	</td>
+	<td class="notvisible cellstype color">
+		
+			<div class="row" id="divCoordinator">
+				<label for="slctCordinator" class="headerlabel" style="padding: 5px;">Coordinator<br><br><select multiple class="inputs" id="slctCordinator" disabled name="coordinator">
+				<option value="" selected>Select value...</option>
+				</select></label>
+			</div>
+		
+	
+	</td>
+	<td class="notvisible cellstype divciclass color">
+		
+			<div class="row" id="divCI">
+				<label for="txtCi" class="headerlabel" style="padding: 5px;">CI<br><br><input class="inputs" type="text" id="txtCi" name="CI" disabled></label>
+			</div>
+		
+	</td>
+	
+	</div>	
+	</tr>
+	</table>
+ 
+ 
+ </td></tr>
+ </table>
+    
+    
+ 
+<table style="width:60%;table-layout:fixed;">
+	
+	<tr>
+		<td>
+			<div class="row" style="margin-left: 0%;margin-top:0%;" id="divopenTicket">
+			<label class="headerlabel" for="chkOpenTicket">Open-Ticket<br><br>
+				<input class="inputsdate" disabled type="checkbox" id="chkOpenTicket" name = "open-close-ticket">
+			</label>
+	</div>
+	
+		</td>
+		<td>
+			<div class="row" id="divTurno">
+					<label class="headerlabel" for="slctTurno">Turno<br><br>
+						<select multiple class="inputsdate" id="slctTurno" name="turno" disabled>
+					    <option selected value="">Select value...</option>
+						<option value="Morning">Morning</option>
+						<option value="Evening">Evening</option>
+						<option value="Night">Night</option>
+						</select>
+					</label>
+				</div>
+		
+		</td>
+		<td>
+			<div class="row" id="divCentro">
+				<label class="headerlabel" for="slctCentro">Centro<br><br>
+					<select multiple class="inputsdate" id="slctCentro" name="centro" disabled>
+					<option value="" selected>Select value...</option>
+					<option value="BCN - 22@">BCN - 22@</option>
+					<option value="MAD - 28@">MAD - 28@</option>
+					</select>
+				</label>
+			</div>
+		</td>
+	</tr>
+</table>
+	
+
+	
+	
+  <div id="buttonsdiv" style="float:right;margin-right:40%;">  
+  <input type="button" class="btnexport" value="Limpiar" onclick="cleanFields();"><input class="btnexport" style="margin-left:25px;" type="button" onclick="filterTable();" value="Buscar">
+  </div>
+  
+</div>
+<div id="preloader" class="preloader" style="margin-top:30vh;margin-left:27vw;position:absolute;display:block;z-index:9999999;height:500px !important;
+width:500px;font-size:16px !important;"><img height="45" width="45" class="" src="/img/preloader_bg.gif" alt="" /></div>
+<button id="btnshowfilters">Mostrar/Ocultar</button>  
+<div id="divtableexport" style="width:100%;height:100%;margin-top:-13% !important;"></div>
+<div id="dialogtimes" style="z-index:999999999">
+<label for="txtAppTime">Time App&nbsp;&nbsp;&nbsp;<input onkeypress="validateNumberOnly(this);" type="text" id="txtAppTime"/></label>
+<label for="txtUserTime">User App&nbsp;&nbsp;&nbsp;<input onkeypress="validateNumberOnly(this);" type="text" id="txtUserTime"/></label>
+</div>
+
+<style>
+td{padding:10px;}
+.tablaEvents_wrapper{margin-top:-0%}
+.dt-buttons{margin-top:5%;}
+
+
+.ui-datepicker-trigger { position:relative;top:-21px; }
+</style>
+
+<script>
+$(document).ready(function(){
+	//INICIALIZA LOS SELECT2
+	
+	
+
+	/*INICIALIZACION DEL FORMULARIO*/
+	if($('#roles').length >0){//verfy if view is open
+		
+
+	   	$( "#dateDesde" ).datetimepicker({
+	    	    showButtonPanel: true,
+	            stepMinute: 5,
+	            firstDay: 1,
+	            showOn: "button",
+	            buttonText: "Date",
+	              buttonImage: "/img/icon/calendar.gif",
+                buttonImageOnly: true,
+	            dateFormat: 'yy-mm-dd', 
+	            timeFormat: 'hh:mm:ss'
+	   	});
+	    
+	    $( "#dateHasta" ).datetimepicker({
+	 	    showButtonPanel: true,
+	        stepMinute: 5,
+	        firstDay: 1,
+	        buttonText: "Date",
+	        showOn: "button",
+	        buttonImage: "/img/icon/calendar.gif",
+            buttonImageOnly: true,
+	        dateFormat: 'yy-mm-dd', 
+	        timeFormat: 'hh:mm:ss'
+	    });
+	    
+	    $('#preloader').show();
+		
+		var roles = $('#roles').val();
+		controlVisibility(roles);
+		getClientes();
+		getUsers();
+		getCustomerAffectedList();
+		getCoordinators();
+		loadTableView();
+		
+		/*En este metodo se puede incluir todo lo que se 
+			desee ejecutar cuando todas las llamadas ajax han concluido...
+		*/
+		$(document).ajaxStop(function() {
+  
+  		$('#preloader').hide();
+		});
+	}
+
+
+
+   
+
+	/*$('.js-example-basic-single').select2(
+		
+			);*/
+		
+});
+$('#btnshowfilters').click(function(){
+	
+	$('.containerx').toggle("slow");
+	
+});
+
+</script>

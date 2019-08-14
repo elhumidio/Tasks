@@ -1,0 +1,64 @@
+<div class="div-form">
+	<form id="form-editar" method="post" action="/taskv2/cambioturno/procesaedicion">
+    	<div class="div-row">
+			<label>Turno</label>
+			<select id="select_turno_edit">
+            	<?php foreach($this->data['turnos'] as $turno){
+            	    $activo = $this->data['entrada']['turno'] == $turno['ID'] ? 'selected' : '';
+            	    echo '<option value="'.$turno['ID'].'" '.$activo.'>'.$turno['nombre'].'</option>';
+            	} ?>
+            </select>
+
+    		<label for="pendiente-edit">Pendiente</label><input name="pendiente" id="pendiente-edit" <?php echo $this->data['entrada']['pendiente'] == 'Y'?'checked':'';?> type="checkbox">
+    		<label for="critico-edit">Crítico</label><input name="critico" id="critico-edit" <?php echo $this->data['entrada']['critico']=='Y'?'checked':'';?> type="checkbox">
+			
+			<input id="fecha-edit-value" type="hidden" value="<?php echo $this->data['entrada']['fecha'];?>">
+			<input id="fecha-edit" readonly value="<?php echo date('d/m/Y', strtotime($this->data['entrada']['fecha']));?>">
+            <a id="bt_fecha-edit" onclick="cambioTurno_calendario_edit();" class="bt_hoy bt_fecha boton ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false"><span style="height: 20px" class="ui-button-text"><img src="/img/icon32/calendar_view_month.png" height="15" alt="Calendario" title="Calendario"></span></a>
+            <div style="position: absolute; left: 357px;" id="datepicker-edit"></div>
+    	</div>
+    	<div class="div-row">
+    		<label>Titulo</label>
+    		<div class="div-col-unico">
+    			<!--  <input class="div-col-text w100" type="text" id="titulo-edit" name="titulo" value="<?php echo $this->data['entrada']['titulo'];?>">-->
+    			<select class="div-col-text w100" id="titulo-edit" name="titulo"></select>         	
+    		</div>
+    	</div>
+    	<div class="div-row">
+    		<div class="div-col-unico">
+    			<textarea class="w100" id="descripcion-edit" name="descripcion" rows="4" cols="100"><?php echo $this->data['entrada']['descripcion'];?></textarea>        
+    		</div>
+    	</div>
+
+	</form>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+
+$(document).ready(function(){
+	iniciaCalendarioEdit();
+
+    /*Carga lista de titulos*/
+  	$.ajax({
+	    url :'/task/cambioturno/refreshtitulos', 
+	    async : true,
+	    type: "post",
+	    timeout: 48000,
+	    dataType : "json",
+	    success:function(data){
+	    	loadSelectTitulosEdit(data);
+	    	
+	    	$('#titulo-edit option[value="<?php echo $this->data['entrada']['titulo'];?>"]').prop('selected', true); 
+	    },
+	    error:function(){
+	    	alert("Error modificando los datos. Intente nuevamente");
+	    }
+	});
+	
+	//
+});
+
+</script>
+
+
+

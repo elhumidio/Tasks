@@ -1,0 +1,36 @@
+<div class="colLeft">
+	<ul>
+		<?php  /*** INDEX ***/
+		
+		if(!is_null($this->menuActivo()->check('default','index'))) { ?>		
+			<!-- 
+			<li class="titulo"><?=$this->translate->_('Dashboards')?></li>
+			
+			<li class="<?=$this->menuActivo()->check('default','admin','general');?>"><a href="<?=$this->baseUrl('/correos-administracion-de-sistemas')?>" title=""><?=$this->translate->_('Correos')?></a></li>
+			<li class="<?=$this->menuActivo()->check('default','admin','general');?>"><a href="<?=$this->baseUrl('/test-one')?>" title=""><?=$this->translate->_('Test One')?></a></li>
+			
+			 -->
+			
+		<?php } /*** FIN INDEX ***/ ?>
+		
+		
+		
+		<?php  /*** ADMIN ***/
+		
+		if(!is_null($this->menuActivo()->check('default','admin'))):?>
+			
+			<?php if ($this->menuActivo()->checkRole('admin','general') || $this->menuActivo()->checkRole('admin','delegations') || $this->menuActivo()->checkRole('admin','sessions')):?><li class="titulo"><?=$this->translate->_('Configurar')?></li><?php endif;?>
+			<?php if ($this->menuActivo()->checkRole('admin','general')):?><li class="<?=$this->menuActivo()->check('default','admin','general');?>"><a href="<?=$this->url(array('controller'=>'admin','action'=>'general'))?>" title=""><?=$this->translate->_('Aplicacion')?></a></li><?php endif;?>
+			<?php if ($this->menuActivo()->checkRole('admin','delegations')):?><li class="<?=$this->menuActivo()->check('default','admin','delegations');?>"><a href="<?=$this->url(array('controller'=>'admin','action'=>'delegations'))?>" title=""><?=$this->translate->_('Delegaciones')?></a></li><?php endif;?>
+			<!-- 
+			<?php if ($this->menuActivo()->checkRole('admin','general') || $this->menuActivo()->checkRole('admin','delegations') || $this->menuActivo()->checkRole('admin','sessions')):?><li class="separador"></li><?php endif;?>
+			<li class="titulo"><?=$this->translate->_('Usuarios')?></li>
+			 -->
+			<?php if ($this->menuActivo()->checkRole('admin','roles')):?><li class="<?=$this->menuActivo()->check('default','admin','roles');?>"><a href="<?=$this->url(array('controller'=>'admin','action'=>'roles'))?>" title=""><?=$this->translate->_('Roles')?></a></li><?php endif;?>
+			<?php if ($this->menuActivo()->checkRole('admin','recursos')):?><li class="<?=$this->menuActivo()->check('default','admin','recursos');?>"><a href="<?=$this->url(array('controller'=>'admin','action'=>'recursos'))?>" title=""><?=$this->translate->_('Recursos')?></a></li><?php endif;?>
+			<?php if ($this->menuActivo()->checkRole('admin','permisos')):?><li class="<?=$this->menuActivo()->check('default','admin','permisos');?>"><a href="<?=$this->url(array('controller'=>'admin','action'=>'permisos'))?>" title=""><?=$this->translate->_('Permisos')?></a></li><?php endif;?>
+			
+		<?php endif; /*** FIN ADMIN ***/ ?>
+				
+	</ul>
+</div>

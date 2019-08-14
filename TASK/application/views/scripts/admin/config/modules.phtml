@@ -1,0 +1,75 @@
+<div class="titulo"><?=$this->translate->_('Módulos')?></div>
+<p><?=$this->translate->_('Un módulo es una aplicación satelite del Portal Easy AUTOMATION. En este apartado puede gestionarlos para poder tratar con ellos.')?></p>
+
+<div class="subtitulo"><?=$this->translate->_('Módulos activos')?></div>
+
+<table id="tablaModulos">
+	<thead>
+		<tr>
+			<th class="id">#</th>
+			<th><?=$this->translate->_('Nombre')?></th>
+			<th><?=$this->translate->_('Dominio')?></th>
+			<th><?=$this->translate->_('URL')?></th>
+			<th><?=$this->translate->_('Pais')?></th>
+			<th><?=$this->translate->_('Easy.A')?></th>
+			<th class="id"><img src="/img/beta_menu.png" /></th>
+			<th class="id"><img src="/img/new_menu.png" /></th>
+		</tr>
+	</thead>
+	
+	<tbody></tbody>
+</table>
+
+<div class="subtitulo"><?=$this->translate->_('Crear un módulo nuevo')?></div>
+
+<p><?=$this->translate->_('Utilice el siguiente formulario para crear un nuevo módulo.')?></p>
+
+<?=$this->form?>
+
+<script type="text/javascript">
+$(function() {
+
+	var mTable = $('#tablaModulos').dataTable( {
+		"bJQueryUI": false,
+		"bStateSave": false,
+		"aaSorting": [[ 0, "asc" ]],
+		"sPaginationType": "full_numbers",
+		"oLanguage": idiomaDataTables,
+		"bServerSide": true,
+        "sAjaxSource": "/index/serverside/tabla/app_modulos",
+        "fnDrawCallback": function( oSettings ) {
+            /*
+        	$('.switchButtom :checkbox').iphoneStyle({
+        		duration: 100,
+        		onChange : function(e){
+            		changeHandler(e,{on:'Y',off:'N'});
+        		}
+        	});
+        	*/
+          },
+       	"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+			// Añadimos la clase necesaria para el iphoneStyle
+			//$('td:eq(5)', nRow).attr('class','switchButtom');
+			//$('td:eq(6)', nRow).attr('class','switchButtom');
+		},
+		"fnInitComplete": function () {
+			$('.dataTables_filter input').attr("placeholder", "Buscar");
+		},
+		aoColumnDefs: [{ 
+			"bSortable": false, 
+			"aTargets": ['noSort'] 
+		}]
+	});
+
+
+	$("#tablaModulos tbody").delegate("tr", "click", function () {
+	    var iPos = mTable.fnGetPosition(this);
+	    if (iPos !== null) {
+		    //console.log(iPos);
+	    	mTable.fnDeleteRow(iPos);//delete row
+	    }
+	});
+
+});
+
+</script>

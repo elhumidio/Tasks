@@ -1,0 +1,131 @@
+<div class="colRight">
+	<div class="contenido">
+		<div class="titulo"><?=$this->translate->_('Usuarios')?></div>
+		
+		<p><?=$this->translate->_('En este apartado se muestran los usuarios que usan la aplicación. Para modificar alguna opción basta con hacer clic en ella, dependiendo del campo se mostrarán las opciones de edición disponibles.')?></p>
+		
+		<table id="tablaUsuarios">
+			<thead>
+				<tr>
+					<th  class="id">#</th>
+					<th><?=$this->translate->_('Usuario')?></th>
+					<th><?=$this->translate->_('pais')?></th>
+					<th><?=$this->translate->_('Rol')?></th>
+					<th><?=$this->translate->_('Creado')?></th>
+					<th><?=$this->translate->_('Último acceso')?></th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</div>
+</div>
+
+<script type="text/javascript">
+var tablaUsuarios;
+
+$(function() {
+
+	/* Definir siempre antes que el datatables */
+	$('.switchButtom :checkbox').iphoneStyle({
+		duration: 100,
+		onChange : changeHandler 
+	});
+	
+	tablaUsuarios = $('#tablaUsuarios').dataTable( {
+		"bStateSave": false,
+		"aaSorting": [[ 0, "asc" ]],
+		"sPaginationType": "full_numbers",
+		"oLanguage": idiomaDataTables,
+		"bProcessing": true,
+        "bServerSide": true,
+        "sAjaxSource": "<?=$this->baseUrl('/index/serverside/tabla/user')?>",
+		"fnInitComplete": function () {
+			$('.dataTables_filter input').attr("placeholder", "Buscar");
+			
+		},
+		"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+			/* CELDA USUARIO */
+			$('td:eq(1)', nRow).editable( "<?=$this->baseUrl('/admin/updateusername')?>", {
+		        "callback": function( sValue, y ) {
+		            var aPos = tablaUsuarios.fnGetPosition( this );
+		            tablaUsuarios.fnUpdate( sValue, aPos[0], aPos[1] );
+		        },
+		        "submitdata": function ( value, settings ) {
+		            return {
+		                "id": $(nRow).attr('id').replace('user_','')
+		            };
+		        },
+		        "height": "14px",
+		        "width"	: "100%"
+		    } );
+
+			
+			/* CELDA PAÍS */
+			$('td:eq(2)', nRow).editable( "<?=$this->baseUrl('/admin/setpais')?>", {
+		        "callback": function( sValue, y ) {
+		            var aPos = tablaUsuarios.fnGetPosition( this );
+		            tablaUsuarios.fnUpdate( sValue, aPos[0], aPos[1] );
+		        },
+		        "submitdata": function ( value, settings ) {
+		            return {
+		                "id": $(nRow).attr('id').replace('user_','')
+		            };
+		        },
+		        "loadurl" : "<?=$this->baseUrl('/admin/getepaislist')?>",
+		        "type"	: 'select',
+		        "submit": 'OK',
+		        "height": "14px",
+		        "width"	: "100%",
+		        "style"	: 'display: inline'
+		    } );
+
+			
+
+			/* CELDA ROL */
+			$('td:eq(3)', nRow).editable( "<?=$this->baseUrl('/admin/setrol')?>", {
+		        "callback": function( sValue, y ) {
+		            var aPos = tablaUsuarios.fnGetPosition( this );
+		            tablaUsuarios.fnUpdate( sValue, aPos[0], aPos[1] );
+		        },
+		        "submitdata": function ( value, settings ) {
+		            return {
+		                "id": $(nRow).attr('id').replace('user_','')
+		            };
+		        },
+		        "loadurl" : "<?=$this->baseUrl('/admin/geterollist')?>",
+		        "type"	: 'multiselect',
+		        "submit": 'OK',
+		        "height": "14px",
+		        "width"	: "100%",
+		        "style"	: 'display: inline'
+		    } );
+			
+			//$('td:eq(3)', nRow).multipleSelectsinDialog(aData[1],{debug:true});
+		},
+		aoColumnDefs: [{ 
+			"bSortable": false, 
+			"aTargets": ['noSort'] 
+		}]
+	}).fnSetFilteringPressEnter();
+
+});
+
+
+function dialogo(titulo)
+{
+	var dialogo = $( "<div></div>" ).html(preloader).dialog({
+		autoOpen: true,
+		position: 'middle',
+		modal: true,
+		title: titulo,
+		width: 1000,
+		buttons: {
+			"<?php echo $this->translate->_("Cancelar")?>": function() {
+				$( this ).dialog( "close" );
+			}
+			
+		}
+	}).load("<?=$this->baseUrl('/admin/ajax_new_usuarios')?>",function(){dialogo.dialog({position: 'middle'});});
+}
+
+</script>

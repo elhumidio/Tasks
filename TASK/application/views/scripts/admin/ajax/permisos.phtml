@@ -1,0 +1,92 @@
+<?php if(!in_array('God',$this->user->role) && $this->id == 1):?>
+<div style="margin:0 20px;"><?=$this->translate('No es posible modificar los permisos del rol Admin')?></div>
+<?php else:?>
+<form id="formRolesValues" action="<?=$this->baseUrl()?>/admin/permisos" method="post">
+<input type="hidden" name="rol_id" value="<?=$this->id?>" />
+<table class="tablePermisos">
+	<caption><?=$this->translate('Active para conceder permisos al apartado deseado.');?></caption>
+	
+	<thead>
+		<tr>
+			<th style="width: 80%">Recursos</th>
+			<th colspan="2"><input type="checkbox" id="checkboxVerAll" /></th>
+		</tr>
+	</thead>
+	
+	<tbody>
+		<?php 
+		$arrayControllers = array();
+		foreach($this->recursosList as $recurso):
+			if(!in_array($recurso['controller'], $arrayControllers)):
+				array_push($arrayControllers, $recurso['controller']);
+				echo '<tr class="controller">';
+				$celda = $recurso['controller'];
+				$flag = true;
+				$cId = $recurso['ID'];
+			else:
+				echo '<tr class="action">';
+				$celda = $recurso['controller'].' » '.$recurso['action'];
+				$flag = false;
+			endif;
+		?>
+			<td><?=$celda?></td>
+			<td class="checkboxVer"><input type="hidden" name="check[<?=$cId.'_'.$recurso['ID']?>]" value="off" /> <input type="checkbox" name="check[<?=$cId.'_'.$recurso['ID']?>]" <?php if($recurso['access']=='allow'){echo 'checked="checked"';}?> /></td>
+			<td><?php if($flag) {?><label><input type="checkbox" class="checkboxTodo"  id="padre_<?=$cId?>" />Todo</label><?php }?></td>
+		</tr>
+		<?php endforeach;?>
+	</tbody>
+</table>
+
+<!-- Select para copiar permisos de otro rol -->
+<div id="" class="optionsList">
+	<ul>
+		<li><input type="hidden" name="status" value="off" /> <label><?=$this->translate('Rol activo:');?>  <input type="checkbox" name="status" <?php if($this->activeRoleStatus=='on'){echo 'checked="checked"';}?> value="on" /></label></li>
+		<li><label><?=$this->translate('Copiar permisos:');?><select id="copiarRolSelect" name="copiarol"><option value="0">---</option><?php foreach($this->rolesList as $rol) { if($rol['ID']!=$this->id){?><option value="<?=$rol['ID']?>"><?=$rol['name']?></option><?php }}?></select></label></li>
+		<li><span id="generarIndices" class="newStyleButtom"><?=$this->translate('Borrar y generar indice');?></span></li>
+		<li><span id="guardarCambios" class="newStyleGreenButtom"><?=$this->translate('Guardar todos los privilegios');?></span></li>
+	</ul>
+</div>
+</form>
+<script type="text/javascript">
+
+EASY.active = false;
+
+$(function(){
+	$('#copiarRolSelect').change(function(){
+		//var val = $(this).val();
+		if(this.value!=0)
+		{
+			alert('ATENCIÓN: al copiar los privilegios de un rol se borran los datos actuales y se vuelven a generar los índices.\n\nEsta operación no se puede deshacer');
+		};
+	});
+	$('#checkboxVerAll').change(function(){
+		var checkboxes = $("td.checkboxVer input[type='checkbox']");
+		check(this,checkboxes);
+	});
+	$('#checkboxEditarAll').change(function(){
+		var checkboxes = $("td.checkboxEditar input[type='checkbox']");
+		check(this,checkboxes);
+	});
+	$('#checkboxBorrarAll').change(function(){
+		var checkboxes = $("td.checkboxBorrar input[type='checkbox']");
+		check(this,checkboxes);
+	});
+	$('.checkboxTodo').change(function(){
+		var padre = this.id.replace('padre_','');
+		var checkboxes = $("input[name*='"+padre+"']");
+		check(this,checkboxes);
+	});
+	$('#generarIndices').click(function(){
+		if(confirm("<?=$this->translate('ATENCIÓN: este proceso elimina todos los privilegios, si continua deberá volver a asignarlos uno por uno.\n\nEsta operación no se puede deshacer\n\n¿Desea continuar?');?>")){
+			generarIndice('#rolid_<?=$this->id?>',<?=$this->id?>);
+		}
+	});
+	$('#guardarCambios').click(function(){
+		if (EASY.active) {return;}
+		EASY.active = true;
+		$('#formRolesValues').submit();
+	});
+});
+
+</script>
+<?php endif;?>

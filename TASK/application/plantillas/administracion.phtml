@@ -1,0 +1,73 @@
+<?php echo $this->doctype();?>
+
+<html>
+<head>
+<?php 
+$active = $this->navigation()->findActive($this->navigation()->getContainer());
+$activePage =  (!empty($active))?$active['page']:'Error';
+$this->headTitle()->prepend($this->Title()->getTitle());
+$this->headTitle()->append((($activePage!='Error')?$activePage->getLabel():'Error'));
+echo $this->headTitle();
+?>
+<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+<?php 
+$this->headMeta()->appendName('robots', 'NOINDEX,NOFOLLOW,NOARCHIVE,NOODP,NOSNIPPET');
+echo $this->headMeta(); ?>
+
+<?php echo $this->headLink(); ?>
+
+<?php echo $this->headStyle(); ?>
+<?php echo $this->headScript(); ?>
+
+</head>
+<body>
+<script language="JavaScript" type="text/javascript" src="/estilos/js/idiomaDataTables.js"></script>
+<script language="JavaScript" type="text/javascript" src="/estilos/js/wz_tooltip.js"></script>
+<script language="JavaScript" type="text/javascript" src="/estilos/js/datos_tooltip.js"></script>
+<a id="top"></a>
+
+
+<header>
+<?=$this->render('partials/topBar.phtml')?>
+</header>
+
+
+<div id="cuerpo">
+	<?=$this->render('partials/leftBar.phtml')?>
+	
+	<div class="content">
+		<?php echo $this->layout()->content;?>
+	</div>
+</div>
+
+<footer>
+	<?=$this->render('partials/footer.phtml')?>
+</footer>
+
+<?php if ($this->User()->hasRole('Admin')) {$debug = 1;}else{$debug = 0;}?>
+<script type="text/javascript">
+var preloader = '<div class="preloader"><img class="" src="/img/preloader.gif" alt="" /></div>';
+var preloader_black = '<div class="preloader"><img class="" src="/img/preloader_black.gif" alt="" /></div>';
+var errorajax = '<div id="errorPage"><h1><?=str_replace("'","\'",$this->translate->_("An error occurred"))?></h1><h2><?=str_replace("'","\'",$this->translate->_('A ocurrido un error al intentar cargar la seccion que solicita.'))?></h2><h2><?=str_replace("'","\'",$this->translate->_('Por favor intentelo mas tarde.'))?></h2></div>';
+$('#buttonLang').selectorIdioma();
+function changeHandler(e,data)
+{
+	var name = e.attr('name').split('#');
+
+	var p = $.extend({
+					on	: 'on',
+					off	: 'off',
+					estado: 'estado'
+				}, data);
+	
+	if(e.is(':checked')) $.post("<?=$this->baseUrl('/index/changeHandler')?>",{'estado':p.on, 'tabla':name[0], 'ID':name[1]});
+	else $.post("<?=$this->baseUrl('/index/changeHandler')?>",{'estado':p.off, 'tabla':name[0], 'ID':name[1]});
+/*
+	if(e.is(':checked')) $.post('/index/changeHandler',{p.estado : p.on, 'tabla':name[0], 'ID':name[1]});
+	else $.post('/index/changeHandler',{p.estado : p.off, 'tabla':name[0], 'ID':name[1]});
+*/
+}
+$('#notify').makeNotify({app:'dashboard',username:'<?=$this->user->username?>',debug:<?=$debug?>});
+</script>
+</body>
+</html>

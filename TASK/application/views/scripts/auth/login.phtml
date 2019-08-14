@@ -1,0 +1,41 @@
+<?php //echo $this->form; ?>
+<!--[if IE 8]><style>input[type="checkbox"]{padding:0;}</style><![endif]-->
+
+<!-- 
+<p class="note"><span><?php echo $this->translate->_( 'Please note:' ); ?></span> <?php echo $this->translate->_( 'Para acceder al portal hay que utilizar el login WIW (que es el mismo login que utilizas para entrar a la red de T-Systems).' ); ?></p>
+-->
+
+<div class="smallMenu">
+	<div class="selector">Language</div>
+	<div class="desplegable">
+		<ul>
+			<li><a href="<?=$this->baseUrl('/index/changelang/changeLang/ca')?>" title="Català">Català</a></li>
+			<li><a href="<?=$this->baseUrl('/index/changelang/changeLang/en')?>" title="English">English</a></li>
+			<li><a href="<?=$this->baseUrl('/index/changelang/changeLang/es')?>" title="Español">Español</a></li>
+		</ul>
+	</div>
+
+</div>
+ 
+<?php
+	if(count($this->errorMessage)!=0)
+	{
+		echo '<div id="errorMsj" class="ui-state-error">';
+		foreach($this->errorMessage as $msj)
+		{
+			echo '<p>'.$msj['msj'].'</p>';
+		}
+		echo '</div>';
+	}
+	
+	echo $this->form;
+?>
+
+<script type="text/javascript">
+		
+$(document).ready(function(){
+	$("#username, #password").inFieldLabels({debug:false});
+	$(".smallMenu").mouseover(function(){$(".desplegable").show();}).mouseout(function(){$(".desplegable").hide();});
+});
+
+</script>

@@ -1,0 +1,64 @@
+<div class="colRight">
+	<div class="contenido">
+		<div class="titulo"><?=$this->translate->_('Recursos')?></div>
+
+		<p><?=$this->translate->_('A continuación se muestran todos los recursos de la aplicación, si se ha creado un recurso nuevo y desea actualizar la lista, utilice el botón que encontrará a continuación.');?></p>
+		
+		<a href="<?=$this->url(array('controller'=>'admin','action'=>'refresrecursos'))?>" onclick="return refreshTree();" class="boton"><?=$this->translate->_('Actualizar árbol de recursos')?></a>
+		
+		<div id="resultRefresh"></div>
+		
+		<table id="tablaRecursos">
+			<thead>
+				<tr>
+					<th class="id">#</th>
+					<th><?=$this->translate->_('Module')?></th>
+					<th><?=$this->translate->_('Controller')?></th>
+					<th><?=$this->translate->_('Action')?></th>
+				</tr>
+			</thead>
+			
+			<tbody></tbody>
+		</table>		
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function() {
+	
+		$('.boton').button();
+		
+		$('#tablaRecursos').dataTable( {
+			"bStateSave": false,
+			"aaSorting": [[ 0, "asc" ]],
+			"sPaginationType": "full_numbers",
+			"oLanguage": idiomaDataTables,
+			"bProcessing": true,
+	        "bServerSide": true,
+	        "sAjaxSource": "<?=$this->url(array('controller'=>'index','action'=>'serverside','tabla'=>'app_recursos'))?>",
+			"fnInitComplete": function () {
+	
+				$('.dataTables_filter input').attr("placeholder", "Buscar");
+				
+			},
+			aoColumnDefs: [{ 
+				"bSortable": false, 
+				"aTargets": ['noSort'] 
+			}]
+		}).fnSetFilteringPressEnter();
+	
+		    
+	});
+	
+	function refreshTree()
+	{
+		$.post('<?=$this->url(array('controller'=>'admin','action'=>'refresrecursos'))?>',function(data){$('#resultRefresh').html(data);});
+	
+		return false;
+	}
+	
+	function switchbuttom()
+	{
+		
+	}
+	</script>

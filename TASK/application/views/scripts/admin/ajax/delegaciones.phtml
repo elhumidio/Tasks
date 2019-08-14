@@ -1,0 +1,34 @@
+<div class="titulo"><?=$this->translate->_('Delegaciones')?></div>
+
+<p class="clear"><?=$this->translate->_('En este apartado puede adminsitrar las delegaciones y sus parámetros de configuración.')?></p>
+<p class="clear"><?=$this->translate->_('A continuación se listan las delegaciones. Puede añadir las aplicaciones que necesite y configurar los parámetros de su sede. Si desea modificar el nombre de una delegación puede hacerlo realizando doble click sobre ella.')?></p>
+
+<?php echo $this->AdministrarDelegaciones()->GetListado(3);?>
+
+
+<?php echo $this->AdministrarDelegaciones()->Generar();?>
+
+<script type="text/javascript">
+$(function() {
+	$('.editable').editable(function(value, settings) { 
+	     /*console.log(this);
+	     console.log(value);
+	     console.log(settings);*/
+	     return(value);
+	  }, { 
+	     type    : 'text',
+	     submit  : 'OK',
+	     cssclass : 'editabless',
+	     event     : "dblclick"
+	 });
+
+	$( ".addapp" ).button().click(function(){
+			var id = this.id.replace('boton_','#content_');
+			//$(id).show().mouseleave( function(){$(id).hide();} );
+			$(id).show();
+		});
+	$( ".closeboton" ).click(function(){
+		$(this).parent().parent().hide();
+	});
+});
+</script>

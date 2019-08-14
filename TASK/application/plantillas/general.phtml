@@ -1,0 +1,49 @@
+<?php echo $this->doctype();?>
+
+<html>
+<head>
+<?php 
+$active = $this->navigation()->findActive($this->navigation()->getContainer());
+$activePage =  (!empty($active))?$active['page']:'Error';
+$this->headTitle()->prepend($this->Title()->getTitle());
+$this->headTitle()->append((($activePage!='Error')?$activePage->getLabel():'Error'));
+echo $this->headTitle();
+?>
+<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+<?php 
+$this->headMeta()->appendName('robots', 'NOINDEX,NOFOLLOW,NOARCHIVE,NOODP,NOSNIPPET');
+echo $this->headMeta(); ?>
+
+<?php echo $this->headLink(); ?>
+
+<?php echo $this->headStyle(); ?>
+<?php echo $this->headScript(); ?>
+
+</head>
+<body>
+<script type="text/javascript" src="/estilos/js/idiomaDataTables.js"></script>
+
+
+<header>
+<?=$this->render('partials/topBar.phtml')?>
+</header>
+
+<div id="cuerpo">
+	<div class="content" style="margin:0;">
+		<?php echo $this->layout()->content;?>
+	</div>
+</div>
+
+<footer>
+<?=$this->render('partials/footer.phtml')?>
+</footer>
+
+<?php if ($this->User()->hasRole('Admin')) {$debug = 1;}else{$debug = 0;}?>
+<script type="text/javascript">
+var preloader = '<div class="preloader"><img class="" src="/img/preloader.gif" alt="" /></div>';
+var preloader_black = '<div class="preloader"><img class="" src="/img/preloader_black.gif" alt="" /></div>';
+var errorajax = '<div id="errorPage"><h1><?=str_replace("'","\'",$this->translate->_("An error occurred"))?></h1><h2><?=str_replace("'","\'",$this->translate->_('A ocurrido un error al intentar cargar la seccion que solicita.'))?></h2><h2><?=str_replace("'","\'",$this->translate->_('Por favor intentelo mas tarde.'))?></h2></div>';
+$('#notify').makeNotify({app:'<?=$this->app->fileBaseName?>',username:'<?=$this->user->username?>',debug:<?=$debug?>});
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<div class="div-form">
+	<form id="form-editar" method="post" action="/taskv2/cambioturno/procesaedicion">
+    	<div class="div-row">
+    		<div class="div-col div-col-izq">
+    			<label>Turno</label>
+				<select id="select_turno_edit">
+                	<?php foreach($this->data['turnos'] as $turno){
+                	    $activo = $this->data['entrada']['turno'] == $turno['ID'] ? 'selected' : '';
+                	    echo '<option value="'.$turno['ID'].'" '.$activo.'>'.$turno['nombre'].'</option>';
+                	} ?>
+                </select>
+    		</div>
+    		<div class="div-col div-col-dcha">
+	    		<label for="pendiente-edit">Pendiente</label><input name="pendiente" id="pendiente-edit" <?php echo $this->data['entrada']['pendiente'] == 'Y'?'checked':'';?> type="checkbox">
+	    		<label for="critico-edit">Crítico</label><input name="critico" id="critico-edit" <?php echo $this->data['entrada']['critico']=='Y'?'checked':'';?> type="checkbox">   	
+    		</div>
+    	</div>
+    	<div class="div-row">
+    		<label>Titulo</label>
+    		<div class="div-col-unico">
+    			<input class="div-col-text w100" type="text" id="titulo-edit" name="titulo" value="<?php echo $this->data['entrada']['titulo'];?>">         	
+    		</div>
+    	</div>
+    	<div class="div-row">
+    		<div class="div-col-unico">
+    			<textarea class="w100" id="descripcion-edit" name="descripcion" rows="4" cols="100"><?php echo $this->data['entrada']['descripcion'];?></textarea>        
+    		</div>
+    	</div>
+
+	</form>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+
+$(document).ready(function(){
+
+});
+
+</script>
+
+
+

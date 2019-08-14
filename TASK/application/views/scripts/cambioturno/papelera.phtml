@@ -1,0 +1,91 @@
+
+<!-- <h3 class="dialog-titulo">Papelera de Reciclaje</h3>  -->
+
+<table class="display" id="lista-papelera">
+	<thead>
+		<tr>
+			<th>Título</th>
+			<th>Descripcion</th>
+			<th>Eliminado</th>
+			<th>Por Usuario</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php 
+
+    if(isset($this->papelera)){
+        
+    	foreach($this->papelera as $item){
+    		
+    	    $tmp = explode(' ', $item['fecha_borrado']);
+   	    
+    	    $fecha = implode("/", array_reverse(explode("-", $tmp[0])));
+    	    $hora = $tmp[1];
+    	    $fecha = $fecha.' '.$hora;
+    	    
+    	    $usuario = $item['usuario_borrado'];
+    	    $titulo = htmlspecialchars($item['titulo']);
+    	    $descripcion = htmlspecialchars($item['descripcion']);
+    	    
+    	    $links = '
+    	        <img id="img_papelera_historial" src="/img/icon32/clock_history_frame.png" alt="Historial Entrada" title="Historial" onclick="cambioTurno_muestraHistorialPapelera('.$item['ID'].');" height="15">
+    	        <img id="img_papelera_recuperar" src="/img/icon32/recycle.png" alt="Historial Entrada" title="Recuperar" onclick="cambioTurno_papeleraRecuperar('.$item['ID'].');" height="15">
+    	        ';
+    	    
+    		echo "<tr>"
+    		        ."<td>$titulo</td>"    
+        			."<td>$descripcion</td>"
+        			."<td>$fecha</td>"
+        			."<td>$usuario</td>"
+        			."<td>$links</td>"
+    		    ."</tr>";	
+    	}
+    }
+	
+	?>
+	
+	</tbody>
+</table>
+
+
+<script type="text/javascript" charset="utf-8">
+
+$(document).ready(function(){
+
+	$('#lista-papelera').dataTable( {
+		"bStateSave": false,
+		"fnStateSave": function (oSettings, oData) {
+	        localStorage.setItem( 'DataTables_'+window.location.pathname, JSON.stringify(oData) );
+	    },
+	    "fnStateLoad": function (oSettings) {
+	        return JSON.parse( localStorage.getItem('DataTables_'+window.location.pathname) );
+	    },
+		"bPaginate": true,
+		"bInfo":false,
+		"bSort":false,
+		"iDisplayLength": 10,
+		"sPaginationType": "full_numbers",
+		"oLanguage": idiomaDataTables,
+		"bFilter": true,	
+		"fnInitComplete": function () {
+			$('.dataTables_filter input').attr("placeholder", "Buscar");
+			
+		},
+		"aoColumns": [
+		              {"sWidth": "100px"},
+		              false,
+		              {"sWidth": "150px"},
+		              {"sWidth": "120px"},
+		              {"sWidth": "50px"}
+		              
+		]
+
+	});
+	
+});
+
+</script>
+
+
+
